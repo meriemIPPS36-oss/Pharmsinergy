@@ -1,0 +1,3173 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Calcul des moyennes | PharmSinergy</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kufam:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        /* =====================================================
+           BODY
+        ===================================================== */
+
+        body {
+
+            min-height: 100vh;
+
+            overflow: hidden;
+
+            font-family:
+                "Inter",
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color: #eeeeee;
+
+            background:
+
+                radial-gradient(
+                    circle at 50% 40%,
+                    rgba(255,255,255,0.14) 0%,
+                    rgba(255,255,255,0.04) 23%,
+                    transparent 50%
+                ),
+
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(170,180,190,0.16),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 90% 90%,
+                    rgba(100,110,120,0.18),
+                    transparent 32%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #08090b 0%,
+                    #16181c 28%,
+                    #5b6066 52%,
+                    #24272b 75%,
+                    #090a0c 100%
+                );
+        }
+
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .page {
+
+            position: relative;
+
+            width: 100%;
+
+            height: 100vh;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            isolation: isolate;
+        }
+
+
+        /* =====================================================
+           BACKGROUND GLOW
+        ===================================================== */
+
+        .orb {
+
+            position: absolute;
+
+            border-radius: 50%;
+
+            filter: blur(75px);
+
+            pointer-events: none;
+
+            z-index: -5;
+        }
+
+
+        .orb-one {
+
+            width: 370px;
+
+            height: 370px;
+
+            top: -150px;
+
+            right: -100px;
+
+            background:
+                rgba(180,188,196,0.16);
+
+            animation:
+                floatOne
+                10s
+                ease-in-out
+                infinite;
+        }
+
+
+        .orb-two {
+
+            width: 340px;
+
+            height: 340px;
+
+            bottom: -150px;
+
+            left: -110px;
+
+            background:
+                rgba(110,120,130,0.16);
+
+            animation:
+                floatTwo
+                12s
+                ease-in-out
+                infinite;
+        }
+
+
+        /* =====================================================
+           CALCULATOR DECORATION
+        ===================================================== */
+
+        .calculator-decoration {
+
+            position: absolute;
+
+            width: 420px;
+
+            height: 500px;
+
+            right: -135px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%)
+                rotate(8deg);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            border-radius:
+                42px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.07),
+                    rgba(0,0,0,0.18)
+                );
+
+            box-shadow:
+
+                0 30px 80px
+                rgba(0,0,0,0.25),
+
+                inset
+                0 1px 0
+                rgba(255,255,255,0.08);
+
+            opacity:
+                0.58;
+
+            pointer-events:
+                none;
+
+            z-index:
+                -3;
+        }
+
+
+        .calculator-screen {
+
+            position: absolute;
+
+            width: 250px;
+
+            height: 74px;
+
+            top: 48px;
+
+            left: 84px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.13);
+
+            border-radius:
+                16px;
+
+            background:
+                rgba(10,12,14,0.58);
+
+            box-shadow:
+                inset
+                0 0 18px
+                rgba(255,255,255,0.04);
+        }
+
+
+        .calculator-screen::after {
+
+            content:
+                "12.48";
+
+            position: absolute;
+
+            right: 18px;
+
+            top: 17px;
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            font-size:
+                1.8rem;
+
+            font-weight:
+                600;
+
+            letter-spacing:
+                0.08em;
+
+            color:
+                rgba(255,255,255,0.36);
+        }
+
+
+        .calc-buttons {
+
+            position: absolute;
+
+            left: 69px;
+
+            top: 160px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 55px);
+
+            gap: 12px;
+        }
+
+
+        .calc-button {
+
+            width: 55px;
+
+            height: 55px;
+
+            border-radius:
+                14px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            background:
+                rgba(255,255,255,0.07);
+
+            box-shadow:
+                inset
+                0 1px 0
+                rgba(255,255,255,0.06);
+        }
+
+
+        /* =====================================================
+           DECORATIVE RINGS
+        ===================================================== */
+
+        .ring {
+
+            position: absolute;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            pointer-events: none;
+        }
+
+
+        .ring-one {
+
+            width: 290px;
+
+            height: 290px;
+
+            left: -120px;
+
+            top: 25%;
+        }
+
+
+        .ring-two {
+
+            width: 360px;
+
+            height: 360px;
+
+            right: -150px;
+
+            bottom: 6%;
+        }
+
+
+        /* =====================================================
+           PARTICLES
+        ===================================================== */
+
+        .particle {
+
+            position: absolute;
+
+            width: 5px;
+
+            height: 5px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,0.50);
+
+            box-shadow:
+                0 0 12px
+                rgba(255,255,255,0.50);
+
+            animation:
+                twinkle
+                3.5s
+                ease-in-out
+                infinite;
+        }
+
+
+        .particle-one {
+
+            top: 16%;
+
+            left: 18%;
+        }
+
+
+        .particle-two {
+
+            top: 27%;
+
+            right: 19%;
+
+            width: 4px;
+
+            height: 4px;
+
+            animation-delay:
+                1s;
+        }
+
+
+        .particle-three {
+
+            bottom: 20%;
+
+            left: 21%;
+
+            width: 4px;
+
+            height: 4px;
+
+            animation-delay:
+                1.7s;
+        }
+
+
+        .particle-four {
+
+            bottom: 25%;
+
+            right: 28%;
+
+            width: 6px;
+
+            height: 6px;
+
+            animation-delay:
+                2.2s;
+        }
+
+
+        /* =====================================================
+           BACK BUTTON
+        ===================================================== */
+
+        .back-button {
+
+            position: absolute;
+
+            top: 24px;
+
+            left: 27px;
+
+            padding:
+                9px
+                17px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.18);
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(255,255,255,0.07);
+
+            color:
+                #e7eaed;
+
+            font-size:
+                0.78rem;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            backdrop-filter:
+                blur(12px);
+
+            -webkit-backdrop-filter:
+                blur(12px);
+
+            box-shadow:
+                0 8px 22px
+                rgba(0,0,0,0.17);
+
+            transition:
+                all .25s ease;
+
+            z-index:
+                30;
+        }
+
+
+        .back-button:hover {
+
+            transform:
+                translateX(-4px);
+
+            background:
+                rgba(255,255,255,0.12);
+        }
+
+
+        /* =====================================================
+           MAIN PANEL
+        ===================================================== */
+
+        .calculator-panel {
+
+            position: relative;
+
+            width:
+                min(1050px, 90%);
+
+            height:
+                89vh;
+
+            padding:
+                24px
+                32px
+                26px;
+
+            border-radius:
+                32px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.12),
+                    rgba(255,255,255,0.04)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.16);
+
+            box-shadow:
+
+                0 28px 80px
+                rgba(0,0,0,0.27),
+
+                inset
+                0 1px 0
+                rgba(255,255,255,0.12);
+
+            backdrop-filter:
+                blur(22px);
+
+            -webkit-backdrop-filter:
+                blur(22px);
+
+            overflow-y:
+                auto;
+
+            scrollbar-width:
+                thin;
+
+            scrollbar-color:
+                rgba(255,255,255,0.25)
+                transparent;
+
+            animation:
+                panelAppear
+                1s
+                cubic-bezier(.2,.8,.2,1)
+                both;
+        }
+
+
+        .calculator-panel::-webkit-scrollbar {
+
+            width:
+                7px;
+        }
+
+
+        .calculator-panel::-webkit-scrollbar-track {
+
+            background:
+                transparent;
+        }
+
+
+        .calculator-panel::-webkit-scrollbar-thumb {
+
+            background:
+                rgba(255,255,255,0.22);
+
+            border-radius:
+                999px;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .header {
+
+            text-align:
+                center;
+
+            margin-bottom:
+                18px;
+        }
+
+
+        .top-line {
+
+            width:
+                72px;
+
+            height:
+                3px;
+
+            margin:
+                0
+                auto
+                11px;
+
+            border-radius:
+                999px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    #555b61,
+                    #d7dce0,
+                    #696f75
+                );
+        }
+
+
+        .mini-label {
+
+            font-size:
+                0.63rem;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                0.30em;
+
+            color:
+                rgba(220,225,229,0.62);
+
+            text-transform:
+                uppercase;
+
+            margin-bottom:
+                5px;
+        }
+
+
+        .title {
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                clamp(
+                    1.55rem,
+                    3.5vw,
+                    2.6rem
+                );
+
+            font-weight:
+                800;
+
+            color:
+                #f2f4f6;
+
+            text-shadow:
+                0 5px 20px
+                rgba(0,0,0,0.30);
+
+            margin-bottom:
+                4px;
+        }
+
+
+        .subtitle {
+
+            font-size:
+                clamp(
+                    0.68rem,
+                    1.15vw,
+                    0.86rem
+                );
+
+            color:
+                rgba(218,223,227,0.70);
+
+            font-weight:
+                600;
+        }
+
+
+        /* =====================================================
+           SEMESTER BLOCK
+        ===================================================== */
+
+        .semester {
+
+            margin-bottom:
+                22px;
+        }
+
+
+        .semester-title {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            margin-bottom:
+                10px;
+
+            font-size:
+                0.88rem;
+
+            font-weight:
+                800;
+
+            color:
+                #dfe3e6;
+        }
+
+
+        .semester-title::before {
+
+            content:
+                "";
+
+            width:
+                7px;
+
+            height:
+                7px;
+
+            border-radius:
+                50%;
+
+            background:
+                #bfc5ca;
+
+            box-shadow:
+                0 0 10px
+                rgba(255,255,255,0.25);
+        }
+
+
+        /* =====================================================
+           SUBJECT GRID
+        ===================================================== */
+
+        .subjects {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap:
+                10px;
+        }
+
+
+        /* =====================================================
+           SUBJECT CARD
+        ===================================================== */
+
+        .subject-card {
+
+            padding:
+                11px;
+
+            border-radius:
+                16px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.11);
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.085),
+                    rgba(255,255,255,0.035)
+                );
+
+            box-shadow:
+
+                0 7px 18px
+                rgba(0,0,0,0.12),
+
+                inset
+                0 1px 0
+                rgba(255,255,255,0.06);
+        }
+
+
+        .subject-name {
+
+            min-height:
+                29px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            font-size:
+                0.66rem;
+
+            font-weight:
+                800;
+
+            line-height:
+                1.2;
+
+            color:
+                #e7eaed;
+
+            margin-bottom:
+                6px;
+        }
+
+
+        .coefficient {
+
+            font-size:
+                0.50rem;
+
+            color:
+                rgba(210,216,221,0.56);
+
+            margin-bottom:
+                7px;
+        }
+
+
+        .inputs {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap:
+                7px;
+        }
+
+
+        .input-group {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                4px;
+        }
+
+
+        .input-group label {
+
+            font-size:
+                0.47rem;
+
+            color:
+                rgba(220,225,229,0.55);
+
+            font-weight:
+                700;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                0.04em;
+        }
+
+
+        .grade-input {
+
+            width:
+                100%;
+
+            height:
+                33px;
+
+            padding:
+                5px
+                8px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.12);
+
+            border-radius:
+                9px;
+
+            background:
+                rgba(0,0,0,0.23);
+
+            color:
+                #f5f6f7;
+
+            outline:
+                none;
+
+            font-size:
+                0.67rem;
+
+            font-weight:
+                700;
+
+            transition:
+                border .2s ease,
+                background .2s ease;
+        }
+
+
+        .grade-input:focus {
+
+            border-color:
+                rgba(220,225,230,0.42);
+
+            background:
+                rgba(255,255,255,0.08);
+        }
+
+
+        /* =====================================================
+           RESULT
+        ===================================================== */
+
+        .subject-result {
+
+            margin-top:
+                7px;
+
+            min-height:
+                19px;
+
+            text-align:
+                right;
+
+            font-size:
+                0.58rem;
+
+            font-weight:
+                800;
+
+            color:
+                rgba(225,229,232,0.48);
+        }
+
+
+        .subject-result.good {
+
+            color:
+                #62d891;
+        }
+
+
+        .subject-result.bad {
+
+            color:
+                #ff6565;
+        }
+
+
+        .subject-result.neutral {
+
+            color:
+                rgba(225,229,232,0.55);
+        }
+
+
+        /* =====================================================
+           SEMESTER RESULT
+        ===================================================== */
+
+        .semester-result-box {
+
+            margin-top:
+                11px;
+
+            padding:
+                11px
+                14px;
+
+            border-radius:
+                14px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.12);
+
+            background:
+                rgba(0,0,0,0.18);
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+        }
+
+
+        .semester-result-label {
+
+            font-size:
+                0.60rem;
+
+            font-weight:
+                800;
+
+            color:
+                rgba(228,232,235,0.66);
+        }
+
+
+        .semester-result {
+
+            font-size:
+                0.92rem;
+
+            font-weight:
+                800;
+
+            color:
+                rgba(228,232,235,0.60);
+
+            transition:
+                color .25s ease;
+        }
+
+
+        .semester-result.good {
+
+            color:
+                #62d891;
+        }
+
+
+        .semester-result.bad {
+
+            color:
+                #ff6565;
+        }
+
+
+        .semester-result.neutral {
+
+            color:
+                rgba(228,232,235,0.65);
+        }
+
+
+        /* =====================================================
+           CALCULATE BUTTON
+        ===================================================== */
+
+        .calculate-wrap {
+
+            display:
+                flex;
+
+            justify-content:
+                center;
+
+            margin:
+                20px
+                0
+                15px;
+        }
+
+
+        .calculate-button {
+
+            min-width:
+                230px;
+
+            padding:
+                12px
+                24px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.20);
+
+            border-radius:
+                999px;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #191c20,
+                    #aeb4b9
+                );
+
+            color:
+                white;
+
+            font-size:
+                0.78rem;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            box-shadow:
+
+                0 12px 27px
+                rgba(0,0,0,0.22),
+
+                inset
+                0 1px 0
+                rgba(255,255,255,0.20);
+
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease;
+        }
+
+
+        .calculate-button:hover {
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 17px 32px
+                rgba(0,0,0,0.30);
+        }
+
+
+        .calculate-button:active {
+
+            transform:
+                scale(.98);
+        }
+
+
+        /* =====================================================
+           ANNUAL RESULT
+        ===================================================== */
+
+        .annual-box {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap:
+                10px;
+
+            margin-top:
+                5px;
+        }
+
+
+        .annual-card {
+
+            min-height:
+                88px;
+
+            padding:
+                13px;
+
+            border-radius:
+                17px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.13);
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.09),
+                    rgba(255,255,255,0.035)
+                );
+
+            box-shadow:
+                0 8px 22px
+                rgba(0,0,0,0.14);
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            text-align:
+                center;
+        }
+
+
+        .annual-label {
+
+            font-size:
+                0.58rem;
+
+            color:
+                rgba(220,225,229,0.55);
+
+            font-weight:
+                700;
+
+            margin-bottom:
+                6px;
+        }
+
+
+        .annual-result {
+
+            font-size:
+                1.15rem;
+
+            font-weight:
+                800;
+
+            color:
+                rgba(238,241,243,0.68);
+        }
+
+
+        .annual-result.good {
+
+            color:
+                #62d891;
+        }
+
+
+        .annual-result.bad {
+
+            color:
+                #ff6565;
+        }
+
+
+        .annual-result.neutral {
+
+            color:
+                #d4d8dc;
+        }
+
+
+        /* =====================================================
+           FOOT NOTE
+        ===================================================== */
+
+        .formula {
+
+            text-align:
+                center;
+
+            margin-top:
+                12px;
+
+            font-size:
+                0.54rem;
+
+            color:
+                rgba(220,225,229,0.43);
+
+            font-weight:
+                600;
+        }
+
+
+        /* =====================================================
+           ANIMATIONS
+        ===================================================== */
+
+        @keyframes panelAppear {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(24px)
+                    scale(.98);
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+
+        @keyframes floatOne {
+
+            0%,
+            100% {
+
+                transform:
+                    translate(0,0);
+            }
+
+            50% {
+
+                transform:
+                    translate(-18px,18px);
+            }
+        }
+
+
+        @keyframes floatTwo {
+
+            0%,
+            100% {
+
+                transform:
+                    translate(0,0);
+            }
+
+            50% {
+
+                transform:
+                    translate(18px,-18px);
+            }
+        }
+
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+
+                opacity:
+                    .20;
+
+                transform:
+                    scale(.75);
+            }
+
+            50% {
+
+                opacity:
+                    .85;
+
+                transform:
+                    scale(1.25);
+            }
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 760px) {
+
+            body {
+                overflow:
+                    hidden;
+            }
+
+
+            .calculator-panel {
+
+                width:
+                    94%;
+
+                height:
+                    93vh;
+
+                padding:
+                    18px
+                    14px
+                    20px;
+
+                border-radius:
+                    25px;
+            }
+
+
+            .subjects {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+
+            .subject-name {
+
+                font-size:
+                    0.60rem;
+            }
+
+
+            .coefficient {
+
+                font-size:
+                    0.47rem;
+            }
+
+
+            .annual-box {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .calculator-decoration {
+
+                opacity:
+                    0.20;
+
+                transform:
+                    translateY(-50%)
+                    rotate(8deg)
+                    scale(.72);
+            }
+        }
+
+
+        @media (max-width: 450px) {
+
+            .subjects {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .page-header {
+
+                top:
+                    18px;
+            }
+
+
+            .page-header .title {
+
+                font-size:
+                    1.25rem;
+            }
+
+
+            .page-header .subtitle {
+
+                font-size:
+                    .56rem;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <main class="page">
+
+
+        <!-- =================================================
+             BACKGROUND
+        ================================================== -->
+
+        <div class="orb orb-one"></div>
+        <div class="orb orb-two"></div>
+
+        <div class="ring ring-one"></div>
+        <div class="ring ring-two"></div>
+
+        <div class="particle particle-one"></div>
+        <div class="particle particle-two"></div>
+        <div class="particle particle-three"></div>
+        <div class="particle particle-four"></div>
+
+
+        <!-- =================================================
+             DECORATIVE CALCULATOR
+        ================================================== -->
+
+        <div class="calculator-decoration">
+
+            <div class="calculator-screen"></div>
+
+            <div class="calc-buttons">
+
+                <span class="calc-button"></span>
+                <span class="calc-button"></span>
+                <span class="calc-button"></span>
+                <span class="calc-button"></span>
+
+                <span class="calc-button"></span>
+                <span class="calc-button"></span>
+                <span class="calc-button"></span>
+                <span class="calc-button"></span>
+
+                <span class="calc-button"></span>
+                <span class="calc-button"></span>
+                <span class="calc-button"></span>
+                <span class="calc-button"></span>
+
+                <span class="calc-button"></span>
+                <span class="calc-button"></span>
+                <span class="calc-button"></span>
+                <span class="calc-button"></span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             BACK BUTTON
+        ================================================== -->
+
+        <button
+            class="back-button"
+            id="backButton"
+            type="button"
+        >
+            ← Retour
+        </button>
+
+
+        <!-- =================================================
+             MAIN CALCULATOR
+        ================================================== -->
+
+        <section class="calculator-panel">
+
+
+            <!-- HEADER -->
+
+            <header class="header">
+
+                <div class="top-line"></div>
+
+                <div class="mini-label">
+                    PHARMSINERGY • CALCUL
+                </div>
+
+                <h1 class="title">
+                    Calcul des moyennes
+                </h1>
+
+                <p class="subtitle">
+                    Licence 1 — Pharmacie industrielle
+                </p>
+
+            </header>
+
+
+            <!-- =================================================
+                 SEMESTRE 1
+            ================================================== -->
+
+            <section class="semester">
+
+                <h2 class="semester-title">
+                    Semestre 1
+                </h2>
+
+
+                <div class="subjects">
+
+
+                    <!-- CHIMIE GÉNÉRALE 1 -->
+
+                    <div
+                        class="subject-card"
+                        data-coef="2"
+                    >
+
+                        <div class="subject-name">
+                            Chimie générale 1
+                        </div>
+
+                        <div class="coefficient">
+                            Coefficient : 2
+                        </div>
+
+                        <div class="inputs">
+
+                            <div class="input-group">
+
+                                <label>
+                                    TD
+                                </label>
+
+                                <input
+                                    class="grade-input td-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+
+                            <div class="input-group">
+
+                                <label>
+                                    Examen
+                                </label>
+
+                                <input
+                                    class="grade-input exam-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div class="subject-result">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <!-- CHIMIE ORGANIQUE -->
+
+                    <div
+                        class="subject-card"
+                        data-coef="2"
+                    >
+
+                        <div class="subject-name">
+                            Chimie organique
+                        </div>
+
+                        <div class="coefficient">
+                            Coefficient : 2
+                        </div>
+
+                        <div class="inputs">
+
+                            <div class="input-group">
+
+                                <label>
+                                    TD
+                                </label>
+
+                                <input
+                                    class="grade-input td-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                            <div class="input-group">
+
+                                <label>
+                                    Examen
+                                </label>
+
+                                <input
+                                    class="grade-input exam-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div class="subject-result">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <!-- PHYSIQUE -->
+
+                    <div
+                        class="subject-card"
+                        data-coef="2"
+                    >
+
+                        <div class="subject-name">
+                            Physique
+                        </div>
+
+                        <div class="coefficient">
+                            Coefficient : 2
+                        </div>
+
+                        <div class="inputs">
+
+                            <div class="input-group">
+
+                                <label>
+                                    TD
+                                </label>
+
+                                <input
+                                    class="grade-input td-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                            <div class="input-group">
+
+                                <label>
+                                    Examen
+                                </label>
+
+                                <input
+                                    class="grade-input exam-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div class="subject-result">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <!-- BIOLOGIE ANIMALE -->
+
+                    <div
+                        class="subject-card"
+                        data-coef="2"
+                    >
+
+                        <div class="subject-name">
+                            Biologie animale
+                        </div>
+
+                        <div class="coefficient">
+                            Coefficient : 2
+                        </div>
+
+                        <div class="inputs">
+
+                            <div class="input-group">
+
+                                <label>
+                                    TD
+                                </label>
+
+                                <input
+                                    class="grade-input td-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                            <div class="input-group">
+
+                                <label>
+                                    Examen
+                                </label>
+
+                                <input
+                                    class="grade-input exam-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div class="subject-result">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <!-- BIOLOGIE VÉGÉTALE -->
+
+                    <div
+                        class="subject-card"
+                        data-coef="2"
+                    >
+
+                        <div class="subject-name">
+                            Biologie végétale
+                        </div>
+
+                        <div class="coefficient">
+                            Coefficient : 2
+                        </div>
+
+                        <div class="inputs">
+
+                            <div class="input-group">
+
+                                <label>
+                                    TD
+                                </label>
+
+                                <input
+                                    class="grade-input td-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                            <div class="input-group">
+
+                                <label>
+                                    Examen
+                                </label>
+
+                                <input
+                                    class="grade-input exam-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div class="subject-result">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <!-- ANGLAIS 1 -->
+
+                    <div
+                        class="subject-card"
+                        data-coef="1"
+                    >
+
+                        <div class="subject-name">
+                            Anglais 1
+                        </div>
+
+                        <div class="coefficient">
+                            Coefficient : 1
+                        </div>
+
+                        <div class="inputs">
+
+                            <div class="input-group">
+
+                                <label>
+                                    TD
+                                </label>
+
+                                <input
+                                    class="grade-input td-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                            <div class="input-group">
+
+                                <label>
+                                    Examen
+                                </label>
+
+                                <input
+                                    class="grade-input exam-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div class="subject-result">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <!-- TERMINOLOGIE -->
+
+                    <div
+                        class="subject-card"
+                        data-coef="1"
+                    >
+
+                        <div class="subject-name">
+                            Terminologie
+                        </div>
+
+                        <div class="coefficient">
+                            Coefficient : 1
+                        </div>
+
+                        <div class="inputs">
+
+                            <div class="input-group">
+
+                                <label>
+                                    TD
+                                </label>
+
+                                <input
+                                    class="grade-input td-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                            <div class="input-group">
+
+                                <label>
+                                    Examen
+                                </label>
+
+                                <input
+                                    class="grade-input exam-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div class="subject-result">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <!-- INFORMATIQUE -->
+
+                    <div
+                        class="subject-card"
+                        data-coef="1"
+                    >
+
+                        <div class="subject-name">
+                            Informatique
+                        </div>
+
+                        <div class="coefficient">
+                            Coefficient : 1
+                        </div>
+
+                        <div class="inputs">
+
+                            <div class="input-group">
+
+                                <label>
+                                    TD
+                                </label>
+
+                                <input
+                                    class="grade-input td-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                            <div class="input-group">
+
+                                <label>
+                                    Examen
+                                </label>
+
+                                <input
+                                    class="grade-input exam-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div class="subject-result">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <!-- BIOSTATISTIQUE -->
+
+                    <div
+                        class="subject-card"
+                        data-coef="2"
+                    >
+
+                        <div class="subject-name">
+                            Biostatistique
+                        </div>
+
+                        <div class="coefficient">
+                            Coefficient : 2
+                        </div>
+
+                        <div class="inputs">
+
+                            <div class="input-group">
+
+                                <label>
+                                    TD
+                                </label>
+
+                                <input
+                                    class="grade-input td-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                            <div class="input-group">
+
+                                <label>
+                                    Examen
+                                </label>
+
+                                <input
+                                    class="grade-input exam-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div class="subject-result">
+                            —
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="semester-result-box">
+
+                    <span class="semester-result-label">
+                        Moyenne Semestre 1
+                    </span>
+
+                    <span
+                        class="semester-result neutral"
+                        id="s1Result"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 SEMESTRE 2
+            ================================================== -->
+
+            <section class="semester">
+
+                <h2 class="semester-title">
+                    Semestre 2
+                </h2>
+
+
+                <div class="subjects">
+
+
+                    <!-- CHIMIE GÉNÉRALE 2 -->
+
+                    <div
+                        class="subject-card"
+                        data-coef="2"
+                    >
+
+                        <div class="subject-name">
+                            Chimie générale 2
+                        </div>
+
+                        <div class="coefficient">
+                            Coefficient : 2
+                        </div>
+
+                        <div class="inputs">
+
+                            <div class="input-group">
+
+                                <label>
+                                    TD
+                                </label>
+
+                                <input
+                                    class="grade-input td-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                            <div class="input-group">
+
+                                <label>
+                                    Examen
+                                </label>
+
+                                <input
+                                    class="grade-input exam-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div class="subject-result">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <!-- CHIMIE INORGANIQUE -->
+
+                    <div
+                        class="subject-card"
+                        data-coef="2"
+                    >
+
+                        <div class="subject-name">
+                            Chimie inorganique
+                        </div>
+
+                        <div class="coefficient">
+                            Coefficient : 2
+                        </div>
+
+                        <div class="inputs">
+
+                            <div class="input-group">
+
+                                <label>
+                                    TD
+                                </label>
+
+                                <input
+                                    class="grade-input td-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                            <div class="input-group">
+
+                                <label>
+                                    Examen
+                                </label>
+
+                                <input
+                                    class="grade-input exam-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div class="subject-result">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <!-- MÉTHODE PHYSIQUE -->
+
+                    <div
+                        class="subject-card"
+                        data-coef="2"
+                    >
+
+                        <div class="subject-name">
+                            Méthode physique
+                        </div>
+
+                        <div class="coefficient">
+                            Coefficient : 2
+                        </div>
+
+                        <div class="inputs">
+
+                            <div class="input-group">
+
+                                <label>
+                                    TD
+                                </label>
+
+                                <input
+                                    class="grade-input td-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                            <div class="input-group">
+
+                                <label>
+                                    Examen
+                                </label>
+
+                                <input
+                                    class="grade-input exam-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div class="subject-result">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <!-- MÉTHODE CHIMIQUE -->
+
+                    <div
+                        class="subject-card"
+                        data-coef="3"
+                    >
+
+                        <div class="subject-name">
+                            Méthode chimique
+                        </div>
+
+                        <div class="coefficient">
+                            Coefficient : 3
+                        </div>
+
+                        <div class="inputs">
+
+                            <div class="input-group">
+
+                                <label>
+                                    TD
+                                </label>
+
+                                <input
+                                    class="grade-input td-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                            <div class="input-group">
+
+                                <label>
+                                    Examen
+                                </label>
+
+                                <input
+                                    class="grade-input exam-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div class="subject-result">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <!-- APP -->
+
+                    <div
+                        class="subject-card"
+                        data-coef="2"
+                    >
+
+                        <div class="subject-name">
+                            Anatomie – Physiologie – Pathologie
+                        </div>
+
+                        <div class="coefficient">
+                            APP — Coefficient : 2
+                        </div>
+
+                        <div class="inputs">
+
+                            <div class="input-group">
+
+                                <label>
+                                    TD
+                                </label>
+
+                                <input
+                                    class="grade-input td-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                            <div class="input-group">
+
+                                <label>
+                                    Examen
+                                </label>
+
+                                <input
+                                    class="grade-input exam-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div class="subject-result">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <!-- TAXONOMIE -->
+
+                    <div
+                        class="subject-card"
+                        data-coef="2"
+                    >
+
+                        <div class="subject-name">
+                            Taxonomie
+                        </div>
+
+                        <div class="coefficient">
+                            Coefficient : 2
+                        </div>
+
+                        <div class="inputs">
+
+                            <div class="input-group">
+
+                                <label>
+                                    TD
+                                </label>
+
+                                <input
+                                    class="grade-input td-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                            <div class="input-group">
+
+                                <label>
+                                    Examen
+                                </label>
+
+                                <input
+                                    class="grade-input exam-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div class="subject-result">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <!-- HISTOIRE DE LA PHARMACIE -->
+
+                    <div
+                        class="subject-card"
+                        data-coef="1"
+                    >
+
+                        <div class="subject-name">
+                            Histoire de la pharmacie
+                        </div>
+
+                        <div class="coefficient">
+                            Coefficient : 1
+                        </div>
+
+                        <div class="inputs">
+
+                            <div class="input-group">
+
+                                <label>
+                                    TD
+                                </label>
+
+                                <input
+                                    class="grade-input td-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                            <div class="input-group">
+
+                                <label>
+                                    Examen
+                                </label>
+
+                                <input
+                                    class="grade-input exam-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div class="subject-result">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <!-- ANGLAIS 2 -->
+
+                    <div
+                        class="subject-card"
+                        data-coef="1"
+                    >
+
+                        <div class="subject-name">
+                            Anglais 2
+                        </div>
+
+                        <div class="coefficient">
+                            Coefficient : 1
+                        </div>
+
+                        <div class="inputs">
+
+                            <div class="input-group">
+
+                                <label>
+                                    TD
+                                </label>
+
+                                <input
+                                    class="grade-input td-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                            <div class="input-group">
+
+                                <label>
+                                    Examen
+                                </label>
+
+                                <input
+                                    class="grade-input exam-input"
+                                    type="number"
+                                    min="0"
+                                    max="20"
+                                    step="0.01"
+                                    placeholder="0–20"
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div class="subject-result">
+                            —
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="semester-result-box">
+
+                    <span class="semester-result-label">
+                        Moyenne Semestre 2
+                    </span>
+
+                    <span
+                        class="semester-result neutral"
+                        id="s2Result"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 CALCULATE
+            ================================================== -->
+
+            <div class="calculate-wrap">
+
+                <button
+                    class="calculate-button"
+                    id="calculateButton"
+                    type="button"
+                >
+                    Calculer mes moyennes
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 ANNUAL RESULTS
+            ================================================== -->
+
+            <div class="annual-box">
+
+
+                <div class="annual-card">
+
+                    <span class="annual-label">
+                        Semestre 1
+                    </span>
+
+                    <span
+                        class="annual-result neutral"
+                        id="finalS1"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+
+                <div class="annual-card">
+
+                    <span class="annual-label">
+                        Semestre 2
+                    </span>
+
+                    <span
+                        class="annual-result neutral"
+                        id="finalS2"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+
+                <div class="annual-card">
+
+                    <span class="annual-label">
+                        Moyenne annuelle
+                    </span>
+
+                    <span
+                        class="annual-result neutral"
+                        id="annualResult"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="formula">
+                TD : 40% &nbsp;•&nbsp; Examen : 60% &nbsp;•&nbsp;
+                Note matière = (TD × 0,40) + (Examen × 0,60)
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <script>
+
+        /* =====================================================
+           RETOUR → PAGE 4
+        ===================================================== */
+
+        document
+            .getElementById("backButton")
+            .addEventListener("click", function () {
+
+                window.location.href =
+                    "page4.html";
+
+            });
+
+
+        /* =====================================================
+           COLOR RESULT
+        ===================================================== */
+
+        function setResultColor(element, value) {
+
+            element.classList.remove(
+                "good",
+                "bad",
+                "neutral"
+            );
+
+            if (value < 10) {
+
+                element.classList.add("bad");
+
+            } else if (value >= 10) {
+
+                element.classList.add("good");
+
+            } else {
+
+                element.classList.add("neutral");
+
+            }
+        }
+
+
+        /* =====================================================
+           CALCULATE SEMESTER
+        ===================================================== */
+
+        function calculateSemester(cards) {
+
+            let weightedTotal = 0;
+
+            let totalCoefficient = 0;
+
+            cards.forEach(function (card) {
+
+                const tdInput =
+                    card.querySelector(".td-input");
+
+                const examInput =
+                    card.querySelector(".exam-input");
+
+                const result =
+                    card.querySelector(".subject-result");
+
+                const coefficient =
+                    Number(
+                        card.dataset.coef
+                    );
+
+
+                const td =
+                    Number(tdInput.value);
+
+                const exam =
+                    Number(examInput.value);
+
+
+                if (
+                    tdInput.value === "" ||
+                    examInput.value === "" ||
+                    Number.isNaN(td) ||
+                    Number.isNaN(exam)
+                ) {
+
+                    result.textContent = "—";
+
+                    result.classList.remove(
+                        "good",
+                        "bad"
+                    );
+
+                    result.classList.add(
+                        "neutral"
+                    );
+
+                    return;
+
+                }
+
+
+                const subjectAverage =
+                    (td * 0.40) +
+                    (exam * 0.60);
+
+
+                result.textContent =
+                    subjectAverage.toFixed(2) +
+                    " / 20";
+
+
+                setResultColor(
+                    result,
+                    subjectAverage
+                );
+
+
+                weightedTotal +=
+                    subjectAverage *
+                    coefficient;
+
+
+                totalCoefficient +=
+                    coefficient;
+
+            });
+
+
+            if (totalCoefficient === 0) {
+
+                return null;
+
+            }
+
+
+            return (
+                weightedTotal /
+                totalCoefficient
+            );
+
+        }
+
+
+        /* =====================================================
+           CALCULATE ALL
+        ===================================================== */
+
+        document
+            .getElementById("calculateButton")
+            .addEventListener("click", function () {
+
+
+                const semesters =
+                    document.querySelectorAll(".semester");
+
+
+                const s1Cards =
+                    semesters[0]
+                        .querySelectorAll(".subject-card");
+
+
+                const s2Cards =
+                    semesters[1]
+                        .querySelectorAll(".subject-card");
+
+
+                const s1 =
+                    calculateSemester(
+                        s1Cards
+                    );
+
+
+                const s2 =
+                    calculateSemester(
+                        s2Cards
+                    );
+
+
+                const s1Result =
+                    document.getElementById(
+                        "s1Result"
+                    );
+
+
+                const s2Result =
+                    document.getElementById(
+                        "s2Result"
+                    );
+
+
+                const finalS1 =
+                    document.getElementById(
+                        "finalS1"
+                    );
+
+
+                const finalS2 =
+                    document.getElementById(
+                        "finalS2"
+                    );
+
+
+                const annualResult =
+                    document.getElementById(
+                        "annualResult"
+                    );
+
+
+                /* ==========================
+                   S1
+                ========================== */
+
+                if (s1 !== null) {
+
+                    s1Result.textContent =
+                        s1.toFixed(2) +
+                        " / 20";
+
+                    finalS1.textContent =
+                        s1.toFixed(2);
+
+                    setResultColor(
+                        s1Result,
+                        s1
+                    );
+
+                    setResultColor(
+                        finalS1,
+                        s1
+                    );
+
+                } else {
+
+                    s1Result.textContent =
+                        "—";
+
+                    finalS1.textContent =
+                        "—";
+
+                    setResultColor(
+                        s1Result,
+                        10
+                    );
+
+                    setResultColor(
+                        finalS1,
+                        10
+                    );
+                }
+
+
+                /* ==========================
+                   S2
+                ========================== */
+
+                if (s2 !== null) {
+
+                    s2Result.textContent =
+                        s2.toFixed(2) +
+                        " / 20";
+
+                    finalS2.textContent =
+                        s2.toFixed(2);
+
+                    setResultColor(
+                        s2Result,
+                        s2
+                    );
+
+                    setResultColor(
+                        finalS2,
+                        s2
+                    );
+
+                } else {
+
+                    s2Result.textContent =
+                        "—";
+
+                    finalS2.textContent =
+                        "—";
+
+                    setResultColor(
+                        s2Result,
+                        10
+                    );
+
+                    setResultColor(
+                        finalS2,
+                        10
+                    );
+                }
+
+
+                /* ==========================
+                   ANNUAL
+                ========================== */
+
+                if (
+                    s1 !== null &&
+                    s2 !== null
+                ) {
+
+                    const annual =
+                        (s1 + s2) / 2;
+
+
+                    annualResult.textContent =
+                        annual.toFixed(2) +
+                        " / 20";
+
+
+                    setResultColor(
+                        annualResult,
+                        annual
+                    );
+
+                } else {
+
+                    annualResult.textContent =
+                        "—";
+
+                    annualResult.classList.remove(
+                        "good",
+                        "bad"
+                    );
+
+                    annualResult.classList.add(
+                        "neutral"
+                    );
+
+                }
+
+            });
+
+
+        /* =====================================================
+           PREVENT INVALID NUMBERS
+        ===================================================== */
+
+        document
+            .querySelectorAll(".grade-input")
+            .forEach(function (input) {
+
+                input.addEventListener(
+                    "input",
+                    function () {
+
+                        let value =
+                            Number(this.value);
+
+
+                        if (value < 0) {
+
+                            this.value = 0;
+
+                        }
+
+
+                        if (value > 20) {
+
+                            this.value = 20;
+
+                        }
+
+                    }
+                );
+
+            });
+
+    </script>
+
+
+</body>
+
+</html>

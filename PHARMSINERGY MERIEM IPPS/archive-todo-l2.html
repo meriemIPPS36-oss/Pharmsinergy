@@ -1,0 +1,2829 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Archives du carnet | PharmSinergy</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kufam:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        /* =====================================================
+           BODY
+        ===================================================== */
+
+        body {
+
+            min-height: 100vh;
+
+            overflow: hidden;
+
+            font-family:
+                "Inter",
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color:
+                #5b3545;
+
+            background:
+
+                radial-gradient(
+                    circle at 50% 45%,
+                    rgba(255,255,255,0.97) 0%,
+                    rgba(255,244,215,0.45) 24%,
+                    transparent 52%
+                ),
+
+                radial-gradient(
+                    circle at 8% 12%,
+                    rgba(255,157,71,0.48),
+                    transparent 31%
+                ),
+
+                radial-gradient(
+                    circle at 92% 88%,
+                    rgba(255,102,157,0.43),
+                    transparent 33%
+                ),
+
+                radial-gradient(
+                    circle at 65% 5%,
+                    rgba(255,220,76,0.30),
+                    transparent 24%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #d85f2c 0%,
+                    #ec7b69 24%,
+                    #f5b447 49%,
+                    #f2d66e 70%,
+                    #ef7a94 100%
+                );
+        }
+
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .page {
+
+            position: relative;
+
+            width: 100%;
+
+            height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            overflow: hidden;
+
+            isolation: isolate;
+        }
+
+
+        /* =====================================================
+           SOFT ORBS
+        ===================================================== */
+
+        .orb {
+
+            position: absolute;
+
+            border-radius: 50%;
+
+            filter:
+                blur(70px);
+
+            pointer-events:
+                none;
+
+            z-index:
+                -8;
+        }
+
+
+        .orb-one {
+
+            width:
+                390px;
+
+            height:
+                390px;
+
+            top:
+                -160px;
+
+            right:
+                -100px;
+
+            background:
+                rgba(255,212,70,0.28);
+
+            animation:
+                floatOne
+                10s
+                ease-in-out
+                infinite;
+        }
+
+
+        .orb-two {
+
+            width:
+                360px;
+
+            height:
+                360px;
+
+            bottom:
+                -160px;
+
+            left:
+                -110px;
+
+            background:
+                rgba(255,99,154,0.25);
+
+            animation:
+                floatTwo
+                12s
+                ease-in-out
+                infinite;
+        }
+
+
+        /* =====================================================
+           NOTE PAPER DECORATION
+        ===================================================== */
+
+        .paper {
+
+            position:
+                absolute;
+
+            width:
+                145px;
+
+            height:
+                112px;
+
+            border-radius:
+                12px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.25);
+
+            background:
+                rgba(255,249,215,0.24);
+
+            box-shadow:
+                0 20px 40px
+                rgba(116,65,48,0.10);
+
+            pointer-events:
+                none;
+
+            z-index:
+                -3;
+        }
+
+
+        .paper::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            left:
+                20px;
+
+            right:
+                20px;
+
+            top:
+                34px;
+
+            height:
+                1px;
+
+            background:
+                rgba(122,78,58,0.15);
+
+            box-shadow:
+                0 13px 0 rgba(122,78,58,0.12),
+                0 26px 0 rgba(122,78,58,0.09),
+                0 39px 0 rgba(122,78,58,0.07);
+        }
+
+
+        .paper-one {
+
+            top:
+                12%;
+
+            left:
+                3%;
+
+            transform:
+                rotate(-10deg);
+        }
+
+
+        .paper-two {
+
+            bottom:
+                10%;
+
+            right:
+                3%;
+
+            transform:
+                rotate(9deg);
+
+            background:
+                rgba(255,229,115,0.22);
+        }
+
+
+        /* =====================================================
+           PENCIL
+        ===================================================== */
+
+        .pencil {
+
+            position:
+                absolute;
+
+            width:
+                155px;
+
+            height:
+                17px;
+
+            border-radius:
+                999px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    rgba(240,133,71,0.25) 0%,
+                    rgba(255,212,104,0.36) 70%,
+                    rgba(255,255,255,0.24) 71%,
+                    rgba(255,255,255,0.24) 78%,
+                    rgba(204,119,78,0.26) 79%,
+                    rgba(204,119,78,0.26) 100%
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.20);
+
+            pointer-events:
+                none;
+
+            z-index:
+                -3;
+        }
+
+
+        .pencil-one {
+
+            top:
+                27%;
+
+            left:
+                -12px;
+
+            transform:
+                rotate(24deg);
+        }
+
+
+        .pencil-two {
+
+            right:
+                -20px;
+
+            bottom:
+                28%;
+
+            transform:
+                rotate(-23deg)
+                scale(.82);
+        }
+
+
+        /* =====================================================
+           CAPSULE
+        ===================================================== */
+
+        .capsule {
+
+            position:
+                absolute;
+
+            width:
+                126px;
+
+            height:
+                48px;
+
+            border-radius:
+                999px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    rgba(238,102,127,0.30) 0%,
+                    rgba(238,102,127,0.30) 49%,
+                    rgba(252,213,81,0.34) 50%,
+                    rgba(252,213,81,0.34) 100%
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.22);
+
+            opacity:
+                .43;
+
+            pointer-events:
+                none;
+
+            z-index:
+                -3;
+        }
+
+
+        .capsule-one {
+
+            right:
+                5%;
+
+            top:
+                17%;
+
+            transform:
+                rotate(24deg);
+        }
+
+
+        .capsule-two {
+
+            left:
+                5%;
+
+            bottom:
+                12%;
+
+            transform:
+                rotate(-27deg)
+                scale(.73);
+        }
+
+
+        /* =====================================================
+           CIRCULAR LIGHT DOTS ONLY
+        ===================================================== */
+
+        .light-dot {
+
+            position:
+                absolute;
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(255,255,255,0.75);
+
+            box-shadow:
+                0 0 17px
+                rgba(255,255,255,0.65);
+
+            pointer-events:
+                none;
+
+            animation:
+                pulseDot
+                4s
+                ease-in-out
+                infinite;
+
+            z-index:
+                -2;
+        }
+
+
+        .dot-one {
+
+            width:
+                6px;
+
+            height:
+                6px;
+
+            left:
+                21%;
+
+            top:
+                18%;
+        }
+
+
+        .dot-two {
+
+            width:
+                4px;
+
+            height:
+                4px;
+
+            right:
+                19%;
+
+            top:
+                25%;
+
+            animation-delay:
+                .8s;
+        }
+
+
+        .dot-three {
+
+            width:
+                5px;
+
+            height:
+                5px;
+
+            left:
+                25%;
+
+            bottom:
+                19%;
+
+            animation-delay:
+                1.5s;
+        }
+
+
+        .dot-four {
+
+            width:
+                6px;
+
+            height:
+                6px;
+
+            right:
+                28%;
+
+            bottom:
+                24%;
+
+            animation-delay:
+                2.2s;
+        }
+
+
+        /* =====================================================
+           BACK BUTTON
+        ===================================================== */
+
+        .back-button {
+
+            position:
+                absolute;
+
+            top:
+                24px;
+
+            left:
+                28px;
+
+            padding:
+                9px
+                17px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.66);
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(255,255,255,0.18);
+
+            color:
+                #713d48;
+
+            font-size:
+                0.77rem;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            backdrop-filter:
+                blur(12px);
+
+            -webkit-backdrop-filter:
+                blur(12px);
+
+            box-shadow:
+                0 8px 22px
+                rgba(122,67,47,0.12);
+
+            transition:
+                all .25s ease;
+
+            z-index:
+                30;
+        }
+
+
+        .back-button:hover {
+
+            transform:
+                translateX(-4px);
+
+            background:
+                rgba(255,255,255,0.31);
+        }
+
+
+        /* =====================================================
+           MAIN CARD
+        ===================================================== */
+
+        .content {
+
+            position:
+                relative;
+
+            width:
+                min(950px, 90%);
+
+            height:
+                89vh;
+
+            padding:
+                22px
+                28px
+                25px;
+
+            border-radius:
+                32px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.45),
+                    rgba(255,244,228,0.16)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.70);
+
+            box-shadow:
+
+                0 30px 80px
+                rgba(118,53,43,0.18),
+
+                inset
+                0 1px 0
+                rgba(255,255,255,0.90);
+
+            backdrop-filter:
+                blur(22px);
+
+            -webkit-backdrop-filter:
+                blur(22px);
+
+            animation:
+                cardAppear
+                1s
+                cubic-bezier(.2,.8,.2,1)
+                both;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            overflow:
+                hidden;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .header {
+
+            text-align:
+                center;
+
+            flex-shrink:
+                0;
+
+            margin-bottom:
+                15px;
+        }
+
+
+        .top-line {
+
+            width:
+                78px;
+
+            height:
+                3px;
+
+            margin:
+                0
+                auto
+                11px;
+
+            border-radius:
+                999px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    #ef7e37,
+                    #f47b93,
+                    #f5cf50
+                );
+        }
+
+
+        .mini-label {
+
+            font-size:
+                0.62rem;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                0.29em;
+
+            color:
+                #9a5a56;
+
+            text-transform:
+                uppercase;
+
+            margin-bottom:
+                5px;
+        }
+
+
+        .title {
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                clamp(
+                    1.55rem,
+                    3.7vw,
+                    2.6rem
+                );
+
+            font-weight:
+                800;
+
+            color:
+                #8e3f55;
+
+            text-shadow:
+                0 5px 18px
+                rgba(144,63,77,0.14);
+
+            margin-bottom:
+                4px;
+        }
+
+
+        .subtitle {
+
+            font-size:
+                clamp(
+                    0.68rem,
+                    1.15vw,
+                    0.84rem
+                );
+
+            font-weight:
+                600;
+
+            color:
+                #99635f;
+        }
+
+
+        /* =====================================================
+           ARCHIVE SUMMARY
+        ===================================================== */
+
+        .archive-summary {
+
+            flex-shrink:
+                0;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap:
+                9px;
+
+            margin-bottom:
+                12px;
+        }
+
+
+        .summary-card {
+
+            padding:
+                10px 12px;
+
+            border-radius:
+                15px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.50);
+
+            background:
+                rgba(255,255,255,0.22);
+
+            text-align:
+                center;
+
+            box-shadow:
+                0 7px 17px
+                rgba(126,65,56,0.06);
+        }
+
+
+        .summary-number {
+
+            display:
+                block;
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                1rem;
+
+            font-weight:
+                800;
+
+            color:
+                #df6c58;
+
+            margin-bottom:
+                2px;
+        }
+
+
+        .summary-label {
+
+            display:
+                block;
+
+            font-size:
+                0.51rem;
+
+            color:
+                #9d7476;
+
+            font-weight:
+                700;
+        }
+
+
+        /* =====================================================
+           ARCHIVE LIST
+        ===================================================== */
+
+        .archive-list {
+
+            flex:
+                1 1 auto;
+
+            min-height:
+                0;
+
+            overflow-y:
+                auto;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                11px;
+
+            padding:
+                2px
+                5px
+                5px
+                2px;
+
+            scrollbar-width:
+                thin;
+
+            scrollbar-color:
+                rgba(194,111,104,0.36)
+                transparent;
+        }
+
+
+        .archive-list::-webkit-scrollbar {
+
+            width:
+                7px;
+        }
+
+
+        .archive-list::-webkit-scrollbar-track {
+
+            background:
+                transparent;
+        }
+
+
+        .archive-list::-webkit-scrollbar-thumb {
+
+            background:
+                rgba(194,111,104,0.30);
+
+            border-radius:
+                999px;
+        }
+
+
+        /* =====================================================
+           EMPTY ARCHIVE
+        ===================================================== */
+
+        .empty-archive {
+
+            min-height:
+                230px;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            text-align:
+                center;
+
+            border:
+                1px dashed
+                rgba(156,96,89,0.20);
+
+            border-radius:
+                20px;
+
+            background:
+                rgba(255,255,255,0.12);
+
+            padding:
+                25px;
+
+            color:
+                #9d777b;
+        }
+
+
+        .empty-icon {
+
+            width:
+                52px;
+
+            height:
+                52px;
+
+            margin-bottom:
+                10px;
+
+            border-radius:
+                15px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            background:
+                rgba(255,215,103,0.18);
+
+            color:
+                #d88662;
+        }
+
+
+        .empty-icon svg {
+
+            width:
+                25px;
+
+            height:
+                25px;
+
+            fill:
+                none;
+
+            stroke:
+                currentColor;
+
+            stroke-width:
+                1.7;
+
+            stroke-linecap:
+                round;
+
+            stroke-linejoin:
+                round;
+        }
+
+
+        .empty-title {
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                0.85rem;
+
+            font-weight:
+                800;
+
+            margin-bottom:
+                5px;
+
+            color:
+                #8e5361;
+        }
+
+
+        .empty-text {
+
+            max-width:
+                350px;
+
+            font-size:
+                0.58rem;
+
+            line-height:
+                1.6;
+        }
+
+
+        /* =====================================================
+           DAY SHEET
+        ===================================================== */
+
+        .day-sheet {
+
+            position:
+                relative;
+
+            flex-shrink:
+                0;
+
+            border-radius:
+                21px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.56);
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,252,233,0.39),
+                    rgba(255,255,255,0.16)
+                );
+
+            box-shadow:
+
+                0 10px 26px
+                rgba(126,65,56,0.07),
+
+                inset
+                0 1px 0
+                rgba(255,255,255,0.70);
+
+            overflow:
+                hidden;
+        }
+
+
+        .day-sheet::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                90px;
+
+            height:
+                90px;
+
+            border-radius:
+                50%;
+
+            right:
+                -38px;
+
+            top:
+                -42px;
+
+            background:
+                rgba(255,212,91,0.12);
+
+            pointer-events:
+                none;
+        }
+
+
+        .day-header {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                12px;
+
+            padding:
+                12px
+                15px;
+
+            border-bottom:
+                1px solid
+                rgba(154,92,82,0.10);
+        }
+
+
+        .day-title-area {
+
+            min-width:
+                0;
+        }
+
+
+        .day-label {
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                0.76rem;
+
+            font-weight:
+                800;
+
+            color:
+                #8c4b59;
+
+            margin-bottom:
+                3px;
+        }
+
+
+        .day-date {
+
+            font-size:
+                0.53rem;
+
+            font-weight:
+                700;
+
+            color:
+                #ae7c7b;
+        }
+
+
+        .day-progress-area {
+
+            width:
+                150px;
+
+            flex-shrink:
+                0;
+
+            text-align:
+                right;
+        }
+
+
+        .day-progress-text {
+
+            font-size:
+                0.52rem;
+
+            font-weight:
+                800;
+
+            color:
+                #a06a68;
+
+            margin-bottom:
+                4px;
+        }
+
+
+        .day-progress-track {
+
+            width:
+                100%;
+
+            height:
+                7px;
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(158,95,89,0.10);
+
+            overflow:
+                hidden;
+        }
+
+
+        .day-progress-fill {
+
+            height:
+                100%;
+
+            border-radius:
+                999px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    #ef803d,
+                    #ec7392,
+                    #f2c94e
+                );
+        }
+
+
+        /* =====================================================
+           DAY TASKS
+        ===================================================== */
+
+        .day-tasks {
+
+            padding:
+                11px
+                13px
+                13px;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                6px;
+        }
+
+
+        .archive-task {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+
+            padding:
+                7px
+                9px;
+
+            border-radius:
+                11px;
+
+            background:
+                rgba(255,255,255,0.22);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.34);
+        }
+
+
+        .archive-check {
+
+            width:
+                17px;
+
+            height:
+                17px;
+
+            flex-shrink:
+                0;
+
+            border-radius:
+                5px;
+
+            border:
+                1px solid
+                rgba(158,91,89,0.25);
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            background:
+                rgba(255,255,255,0.25);
+        }
+
+
+        .archive-check.checked {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ef7c40,
+                    #e97091
+                );
+
+            border-color:
+                transparent;
+        }
+
+
+        .archive-check svg {
+
+            width:
+                11px;
+
+            height:
+                11px;
+
+            display:
+                none;
+
+            fill:
+                none;
+
+            stroke:
+                white;
+
+            stroke-width:
+                2;
+
+            stroke-linecap:
+                round;
+
+            stroke-linejoin:
+                round;
+        }
+
+
+        .archive-check.checked svg {
+
+            display:
+                block;
+        }
+
+
+        .archive-task-text {
+
+            flex:
+                1;
+
+            min-width:
+                0;
+
+            font-size:
+                0.58rem;
+
+            line-height:
+                1.35;
+
+            font-weight:
+                700;
+
+            color:
+                #774b58;
+
+            word-break:
+                break-word;
+        }
+
+
+        .archive-task.completed .archive-task-text {
+
+            text-decoration:
+                line-through;
+
+            color:
+                #ae9097;
+
+            opacity:
+                .76;
+        }
+
+
+        /* =====================================================
+           DAY FOOTER
+        ===================================================== */
+
+        .day-footer {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            padding:
+                8px
+                13px
+                11px;
+
+            font-size:
+                0.51rem;
+
+            font-weight:
+                700;
+
+            color:
+                #a27477;
+        }
+
+
+        .completed-badge {
+
+            padding:
+                4px
+                8px;
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(90,194,127,0.11);
+
+            color:
+                #579871;
+        }
+
+
+        .partial-badge {
+
+            padding:
+                4px
+                8px;
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(246,193,76,0.14);
+
+            color:
+                #af7d4c;
+        }
+
+
+        /* =====================================================
+           DELETE DAY
+        ===================================================== */
+
+        .delete-day {
+
+            width:
+                27px;
+
+            height:
+                27px;
+
+            border:
+                none;
+
+            border-radius:
+                8px;
+
+            background:
+                rgba(224,102,116,0.08);
+
+            color:
+                #ae6b76;
+
+            cursor:
+                pointer;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            transition:
+                all .2s ease;
+        }
+
+
+        .delete-day:hover {
+
+            background:
+                rgba(224,102,116,0.15);
+
+            transform:
+                scale(1.04);
+        }
+
+
+        .delete-day svg {
+
+            width:
+                13px;
+
+            height:
+                13px;
+
+            fill:
+                none;
+
+            stroke:
+                currentColor;
+
+            stroke-width:
+                1.7;
+
+            stroke-linecap:
+                round;
+
+            stroke-linejoin:
+                round;
+        }
+
+
+        /* =====================================================
+           BOTTOM
+        ===================================================== */
+
+        .bottom-note {
+
+            flex-shrink:
+                0;
+
+            text-align:
+                center;
+
+            padding:
+                10px
+                12px
+                0;
+
+            color:
+                #a06f74;
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                0.55rem;
+
+            font-weight:
+                600;
+        }
+
+
+        /* =====================================================
+           ANIMATIONS
+        ===================================================== */
+
+        @keyframes cardAppear {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(25px)
+                    scale(.97);
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+
+        @keyframes floatOne {
+
+            0%,
+            100% {
+
+                transform:
+                    translate(0,0);
+            }
+
+            50% {
+
+                transform:
+                    translate(-18px,18px);
+            }
+        }
+
+
+        @keyframes floatTwo {
+
+            0%,
+            100% {
+
+                transform:
+                    translate(0,0);
+            }
+
+            50% {
+
+                transform:
+                    translate(18px,-18px);
+            }
+        }
+
+
+        @keyframes pulseDot {
+
+            0%,
+            100% {
+
+                opacity:
+                    .22;
+
+                transform:
+                    scale(.78);
+            }
+
+            50% {
+
+                opacity:
+                    .90;
+
+                transform:
+                    scale(1.18);
+            }
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 750px) {
+
+            .content {
+
+                width:
+                    93%;
+
+                height:
+                    92vh;
+
+                padding:
+                    18px
+                    13px
+                    18px;
+
+                border-radius:
+                    27px;
+            }
+
+
+            .back-button {
+
+                top:
+                    16px;
+
+                left:
+                    16px;
+
+                padding:
+                    8px
+                    13px;
+
+                font-size:
+                    .68rem;
+            }
+
+
+            .title {
+
+                font-size:
+                    1.45rem;
+            }
+
+
+            .subtitle {
+
+                font-size:
+                    .60rem;
+            }
+
+
+            .archive-summary {
+
+                gap:
+                    7px;
+            }
+
+
+            .summary-card {
+
+                padding:
+                    8px 6px;
+            }
+
+
+            .summary-number {
+
+                font-size:
+                    .88rem;
+            }
+
+
+            .summary-label {
+
+                font-size:
+                    .46rem;
+            }
+
+
+            .day-header {
+
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+            }
+
+
+            .day-progress-area {
+
+                width:
+                    100%;
+
+                text-align:
+                    left;
+            }
+
+
+            .day-progress-track {
+
+                width:
+                    100%;
+            }
+
+
+            .paper,
+            .pencil {
+
+                opacity:
+                    .30;
+            }
+        }
+
+
+        @media (max-width: 450px) {
+
+            .archive-summary {
+
+                grid-template-columns:
+                    1fr
+                    1fr
+                    1fr;
+            }
+
+
+            .summary-label {
+
+                font-size:
+                    .43rem;
+            }
+
+
+            .day-label {
+
+                font-size:
+                    .68rem;
+            }
+
+
+            .archive-task-text {
+
+                font-size:
+                    .55rem;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <main class="page">
+
+
+        <!-- =================================================
+             BACKGROUND
+        ================================================== -->
+
+        <div class="orb orb-one"></div>
+
+        <div class="orb orb-two"></div>
+
+        <div class="paper paper-one"></div>
+
+        <div class="paper paper-two"></div>
+
+        <div class="pencil pencil-one"></div>
+
+        <div class="pencil pencil-two"></div>
+
+        <div class="capsule capsule-one"></div>
+
+        <div class="capsule capsule-two"></div>
+
+        <div class="light-dot dot-one"></div>
+
+        <div class="light-dot dot-two"></div>
+
+        <div class="light-dot dot-three"></div>
+
+        <div class="light-dot dot-four"></div>
+
+
+        <!-- =================================================
+             RETOUR
+        ================================================== -->
+
+        <button
+            class="back-button"
+            id="backButton"
+            type="button"
+        >
+            ← Retour
+        </button>
+
+
+        <!-- =================================================
+             MAIN CONTENT
+        ================================================== -->
+
+        <section class="content">
+
+
+            <!-- HEADER -->
+
+            <header class="header">
+
+                <div class="top-line"></div>
+
+                <div class="mini-label">
+                    PHARMSINERGY • LICENCE 2
+                </div>
+
+                <h1 class="title">
+                    Archives du carnet
+                </h1>
+
+                <p class="subtitle">
+                    Toutes tes journées, toutes tes petites victoires
+                </p>
+
+            </header>
+
+
+            <!-- =================================================
+                 SUMMARY
+            ================================================== -->
+
+            <div class="archive-summary">
+
+
+                <div class="summary-card">
+
+                    <span
+                        class="summary-number"
+                        id="daysNumber"
+                    >
+                        0
+                    </span>
+
+                    <span class="summary-label">
+                        Journées enregistrées
+                    </span>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <span
+                        class="summary-number"
+                        id="tasksNumber"
+                    >
+                        0
+                    </span>
+
+                    <span class="summary-label">
+                        Tâches réalisées
+                    </span>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <span
+                        class="summary-number"
+                        id="averageNumber"
+                    >
+                        0%
+                    </span>
+
+                    <span class="summary-label">
+                        Progression moyenne
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 ARCHIVE LIST
+            ================================================== -->
+
+            <div
+                class="archive-list"
+                id="archiveList"
+            >
+
+                <!-- Javascript -->
+
+            </div>
+
+
+            <div class="bottom-note">
+
+                Ton travail d'hier devient la force de demain. 💗
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <script>
+
+
+        /* =====================================================
+           RETOUR → TODO
+        ===================================================== */
+
+        document
+            .getElementById("backButton")
+            .addEventListener(
+                "click",
+                function () {
+
+                    window.location.href =
+                        "tododujour-l2.html";
+
+                }
+            );
+
+
+        /* =====================================================
+           ARCHIVE PREFIX
+        ===================================================== */
+
+        const storagePrefix =
+            "pharmsinergy_todo_l2_";
+
+
+        /* =====================================================
+           ELEMENTS
+        ===================================================== */
+
+        const archiveList =
+            document.getElementById(
+                "archiveList"
+            );
+
+
+        const daysNumber =
+            document.getElementById(
+                "daysNumber"
+            );
+
+
+        const tasksNumber =
+            document.getElementById(
+                "tasksNumber"
+            );
+
+
+        const averageNumber =
+            document.getElementById(
+                "averageNumber"
+            );
+
+
+        /* =====================================================
+           DATE FORMATTER
+        ===================================================== */
+
+        const formatter =
+            new Intl.DateTimeFormat(
+                "fr-FR",
+                {
+                    weekday:
+                        "long",
+
+                    day:
+                        "numeric",
+
+                    month:
+                        "long",
+
+                    year:
+                        "numeric"
+                }
+            );
+
+
+        /* =====================================================
+           GET SAVED DAYS
+        ===================================================== */
+
+        function getSavedDays() {
+
+            const days = [];
+
+            for (
+                let i = 0;
+                i < localStorage.length;
+                i++
+            ) {
+
+                const key =
+                    localStorage.key(i);
+
+
+                if (
+                    key &&
+                    key.startsWith(
+                        storagePrefix
+                    )
+                ) {
+
+                    const dateKey =
+                        key.replace(
+                            storagePrefix,
+                            ""
+                        );
+
+
+                    const raw =
+                        localStorage.getItem(
+                            key
+                        );
+
+
+                    try {
+
+                        const tasks =
+                            JSON.parse(raw);
+
+
+                        if (
+                            Array.isArray(tasks)
+                        ) {
+
+                            days.push({
+
+                                dateKey:
+                                    dateKey,
+
+                                tasks:
+                                    tasks
+
+                            });
+
+                        }
+
+                    } catch (error) {
+
+                        console.warn(
+                            "Archive illisible :",
+                            key
+                        );
+
+                    }
+
+                }
+
+            }
+
+
+            days.sort(
+                function (a, b) {
+
+                    return b.dateKey
+                        .localeCompare(
+                            a.dateKey
+                        );
+
+                }
+            );
+
+
+            return days;
+
+        }
+
+
+        /* =====================================================
+           DELETE DAY
+        ===================================================== */
+
+        function deleteDay(
+            dateKey
+        ) {
+
+            const answer =
+                window.confirm(
+                    "Supprimer cette journée de l'archive ?"
+                );
+
+
+            if (!answer) {
+
+                return;
+            }
+
+
+            localStorage.removeItem(
+                storagePrefix +
+                dateKey
+            );
+
+
+            renderArchive();
+
+        }
+
+
+        /* =====================================================
+           CREATE SVG
+        ===================================================== */
+
+        function checkSVG() {
+
+            return `
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M5 12l4 4L19 6"></path>
+
+                </svg>
+
+            `;
+
+        }
+
+
+        function trashSVG() {
+
+            return `
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M4 7h16"></path>
+
+                    <path d="M10 11v6"></path>
+
+                    <path d="M14 11v6"></path>
+
+                    <path d="M6 7l1 13h10l1-13"></path>
+
+                    <path d="M9 7V4h6v3"></path>
+
+                </svg>
+
+            `;
+
+        }
+
+
+        function notebookSVG() {
+
+            return `
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M5 4h14v16H5z"></path>
+
+                    <path d="M8 8h8"></path>
+
+                    <path d="M8 12h8"></path>
+
+                    <path d="M8 16h5"></path>
+
+                </svg>
+
+            `;
+
+        }
+
+
+        /* =====================================================
+           RENDER ARCHIVE
+        ===================================================== */
+
+        function renderArchive() {
+
+            const days =
+                getSavedDays();
+
+
+            archiveList.innerHTML =
+                "";
+
+
+            /* ==========================
+               EMPTY
+            ========================== */
+
+            if (
+                days.length === 0
+            ) {
+
+                const empty =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                empty.className =
+                    "empty-archive";
+
+
+                empty.innerHTML = `
+
+                    <div class="empty-icon">
+
+                        ${notebookSVG()}
+
+                    </div>
+
+
+                    <div class="empty-title">
+
+                        Ton carnet est encore vide
+
+                    </div>
+
+
+                    <div class="empty-text">
+
+                        Ajoute des tâches dans
+                        <strong>To-Do du jour</strong>
+                        et retrouve ici l'historique
+                        de tes journées.
+
+                    </div>
+
+                `;
+
+
+                archiveList.appendChild(
+                    empty
+                );
+
+
+                daysNumber.textContent =
+                    "0";
+
+
+                tasksNumber.textContent =
+                    "0";
+
+
+                averageNumber.textContent =
+                    "0%";
+
+
+                return;
+            }
+
+
+            let totalTasks =
+                0;
+
+
+            let totalCompleted =
+                0;
+
+
+            let totalPercentage =
+                0;
+
+
+            /* ==========================
+               DAY SHEETS
+            ========================== */
+
+            days.forEach(
+                function (day) {
+
+
+                    const tasks =
+                        day.tasks;
+
+
+                    const total =
+                        tasks.length;
+
+
+                    const completed =
+                        tasks.filter(
+                            function (task) {
+
+                                return task.completed;
+
+                            }
+                        ).length;
+
+
+                    const percentage =
+                        total === 0
+                            ? 0
+                            : Math.round(
+                                (
+                                    completed /
+                                    total
+                                ) * 100
+                            );
+
+
+                    totalTasks +=
+                        total;
+
+
+                    totalCompleted +=
+                        completed;
+
+
+                    totalPercentage +=
+                        percentage;
+
+
+                    /* DAY SHEET */
+
+                    const sheet =
+                        document.createElement(
+                            "article"
+                        );
+
+
+                    sheet.className =
+                        "day-sheet";
+
+
+                    /* HEADER */
+
+                    const header =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    header.className =
+                        "day-header";
+
+
+                    const titleArea =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    titleArea.className =
+                        "day-title-area";
+
+
+                    const title =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    title.className =
+                        "day-label";
+
+
+                    const safeDate =
+                        new Date(
+                            day.dateKey +
+                            "T12:00:00"
+                        );
+
+
+                    title.textContent =
+                        formatter.format(
+                            safeDate
+                        );
+
+
+                    const date =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    date.className =
+                        "day-date";
+
+
+                    date.textContent =
+                        day.dateKey;
+
+
+                    titleArea.appendChild(
+                        title
+                    );
+
+
+                    titleArea.appendChild(
+                        date
+                    );
+
+
+                    /* PROGRESS */
+
+                    const progressArea =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    progressArea.className =
+                        "day-progress-area";
+
+
+                    const progressText =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    progressText.className =
+                        "day-progress-text";
+
+
+                    progressText.textContent =
+                        completed +
+                        " / " +
+                        total +
+                        " tâche(s) • " +
+                        percentage +
+                        "%";
+
+
+                    const progressTrack =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    progressTrack.className =
+                        "day-progress-track";
+
+
+                    const progressFill =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    progressFill.className =
+                        "day-progress-fill";
+
+
+                    progressFill.style.width =
+                        percentage + "%";
+
+
+                    progressTrack.appendChild(
+                        progressFill
+                    );
+
+
+                    progressArea.appendChild(
+                        progressText
+                    );
+
+
+                    progressArea.appendChild(
+                        progressTrack
+                    );
+
+
+                    header.appendChild(
+                        titleArea
+                    );
+
+
+                    header.appendChild(
+                        progressArea
+                    );
+
+
+                    /* TASKS */
+
+                    const taskContainer =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    taskContainer.className =
+                        "day-tasks";
+
+
+                    tasks.forEach(
+                        function (task) {
+
+
+                            const taskRow =
+                                document.createElement(
+                                    "div"
+                                );
+
+
+                            taskRow.className =
+                                "archive-task";
+
+
+                            if (
+                                task.completed
+                            ) {
+
+                                taskRow.classList.add(
+                                    "completed"
+                                );
+                            }
+
+
+                            const check =
+                                document.createElement(
+                                    "span"
+                                );
+
+
+                            check.className =
+                                "archive-check";
+
+
+                            if (
+                                task.completed
+                            ) {
+
+                                check.classList.add(
+                                    "checked"
+                                );
+                            }
+
+
+                            check.innerHTML =
+                                checkSVG();
+
+
+                            const taskText =
+                                document.createElement(
+                                    "span"
+                                );
+
+
+                            taskText.className =
+                                "archive-task-text";
+
+
+                            taskText.textContent =
+                                task.text;
+
+
+                            taskRow.appendChild(
+                                check
+                            );
+
+
+                            taskRow.appendChild(
+                                taskText
+                            );
+
+
+                            taskContainer.appendChild(
+                                taskRow
+                            );
+
+                        }
+                    );
+
+
+                    /* FOOTER */
+
+                    const footer =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    footer.className =
+                        "day-footer";
+
+
+                    const status =
+                        document.createElement(
+                            "span"
+                        );
+
+
+                    if (
+                        total > 0 &&
+                        completed === total
+                    ) {
+
+                        status.className =
+                            "completed-badge";
+
+                        status.textContent =
+                            "Journée accomplie";
+
+                    } else {
+
+                        status.className =
+                            "partial-badge";
+
+                        status.textContent =
+                            "Journée en cours";
+
+                    }
+
+
+                    const deleteButton =
+                        document.createElement(
+                            "button"
+                        );
+
+
+                    deleteButton.className =
+                        "delete-day";
+
+                    deleteButton.type =
+                        "button";
+
+                    deleteButton.title =
+                        "Supprimer cette journée";
+
+                    deleteButton.innerHTML =
+                        trashSVG();
+
+
+                    deleteButton.addEventListener(
+                        "click",
+                        function () {
+
+                            deleteDay(
+                                day.dateKey
+                            );
+
+                        }
+                    );
+
+
+                    footer.appendChild(
+                        status
+                    );
+
+
+                    footer.appendChild(
+                        deleteButton
+                    );
+
+
+                    sheet.appendChild(
+                        header
+                    );
+
+
+                    sheet.appendChild(
+                        taskContainer
+                    );
+
+
+                    footer.appendChild(
+                        deleteButton
+                    );
+
+
+                    sheet.appendChild(
+                        footer
+                    );
+
+
+                    archiveList.appendChild(
+                        sheet
+                    );
+
+                }
+            );
+
+
+            /* ==========================
+               SUMMARY
+            ========================== */
+
+            const average =
+                days.length === 0
+                    ? 0
+                    : Math.round(
+                        totalPercentage /
+                        days.length
+                    );
+
+
+            daysNumber.textContent =
+                days.length;
+
+
+            tasksNumber.textContent =
+                totalCompleted;
+
+
+            averageNumber.textContent =
+                average + "%";
+
+        }
+
+
+        /* =====================================================
+           INITIALIZE
+        ===================================================== */
+
+        renderArchive();
+
+
+        /* =====================================================
+           UPDATE WHEN TAB RETURNS TO FOCUS
+        ===================================================== */
+
+        window.addEventListener(
+            "focus",
+            function () {
+
+                renderArchive();
+
+            }
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>

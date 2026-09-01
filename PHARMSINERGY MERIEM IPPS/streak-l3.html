@@ -1,0 +1,4305 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Streak | PharmSinergy</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kufam:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        /* =====================================================
+           BODY
+        ===================================================== */
+
+        body {
+
+            min-height: 100vh;
+
+            overflow: hidden;
+
+            font-family:
+                "Inter",
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color:
+                #eadff3;
+
+            background:
+
+                radial-gradient(
+                    circle at 50% 45%,
+                    rgba(255,255,255,0.08) 0%,
+                    rgba(163,82,231,0.07) 23%,
+                    transparent 52%
+                ),
+
+                radial-gradient(
+                    circle at 8% 12%,
+                    rgba(151,62,231,0.34),
+                    transparent 32%
+                ),
+
+                radial-gradient(
+                    circle at 92% 86%,
+                    rgba(243,92,139,0.29),
+                    transparent 33%
+                ),
+
+                radial-gradient(
+                    circle at 66% 6%,
+                    rgba(252,178,79,0.13),
+                    transparent 23%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #07060a 0%,
+                    #130d1d 24%,
+                    #241537 48%,
+                    #150d1e 72%,
+                    #050509 100%
+                );
+        }
+
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .page {
+
+            position:
+                relative;
+
+            width:
+                100%;
+
+            height:
+                100vh;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            overflow:
+                hidden;
+
+            isolation:
+                isolate;
+        }
+
+
+        /* =====================================================
+           ORBS
+        ===================================================== */
+
+        .orb {
+
+            position:
+                absolute;
+
+            border-radius:
+                50%;
+
+            filter:
+                blur(80px);
+
+            pointer-events:
+                none;
+
+            z-index:
+                -8;
+        }
+
+
+        .orb-one {
+
+            width:
+                410px;
+
+            height:
+                410px;
+
+            top:
+                -170px;
+
+            right:
+                -110px;
+
+            background:
+                rgba(145,70,228,0.24);
+
+            animation:
+                floatOne
+                10s
+                ease-in-out
+                infinite;
+        }
+
+
+        .orb-two {
+
+            width:
+                390px;
+
+            height:
+                390px;
+
+            bottom:
+                -170px;
+
+            left:
+                -115px;
+
+            background:
+                rgba(237,80,144,0.20);
+
+            animation:
+                floatTwo
+                12s
+                ease-in-out
+                infinite;
+        }
+
+
+        .orb-three {
+
+            width:
+                190px;
+
+            height:
+                190px;
+
+            top:
+                43%;
+
+            left:
+                45%;
+
+            background:
+                rgba(190,103,246,0.09);
+
+            filter:
+                blur(90px);
+        }
+
+
+        /* =====================================================
+           FLAMES
+        ===================================================== */
+
+        .flame {
+
+            position:
+                absolute;
+
+            width:
+                90px;
+
+            height:
+                110px;
+
+            opacity:
+                .22;
+
+            pointer-events:
+                none;
+
+            z-index:
+                -3;
+        }
+
+
+        .flame::before {
+
+            content:
+                "🔥";
+
+            position:
+                absolute;
+
+            inset:
+                0;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            font-size:
+                4.7rem;
+
+            filter:
+                drop-shadow(
+                    0 0 18px
+                    rgba(255,125,72,0.18)
+                );
+        }
+
+
+        .flame-one {
+
+            top:
+                8%;
+
+            left:
+                4%;
+
+            transform:
+                rotate(-8deg);
+        }
+
+
+        .flame-two {
+
+            right:
+                4%;
+
+            bottom:
+                8%;
+
+            transform:
+                rotate(9deg)
+                scale(.82);
+        }
+
+
+        /* =====================================================
+           CAPSULES
+        ===================================================== */
+
+        .capsule {
+
+            position:
+                absolute;
+
+            border-radius:
+                999px;
+
+            border:
+                1px solid
+                rgba(227,180,255,0.13);
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    rgba(146,69,228,0.23) 0%,
+                    rgba(146,69,228,0.23) 49%,
+                    rgba(238,89,146,0.22) 50%,
+                    rgba(238,89,146,0.22) 100%
+                );
+
+            opacity:
+                .43;
+
+            pointer-events:
+                none;
+
+            z-index:
+                -3;
+        }
+
+
+        .capsule-one {
+
+            width:
+                136px;
+
+            height:
+                50px;
+
+            right:
+                7%;
+
+            top:
+                18%;
+
+            transform:
+                rotate(26deg);
+        }
+
+
+        .capsule-two {
+
+            width:
+                110px;
+
+            height:
+                41px;
+
+            left:
+                6%;
+
+            bottom:
+                18%;
+
+            transform:
+                rotate(-29deg);
+        }
+
+
+        /* =====================================================
+           BOTTLES
+        ===================================================== */
+
+        .bottle {
+
+            position:
+                absolute;
+
+            width:
+                56px;
+
+            height:
+                84px;
+
+            border-radius:
+                13px
+                13px
+                18px
+                18px;
+
+            background:
+                rgba(225,191,250,0.055);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.10);
+
+            box-shadow:
+                0 17px 35px
+                rgba(0,0,0,0.14);
+
+            pointer-events:
+                none;
+
+            z-index:
+                -3;
+        }
+
+
+        .bottle::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                25px;
+
+            height:
+                16px;
+
+            left:
+                14px;
+
+            top:
+                -13px;
+
+            border-radius:
+                5px
+                5px
+                2px
+                2px;
+
+            background:
+                rgba(237,110,175,0.16);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.09);
+        }
+
+
+        .bottle::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                33px;
+
+            height:
+                23px;
+
+            left:
+                10px;
+
+            top:
+                30px;
+
+            border-radius:
+                6px;
+
+            background:
+                rgba(155,76,225,0.14);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+        }
+
+
+        .bottle-one {
+
+            left:
+                3%;
+
+            top:
+                35%;
+
+            transform:
+                rotate(-8deg)
+                scale(.77);
+        }
+
+
+        .bottle-two {
+
+            right:
+                3%;
+
+            bottom:
+                29%;
+
+            transform:
+                rotate(8deg)
+                scale(.68);
+        }
+
+
+        /* =====================================================
+           MOLECULE
+        ===================================================== */
+
+        .molecule {
+
+            position:
+                absolute;
+
+            width:
+                170px;
+
+            height:
+                170px;
+
+            border-radius:
+                50%;
+
+            border:
+                1px solid
+                rgba(226,177,255,0.11);
+
+            opacity:
+                .36;
+
+            pointer-events:
+                none;
+
+            z-index:
+                -3;
+        }
+
+
+        .molecule::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                94px;
+
+            height:
+                94px;
+
+            top:
+                37px;
+
+            left:
+                37px;
+
+            border-radius:
+                50%;
+
+            border:
+                1px solid
+                rgba(226,177,255,0.10);
+        }
+
+
+        .molecule::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                9px;
+
+            height:
+                9px;
+
+            border-radius:
+                50%;
+
+            top:
+                17px;
+
+            right:
+                19px;
+
+            background:
+                rgba(245,203,255,0.30);
+
+            box-shadow:
+
+                -111px 50px 0
+                rgba(245,203,255,0.14),
+
+                51px 112px 0
+                rgba(245,203,255,0.11);
+        }
+
+
+        .molecule-one {
+
+            left:
+                2%;
+
+            bottom:
+                4%;
+
+            transform:
+                rotate(22deg);
+        }
+
+
+        .molecule-two {
+
+            right:
+                2%;
+
+            top:
+                7%;
+
+            transform:
+                rotate(-25deg)
+                scale(.76);
+        }
+
+
+        /* =====================================================
+           LIGHT CIRCLES ONLY
+        ===================================================== */
+
+        .light-dot {
+
+            position:
+                absolute;
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(220,181,255,0.67);
+
+            box-shadow:
+                0 0 16px
+                rgba(178,93,244,0.38);
+
+            pointer-events:
+                none;
+
+            animation:
+                pulseDot
+                4s
+                ease-in-out
+                infinite;
+
+            z-index:
+                -2;
+        }
+
+
+        .dot-one {
+
+            width:
+                6px;
+
+            height:
+                6px;
+
+            left:
+                22%;
+
+            top:
+                18%;
+        }
+
+
+        .dot-two {
+
+            width:
+                4px;
+
+            height:
+                4px;
+
+            right:
+                21%;
+
+            top:
+                26%;
+
+            animation-delay:
+                .9s;
+        }
+
+
+        .dot-three {
+
+            width:
+                5px;
+
+            height:
+                5px;
+
+            left:
+                26%;
+
+            bottom:
+                19%;
+
+            animation-delay:
+                1.6s;
+        }
+
+
+        .dot-four {
+
+            width:
+                6px;
+
+            height:
+                6px;
+
+            right:
+                28%;
+
+            bottom:
+                24%;
+
+            animation-delay:
+                2.2s;
+        }
+
+
+        /* =====================================================
+           BACK BUTTON
+        ===================================================== */
+
+        .back-button {
+
+            position:
+                absolute;
+
+            top:
+                23px;
+
+            left:
+                27px;
+
+            padding:
+                9px
+                17px;
+
+            border:
+                1px solid
+                rgba(224,183,249,0.22);
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(155,75,215,0.08);
+
+            color:
+                #e0c7ec;
+
+            font-size:
+                .76rem;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            backdrop-filter:
+                blur(12px);
+
+            -webkit-backdrop-filter:
+                blur(12px);
+
+            box-shadow:
+                0 8px 24px
+                rgba(0,0,0,0.20);
+
+            transition:
+                all .25s ease;
+
+            z-index:
+                50;
+        }
+
+
+        .back-button:hover {
+
+            transform:
+                translateX(-4px);
+
+            background:
+                rgba(168,81,227,0.14);
+
+            border-color:
+                rgba(237,200,255,0.34);
+        }
+
+
+        /* =====================================================
+           MAIN CARD
+        ===================================================== */
+
+        .content {
+
+            position:
+                relative;
+
+            width:
+                min(1050px, 91%);
+
+            height:
+                91vh;
+
+            padding:
+                20px
+                24px
+                18px;
+
+            border-radius:
+                32px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.065),
+                    rgba(163,76,215,0.045)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.13);
+
+            box-shadow:
+
+                0 32px 85px
+                rgba(0,0,0,0.42),
+
+                0 0 60px
+                rgba(139,67,213,0.07),
+
+                inset
+                0 1px 0
+                rgba(255,255,255,0.09);
+
+            backdrop-filter:
+                blur(25px);
+
+            -webkit-backdrop-filter:
+                blur(25px);
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            overflow:
+                hidden;
+
+            animation:
+                cardAppear
+                1s
+                cubic-bezier(.2,.8,.2,1)
+                both;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .header {
+
+            flex-shrink:
+                0;
+
+            text-align:
+                center;
+
+            margin-bottom:
+                11px;
+        }
+
+
+        .top-line {
+
+            width:
+                78px;
+
+            height:
+                3px;
+
+            margin:
+                0 auto
+                10px;
+
+            border-radius:
+                999px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    #8f43cf,
+                    #eb72a8,
+                    #f3aa5d
+                );
+
+            box-shadow:
+                0 0 16px
+                rgba(194,84,229,0.18);
+        }
+
+
+        .mini-label {
+
+            font-size:
+                .60rem;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                .29em;
+
+            color:
+                #ae91bd;
+
+            text-transform:
+                uppercase;
+
+            margin-bottom:
+                4px;
+        }
+
+
+        .title {
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                clamp(
+                    1.50rem,
+                    3.6vw,
+                    2.5rem
+                );
+
+            font-weight:
+                800;
+
+            color:
+                #eadbfa;
+
+            text-shadow:
+                0 5px 25px
+                rgba(183,84,237,0.20);
+        }
+
+
+        .subtitle {
+
+            margin-top:
+                4px;
+
+            font-size:
+                clamp(
+                    .63rem,
+                    1.1vw,
+                    .80rem
+                );
+
+            color:
+                #aa96b5;
+
+            font-weight:
+                600;
+        }
+
+
+        /* =====================================================
+           STATS
+        ===================================================== */
+
+        .stats {
+
+            flex-shrink:
+                0;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap:
+                8px;
+
+            margin-bottom:
+                10px;
+        }
+
+
+        .stat {
+
+            padding:
+                10px 8px;
+
+            border-radius:
+                14px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            background:
+                rgba(255,255,255,0.035);
+
+            text-align:
+                center;
+
+            box-shadow:
+                inset
+                0 1px 0
+                rgba(255,255,255,0.05);
+        }
+
+
+        .stat-number {
+
+            display:
+                block;
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                1.08rem;
+
+            font-weight:
+                800;
+
+            color:
+                #ddc0f0;
+
+            margin-bottom:
+                2px;
+        }
+
+
+        .stat:first-child .stat-number {
+
+            color:
+                #f0a5c3;
+
+            text-shadow:
+                0 0 14px
+                rgba(232,89,151,0.16);
+        }
+
+
+        .stat-label {
+
+            display:
+                block;
+
+            font-size:
+                .45rem;
+
+            font-weight:
+                700;
+
+            color:
+                #8e789c;
+        }
+
+
+        /* =====================================================
+           DASHBOARD WITH SCROLL
+        ===================================================== */
+
+        .dashboard {
+
+            flex:
+                1 1 auto;
+
+            min-height:
+                0;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1.1fr
+                .9fr;
+
+            gap:
+                11px;
+
+            overflow-y:
+                auto;
+
+            overflow-x:
+                hidden;
+
+            padding:
+                3px
+                6px
+                5px
+                2px;
+
+            scrollbar-width:
+                thin;
+
+            scrollbar-color:
+                rgba(151,78,211,0.38)
+                transparent;
+        }
+
+
+        .dashboard::-webkit-scrollbar {
+
+            width:
+                7px;
+        }
+
+
+        .dashboard::-webkit-scrollbar-track {
+
+            background:
+                rgba(255,255,255,0.015);
+
+            border-radius:
+                999px;
+        }
+
+
+        .dashboard::-webkit-scrollbar-thumb {
+
+            background:
+                rgba(151,78,211,0.32);
+
+            border-radius:
+                999px;
+        }
+
+
+        /* =====================================================
+           LEFT PANEL
+        ===================================================== */
+
+        .left-panel {
+
+            min-width:
+                0;
+
+            min-height:
+                0;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                9px;
+
+            padding:
+                13px;
+
+            border-radius:
+                21px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.045),
+                    rgba(151,68,205,0.028)
+                );
+
+            box-shadow:
+                0 10px 26px
+                rgba(0,0,0,0.13);
+
+            flex-shrink:
+                0;
+        }
+
+
+        /* =====================================================
+           STREAK HERO
+        ===================================================== */
+
+        .streak-hero {
+
+            flex-shrink:
+                0;
+
+            padding:
+                13px;
+
+            border-radius:
+                17px;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    rgba(138,59,203,0.12),
+                    rgba(229,87,145,0.09)
+                );
+
+            border:
+                1px solid
+                rgba(222,171,247,0.08);
+
+            text-align:
+                center;
+        }
+
+
+        .fire {
+
+            font-size:
+                2rem;
+
+            line-height:
+                1;
+
+            margin-bottom:
+                5px;
+
+            filter:
+                drop-shadow(
+                    0 0 14px
+                    rgba(237,116,74,0.22)
+                );
+        }
+
+
+        .current-streak {
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                clamp(
+                    2rem,
+                    5vw,
+                    3.2rem
+                );
+
+            line-height:
+                1;
+
+            font-weight:
+                800;
+
+            color:
+                #f0b2d0;
+
+            text-shadow:
+
+                0 0 22px
+                rgba(233,88,152,0.17);
+        }
+
+
+        .streak-label {
+
+            margin-top:
+                5px;
+
+            font-size:
+                .55rem;
+
+            color:
+                #a28bab;
+
+            font-weight:
+                800;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                .13em;
+        }
+
+
+        .study-button {
+
+            width:
+                100%;
+
+            height:
+                40px;
+
+            margin-top:
+                10px;
+
+            border:
+                none;
+
+            border-radius:
+                12px;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #8d3dcb,
+                    #db5b94
+                );
+
+            color:
+                white;
+
+            font-size:
+                .58rem;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            box-shadow:
+                0 9px 22px
+                rgba(137,59,198,0.22);
+
+            transition:
+                all .2s ease;
+        }
+
+
+        .study-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 12px 27px
+                rgba(137,59,198,0.29);
+        }
+
+
+        .study-button.done {
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #4d9e75,
+                    #62b28c
+                );
+
+            box-shadow:
+                0 9px 22px
+                rgba(68,155,110,0.18);
+
+            cursor:
+                default;
+        }
+
+
+        .study-button.done:hover {
+
+            transform:
+                none;
+        }
+
+
+        /* =====================================================
+           WEEKLY GOAL
+        ===================================================== */
+
+        .goal-card {
+
+            flex-shrink:
+                0;
+
+            padding:
+                11px 12px;
+
+            border-radius:
+                16px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.07);
+
+            background:
+                rgba(255,255,255,0.03);
+        }
+
+
+        .section-title {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+
+            font-size:
+                .58rem;
+
+            font-weight:
+                800;
+
+            color:
+                #b197c0;
+
+            margin-bottom:
+                7px;
+        }
+
+
+        .goal-value {
+
+            color:
+                #d5b6e8;
+        }
+
+
+        .goal-track {
+
+            width:
+                100%;
+
+            height:
+                8px;
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(255,255,255,0.055);
+
+            overflow:
+                hidden;
+        }
+
+
+        .goal-fill {
+
+            width:
+                0%;
+
+            height:
+                100%;
+
+            border-radius:
+                999px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    #8c45cf,
+                    #e473ad,
+                    #f3a55b
+                );
+
+            transition:
+                width .35s ease;
+        }
+
+
+        .goal-days {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(7, 1fr);
+
+            gap:
+                5px;
+
+            margin-top:
+                8px;
+        }
+
+
+        .goal-day {
+
+            height:
+                30px;
+
+            border-radius:
+                8px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.05);
+
+            background:
+                rgba(255,255,255,0.025);
+
+            color:
+                #806b8b;
+
+            font-size:
+                .40rem;
+
+            font-weight:
+                800;
+        }
+
+
+        .goal-day.active {
+
+            background:
+                rgba(142,68,205,0.17);
+
+            border-color:
+                rgba(185,100,229,0.18);
+
+            color:
+                #d2a8e5;
+        }
+
+
+        /* =====================================================
+           CALENDAR
+        ===================================================== */
+
+        .calendar-card {
+
+            flex:
+                1 1 auto;
+
+            min-height:
+                240px;
+
+            padding:
+                11px;
+
+            border-radius:
+                18px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.07);
+
+            background:
+                rgba(0,0,0,0.08);
+
+            overflow:
+                hidden;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+        }
+
+
+        .calendar-header {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            margin-bottom:
+                8px;
+        }
+
+
+        .calendar-title {
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                .64rem;
+
+            font-weight:
+                800;
+
+            color:
+                #bda3c9;
+        }
+
+
+        .calendar-month {
+
+            font-size:
+                .45rem;
+
+            color:
+                #7d6b89;
+
+            font-weight:
+                700;
+
+            text-transform:
+                capitalize;
+        }
+
+
+        .week-labels {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(7,1fr);
+
+            gap:
+                4px;
+
+            margin-bottom:
+                4px;
+        }
+
+
+        .week-label {
+
+            text-align:
+                center;
+
+            font-size:
+                .39rem;
+
+            color:
+                #766383;
+
+            font-weight:
+                800;
+        }
+
+
+        .calendar-grid {
+
+            flex:
+                1;
+
+            min-height:
+                0;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(7,1fr);
+
+            grid-auto-rows:
+                minmax(31px,1fr);
+
+            gap:
+                4px;
+
+            overflow-y:
+                auto;
+
+            padding-right:
+                2px;
+
+            scrollbar-width:
+                thin;
+
+            scrollbar-color:
+                rgba(150,75,208,0.24)
+                transparent;
+        }
+
+
+        .calendar-grid::-webkit-scrollbar {
+
+            width:
+                4px;
+        }
+
+
+        .calendar-grid::-webkit-scrollbar-thumb {
+
+            background:
+                rgba(150,75,208,0.23);
+
+            border-radius:
+                999px;
+        }
+
+
+        .calendar-day {
+
+            position:
+                relative;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                8px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.04);
+
+            background:
+                rgba(255,255,255,0.022);
+
+            color:
+                #806d8c;
+
+            font-size:
+                .47rem;
+
+            font-weight:
+                700;
+
+            min-height:
+                31px;
+        }
+
+
+        .calendar-day.other {
+
+            opacity:
+                .27;
+        }
+
+
+        .calendar-day.today {
+
+            border-color:
+                rgba(224,116,170,0.35);
+
+            color:
+                #f1bdd4;
+
+            background:
+                rgba(214,81,139,0.08);
+        }
+
+
+        .calendar-day.active {
+
+            background:
+                rgba(135,61,199,0.20);
+
+            border-color:
+                rgba(180,93,227,0.18);
+
+            color:
+                #deb8ec;
+        }
+
+
+        .calendar-day.active::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                4px;
+
+            height:
+                4px;
+
+            border-radius:
+                50%;
+
+            bottom:
+                4px;
+
+            background:
+                #da79ad;
+
+            box-shadow:
+                0 0 7px
+                rgba(222,101,170,0.45);
+        }
+
+
+        .calendar-day.today.active::after {
+
+            background:
+                #f1ac63;
+        }
+
+
+        /* =====================================================
+           RIGHT PANEL
+        ===================================================== */
+
+        .right-panel {
+
+            min-width:
+                0;
+
+            min-height:
+                0;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                9px;
+
+            flex-shrink:
+                0;
+        }
+
+
+        /* =====================================================
+           RECORD
+        ===================================================== */
+
+        .record-card {
+
+            flex-shrink:
+                0;
+
+            padding:
+                14px;
+
+            border-radius:
+                19px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.045),
+                    rgba(226,76,140,0.045)
+                );
+
+            box-shadow:
+                0 9px 24px
+                rgba(0,0,0,0.13);
+        }
+
+
+        .record-title {
+
+            font-size:
+                .60rem;
+
+            font-weight:
+                800;
+
+            color:
+                #a991b6;
+
+            margin-bottom:
+                4px;
+        }
+
+
+        .record-number {
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                1.8rem;
+
+            font-weight:
+                800;
+
+            color:
+                #e4b6d7;
+
+            text-shadow:
+                0 0 18px
+                rgba(227,83,141,0.13);
+        }
+
+
+        .record-subtitle {
+
+            font-size:
+                .47rem;
+
+            color:
+                #7f6d8d;
+
+            margin-top:
+                2px;
+
+            font-weight:
+                700;
+        }
+
+
+        /* =====================================================
+           BADGES
+        ===================================================== */
+
+        .badges-card {
+
+            min-height:
+                270px;
+
+            padding:
+                13px;
+
+            border-radius:
+                19px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.07);
+
+            background:
+                rgba(255,255,255,0.028);
+
+            overflow:
+                hidden;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+        }
+
+
+        .badges-header {
+
+            flex-shrink:
+                0;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            margin-bottom:
+                8px;
+        }
+
+
+        .badges-title {
+
+            font-size:
+                .60rem;
+
+            color:
+                #ad95b9;
+
+            font-weight:
+                800;
+        }
+
+
+        .badge-count {
+
+            font-size:
+                .46rem;
+
+            color:
+                #7f6b8d;
+
+            font-weight:
+                700;
+        }
+
+
+        .badges-grid {
+
+            flex:
+                1;
+
+            min-height:
+                0;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap:
+                7px;
+
+            overflow-y:
+                auto;
+
+            padding-right:
+                2px;
+
+            scrollbar-width:
+                thin;
+
+            scrollbar-color:
+                rgba(153,77,210,0.22)
+                transparent;
+        }
+
+
+        .badges-grid::-webkit-scrollbar {
+
+            width:
+                5px;
+        }
+
+
+        .badges-grid::-webkit-scrollbar-thumb {
+
+            background:
+                rgba(153,77,210,0.22);
+
+            border-radius:
+                999px;
+        }
+
+
+        .badge {
+
+            min-height:
+                72px;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                3px;
+
+            padding:
+                8px;
+
+            border-radius:
+                13px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.05);
+
+            background:
+                rgba(255,255,255,0.025);
+
+            text-align:
+                center;
+
+            opacity:
+                .38;
+
+            filter:
+                grayscale(.45);
+
+            transition:
+                all .25s ease;
+        }
+
+
+        .badge.unlocked {
+
+            opacity:
+                1;
+
+            filter:
+                none;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(144,65,205,0.13),
+                    rgba(220,83,143,0.08)
+                );
+
+            border-color:
+                rgba(188,95,228,0.14);
+
+            box-shadow:
+                0 7px 16px
+                rgba(137,63,196,0.07);
+        }
+
+
+        .badge-icon {
+
+            font-size:
+                1.25rem;
+
+            line-height:
+                1;
+        }
+
+
+        .badge-name {
+
+            font-size:
+                .45rem;
+
+            color:
+                #bc9ec9;
+
+            font-weight:
+                800;
+        }
+
+
+        .badge-condition {
+
+            font-size:
+                .38rem;
+
+            color:
+                #806c8d;
+
+            line-height:
+                1.3;
+        }
+
+
+        /* =====================================================
+           MOTIVATION
+        ===================================================== */
+
+        .motivation-card {
+
+            flex-shrink:
+                0;
+
+            padding:
+                12px;
+
+            border-radius:
+                17px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.07);
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    rgba(231,88,150,0.075),
+                    rgba(141,65,205,0.07)
+                );
+        }
+
+
+        .motivation-title {
+
+            font-size:
+                .57rem;
+
+            font-weight:
+                800;
+
+            color:
+                #b697bd;
+
+            margin-bottom:
+                4px;
+        }
+
+
+        .motivation-text {
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                .52rem;
+
+            line-height:
+                1.75;
+
+            color:
+                #a58cae;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .bottom-note {
+
+            flex-shrink:
+                0;
+
+            text-align:
+                center;
+
+            padding:
+                7px
+                0
+                0;
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                .49rem;
+
+            color:
+                #796785;
+
+            font-weight:
+                600;
+        }
+
+
+        /* =====================================================
+           ANIMATIONS
+        ===================================================== */
+
+        @keyframes cardAppear {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(24px)
+                    scale(.97);
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+
+        @keyframes floatOne {
+
+            0%,
+            100% {
+
+                transform:
+                    translate(0,0);
+            }
+
+            50% {
+
+                transform:
+                    translate(-18px,18px);
+            }
+        }
+
+
+        @keyframes floatTwo {
+
+            0%,
+            100% {
+
+                transform:
+                    translate(0,0);
+            }
+
+            50% {
+
+                transform:
+                    translate(18px,-18px);
+            }
+        }
+
+
+        @keyframes pulseDot {
+
+            0%,
+            100% {
+
+                opacity:
+                    .18;
+
+                transform:
+                    scale(.78);
+            }
+
+            50% {
+
+                opacity:
+                    .88;
+
+                transform:
+                    scale(1.18);
+            }
+        }
+
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .content {
+
+                width:
+                    94%;
+
+                height:
+                    93vh;
+
+                padding:
+                    17px
+                    13px
+                    15px;
+            }
+
+
+            .dashboard {
+
+                display:
+                    flex;
+
+                flex-direction:
+                    column;
+
+                overflow-y:
+                    auto;
+
+                overflow-x:
+                    hidden;
+
+                gap:
+                    10px;
+            }
+
+
+            .left-panel,
+            .right-panel {
+
+                width:
+                    100%;
+
+                flex-shrink:
+                    0;
+            }
+
+
+            .right-panel {
+
+                display:
+                    grid;
+
+                grid-template-columns:
+                    1fr
+                    1fr;
+            }
+
+
+            .badges-card {
+
+                min-height:
+                    240px;
+            }
+
+
+            .motivation-card {
+
+                min-height:
+                    110px;
+            }
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 620px) {
+
+            .content {
+
+                width:
+                    95%;
+
+                height:
+                    94vh;
+
+                padding:
+                    16px
+                    10px
+                    13px;
+
+                border-radius:
+                    26px;
+            }
+
+
+            .back-button {
+
+                top:
+                    15px;
+
+                left:
+                    15px;
+
+                padding:
+                    7px
+                    12px;
+
+                font-size:
+                    .63rem;
+            }
+
+
+            .mini-label {
+
+                font-size:
+                    .50rem;
+            }
+
+
+            .title {
+
+                font-size:
+                    1.33rem;
+            }
+
+
+            .subtitle {
+
+                font-size:
+                    .54rem;
+            }
+
+
+            .stats {
+
+                gap:
+                    5px;
+            }
+
+
+            .stat {
+
+                padding:
+                    7px
+                    4px;
+            }
+
+
+            .stat-number {
+
+                font-size:
+                    .82rem;
+            }
+
+
+            .stat-label {
+
+                font-size:
+                    .37rem;
+            }
+
+
+            .dashboard {
+
+                display:
+                    flex;
+
+                flex-direction:
+                    column;
+
+                overflow-y:
+                    auto;
+
+                overflow-x:
+                    hidden;
+
+                gap:
+                    9px;
+
+                padding-right:
+                    4px;
+            }
+
+
+            .left-panel {
+
+                min-height:
+                    570px;
+
+                flex-shrink:
+                    0;
+            }
+
+
+            .right-panel {
+
+                display:
+                    flex;
+
+                flex-direction:
+                    column;
+
+                min-height:
+                    0;
+
+                flex-shrink:
+                    0;
+            }
+
+
+            .calendar-card {
+
+                min-height:
+                    250px;
+            }
+
+
+            .badges-card {
+
+                min-height:
+                    330px;
+            }
+
+
+            .motivation-card {
+
+                min-height:
+                    100px;
+            }
+
+
+            .badges-grid {
+
+                grid-template-columns:
+                    repeat(3,1fr);
+            }
+
+
+            .badge {
+
+                min-height:
+                    67px;
+            }
+
+
+            .flame,
+            .bottle,
+            .molecule {
+
+                opacity:
+                    .20;
+            }
+        }
+
+
+        @media (max-width: 430px) {
+
+            .badges-grid {
+
+                grid-template-columns:
+                    repeat(2,1fr);
+            }
+
+
+            .goal-day {
+
+                height:
+                    27px;
+
+                font-size:
+                    .36rem;
+            }
+
+
+            .calendar-day {
+
+                font-size:
+                    .43rem;
+            }
+
+
+            .calendar-grid {
+
+                grid-auto-rows:
+                    minmax(28px,1fr);
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <main class="page">
+
+
+        <!-- =================================================
+             BACKGROUND
+        ================================================== -->
+
+        <div class="orb orb-one"></div>
+
+        <div class="orb orb-two"></div>
+
+        <div class="orb orb-three"></div>
+
+        <div class="flame flame-one"></div>
+
+        <div class="flame flame-two"></div>
+
+        <div class="capsule capsule-one"></div>
+
+        <div class="capsule capsule-two"></div>
+
+        <div class="bottle bottle-one"></div>
+
+        <div class="bottle bottle-two"></div>
+
+        <div class="molecule molecule-one"></div>
+
+        <div class="molecule molecule-two"></div>
+
+        <div class="light-dot dot-one"></div>
+
+        <div class="light-dot dot-two"></div>
+
+        <div class="light-dot dot-three"></div>
+
+        <div class="light-dot dot-four"></div>
+
+
+        <!-- =================================================
+             BACK
+        ================================================== -->
+
+        <button
+            type="button"
+            class="back-button"
+            id="backButton"
+        >
+            ← Retour
+        </button>
+
+
+        <!-- =================================================
+             MAIN CONTENT
+        ================================================== -->
+
+        <section class="content">
+
+
+            <!-- HEADER -->
+
+            <header class="header">
+
+                <div class="top-line"></div>
+
+                <div class="mini-label">
+                    PHARMSINERGY • LICENCE 3
+                </div>
+
+                <h1 class="title">
+                    Streak
+                </h1>
+
+                <p class="subtitle">
+                    La régularité construit les grandes réussites
+                </p>
+
+            </header>
+
+
+            <!-- =================================================
+                 STATS
+            ================================================== -->
+
+            <div class="stats">
+
+                <div class="stat">
+
+                    <span
+                        class="stat-number"
+                        id="currentStreak"
+                    >
+                        0
+                    </span>
+
+                    <span class="stat-label">
+                        Streak actuel
+                    </span>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <span
+                        class="stat-number"
+                        id="recordStreak"
+                    >
+                        0
+                    </span>
+
+                    <span class="stat-label">
+                        Record
+                    </span>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <span
+                        class="stat-number"
+                        id="activeDays"
+                    >
+                        0
+                    </span>
+
+                    <span class="stat-label">
+                        Jours actifs
+                    </span>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <span
+                        class="stat-number"
+                        id="weekScore"
+                    >
+                        0%
+                    </span>
+
+                    <span class="stat-label">
+                        Score semaine
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 DASHBOARD — SCROLL
+            ================================================== -->
+
+            <div class="dashboard">
+
+
+                <!-- =================================================
+                     LEFT PANEL
+                ================================================== -->
+
+                <section class="left-panel">
+
+
+                    <!-- STREAK -->
+
+                    <div class="streak-hero">
+
+                        <div class="fire">
+                            🔥
+                        </div>
+
+
+                        <div
+                            class="current-streak"
+                            id="heroStreak"
+                        >
+                            0
+                        </div>
+
+
+                        <div class="streak-label">
+                            jours consécutifs
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="study-button"
+                            id="studyButton"
+                        >
+                            ✓ J'ai étudié aujourd'hui
+                        </button>
+
+                    </div>
+
+
+                    <!-- WEEKLY GOAL -->
+
+                    <div class="goal-card">
+
+                        <div class="section-title">
+
+                            <span>
+                                Objectif de la semaine
+                            </span>
+
+                            <span
+                                class="goal-value"
+                                id="goalValue"
+                            >
+                                0 / 7
+                            </span>
+
+                        </div>
+
+
+                        <div class="goal-track">
+
+                            <div
+                                class="goal-fill"
+                                id="goalFill"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="goal-days">
+
+                            <div class="goal-day">
+                                L
+                            </div>
+
+                            <div class="goal-day">
+                                M
+                            </div>
+
+                            <div class="goal-day">
+                                M
+                            </div>
+
+                            <div class="goal-day">
+                                J
+                            </div>
+
+                            <div class="goal-day">
+                                V
+                            </div>
+
+                            <div class="goal-day">
+                                S
+                            </div>
+
+                            <div class="goal-day">
+                                D
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CALENDAR -->
+
+                    <div class="calendar-card">
+
+                        <div class="calendar-header">
+
+                            <div class="calendar-title">
+                                Mon activité
+                            </div>
+
+                            <div
+                                class="calendar-month"
+                                id="calendarMonth"
+                            >
+                                —
+                            </div>
+
+                        </div>
+
+
+                        <div class="week-labels">
+
+                            <div class="week-label">
+                                L
+                            </div>
+
+                            <div class="week-label">
+                                M
+                            </div>
+
+                            <div class="week-label">
+                                M
+                            </div>
+
+                            <div class="week-label">
+                                J
+                            </div>
+
+                            <div class="week-label">
+                                V
+                            </div>
+
+                            <div class="week-label">
+                                S
+                            </div>
+
+                            <div class="week-label">
+                                D
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="calendar-grid"
+                            id="calendarGrid"
+                        ></div>
+
+                    </div>
+
+
+                </section>
+
+
+                <!-- =================================================
+                     RIGHT PANEL
+                ================================================== -->
+
+                <aside class="right-panel">
+
+
+                    <!-- RECORD -->
+
+                    <div class="record-card">
+
+                        <div class="record-title">
+                            🏆 Ton meilleur streak
+                        </div>
+
+                        <div
+                            class="record-number"
+                            id="recordNumber"
+                        >
+                            0 jours
+                        </div>
+
+                        <div class="record-subtitle">
+                            Continue pour battre ton record.
+                        </div>
+
+                    </div>
+
+
+                    <!-- BADGES -->
+
+                    <div class="badges-card">
+
+                        <div class="badges-header">
+
+                            <div class="badges-title">
+                                Mes récompenses
+                            </div>
+
+                            <div
+                                class="badge-count"
+                                id="badgeCount"
+                            >
+                                0 / 7
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="badges-grid"
+                            id="badgesGrid"
+                        ></div>
+
+                    </div>
+
+
+                    <!-- MOTIVATION -->
+
+                    <div class="motivation-card">
+
+                        <div class="motivation-title">
+                            Petit rappel
+                        </div>
+
+                        <div
+                            class="motivation-text"
+                            id="motivationText"
+                        >
+                            La constance d'aujourd'hui devient le résultat de demain.
+                        </div>
+
+                    </div>
+
+
+                </aside>
+
+
+            </div>
+
+
+            <!-- FOOTER -->
+
+            <div class="bottom-note">
+
+                Une journée de plus. Une habitude de plus. Une victoire de plus. 💜
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <script>
+
+        /* =====================================================
+           RETURN
+        ===================================================== */
+
+        document
+            .getElementById("backButton")
+            .addEventListener(
+                "click",
+                function () {
+
+                    window.location.href =
+                        "carnet-l3.html";
+
+                }
+            );
+
+
+        /* =====================================================
+           STORAGE
+        ===================================================== */
+
+        const storageKey =
+            "pharmsinergy_streak_l3";
+
+
+        let activityDays =
+            JSON.parse(
+                localStorage.getItem(
+                    storageKey
+                )
+            ) || [];
+
+
+        /* =====================================================
+           DATE HELPERS
+        ===================================================== */
+
+        function createDateKey(
+            date
+        ) {
+
+            const year =
+                date.getFullYear();
+
+
+            const month =
+                String(
+                    date.getMonth() + 1
+                ).padStart(
+                    2,
+                    "0"
+                );
+
+
+            const day =
+                String(
+                    date.getDate()
+                ).padStart(
+                    2,
+                    "0"
+                );
+
+
+            return (
+                year +
+                "-" +
+                month +
+                "-" +
+                day
+            );
+
+        }
+
+
+        function parseDateKey(
+            key
+        ) {
+
+            const parts =
+                key.split("-");
+
+
+            return new Date(
+                Number(parts[0]),
+                Number(parts[1]) - 1,
+                Number(parts[2])
+            );
+
+        }
+
+
+        function todayKey() {
+
+            return createDateKey(
+                new Date()
+            );
+
+        }
+
+
+        function yesterdayKey() {
+
+            const date =
+                new Date();
+
+
+            date.setDate(
+                date.getDate() - 1
+            );
+
+
+            return createDateKey(
+                date
+            );
+
+        }
+
+
+        /* =====================================================
+           CLEAN
+        ===================================================== */
+
+        function cleanActivityDays() {
+
+            activityDays =
+                [
+                    ...new Set(
+                        activityDays.filter(
+                            function (
+                                date
+                            ) {
+
+                                return (
+                                    typeof date ===
+                                    "string" &&
+                                    /^\d{4}-\d{2}-\d{2}$/
+                                        .test(date)
+                                );
+
+                            }
+                        )
+                    )
+                ];
+
+
+            activityDays.sort();
+
+            saveData();
+
+        }
+
+
+        /* =====================================================
+           SAVE
+        ===================================================== */
+
+        function saveData() {
+
+            localStorage.setItem(
+                storageKey,
+                JSON.stringify(
+                    activityDays
+                )
+            );
+
+        }
+
+
+        /* =====================================================
+           CURRENT STREAK
+        ===================================================== */
+
+        function getCurrentStreak() {
+
+            if (
+                activityDays.length ===
+                0
+            ) {
+
+                return 0;
+            }
+
+
+            const active =
+                new Set(
+                    activityDays
+                );
+
+
+            let cursor =
+                new Date();
+
+
+            if (
+                !active.has(
+                    createDateKey(
+                        cursor
+                    )
+                )
+            ) {
+
+                cursor.setDate(
+                    cursor.getDate() - 1
+                );
+
+            }
+
+
+            if (
+                !active.has(
+                    createDateKey(
+                        cursor
+                    )
+                )
+            ) {
+
+                return 0;
+            }
+
+
+            let count =
+                0;
+
+
+            while (
+                active.has(
+                    createDateKey(
+                        cursor
+                    )
+                )
+            ) {
+
+                count++;
+
+
+                cursor.setDate(
+                    cursor.getDate() - 1
+                );
+
+            }
+
+
+            return count;
+
+        }
+
+
+        /* =====================================================
+           RECORD STREAK
+        ===================================================== */
+
+        function getRecordStreak() {
+
+            if (
+                activityDays.length ===
+                0
+            ) {
+
+                return 0;
+            }
+
+
+            const sorted =
+                activityDays
+                    .slice()
+                    .sort();
+
+
+            let best =
+                1;
+
+
+            let current =
+                1;
+
+
+            for (
+                let i = 1;
+                i < sorted.length;
+                i++
+            ) {
+
+                const previous =
+                    parseDateKey(
+                        sorted[i - 1]
+                    );
+
+
+                const currentDate =
+                    parseDateKey(
+                        sorted[i]
+                    );
+
+
+                const difference =
+                    Math.round(
+                        (
+                            currentDate -
+                            previous
+                        ) /
+                        (
+                            1000 *
+                            60 *
+                            60 *
+                            24
+                        )
+                    );
+
+
+                if (
+                    difference ===
+                    1
+                ) {
+
+                    current++;
+
+                } else {
+
+                    current = 1;
+
+                }
+
+
+                best =
+                    Math.max(
+                        best,
+                        current
+                    );
+
+            }
+
+
+            return best;
+
+        }
+
+
+        /* =====================================================
+           WEEK
+        ===================================================== */
+
+        function getMonday(
+            date
+        ) {
+
+            const d =
+                new Date(
+                    date
+                );
+
+
+            const day =
+                d.getDay();
+
+
+            const difference =
+                day === 0
+                    ? -6
+                    : 1 - day;
+
+
+            d.setDate(
+                d.getDate() +
+                difference
+            );
+
+
+            d.setHours(
+                0,
+                0,
+                0,
+                0
+            );
+
+
+            return d;
+
+        }
+
+
+        function getWeekActivity() {
+
+            const monday =
+                getMonday(
+                    new Date()
+                );
+
+
+            const result =
+                [];
+
+
+            for (
+                let i = 0;
+                i < 7;
+                i++
+            ) {
+
+                const date =
+                    new Date(
+                        monday
+                    );
+
+
+                date.setDate(
+                    monday.getDate() +
+                    i
+                );
+
+
+                result.push(
+                    createDateKey(
+                        date
+                    )
+                );
+
+            }
+
+
+            return result;
+
+        }
+
+
+        /* =====================================================
+           UPDATE STATS
+        ===================================================== */
+
+        function updateStats() {
+
+            const current =
+                getCurrentStreak();
+
+
+            const record =
+                getRecordStreak();
+
+
+            const week =
+                getWeekActivity();
+
+
+            const weekActive =
+                week.filter(
+                    function (
+                        date
+                    ) {
+
+                        return activityDays.includes(
+                            date
+                        );
+
+                    }
+                ).length;
+
+
+            const score =
+                Math.round(
+                    (
+                        weekActive /
+                        7
+                    ) *
+                    100
+                );
+
+
+            document.getElementById(
+                "currentStreak"
+            ).textContent =
+                current;
+
+
+            document.getElementById(
+                "heroStreak"
+            ).textContent =
+                current;
+
+
+            document.getElementById(
+                "recordStreak"
+            ).textContent =
+                record;
+
+
+            document.getElementById(
+                "recordNumber"
+            ).textContent =
+                record +
+                (
+                    record === 1
+                        ? " jour"
+                        : " jours"
+                );
+
+
+            document.getElementById(
+                "activeDays"
+            ).textContent =
+                activityDays.length;
+
+
+            document.getElementById(
+                "weekScore"
+            ).textContent =
+                score +
+                "%";
+
+
+            document.getElementById(
+                "goalValue"
+            ).textContent =
+                weekActive +
+                " / 7";
+
+
+            document.getElementById(
+                "goalFill"
+            ).style.width =
+                score +
+                "%";
+
+
+            const studyButton =
+                document.getElementById(
+                    "studyButton"
+                );
+
+
+            if (
+                activityDays.includes(
+                    todayKey()
+                )
+            ) {
+
+                studyButton.textContent =
+                    "✓ Journée enregistrée";
+
+
+                studyButton.classList.add(
+                    "done"
+                );
+
+
+                studyButton.disabled =
+                    true;
+
+            } else {
+
+                studyButton.textContent =
+                    "✓ J'ai étudié aujourd'hui";
+
+
+                studyButton.classList.remove(
+                    "done"
+                );
+
+
+                studyButton.disabled =
+                    false;
+            }
+
+
+            const goalDays =
+                document.querySelectorAll(
+                    ".goal-day"
+                );
+
+
+            goalDays.forEach(
+                function (
+                    element,
+                    index
+                ) {
+
+                    if (
+                        activityDays.includes(
+                            week[index]
+                        )
+                    ) {
+
+                        element.classList.add(
+                            "active"
+                        );
+
+                    } else {
+
+                        element.classList.remove(
+                            "active"
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           STUDY TODAY
+        ===================================================== */
+
+        document
+            .getElementById(
+                "studyButton"
+            )
+            .addEventListener(
+                "click",
+                function () {
+
+                    const today =
+                        todayKey();
+
+
+                    if (
+                        !activityDays.includes(
+                            today
+                        )
+                    ) {
+
+                        activityDays.push(
+                            today
+                        );
+
+                        cleanActivityDays();
+
+                    }
+
+
+                    updateStats();
+
+                    renderCalendar();
+
+                    renderBadges();
+
+                    updateMotivation();
+
+                }
+            );
+
+
+        /* =====================================================
+           CALENDAR
+        ===================================================== */
+
+        function renderCalendar() {
+
+            const grid =
+                document.getElementById(
+                    "calendarGrid"
+                );
+
+
+            grid.innerHTML =
+                "";
+
+
+            const now =
+                new Date();
+
+
+            const year =
+                now.getFullYear();
+
+
+            const month =
+                now.getMonth();
+
+
+            const firstDay =
+                new Date(
+                    year,
+                    month,
+                    1
+                );
+
+
+            const daysInMonth =
+                new Date(
+                    year,
+                    month + 1,
+                    0
+                ).getDate();
+
+
+            let firstWeekday =
+                firstDay.getDay();
+
+
+            firstWeekday =
+                firstWeekday === 0
+                    ? 6
+                    : firstWeekday - 1;
+
+
+            const previousDays =
+                new Date(
+                    year,
+                    month,
+                    0
+                ).getDate();
+
+
+            for (
+                let i =
+                    firstWeekday - 1;
+                i >= 0;
+                i--
+            ) {
+
+                const date =
+                    new Date(
+                        year,
+                        month - 1,
+                        previousDays - i
+                    );
+
+
+                grid.appendChild(
+                    createCalendarDay(
+                        date,
+                        true
+                    )
+                );
+
+            }
+
+
+            for (
+                let day = 1;
+                day <= daysInMonth;
+                day++
+            ) {
+
+                const date =
+                    new Date(
+                        year,
+                        month,
+                        day
+                    );
+
+
+                grid.appendChild(
+                    createCalendarDay(
+                        date,
+                        false
+                    )
+                );
+
+            }
+
+
+            const currentCells =
+                grid.children.length;
+
+
+            const remaining =
+                Math.ceil(
+                    currentCells / 7
+                ) *
+                7 -
+                currentCells;
+
+
+            for (
+                let day = 1;
+                day <= remaining;
+                day++
+            ) {
+
+                const date =
+                    new Date(
+                        year,
+                        month + 1,
+                        day
+                    );
+
+
+                grid.appendChild(
+                    createCalendarDay(
+                        date,
+                        true
+                    )
+                );
+
+            }
+
+
+            document.getElementById(
+                "calendarMonth"
+            ).textContent =
+                new Intl.DateTimeFormat(
+                    "fr-FR",
+                    {
+                        month:
+                            "long",
+
+                        year:
+                            "numeric"
+                    }
+                ).format(
+                    firstDay
+                );
+
+        }
+
+
+        /* =====================================================
+           CREATE CALENDAR DAY
+        ===================================================== */
+
+        function createCalendarDay(
+            date,
+            other
+        ) {
+
+            const cell =
+                document.createElement(
+                    "div"
+                );
+
+
+            cell.className =
+                "calendar-day";
+
+
+            if (
+                other
+            ) {
+
+                cell.classList.add(
+                    "other"
+                );
+            }
+
+
+            const key =
+                createDateKey(
+                    date
+                );
+
+
+            if (
+                activityDays.includes(
+                    key
+                )
+            ) {
+
+                cell.classList.add(
+                    "active"
+                );
+            }
+
+
+            if (
+                key ===
+                todayKey()
+            ) {
+
+                cell.classList.add(
+                    "today"
+                );
+            }
+
+
+            cell.textContent =
+                date.getDate();
+
+
+            return cell;
+
+        }
+
+
+        /* =====================================================
+           BADGES
+        ===================================================== */
+
+        const badges = [
+
+            {
+                days:
+                    1,
+
+                icon:
+                    "🌱",
+
+                name:
+                    "Premier pas",
+
+                condition:
+                    "1 jour actif"
+            },
+
+
+            {
+                days:
+                    3,
+
+                icon:
+                    "🔥",
+
+                name:
+                    "En route",
+
+                condition:
+                    "3 jours"
+            },
+
+
+            {
+                days:
+                    7,
+
+                icon:
+                    "⚡",
+
+                name:
+                    "Une semaine",
+
+                condition:
+                    "7 jours"
+            },
+
+
+            {
+                days:
+                    14,
+
+                icon:
+                    "💜",
+
+                name:
+                    "Régulier",
+
+                condition:
+                    "14 jours"
+            },
+
+
+            {
+                days:
+                    21,
+
+                icon:
+                    "🏆",
+
+                name:
+                    "Habitude",
+
+                condition:
+                    "21 jours"
+            },
+
+
+            {
+                days:
+                    30,
+
+                icon:
+                    "👑",
+
+                name:
+                    "Discipline",
+
+                condition:
+                    "30 jours"
+            },
+
+
+            {
+                days:
+                    50,
+
+                icon:
+                    "💎",
+
+                name:
+                    "Élite",
+
+                condition:
+                    "50 jours"
+            }
+
+        ];
+
+
+        /* =====================================================
+           RENDER BADGES
+        ===================================================== */
+
+        function renderBadges() {
+
+            const container =
+                document.getElementById(
+                    "badgesGrid"
+                );
+
+
+            container.innerHTML =
+                "";
+
+
+            const record =
+                getRecordStreak();
+
+
+            let unlocked =
+                0;
+
+
+            badges.forEach(
+                function (
+                    badge
+                ) {
+
+                    const card =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    card.className =
+                        "badge";
+
+
+                    if (
+                        record >=
+                        badge.days
+                    ) {
+
+                        card.classList.add(
+                            "unlocked"
+                        );
+
+                        unlocked++;
+
+                    }
+
+
+                    const icon =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    icon.className =
+                        "badge-icon";
+
+
+                    icon.textContent =
+                        badge.icon;
+
+
+                    const name =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    name.className =
+                        "badge-name";
+
+
+                    name.textContent =
+                        badge.name;
+
+
+                    const condition =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    condition.className =
+                        "badge-condition";
+
+
+                    condition.textContent =
+                        badge.condition;
+
+
+                    card.appendChild(
+                        icon
+                    );
+
+
+                    card.appendChild(
+                        name
+                    );
+
+
+                    card.appendChild(
+                        condition
+                    );
+
+
+                    container.appendChild(
+                        card
+                    );
+
+                }
+            );
+
+
+            document.getElementById(
+                "badgeCount"
+            ).textContent =
+                unlocked +
+                " / " +
+                badges.length;
+
+        }
+
+
+        /* =====================================================
+           MOTIVATION
+        ===================================================== */
+
+        function updateMotivation() {
+
+            const current =
+                getCurrentStreak();
+
+
+            const messages = [
+
+                "La constance d'aujourd'hui devient le résultat de demain.",
+
+                "Une petite session vaut mieux qu'une journée sans avancer.",
+
+                "Tu construis tes habitudes, une journée à la fois.",
+
+                "Continue. Ton futur toi te remerciera.",
+
+                "Chaque jour actif rapproche ton objectif.",
+
+                "Le secret n'est pas de faire beaucoup, mais de continuer."
+
+            ];
+
+
+            const index =
+                current %
+                messages.length;
+
+
+            document.getElementById(
+                "motivationText"
+            ).textContent =
+                messages[index];
+
+        }
+
+
+        /* =====================================================
+           INITIALIZE
+        ===================================================== */
+
+        cleanActivityDays();
+
+        updateStats();
+
+        renderCalendar();
+
+        renderBadges();
+
+        updateMotivation();
+
+
+        /* =====================================================
+           REFRESH EVERY MINUTE
+        ===================================================== */
+
+        setInterval(
+            function () {
+
+                updateStats();
+
+                renderCalendar();
+
+                renderBadges();
+
+                updateMotivation();
+
+            },
+            60000
+        );
+
+    </script>
+
+</body>
+
+</html>

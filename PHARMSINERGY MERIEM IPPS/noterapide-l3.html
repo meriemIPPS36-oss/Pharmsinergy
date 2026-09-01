@@ -1,0 +1,2798 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Notes rapides | PharmSinergy</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kufam:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        /* =====================================================
+           BODY
+        ===================================================== */
+
+        body {
+
+            min-height: 100vh;
+
+            overflow: hidden;
+
+            font-family:
+                "Inter",
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color: #693f4d;
+
+            background:
+
+                radial-gradient(
+                    circle at 12% 14%,
+                    rgba(255,126,163,0.50),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 88% 14%,
+                    rgba(255,210,74,0.45),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 82% 88%,
+                    rgba(255,145,67,0.40),
+                    transparent 31%
+                ),
+
+                radial-gradient(
+                    circle at 18% 88%,
+                    rgba(255,195,84,0.36),
+                    transparent 29%
+                ),
+
+                radial-gradient(
+                    circle at 50% 45%,
+                    rgba(255,255,255,0.85),
+                    rgba(255,232,222,0.26) 26%,
+                    transparent 55%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #ee739c 0%,
+                    #f59b77 27%,
+                    #f8c95c 53%,
+                    #f8a86b 75%,
+                    #ef749c 100%
+                );
+        }
+
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .page {
+
+            position: relative;
+
+            width: 100%;
+            height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+            isolation: isolate;
+        }
+
+
+        /* =====================================================
+           BACKGROUND ORBS
+        ===================================================== */
+
+        .orb {
+
+            position: absolute;
+
+            border-radius: 50%;
+
+            filter: blur(70px);
+
+            pointer-events: none;
+
+            z-index: -9;
+        }
+
+        .orb-one {
+
+            width: 420px;
+            height: 420px;
+
+            top: -180px;
+            left: -120px;
+
+            background:
+                rgba(255,117,171,0.28);
+
+            animation:
+                floatOne
+                10s
+                ease-in-out
+                infinite;
+        }
+
+        .orb-two {
+
+            width: 400px;
+            height: 400px;
+
+            right: -130px;
+            bottom: -170px;
+
+            background:
+                rgba(255,175,61,0.26);
+
+            animation:
+                floatTwo
+                12s
+                ease-in-out
+                infinite;
+        }
+
+        .orb-three {
+
+            width: 210px;
+            height: 210px;
+
+            left: 43%;
+            top: 40%;
+
+            background:
+                rgba(255,223,106,0.15);
+
+            filter:
+                blur(88px);
+        }
+
+
+        /* =====================================================
+           DECORATIVE PAPER
+        ===================================================== */
+
+        .deco-paper {
+
+            position: absolute;
+
+            width: 165px;
+            height: 125px;
+
+            border-radius: 13px;
+
+            background:
+                rgba(255,249,222,0.34);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.38);
+
+            box-shadow:
+                0 20px 45px
+                rgba(130,74,62,0.10);
+
+            pointer-events: none;
+
+            z-index: -3;
+        }
+
+        .deco-paper::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 20px;
+            right: 20px;
+            top: 35px;
+
+            height: 1px;
+
+            background:
+                rgba(127,91,71,0.14);
+
+            box-shadow:
+                0 15px 0 rgba(127,91,71,0.11),
+                0 30px 0 rgba(127,91,71,0.09),
+                0 45px 0 rgba(127,91,71,0.07);
+        }
+
+        .deco-paper-one {
+
+            left: -40px;
+            top: 10%;
+
+            transform:
+                rotate(-10deg);
+        }
+
+        .deco-paper-two {
+
+            right: -42px;
+            bottom: 11%;
+
+            transform:
+                rotate(9deg);
+
+            background:
+                rgba(255,236,170,0.30);
+        }
+
+
+        /* =====================================================
+           PENCIL
+        ===================================================== */
+
+        .pencil {
+
+            position: absolute;
+
+            width: 165px;
+            height: 18px;
+
+            border-radius: 999px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    rgba(246,113,155,0.26) 0%,
+                    rgba(255,199,81,0.38) 65%,
+                    rgba(255,255,255,0.35) 66%,
+                    rgba(255,255,255,0.35) 75%,
+                    rgba(234,123,75,0.30) 76%,
+                    rgba(234,123,75,0.30) 100%
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.34);
+
+            box-shadow:
+                0 10px 26px
+                rgba(145,74,60,0.09);
+
+            pointer-events:
+                none;
+
+            z-index: -3;
+        }
+
+        .pencil::after {
+
+            content: "";
+
+            position: absolute;
+
+            right: -12px;
+            top: 2px;
+
+            border-top:
+                7px solid transparent;
+
+            border-bottom:
+                7px solid transparent;
+
+            border-left:
+                13px solid rgba(108,75,61,0.28);
+        }
+
+        .pencil-one {
+
+            left: -30px;
+            top: 30%;
+
+            transform:
+                rotate(22deg);
+        }
+
+        .pencil-two {
+
+            right: -30px;
+            bottom: 29%;
+
+            transform:
+                rotate(-20deg)
+                scale(.82);
+        }
+
+
+        /* =====================================================
+           PHARMACY STICKERS
+        ===================================================== */
+
+        .sticker {
+
+            position: absolute;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.45);
+
+            box-shadow:
+                0 14px 28px
+                rgba(117,65,51,0.10);
+
+            pointer-events: none;
+
+            z-index: -2;
+
+            font-size: 1.15rem;
+        }
+
+        .sticker-capsule {
+
+            width: 85px;
+            height: 37px;
+
+            border-radius: 999px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    rgba(234,100,130,0.70) 0 49%,
+                    rgba(255,218,99,0.72) 50% 100%
+                );
+
+            transform:
+                rotate(-18deg);
+        }
+
+        .sticker-pill {
+
+            width: 46px;
+            height: 46px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,244,203,0.72);
+
+            color:
+                #e58d70;
+
+            font-size: 1.25rem;
+        }
+
+        .sticker-flask {
+
+            width: 48px;
+            height: 62px;
+
+            border-radius:
+                13px
+                13px
+                17px
+                17px;
+
+            background:
+                rgba(255,244,204,0.62);
+
+            color:
+                #df8f6c;
+
+            font-size: 1.15rem;
+        }
+
+        .sticker-book {
+
+            width: 62px;
+            height: 49px;
+
+            border-radius: 10px;
+
+            background:
+                rgba(255,237,180,0.72);
+
+            color:
+                #d78367;
+
+            font-size: 1rem;
+        }
+
+        .sticker-cross {
+
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,245,213,0.75);
+
+            color:
+                #e58d72;
+        }
+
+        .sticker-one {
+
+            top: 12%;
+            right: 13%;
+
+            transform:
+                rotate(-10deg);
+        }
+
+        .sticker-two {
+
+            top: 26%;
+            left: 8%;
+
+            transform:
+                rotate(8deg);
+        }
+
+        .sticker-three {
+
+            bottom: 16%;
+            right: 8%;
+
+            transform:
+                rotate(7deg);
+        }
+
+        .sticker-four {
+
+            bottom: 12%;
+            left: 12%;
+
+            transform:
+                rotate(-7deg);
+        }
+
+        .sticker-five {
+
+            top: 21%;
+            right: 7%;
+
+            transform:
+                rotate(10deg);
+        }
+
+
+        /* =====================================================
+           SMALL CIRCULAR ELEMENTS
+        ===================================================== */
+
+        .bubble {
+
+            position: absolute;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.35);
+
+            background:
+                rgba(255,255,255,0.12);
+
+            pointer-events: none;
+
+            z-index: -3;
+        }
+
+        .bubble-one {
+
+            width: 29px;
+            height: 29px;
+
+            left: 14%;
+            top: 17%;
+        }
+
+        .bubble-two {
+
+            width: 18px;
+            height: 18px;
+
+            left: 8%;
+            top: 42%;
+        }
+
+        .bubble-three {
+
+            width: 39px;
+            height: 39px;
+
+            right: 15%;
+            bottom: 20%;
+        }
+
+        .bubble-four {
+
+            width: 21px;
+            height: 21px;
+
+            right: 23%;
+            bottom: 12%;
+        }
+
+
+        /* =====================================================
+           BACK BUTTON
+        ===================================================== */
+
+        .back-button {
+
+            position: absolute;
+
+            top: 24px;
+            left: 28px;
+
+            padding:
+                9px 17px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.66);
+
+            border-radius: 999px;
+
+            background:
+                rgba(255,255,255,0.25);
+
+            color:
+                #824b58;
+
+            font-size:
+                .76rem;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            backdrop-filter:
+                blur(13px);
+
+            -webkit-backdrop-filter:
+                blur(13px);
+
+            box-shadow:
+                0 8px 22px
+                rgba(116,66,57,0.11);
+
+            transition:
+                all .25s ease;
+
+            z-index:
+                50;
+        }
+
+        .back-button:hover {
+
+            transform:
+                translateX(-4px);
+
+            background:
+                rgba(255,255,255,0.40);
+        }
+
+
+        /* =====================================================
+           MAIN GLASS CARD
+        ===================================================== */
+
+        .content {
+
+            position: relative;
+
+            width:
+                min(1040px, 91%);
+
+            height:
+                91vh;
+
+            padding:
+                20px 23px 18px;
+
+            border-radius:
+                32px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.44),
+                    rgba(255,240,228,0.19)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.73);
+
+            box-shadow:
+
+                0 30px 82px
+                rgba(105,57,54,0.18),
+
+                inset
+                0 1px 0
+                rgba(255,255,255,0.92);
+
+            backdrop-filter:
+                blur(24px);
+
+            -webkit-backdrop-filter:
+                blur(24px);
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            overflow:
+                hidden;
+
+            animation:
+                cardAppear
+                1s
+                cubic-bezier(.2,.8,.2,1)
+                both;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .header {
+
+            text-align:
+                center;
+
+            flex-shrink:
+                0;
+
+            margin-bottom:
+                10px;
+        }
+
+        .top-line {
+
+            width:
+                78px;
+
+            height:
+                3px;
+
+            margin:
+                0 auto
+                10px;
+
+            border-radius:
+                999px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    #ee6f9d,
+                    #f5b94f,
+                    #f18767
+                );
+        }
+
+        .mini-label {
+
+            font-size:
+                .60rem;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                .29em;
+
+            color:
+                #9f635f;
+
+            text-transform:
+                uppercase;
+
+            margin-bottom:
+                4px;
+        }
+
+        .title {
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                clamp(
+                    1.50rem,
+                    3.7vw,
+                    2.5rem
+                );
+
+            font-weight:
+                800;
+
+            color:
+                #934c60;
+
+            text-shadow:
+                0 5px 18px
+                rgba(144,61,77,0.13);
+        }
+
+        .subtitle {
+
+            margin-top:
+                4px;
+
+            font-size:
+                clamp(
+                    .63rem,
+                    1.1vw,
+                    .80rem
+                );
+
+            color:
+                #9a6b68;
+
+            font-weight:
+                600;
+        }
+
+
+        /* =====================================================
+           TOOL BAR
+        ===================================================== */
+
+        .toolbar {
+
+            flex-shrink:
+                0;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                9px;
+
+            margin-bottom:
+                10px;
+        }
+
+        .search-box {
+
+            flex:
+                1;
+
+            min-width:
+                0;
+
+            height:
+                37px;
+
+            padding:
+                0 12px;
+
+            border:
+                1px solid
+                rgba(176,104,100,0.18);
+
+            border-radius:
+                11px;
+
+            background:
+                rgba(255,255,255,0.30);
+
+            color:
+                #70444e;
+
+            outline:
+                none;
+
+            font-size:
+                .57rem;
+
+            font-weight:
+                600;
+        }
+
+        .search-box::placeholder {
+
+            color:
+                #ad7d7c;
+        }
+
+        .search-box:focus {
+
+            background:
+                rgba(255,255,255,0.43);
+
+            border-color:
+                rgba(222,112,132,0.35);
+        }
+
+        .new-note-button {
+
+            flex-shrink:
+                0;
+
+            height:
+                37px;
+
+            padding:
+                0 15px;
+
+            border:
+                none;
+
+            border-radius:
+                11px;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #ea7397,
+                    #f2a75c
+                );
+
+            color:
+                white;
+
+            font-size:
+                .56rem;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            box-shadow:
+                0 9px 20px
+                rgba(214,104,106,0.18);
+
+            transition:
+                all .20s ease;
+        }
+
+        .new-note-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 12px 24px
+                rgba(214,104,106,0.24);
+        }
+
+
+        /* =====================================================
+           NOTE BOARD
+        ===================================================== */
+
+        .board {
+
+            flex:
+                1 1 auto;
+
+            min-height:
+                0;
+
+            overflow-y:
+                auto;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    minmax(
+                        0,
+                        1fr
+                    )
+                );
+
+            gap:
+                11px;
+
+            padding:
+                5px
+                5px
+                8px
+                3px;
+
+            scrollbar-width:
+                thin;
+
+            scrollbar-color:
+                rgba(214,106,117,0.30)
+                transparent;
+        }
+
+        .board::-webkit-scrollbar {
+
+            width:
+                6px;
+        }
+
+        .board::-webkit-scrollbar-track {
+
+            background:
+                transparent;
+        }
+
+        .board::-webkit-scrollbar-thumb {
+
+            background:
+                rgba(214,106,117,0.27);
+
+            border-radius:
+                999px;
+        }
+
+
+        /* =====================================================
+           NOTE CARD
+        ===================================================== */
+
+        .note-card {
+
+            position:
+                relative;
+
+            min-height:
+                215px;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            padding:
+                14px
+                13px
+                12px;
+
+            border-radius:
+                9px;
+
+            border:
+                1px solid
+                rgba(177,114,83,0.16);
+
+            box-shadow:
+
+                0 12px 24px
+                rgba(126,72,59,0.10),
+
+                0 2px 4px
+                rgba(126,72,59,0.05);
+
+            overflow:
+                hidden;
+
+            transform:
+                rotate(-0.7deg);
+        }
+
+        .note-card:nth-child(2n) {
+
+            transform:
+                rotate(0.8deg);
+        }
+
+        .note-card:nth-child(3n) {
+
+            transform:
+                rotate(-0.25deg);
+        }
+
+
+        /* =====================================================
+           NOTE PAPER COLORS
+        ===================================================== */
+
+        .note-card.pink {
+
+            background:
+                #ffe2e8;
+        }
+
+        .note-card.yellow {
+
+            background:
+                #fff1ad;
+        }
+
+        .note-card.orange {
+
+            background:
+                #ffe1bb;
+        }
+
+        .note-card.cream {
+
+            background:
+                #fff8d8;
+        }
+
+
+        /* =====================================================
+           TAPE
+        ===================================================== */
+
+        .tape {
+
+            position:
+                absolute;
+
+            width:
+                54px;
+
+            height:
+                17px;
+
+            top:
+                -1px;
+
+            left:
+                50%;
+
+            transform:
+                translateX(-50%)
+                rotate(-1deg);
+
+            background:
+                rgba(255,218,137,0.62);
+
+            border-left:
+                1px solid
+                rgba(214,166,95,0.15);
+
+            border-right:
+                1px solid
+                rgba(214,166,95,0.15);
+
+            pointer-events:
+                none;
+        }
+
+
+        /* =====================================================
+           NOTE HEADER
+        ===================================================== */
+
+        .note-header {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                8px;
+
+            margin-top:
+                5px;
+
+            margin-bottom:
+                8px;
+        }
+
+        .note-title {
+
+            flex:
+                1;
+
+            min-width:
+                0;
+
+            border:
+                none;
+
+            background:
+                transparent;
+
+            outline:
+                none;
+
+            color:
+                #7f4654;
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                .69rem;
+
+            font-weight:
+                800;
+
+            min-height:
+                23px;
+
+            padding:
+                2px
+                0;
+        }
+
+        .note-title::placeholder {
+
+            color:
+                #b57f86;
+        }
+
+        .note-date {
+
+            font-size:
+                .42rem;
+
+            color:
+                #aa7a78;
+
+            font-weight:
+                700;
+
+            white-space:
+                nowrap;
+        }
+
+
+        /* =====================================================
+           NOTE TEXTAREA
+        ===================================================== */
+
+        .note-text {
+
+            flex:
+                1;
+
+            width:
+                100%;
+
+            min-height:
+                120px;
+
+            resize:
+                none;
+
+            border:
+                none;
+
+            outline:
+                none;
+
+            padding:
+                2px
+                0;
+
+            font-family:
+                "Kufam",
+                "Segoe UI",
+                sans-serif;
+
+            font-size:
+                .57rem;
+
+            line-height:
+                1.9;
+
+            color:
+                #6f4d57;
+
+            background:
+
+                repeating-linear-gradient(
+                    to bottom,
+                    transparent 0px,
+                    transparent 27px,
+                    rgba(135,90,75,0.15) 28px,
+                    transparent 29px
+                );
+        }
+
+        .note-text::placeholder {
+
+            color:
+                #b4888a;
+        }
+
+
+        /* =====================================================
+           NOTE FOOTER
+        ===================================================== */
+
+        .note-footer {
+
+            flex-shrink:
+                0;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                7px;
+
+            margin-top:
+                8px;
+        }
+
+        .note-tag {
+
+            height:
+                24px;
+
+            padding:
+                0 8px;
+
+            border:
+                1px solid
+                rgba(159,94,82,0.14);
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(255,255,255,0.28);
+
+            color:
+                #9c666d;
+
+            font-size:
+                .42rem;
+
+            font-weight:
+                800;
+
+            outline:
+                none;
+        }
+
+        .note-actions {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                5px;
+        }
+
+        .note-action {
+
+            width:
+                27px;
+
+            height:
+                27px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                none;
+
+            border-radius:
+                8px;
+
+            background:
+                rgba(255,255,255,0.24);
+
+            color:
+                #9b6069;
+
+            cursor:
+                pointer;
+
+            transition:
+                all .18s ease;
+        }
+
+        .note-action:hover {
+
+            background:
+                rgba(255,255,255,0.42);
+
+            transform:
+                scale(1.05);
+        }
+
+        .note-action svg {
+
+            width:
+                14px;
+
+            height:
+                14px;
+
+            fill:
+                none;
+
+            stroke:
+                currentColor;
+
+            stroke-width:
+                1.7;
+
+            stroke-linecap:
+                round;
+
+            stroke-linejoin:
+                round;
+        }
+
+
+        /* =====================================================
+           EMPTY STATE
+        ===================================================== */
+
+        .empty-state {
+
+            grid-column:
+                1 / -1;
+
+            min-height:
+                270px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            text-align:
+                center;
+
+            border:
+                2px dashed
+                rgba(148,89,83,0.18);
+
+            border-radius:
+                18px;
+
+            background:
+                rgba(255,255,255,0.16);
+
+            padding:
+                25px;
+        }
+
+        .empty-inner {
+
+            max-width:
+                390px;
+        }
+
+        .empty-title {
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                .88rem;
+
+            font-weight:
+                800;
+
+            color:
+                #965365;
+
+            margin-bottom:
+                6px;
+        }
+
+        .empty-text {
+
+            font-size:
+                .56rem;
+
+            line-height:
+                1.65;
+
+            color:
+                #aa7d7d;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .bottom-note {
+
+            flex-shrink:
+                0;
+
+            text-align:
+                center;
+
+            padding:
+                7px
+                0
+                0;
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                .51rem;
+
+            font-weight:
+                600;
+
+            color:
+                #9a7173;
+        }
+
+
+        /* =====================================================
+           ANIMATIONS
+        ===================================================== */
+
+        @keyframes cardAppear {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(23px)
+                    scale(.97);
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+        @keyframes floatOne {
+
+            0%,
+            100% {
+
+                transform:
+                    translate(0,0);
+            }
+
+            50% {
+
+                transform:
+                    translate(18px,17px);
+            }
+        }
+
+        @keyframes floatTwo {
+
+            0%,
+            100% {
+
+                transform:
+                    translate(0,0);
+            }
+
+            50% {
+
+                transform:
+                    translate(-18px,-17px);
+            }
+        }
+
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .content {
+
+                width:
+                    94%;
+
+                height:
+                    93vh;
+
+                padding:
+                    17px
+                    13px
+                    15px;
+            }
+
+            .board {
+
+                grid-template-columns:
+                    repeat(
+                        2,
+                        minmax(0, 1fr)
+                    );
+            }
+
+            .sticker,
+            .deco-paper,
+            .pencil {
+
+                opacity:
+                    .30;
+            }
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 600px) {
+
+            .content {
+
+                width:
+                    95%;
+
+                height:
+                    94vh;
+
+                padding:
+                    16px
+                    10px
+                    12px;
+
+                border-radius:
+                    26px;
+            }
+
+            .back-button {
+
+                top:
+                    15px;
+
+                left:
+                    15px;
+
+                padding:
+                    7px
+                    12px;
+
+                font-size:
+                    .63rem;
+            }
+
+            .mini-label {
+
+                font-size:
+                    .50rem;
+            }
+
+            .title {
+
+                font-size:
+                    1.32rem;
+            }
+
+            .subtitle {
+
+                font-size:
+                    .54rem;
+            }
+
+            .toolbar {
+
+                flex-direction:
+                    column;
+            }
+
+            .search-box {
+
+                width:
+                    100%;
+            }
+
+            .new-note-button {
+
+                width:
+                    100%;
+            }
+
+            .board {
+
+                grid-template-columns:
+                    1fr;
+
+                gap:
+                    9px;
+            }
+
+            .note-card {
+
+                min-height:
+                    220px;
+            }
+
+            .note-text {
+
+                min-height:
+                    125px;
+            }
+
+            .sticker,
+            .deco-paper,
+            .pencil,
+            .bubble {
+
+                opacity:
+                    .18;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <main class="page">
+
+
+        <!-- =================================================
+             BACKGROUND
+        ================================================== -->
+
+        <div class="orb orb-one"></div>
+
+        <div class="orb orb-two"></div>
+
+        <div class="orb orb-three"></div>
+
+        <div class="deco-paper deco-paper-one"></div>
+
+        <div class="deco-paper deco-paper-two"></div>
+
+        <div class="pencil pencil-one"></div>
+
+        <div class="pencil pencil-two"></div>
+
+
+        <!-- PHARMACY STICKERS -->
+
+        <div class="sticker sticker-capsule sticker-one"></div>
+
+        <div class="sticker sticker-pill sticker-two">
+            💊
+        </div>
+
+        <div class="sticker sticker-flask sticker-three">
+            🧪
+        </div>
+
+        <div class="sticker sticker-book sticker-four">
+            📖
+        </div>
+
+        <div class="sticker sticker-cross sticker-five">
+            +
+        </div>
+
+
+        <!-- BUBBLES -->
+
+        <div class="bubble bubble-one"></div>
+
+        <div class="bubble bubble-two"></div>
+
+        <div class="bubble bubble-three"></div>
+
+        <div class="bubble bubble-four"></div>
+
+
+        <!-- =================================================
+             BACK
+        ================================================== -->
+
+        <button
+            type="button"
+            class="back-button"
+            id="backButton"
+        >
+            ← Retour
+        </button>
+
+
+        <!-- =================================================
+             MAIN CARD
+        ================================================== -->
+
+        <section class="content">
+
+
+            <!-- HEADER -->
+
+            <header class="header">
+
+                <div class="top-line"></div>
+
+                <div class="mini-label">
+                    PHARMSINERGY • LICENCE 3
+                </div>
+
+                <h1 class="title">
+                    Notes rapides
+                </h1>
+
+                <p class="subtitle">
+                    Garde tes idées, rappels et petites notes au même endroit
+                </p>
+
+            </header>
+
+
+            <!-- =================================================
+                 TOOLBAR
+            ================================================== -->
+
+            <div class="toolbar">
+
+                <input
+                    type="text"
+                    class="search-box"
+                    id="searchInput"
+                    placeholder="Rechercher dans tes notes..."
+                    autocomplete="off"
+                >
+
+
+                <button
+                    type="button"
+                    class="new-note-button"
+                    id="newNoteButton"
+                >
+                    + Nouvelle note
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 BOARD
+            ================================================== -->
+
+            <div
+                class="board"
+                id="notesBoard"
+            >
+
+                <div
+                    class="empty-state"
+                    id="emptyState"
+                >
+
+                    <div class="empty-inner">
+
+                        <div class="empty-title">
+                            Ton carnet est prêt ✎
+                        </div>
+
+                        <div class="empty-text">
+                            Crée une note pour écrire une idée,
+                            un rappel de cours, une formule,
+                            une chose à ne pas oublier ou
+                            n'importe quelle information utile.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FOOTER -->
+
+            <div class="bottom-note">
+                Écris. Organise. N'oublie rien. 💗
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <script>
+
+        /* =====================================================
+           RETURN
+        ===================================================== */
+
+        document
+            .getElementById("backButton")
+            .addEventListener(
+                "click",
+                function () {
+
+                    window.location.href =
+                        "carnet-l3.html";
+
+                }
+            );
+
+
+        /* =====================================================
+           ELEMENTS
+        ===================================================== */
+
+        const notesBoard =
+            document.getElementById(
+                "notesBoard"
+            );
+
+
+        const emptyState =
+            document.getElementById(
+                "emptyState"
+            );
+
+
+        const newNoteButton =
+            document.getElementById(
+                "newNoteButton"
+            );
+
+
+        const searchInput =
+            document.getElementById(
+                "searchInput"
+            );
+
+
+        /* =====================================================
+           STORAGE
+        ===================================================== */
+
+        const storageKey =
+            "pharmsinergy_notes_rapides_l3";
+
+
+        let notes =
+            JSON.parse(
+                localStorage.getItem(
+                    storageKey
+                )
+            ) || [];
+
+
+        /* =====================================================
+           COLORS
+        ===================================================== */
+
+        const noteColors = [
+            "pink",
+            "yellow",
+            "orange",
+            "cream"
+        ];
+
+
+        /* =====================================================
+           SAVE
+        ===================================================== */
+
+        function saveNotes() {
+
+            localStorage.setItem(
+                storageKey,
+                JSON.stringify(
+                    notes
+                )
+            );
+
+        }
+
+
+        /* =====================================================
+           DATE
+        ===================================================== */
+
+        function formatDate(
+            dateString
+        ) {
+
+            const date =
+                new Date(
+                    dateString
+                );
+
+
+            return new Intl.DateTimeFormat(
+                "fr-FR",
+                {
+                    day:
+                        "2-digit",
+
+                    month:
+                        "2-digit",
+
+                    year:
+                        "numeric"
+                }
+            ).format(
+                date
+            );
+
+        }
+
+
+        /* =====================================================
+           SVG
+        ===================================================== */
+
+        function trashIcon() {
+
+            return `
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M4 7h16"></path>
+
+                    <path d="M10 11v6"></path>
+
+                    <path d="M14 11v6"></path>
+
+                    <path
+                        d="M6 7l1 13h10l1-13"
+                    ></path>
+
+                    <path
+                        d="M9 7V4h6v3"
+                    ></path>
+
+                </svg>
+
+            `;
+
+        }
+
+
+        function duplicateIcon() {
+
+            return `
+
+                <svg viewBox="0 0 24 24">
+
+                    <rect
+                        x="8"
+                        y="8"
+                        width="11"
+                        height="11"
+                        rx="2"
+                    ></rect>
+
+                    <path
+                        d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"
+                    ></path>
+
+                </svg>
+
+            `;
+
+        }
+
+
+        /* =====================================================
+           CREATE NOTE
+        ===================================================== */
+
+        function createNote() {
+
+            const note = {
+
+                id:
+                    Date.now() +
+                    Math.random(),
+
+                title:
+                    "Nouvelle note",
+
+                text:
+                    "",
+
+                tag:
+                    "Cours",
+
+                color:
+                    noteColors[
+                        notes.length %
+                        noteColors.length
+                    ],
+
+                createdAt:
+                    new Date().toISOString()
+
+            };
+
+
+            notes.unshift(
+                note
+            );
+
+
+            saveNotes();
+
+            renderNotes();
+
+
+            setTimeout(
+                function () {
+
+                    const firstTitle =
+                        document.querySelector(
+                            ".note-card .note-title"
+                        );
+
+
+                    if (
+                        firstTitle
+                    ) {
+
+                        firstTitle.focus();
+
+                        firstTitle.select();
+
+                    }
+
+                },
+                50
+            );
+
+        }
+
+
+        /* =====================================================
+           UPDATE NOTE
+        ===================================================== */
+
+        function updateNote(
+            id,
+            field,
+            value
+        ) {
+
+            const note =
+                notes.find(
+                    function (
+                        item
+                    ) {
+
+                        return (
+                            item.id ===
+                            id
+                        );
+
+                    }
+                );
+
+
+            if (!note) {
+
+                return;
+            }
+
+
+            note[field] =
+                value;
+
+
+            saveNotes();
+
+        }
+
+
+        /* =====================================================
+           DELETE NOTE
+        ===================================================== */
+
+        function deleteNote(
+            id
+        ) {
+
+            const confirmed =
+                window.confirm(
+                    "Supprimer cette note ?"
+                );
+
+
+            if (!confirmed) {
+
+                return;
+            }
+
+
+            notes =
+                notes.filter(
+                    function (
+                        note
+                    ) {
+
+                        return (
+                            note.id !==
+                            id
+                        );
+
+                    }
+                );
+
+
+            saveNotes();
+
+            renderNotes();
+
+        }
+
+
+        /* =====================================================
+           DUPLICATE NOTE
+        ===================================================== */
+
+        function duplicateNote(
+            note
+        ) {
+
+            const copy = {
+
+                id:
+                    Date.now() +
+                    Math.random(),
+
+                title:
+                    note.title +
+                    " — copie",
+
+                text:
+                    note.text,
+
+                tag:
+                    note.tag,
+
+                color:
+                    noteColors[
+                        (
+                            notes.length +
+                            1
+                        ) %
+                        noteColors.length
+                    ],
+
+                createdAt:
+                    new Date().toISOString()
+
+            };
+
+
+            notes.unshift(
+                copy
+            );
+
+
+            saveNotes();
+
+            renderNotes();
+
+        }
+
+
+        /* =====================================================
+           CREATE NOTE CARD
+        ===================================================== */
+
+        function createNoteCard(
+            note
+        ) {
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+
+            card.className =
+                "note-card " +
+                note.color;
+
+
+            /* TAPE */
+
+            const tape =
+                document.createElement(
+                    "div"
+                );
+
+
+            tape.className =
+                "tape";
+
+
+            /* HEADER */
+
+            const header =
+                document.createElement(
+                    "div"
+                );
+
+
+            header.className =
+                "note-header";
+
+
+            const title =
+                document.createElement(
+                    "input"
+                );
+
+
+            title.type =
+                "text";
+
+
+            title.className =
+                "note-title";
+
+
+            title.maxLength =
+                80;
+
+
+            title.value =
+                note.title;
+
+
+            title.addEventListener(
+                "input",
+                function () {
+
+                    updateNote(
+                        note.id,
+                        "title",
+                        title.value
+                    );
+
+                }
+            );
+
+
+            const date =
+                document.createElement(
+                    "span"
+                );
+
+
+            date.className =
+                "note-date";
+
+
+            date.textContent =
+                formatDate(
+                    note.createdAt
+                );
+
+
+            header.appendChild(
+                title
+            );
+
+
+            header.appendChild(
+                date
+            );
+
+
+            /* TEXT */
+
+            const text =
+                document.createElement(
+                    "textarea"
+                );
+
+
+            text.className =
+                "note-text";
+
+
+            text.maxLength =
+                3000;
+
+
+            text.placeholder =
+                "Écris ta note ici...";
+
+
+            text.value =
+                note.text;
+
+
+            text.addEventListener(
+                "input",
+                function () {
+
+                    updateNote(
+                        note.id,
+                        "text",
+                        text.value
+                    );
+
+                }
+            );
+
+
+            /* FOOTER */
+
+            const footer =
+                document.createElement(
+                    "div"
+                );
+
+
+            footer.className =
+                "note-footer";
+
+
+            const tag =
+                document.createElement(
+                    "select"
+                );
+
+
+            tag.className =
+                "note-tag";
+
+
+            const tagOptions = [
+
+                "Cours",
+
+                "Révision",
+
+                "Important",
+
+                "Idée",
+
+                "À faire",
+
+                "Autre"
+
+            ];
+
+
+            tagOptions.forEach(
+                function (
+                    optionText
+                ) {
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+
+                    option.value =
+                        optionText;
+
+
+                    option.textContent =
+                        optionText;
+
+
+                    if (
+                        optionText ===
+                        note.tag
+                    ) {
+
+                        option.selected =
+                            true;
+                    }
+
+
+                    tag.appendChild(
+                        option
+                    );
+
+                }
+            );
+
+
+            tag.addEventListener(
+                "change",
+                function () {
+
+                    updateNote(
+                        note.id,
+                        "tag",
+                        tag.value
+                    );
+
+                }
+            );
+
+
+            const actions =
+                document.createElement(
+                    "div"
+                );
+
+
+            actions.className =
+                "note-actions";
+
+
+            /* DUPLICATE */
+
+            const duplicate =
+                document.createElement(
+                    "button"
+                );
+
+
+            duplicate.type =
+                "button";
+
+
+            duplicate.className =
+                "note-action";
+
+
+            duplicate.title =
+                "Dupliquer";
+
+
+            duplicate.innerHTML =
+                duplicateIcon();
+
+
+            duplicate.addEventListener(
+                "click",
+                function () {
+
+                    duplicateNote(
+                        note
+                    );
+
+                }
+            );
+
+
+            /* DELETE */
+
+            const remove =
+                document.createElement(
+                    "button"
+                );
+
+
+            remove.type =
+                "button";
+
+
+            remove.className =
+                "note-action";
+
+
+            remove.title =
+                "Supprimer";
+
+
+            remove.innerHTML =
+                trashIcon();
+
+
+            remove.addEventListener(
+                "click",
+                function () {
+
+                    deleteNote(
+                        note.id
+                    );
+
+                }
+            );
+
+
+            actions.appendChild(
+                duplicate
+            );
+
+
+            actions.appendChild(
+                remove
+            );
+
+
+            footer.appendChild(
+                tag
+            );
+
+
+            footer.appendChild(
+                actions
+            );
+
+
+            /* APPEND */
+
+            card.appendChild(
+                tape
+            );
+
+            card.appendChild(
+                header
+            );
+
+            card.appendChild(
+                text
+            );
+
+            card.appendChild(
+                footer
+            );
+
+
+            return card;
+
+        }
+
+
+        /* =====================================================
+           RENDER NOTES
+        ===================================================== */
+
+        function renderNotes() {
+
+            notesBoard.innerHTML =
+                "";
+
+
+            const search =
+                searchInput.value
+                    .trim()
+                    .toLowerCase();
+
+
+            const filtered =
+                notes.filter(
+                    function (
+                        note
+                    ) {
+
+                        return (
+
+                            note.title
+                                .toLowerCase()
+                                .includes(
+                                    search
+                                )
+
+                            ||
+
+                            note.text
+                                .toLowerCase()
+                                .includes(
+                                    search
+                                )
+
+                            ||
+
+                            note.tag
+                                .toLowerCase()
+                                .includes(
+                                    search
+                                )
+
+                        );
+
+                    }
+                );
+
+
+            if (
+                filtered.length ===
+                0
+            ) {
+
+                const empty =
+                    emptyState.cloneNode(
+                        true
+                    );
+
+
+                empty.style.display =
+                    "flex";
+
+
+                if (
+                    notes.length ===
+                    0
+                ) {
+
+                    empty.querySelector(
+                        ".empty-title"
+                    ).textContent =
+                        "Ton carnet est prêt ✎";
+
+
+                    empty.querySelector(
+                        ".empty-text"
+                    ).textContent =
+                        "Crée une note pour écrire une idée, un rappel de cours, une formule, une chose à ne pas oublier ou n'importe quelle information utile.";
+
+                } else {
+
+                    empty.querySelector(
+                        ".empty-title"
+                    ).textContent =
+                        "Aucune note trouvée";
+
+
+                    empty.querySelector(
+                        ".empty-text"
+                    ).textContent =
+                        "Essaie un autre mot dans la recherche.";
+
+                }
+
+
+                notesBoard.appendChild(
+                    empty
+                );
+
+
+                return;
+
+            }
+
+
+            filtered.forEach(
+                function (
+                    note
+                ) {
+
+                    notesBoard.appendChild(
+                        createNoteCard(
+                            note
+                        )
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           NEW NOTE BUTTON
+        ===================================================== */
+
+        newNoteButton
+            .addEventListener(
+                "click",
+                createNote
+            );
+
+
+        /* =====================================================
+           SEARCH
+        ===================================================== */
+
+        searchInput
+            .addEventListener(
+                "input",
+                renderNotes
+            );
+
+
+        /* =====================================================
+           INITIALIZE
+        ===================================================== */
+
+        renderNotes();
+
+    </script>
+
+</body>
+
+</html>

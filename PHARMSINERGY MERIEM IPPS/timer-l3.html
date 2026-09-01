@@ -1,0 +1,1825 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Timer | PharmSinergy</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Kufam:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    min-height:100vh;
+    font-family:"Inter","Segoe UI",sans-serif;
+    color:#3f6f78;
+    overflow-x:hidden;
+
+    background:
+        radial-gradient(circle at 12% 15%,
+        rgba(255,185,215,.48),
+        transparent 30%),
+
+        radial-gradient(circle at 88% 82%,
+        rgba(74,220,207,.40),
+        transparent 32%),
+
+        radial-gradient(circle at 70% 10%,
+        rgba(255,215,230,.32),
+        transparent 25%),
+
+        linear-gradient(
+        135deg,
+        #f8cbdc 0%,
+        #f4d4e2 28%,
+        #d5eeee 57%,
+        #9edfd9 100%
+        );
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.page{
+    min-height:100vh;
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:35px 20px;
+    overflow:hidden;
+}
+
+
+/* =========================
+   SOFT LIGHTS
+========================= */
+
+.glow{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(70px);
+    pointer-events:none;
+}
+
+.glow-one{
+    width:360px;
+    height:360px;
+    left:-130px;
+    top:-100px;
+    background:rgba(255,150,195,.30);
+    animation:floatOne 9s ease-in-out infinite;
+}
+
+.glow-two{
+    width:350px;
+    height:350px;
+    right:-130px;
+    bottom:-120px;
+    background:rgba(51,210,198,.27);
+    animation:floatTwo 11s ease-in-out infinite;
+}
+
+.glow-three{
+    width:190px;
+    height:190px;
+    left:45%;
+    top:40%;
+    background:rgba(255,255,255,.18);
+}
+
+
+/* =========================
+   FLOATING BUBBLES
+========================= */
+
+.bubble{
+    position:absolute;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.60);
+    background:rgba(255,255,255,.16);
+    box-shadow:
+        inset 0 1px 5px rgba(255,255,255,.60),
+        0 8px 25px rgba(63,150,150,.08);
+    pointer-events:none;
+}
+
+.bubble-one{
+    width:34px;
+    height:34px;
+    left:8%;
+    bottom:18%;
+    animation:bubbleFloat 7s ease-in-out infinite;
+}
+
+.bubble-two{
+    width:18px;
+    height:18px;
+    left:18%;
+    top:18%;
+    animation:bubbleFloat 9s ease-in-out infinite 1s;
+}
+
+.bubble-three{
+    width:48px;
+    height:48px;
+    right:9%;
+    top:18%;
+    animation:bubbleFloat 8s ease-in-out infinite 2s;
+}
+
+.bubble-four{
+    width:24px;
+    height:24px;
+    right:21%;
+    bottom:15%;
+    animation:bubbleFloat 10s ease-in-out infinite 1.5s;
+}
+
+.bubble-five{
+    width:12px;
+    height:12px;
+    right:35%;
+    top:10%;
+    animation:bubbleFloat 6s ease-in-out infinite .5s;
+}
+
+
+/* =========================
+   PHARMACY DECORATIONS
+========================= */
+
+.pharm-symbol{
+    position:absolute;
+    color:rgba(70,137,143,.16);
+    pointer-events:none;
+}
+
+.pharm-symbol svg{
+    width:100%;
+    height:100%;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.4;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.pharm-one{
+    width:105px;
+    height:105px;
+    left:4%;
+    top:37%;
+    transform:rotate(-12deg);
+}
+
+.pharm-two{
+    width:92px;
+    height:92px;
+    right:5%;
+    bottom:32%;
+    transform:rotate(15deg);
+}
+
+.pharm-three{
+    width:70px;
+    height:70px;
+    right:18%;
+    top:7%;
+    opacity:.65;
+}
+
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back-button{
+    position:absolute;
+    top:24px;
+    left:28px;
+
+    padding:10px 18px;
+
+    border:1px solid rgba(255,255,255,.70);
+    border-radius:999px;
+
+    background:rgba(255,255,255,.22);
+
+    color:#477983;
+    font-size:.78rem;
+    font-weight:800;
+
+    cursor:pointer;
+
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+
+    box-shadow:
+        0 8px 22px rgba(65,130,135,.10),
+        inset 0 1px 0 rgba(255,255,255,.75);
+
+    transition:.25s ease;
+
+    z-index:20;
+}
+
+.back-button:hover{
+    transform:translateX(-4px);
+    background:rgba(255,255,255,.38);
+}
+
+
+/* =========================
+   SMALL GLASS FRAME
+========================= */
+
+.timer-card{
+    position:relative;
+
+    width:min(920px,94vw);
+
+    padding:30px 32px;
+
+    border-radius:28px;
+
+    background:
+        linear-gradient(
+        145deg,
+        rgba(255,255,255,.34),
+        rgba(255,255,255,.14)
+        );
+
+    border:1px solid rgba(255,255,255,.65);
+
+    box-shadow:
+        0 25px 65px rgba(71,133,139,.16),
+        inset 0 1px 0 rgba(255,255,255,.80);
+
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    animation:cardAppear .8s ease both;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.top-line{
+    width:75px;
+    height:3px;
+    margin:0 auto 11px;
+
+    border-radius:999px;
+
+    background:
+        linear-gradient(
+        90deg,
+        #e990b8,
+        #65cbc4
+        );
+}
+
+.mini-label{
+    font-size:.65rem;
+    font-weight:800;
+    letter-spacing:.25em;
+    color:#668d92;
+    margin-bottom:6px;
+}
+
+.title{
+    font-family:"Kufam",sans-serif;
+    font-size:clamp(1.8rem,4vw,2.8rem);
+    font-weight:800;
+    color:#4b8990;
+
+    text-shadow:
+        0 5px 18px rgba(65,135,140,.12);
+}
+
+.subtitle{
+    margin-top:6px;
+    font-size:.78rem;
+    font-weight:600;
+    color:#7b9fa1;
+}
+
+
+/* =========================
+   TIMER DISPLAY
+========================= */
+
+.timer-display{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+
+    margin:18px auto 22px;
+}
+
+.time-box{
+    min-width:125px;
+
+    padding:20px 15px;
+
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+        145deg,
+        rgba(255,255,255,.53),
+        rgba(255,255,255,.19)
+        );
+
+    border:1px solid rgba(255,255,255,.65);
+
+    box-shadow:
+        0 12px 30px rgba(69,140,143,.10),
+        inset 0 1px 0 rgba(255,255,255,.85);
+
+    text-align:center;
+}
+
+.time-number{
+    display:block;
+
+    font-size:clamp(2rem,5vw,3.4rem);
+
+    font-weight:800;
+
+    color:#4b8d92;
+
+    letter-spacing:.04em;
+}
+
+.time-label{
+    display:block;
+
+    margin-top:4px;
+
+    font-size:.57rem;
+
+    font-weight:800;
+
+    letter-spacing:.18em;
+
+    color:#8baeb0;
+}
+
+.time-separator{
+    font-size:2rem;
+    font-weight:800;
+    color:#78aaa9;
+    transform:translateY(-5px);
+}
+
+
+/* =========================
+   SETTINGS
+========================= */
+
+.settings{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-bottom:18px;
+}
+
+.setting{
+    padding:14px;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.22);
+
+    border:1px solid rgba(255,255,255,.52);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.60);
+}
+
+.setting label{
+    display:block;
+
+    margin-bottom:7px;
+
+    font-size:.65rem;
+
+    font-weight:800;
+
+    color:#638d91;
+}
+
+.setting input,
+.setting select{
+    width:100%;
+
+    padding:9px 10px;
+
+    border-radius:11px;
+
+    border:1px solid rgba(255,255,255,.72);
+
+    outline:none;
+
+    background:rgba(255,255,255,.40);
+
+    color:#477d83;
+
+    font-family:inherit;
+
+    font-weight:700;
+}
+
+.setting input:focus,
+.setting select:focus{
+    border-color:rgba(91,191,186,.65);
+}
+
+
+/* =========================
+   CONTROLS
+========================= */
+
+.controls{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+
+    margin-top:8px;
+}
+
+.control-button{
+    min-width:125px;
+
+    padding:12px 20px;
+
+    border-radius:999px;
+
+    border:1px solid rgba(255,255,255,.70);
+
+    background:
+        linear-gradient(
+        135deg,
+        rgba(255,255,255,.45),
+        rgba(255,255,255,.20)
+        );
+
+    color:#4f858a;
+
+    font-size:.72rem;
+    font-weight:800;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 8px 20px rgba(63,130,135,.08),
+        inset 0 1px 0 rgba(255,255,255,.80);
+
+    transition:.22s ease;
+}
+
+.control-button:hover{
+    transform:translateY(-3px);
+    background:rgba(255,255,255,.46);
+}
+
+.control-button.primary{
+    background:
+        linear-gradient(
+        135deg,
+        rgba(239,155,190,.48),
+        rgba(91,205,196,.38)
+        );
+
+    color:#46777c;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.status{
+    text-align:center;
+
+    margin-top:18px;
+
+    min-height:22px;
+
+    font-family:"Kufam",sans-serif;
+
+    font-size:.73rem;
+
+    font-weight:700;
+
+    color:#668d91;
+}
+
+
+/* =========================
+   SOUND
+========================= */
+
+.sound-panel{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:9px;
+
+    margin-top:16px;
+    flex-wrap:wrap;
+}
+
+.sound-button{
+    padding:8px 13px;
+
+    border-radius:999px;
+
+    border:1px solid rgba(255,255,255,.60);
+
+    background:rgba(255,255,255,.20);
+
+    color:#608d91;
+
+    font-size:.61rem;
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:.2s ease;
+}
+
+.sound-button.active{
+    background:
+        linear-gradient(
+        135deg,
+        rgba(238,155,191,.42),
+        rgba(86,203,194,.35)
+        );
+
+    box-shadow:
+        0 7px 18px rgba(66,140,140,.10);
+}
+
+
+/* =========================
+   BREAK PANEL
+========================= */
+
+.break-panel{
+    display:none;
+
+    margin-top:20px;
+
+    padding:18px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    background:
+        linear-gradient(
+        135deg,
+        rgba(255,188,215,.30),
+        rgba(104,218,207,.25)
+        );
+
+    border:1px solid rgba(255,255,255,.65);
+
+    animation:breakAppear .5s ease both;
+}
+
+.break-panel.show{
+    display:block;
+}
+
+.break-title{
+    font-family:"Kufam",sans-serif;
+    font-size:1rem;
+    font-weight:800;
+    color:#56858a;
+}
+
+.break-subtitle{
+    margin-top:5px;
+    font-size:.68rem;
+    font-weight:600;
+    color:#789b9d;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+    margin-top:18px;
+
+    text-align:center;
+
+    font-size:.57rem;
+
+    font-weight:600;
+
+    color:#83a3a5;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes cardAppear{
+    from{
+        opacity:0;
+        transform:translateY(25px) scale(.97);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+@keyframes floatOne{
+    0%,100%{
+        transform:translate(0,0);
+    }
+
+    50%{
+        transform:translate(20px,18px);
+    }
+}
+
+@keyframes floatTwo{
+    0%,100%{
+        transform:translate(0,0);
+    }
+
+    50%{
+        transform:translate(-18px,-20px);
+    }
+}
+
+@keyframes bubbleFloat{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-28px);
+    }
+}
+
+@keyframes breakAppear{
+    from{
+        opacity:0;
+        transform:scale(.96);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px){
+
+    .page{
+        padding:75px 12px 25px;
+    }
+
+    .timer-card{
+        width:96vw;
+        padding:22px 14px;
+        border-radius:23px;
+    }
+
+    .back-button{
+        top:17px;
+        left:16px;
+    }
+
+    .settings{
+        grid-template-columns:1fr;
+    }
+
+    .timer-display{
+        gap:5px;
+    }
+
+    .time-box{
+        min-width:0;
+        flex:1;
+        padding:16px 8px;
+    }
+
+    .time-number{
+        font-size:2rem;
+    }
+
+    .time-label{
+        font-size:.48rem;
+    }
+
+    .time-separator{
+        font-size:1.4rem;
+    }
+
+    .pharm-one,
+    .pharm-two{
+        opacity:.5;
+    }
+}
+
+@media(max-width:430px){
+
+    .title{
+        font-size:1.65rem;
+    }
+
+    .timer-display{
+        gap:3px;
+    }
+
+    .time-box{
+        padding:13px 5px;
+        border-radius:16px;
+    }
+
+    .time-number{
+        font-size:1.55rem;
+    }
+
+    .time-label{
+        font-size:.42rem;
+    }
+
+    .time-separator{
+        font-size:1.1rem;
+    }
+
+    .control-button{
+        min-width:105px;
+        padding:10px 14px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<main class="page">
+
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+    <div class="glow glow-three"></div>
+
+    <div class="bubble bubble-one"></div>
+    <div class="bubble bubble-two"></div>
+    <div class="bubble bubble-three"></div>
+    <div class="bubble bubble-four"></div>
+    <div class="bubble bubble-five"></div>
+
+
+    <!-- Pharmacy decoration -->
+    <div class="pharm-symbol pharm-one">
+        <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="32"></circle>
+            <path d="M30 50h40"></path>
+            <path d="M50 30v40"></path>
+            <circle cx="50" cy="50" r="10"></circle>
+        </svg>
+    </div>
+
+    <div class="pharm-symbol pharm-two">
+        <svg viewBox="0 0 100 100">
+            <path d="M35 20h30v15H35z"></path>
+            <path d="M40 35h20v42H40z"></path>
+            <path d="M40 50h20"></path>
+        </svg>
+    </div>
+
+    <div class="pharm-symbol pharm-three">
+        <svg viewBox="0 0 100 100">
+            <path d="M32 18h36"></path>
+            <path d="M38 18v20l-12 34c-2 6 2 10 8 10h32c6 0 10-4 8-10L62 38V18"></path>
+            <path d="M34 65h32"></path>
+        </svg>
+    </div>
+
+
+    <!-- Retour -->
+    <button class="back-button" id="backButton">
+        ← Retour
+    </button>
+
+
+    <!-- Main timer -->
+    <section class="timer-card">
+
+        <header class="header">
+
+            <div class="top-line"></div>
+
+            <div class="mini-label">
+                PHARMSINERGY • LICENCE 3
+            </div>
+
+            <h1 class="title">
+                Study Timer
+            </h1>
+
+            <p class="subtitle">
+                Organise ta séance, travaille à ton rythme.
+            </p>
+
+        </header>
+
+
+        <!-- Timer -->
+        <div class="timer-display">
+
+            <div class="time-box">
+                <span class="time-number" id="hours">
+                    00
+                </span>
+
+                <span class="time-label">
+                    HEURES
+                </span>
+            </div>
+
+            <div class="time-separator">
+                :
+            </div>
+
+            <div class="time-box">
+                <span class="time-number" id="minutes">
+                    00
+                </span>
+
+                <span class="time-label">
+                    MINUTES
+                </span>
+            </div>
+
+            <div class="time-separator">
+                :
+            </div>
+
+            <div class="time-box">
+                <span class="time-number" id="seconds">
+                    00
+                </span>
+
+                <span class="time-label">
+                    SECONDES
+                </span>
+            </div>
+
+        </div>
+
+
+        <!-- Settings -->
+        <div class="settings">
+
+            <div class="setting">
+
+                <label>
+                    Durée d'étude
+                </label>
+
+                <input
+                    type="number"
+                    id="studyHours"
+                    min="0"
+                    max="23"
+                    value="2"
+                >
+
+            </div>
+
+
+            <div class="setting">
+
+                <label>
+                    Pause après
+                </label>
+
+                <select id="pauseEvery">
+
+                    <option value="15">
+                        15 minutes
+                    </option>
+
+                    <option value="30" selected>
+                        30 minutes
+                    </option>
+
+                    <option value="45">
+                        45 minutes
+                    </option>
+
+                    <option value="60">
+                        1 heure
+                    </option>
+
+                    <option value="90">
+                        1h 30
+                    </option>
+
+                    <option value="120">
+                        2 heures
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="setting">
+
+                <label>
+                    Durée de la pause
+                </label>
+
+                <select id="breakDuration">
+
+                    <option value="5">
+                        5 minutes
+                    </option>
+
+                    <option value="10" selected>
+                        10 minutes
+                    </option>
+
+                    <option value="15">
+                        15 minutes
+                    </option>
+
+                    <option value="20">
+                        20 minutes
+                    </option>
+
+                    <option value="30">
+                        30 minutes
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- Controls -->
+        <div class="controls">
+
+            <button
+                class="control-button primary"
+                id="startButton">
+                Démarrer
+            </button>
+
+            <button
+                class="control-button"
+                id="pauseButton">
+                Pause
+            </button>
+
+            <button
+                class="control-button"
+                id="resetButton">
+                Réinitialiser
+            </button>
+
+        </div>
+
+
+        <!-- Status -->
+        <div class="status" id="status">
+            Prêt à commencer ta séance.
+        </div>
+
+
+        <!-- Sounds -->
+        <div class="sound-panel">
+
+            <button
+                class="sound-button"
+                id="timerSoundButton">
+
+                Son Timer : OFF
+
+            </button>
+
+            <button
+                class="sound-button"
+                id="rainButton">
+
+                Pluie : OFF
+
+            </button>
+
+        </div>
+
+
+        <!-- Break message -->
+        <div
+            class="break-panel"
+            id="breakPanel">
+
+            <div class="break-title">
+                Pause bien méritée
+            </div>
+
+            <div class="break-subtitle">
+                Prends ton café et profite de ton Cookie.
+            </div>
+
+        </div>
+
+
+        <div class="footer">
+            PharmSinergy • Study smarter, not harder.
+        </div>
+
+    </section>
+
+</main>
+
+
+<script>
+
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const hoursElement =
+    document.getElementById("hours");
+
+const minutesElement =
+    document.getElementById("minutes");
+
+const secondsElement =
+    document.getElementById("seconds");
+
+const studyHours =
+    document.getElementById("studyHours");
+
+const pauseEvery =
+    document.getElementById("pauseEvery");
+
+const breakDuration =
+    document.getElementById("breakDuration");
+
+const startButton =
+    document.getElementById("startButton");
+
+const pauseButton =
+    document.getElementById("pauseButton");
+
+const resetButton =
+    document.getElementById("resetButton");
+
+const status =
+    document.getElementById("status");
+
+const breakPanel =
+    document.getElementById("breakPanel");
+
+const timerSoundButton =
+    document.getElementById("timerSoundButton");
+
+const rainButton =
+    document.getElementById("rainButton");
+
+
+/* =========================================
+   VARIABLES
+========================================= */
+
+let totalSeconds = 0;
+
+let remainingSeconds = 0;
+
+let timerInterval = null;
+
+let running = false;
+
+let paused = false;
+
+let isBreak = false;
+
+let elapsedStudySeconds = 0;
+
+let nextBreakSeconds = 0;
+
+let timerSoundOn = false;
+
+let rainOn = false;
+
+let audioContext = null;
+
+let rainNodes = [];
+
+
+/* =========================================
+   DISPLAY
+========================================= */
+
+function updateDisplay(){
+
+    let h =
+        Math.floor(
+            remainingSeconds / 3600
+        );
+
+    let m =
+        Math.floor(
+            (remainingSeconds % 3600) / 60
+        );
+
+    let s =
+        remainingSeconds % 60;
+
+    hoursElement.textContent =
+        String(h).padStart(2,"0");
+
+    minutesElement.textContent =
+        String(m).padStart(2,"0");
+
+    secondsElement.textContent =
+        String(s).padStart(2,"0");
+}
+
+
+/* =========================================
+   AUDIO
+========================================= */
+
+function getAudioContext(){
+
+    if(!audioContext){
+
+        audioContext =
+            new (
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
+    }
+
+    if(
+        audioContext.state ===
+        "suspended"
+    ){
+
+        audioContext.resume();
+    }
+
+    return audioContext;
+}
+
+
+/* =========================================
+   TIMER TICK SOUND
+========================================= */
+
+function timerTick(){
+
+    if(!timerSoundOn)
+        return;
+
+    const ctx =
+        getAudioContext();
+
+    const oscillator =
+        ctx.createOscillator();
+
+    const gain =
+        ctx.createGain();
+
+    oscillator.type = "square";
+
+    oscillator.frequency.setValueAtTime(
+        880,
+        ctx.currentTime
+    );
+
+    gain.gain.setValueAtTime(
+        0.035,
+        ctx.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        ctx.currentTime + 0.08
+    );
+
+    oscillator.connect(gain);
+
+    gain.connect(
+        ctx.destination
+    );
+
+    oscillator.start();
+
+    oscillator.stop(
+        ctx.currentTime + 0.08
+    );
+}
+
+
+/* =========================================
+   BREAK SOUND
+========================================= */
+
+function breakSound(){
+
+    const ctx =
+        getAudioContext();
+
+    const oscillator =
+        ctx.createOscillator();
+
+    const gain =
+        ctx.createGain();
+
+    oscillator.type = "sine";
+
+    oscillator.frequency.setValueAtTime(
+        660,
+        ctx.currentTime
+    );
+
+    oscillator.frequency.exponentialRampToValueAtTime(
+        990,
+        ctx.currentTime + 0.25
+    );
+
+    gain.gain.setValueAtTime(
+        0.001,
+        ctx.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.20,
+        ctx.currentTime + 0.03
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        ctx.currentTime + 0.35
+    );
+
+    oscillator.connect(gain);
+
+    gain.connect(
+        ctx.destination
+    );
+
+    oscillator.start();
+
+    oscillator.stop(
+        ctx.currentTime + 0.35
+    );
+}
+
+
+/* =========================================
+   RAIN SOUND
+========================================= */
+
+function createRain(){
+
+    if(rainNodes.length)
+        return;
+
+    const ctx =
+        getAudioContext();
+
+    const bufferSize =
+        ctx.sampleRate * 2;
+
+    const buffer =
+        ctx.createBuffer(
+            1,
+            bufferSize,
+            ctx.sampleRate
+        );
+
+    const data =
+        buffer.getChannelData(0);
+
+    for(
+        let i = 0;
+        i < bufferSize;
+        i++
+    ){
+
+        data[i] =
+            Math.random() * 2 - 1;
+    }
+
+    const source =
+        ctx.createBufferSource();
+
+    source.buffer = buffer;
+
+    source.loop = true;
+
+    const filter =
+        ctx.createBiquadFilter();
+
+    filter.type = "lowpass";
+
+    filter.frequency.value = 4200;
+
+    const gain =
+        ctx.createGain();
+
+    gain.gain.value = 0.055;
+
+    source.connect(filter);
+
+    filter.connect(gain);
+
+    gain.connect(
+        ctx.destination
+    );
+
+    source.start();
+
+    rainNodes = [
+        source,
+        filter,
+        gain
+    ];
+}
+
+
+function stopRain(){
+
+    if(!rainNodes.length)
+        return;
+
+    try{
+        rainNodes[0].stop();
+    }
+    catch(e){}
+
+    rainNodes = [];
+}
+
+
+/* =========================================
+   START
+========================================= */
+
+function startTimer(){
+
+    getAudioContext();
+
+    if(!running){
+
+        if(remainingSeconds <= 0){
+
+            totalSeconds =
+                Number(studyHours.value) *
+                3600;
+
+            if(totalSeconds <= 0){
+
+                status.textContent =
+                    "Choisis une durée d'étude.";
+
+                return;
+            }
+
+            remainingSeconds =
+                totalSeconds;
+
+            elapsedStudySeconds = 0;
+
+            nextBreakSeconds =
+                Number(pauseEvery.value) *
+                60;
+
+            isBreak = false;
+
+            breakPanel.classList.remove(
+                "show"
+            );
+        }
+
+        running = true;
+
+        paused = false;
+
+        status.textContent =
+            "Étude en cours...";
+
+        timerInterval =
+            setInterval(
+                tick,
+                1000
+            );
+    }
+}
+
+
+/* =========================================
+   TICK
+========================================= */
+
+function tick(){
+
+    if(remainingSeconds <= 0){
+
+        finishTimer();
+
+        return;
+    }
+
+    remainingSeconds--;
+
+    if(!isBreak){
+
+        elapsedStudySeconds++;
+
+        if(
+            elapsedStudySeconds >=
+            nextBreakSeconds
+        ){
+
+            startBreak();
+
+            return;
+        }
+
+    }
+
+    updateDisplay();
+
+    timerTick();
+}
+
+
+/* =========================================
+   START BREAK
+========================================= */
+
+function startBreak(){
+
+    isBreak = true;
+
+    clearInterval(
+        timerInterval
+    );
+
+    timerInterval = null;
+
+    running = false;
+
+    breakSound();
+
+    breakPanel.classList.add(
+        "show"
+    );
+
+    status.textContent =
+        "Pause ! Temps de repos.";
+
+    let breakSeconds =
+        Number(
+            breakDuration.value
+        ) * 60;
+
+    remainingSeconds =
+        breakSeconds;
+
+    updateDisplay();
+
+    timerInterval =
+        setInterval(
+            breakTick,
+            1000
+        );
+
+    running = true;
+}
+
+
+function breakTick(){
+
+    if(remainingSeconds <= 0){
+
+        finishBreak();
+
+        return;
+    }
+
+    remainingSeconds--;
+
+    updateDisplay();
+}
+
+
+/* =========================================
+   FINISH BREAK
+========================================= */
+
+function finishBreak(){
+
+    clearInterval(
+        timerInterval
+    );
+
+    timerInterval = null;
+
+    running = false;
+
+    isBreak = false;
+
+    breakPanel.classList.remove(
+        "show"
+    );
+
+    remainingSeconds =
+        totalSeconds -
+        elapsedStudySeconds;
+
+    nextBreakSeconds =
+        elapsedStudySeconds +
+        Number(pauseEvery.value) * 60;
+
+    status.textContent =
+        "Pause terminée. On reprend !";
+
+    startTimer();
+}
+
+
+/* =========================================
+   FINISH TIMER
+========================================= */
+
+function finishTimer(){
+
+    clearInterval(
+        timerInterval
+    );
+
+    timerInterval = null;
+
+    running = false;
+
+    remainingSeconds = 0;
+
+    updateDisplay();
+
+    status.textContent =
+        "Séance terminée. Bravo !";
+
+    breakSound();
+
+    breakPanel.classList.remove(
+        "show"
+    );
+}
+
+
+/* =========================================
+   PAUSE
+========================================= */
+
+function pauseTimer(){
+
+    if(!running)
+        return;
+
+    clearInterval(
+        timerInterval
+    );
+
+    timerInterval = null;
+
+    running = false;
+
+    paused = true;
+
+    status.textContent =
+        "Timer en pause.";
+}
+
+
+/* =========================================
+   RESET
+========================================= */
+
+function resetTimer(){
+
+    clearInterval(
+        timerInterval
+    );
+
+    timerInterval = null;
+
+    running = false;
+
+    paused = false;
+
+    isBreak = false;
+
+    elapsedStudySeconds = 0;
+
+    totalSeconds =
+        Number(studyHours.value) *
+        3600;
+
+    remainingSeconds =
+        totalSeconds;
+
+    nextBreakSeconds =
+        Number(pauseEvery.value) *
+        60;
+
+    updateDisplay();
+
+    breakPanel.classList.remove(
+        "show"
+    );
+
+    status.textContent =
+        "Prêt à commencer ta séance.";
+}
+
+
+/* =========================================
+   TIMER SOUND BUTTON
+========================================= */
+
+timerSoundButton.addEventListener(
+    "click",
+    function(){
+
+        timerSoundOn =
+            !timerSoundOn;
+
+        timerSoundButton.textContent =
+            timerSoundOn
+            ? "Son Timer : ON"
+            : "Son Timer : OFF";
+
+        timerSoundButton.classList.toggle(
+            "active",
+            timerSoundOn
+        );
+
+        if(timerSoundOn){
+
+            getAudioContext();
+
+            timerTick();
+        }
+    }
+);
+
+
+/* =========================================
+   RAIN BUTTON
+========================================= */
+
+rainButton.addEventListener(
+    "click",
+    function(){
+
+        rainOn =
+            !rainOn;
+
+        rainButton.textContent =
+            rainOn
+            ? "Pluie : ON"
+            : "Pluie : OFF";
+
+        rainButton.classList.toggle(
+            "active",
+            rainOn
+        );
+
+        if(rainOn){
+
+            createRain();
+
+        }else{
+
+            stopRain();
+        }
+    }
+);
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+startButton.addEventListener(
+    "click",
+    startTimer
+);
+
+pauseButton.addEventListener(
+    "click",
+    pauseTimer
+);
+
+resetButton.addEventListener(
+    "click",
+    resetTimer
+);
+
+
+/* =========================================
+   SETTINGS CHANGE
+========================================= */
+
+studyHours.addEventListener(
+    "change",
+    resetTimer
+);
+
+pauseEvery.addEventListener(
+    "change",
+    function(){
+
+        if(!running){
+
+            nextBreakSeconds =
+                Number(
+                    pauseEvery.value
+                ) * 60;
+        }
+    }
+);
+
+
+/* =========================================
+   BACK TO CARNET
+========================================= */
+
+document
+    .getElementById("backButton")
+    .addEventListener(
+        "click",
+        function(){
+
+            window.location.href =
+                "carnet-l3.html";
+
+        }
+    );
+
+
+/* =========================================
+   INITIAL DISPLAY
+========================================= */
+
+resetTimer();
+
+</script>
+
+</body>
+</html>

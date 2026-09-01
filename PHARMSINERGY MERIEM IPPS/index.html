@@ -1,0 +1,2139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PharmSinergy</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: #35176f;
+
+            background:
+                radial-gradient(
+                    circle at 50% 8%,
+                    rgba(255,255,255,0.98) 0%,
+                    rgba(255,255,255,0.45) 18%,
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 0% 35%,
+                    rgba(153,77,255,0.60) 0%,
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 100% 38%,
+                    rgba(74,176,255,0.58) 0%,
+                    transparent 34%
+                ),
+                linear-gradient(
+                    135deg,
+                    #7134d3 0%,
+                    #a96beb 28%,
+                    #e5ddff 50%,
+                    #bddcff 74%,
+                    #5798df 100%
+                );
+        }
+
+        button {
+            font: inherit;
+        }
+
+        /* =========================
+           PAGE
+        ========================= */
+
+        .page {
+            position: relative;
+            min-height: 100vh;
+            padding: 38px 24px 24px;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .container {
+            width: min(1120px, 100%);
+            margin: 0 auto;
+            position: relative;
+            z-index: 5;
+        }
+
+        /* =========================
+           BACKGROUND
+        ========================= */
+
+        .glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(75px);
+            pointer-events: none;
+            z-index: -5;
+        }
+
+        .glow-left {
+            width: 420px;
+            height: 420px;
+            left: -160px;
+            top: 120px;
+            background: rgba(163,76,255,0.27);
+            animation: glowMove 10s ease-in-out infinite;
+        }
+
+        .glow-right {
+            width: 430px;
+            height: 430px;
+            right: -160px;
+            top: 180px;
+            background: rgba(71,176,255,0.25);
+            animation: glowMove 12s ease-in-out infinite reverse;
+        }
+
+        .wave {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -4;
+        }
+
+        .wave-left {
+            width: 760px;
+            height: 225px;
+            left: -180px;
+            top: -110px;
+            border-top: 2px solid rgba(255,255,255,0.40);
+            transform: rotate(-9deg);
+        }
+
+        .wave-right {
+            width: 720px;
+            height: 230px;
+            right: -180px;
+            bottom: -100px;
+            border-top: 2px solid rgba(255,255,255,0.30);
+            transform: rotate(11deg);
+        }
+
+        /* =========================
+           MOLECULES
+        ========================= */
+
+        .molecule {
+            position: absolute;
+            width: 220px;
+            height: 180px;
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        .molecule-left {
+            left: 0;
+            top: 28px;
+            opacity: 0.52;
+        }
+
+        .molecule-right {
+            right: 0;
+            top: 38px;
+            opacity: 0.38;
+        }
+
+        .atom {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.68);
+            border: 1px solid rgba(255,255,255,0.86);
+            box-shadow: 0 0 14px rgba(255,255,255,0.95);
+        }
+
+        .bond {
+            position: absolute;
+            height: 2px;
+            background: rgba(255,255,255,0.42);
+            transform-origin: left center;
+        }
+
+        .molecule-left .a1 { left: 25px; top: 38px; }
+        .molecule-left .a2 { left: 100px; top: 82px; }
+        .molecule-left .a3 { left: 181px; top: 24px; }
+        .molecule-left .a4 { left: 148px; top: 148px; }
+        .molecule-left .a5 { left: 48px; top: 148px; }
+
+        .molecule-left .b1 {
+            left: 37px;
+            top: 49px;
+            width: 77px;
+            transform: rotate(31deg);
+        }
+
+        .molecule-left .b2 {
+            left: 113px;
+            top: 89px;
+            width: 82px;
+            transform: rotate(-41deg);
+        }
+
+        .molecule-left .b3 {
+            left: 111px;
+            top: 89px;
+            width: 72px;
+            transform: rotate(66deg);
+        }
+
+        .molecule-left .b4 {
+            left: 60px;
+            top: 157px;
+            width: 88px;
+            transform: rotate(-8deg);
+        }
+
+        .molecule-right .a1 { left: 24px; top: 31px; }
+        .molecule-right .a2 { left: 103px; top: 75px; }
+        .molecule-right .a3 { left: 185px; top: 21px; }
+        .molecule-right .a4 { left: 149px; top: 143px; }
+        .molecule-right .a5 { left: 61px; top: 137px; }
+
+        .molecule-right .b1 {
+            left: 35px;
+            top: 42px;
+            width: 79px;
+            transform: rotate(28deg);
+        }
+
+        .molecule-right .b2 {
+            left: 111px;
+            top: 84px;
+            width: 81px;
+            transform: rotate(-39deg);
+        }
+
+        .molecule-right .b3 {
+            left: 110px;
+            top: 87px;
+            width: 75px;
+            transform: rotate(61deg);
+        }
+
+        .molecule-right .b4 {
+            left: 70px;
+            top: 144px;
+            width: 83px;
+            transform: rotate(5deg);
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            text-align: center;
+            position: relative;
+        }
+
+        .brand-wrap {
+            position: relative;
+            display: inline-block;
+
+            animation:
+                brandEntrance 1.35s ease-out both,
+                brandFloat 6s ease-in-out 1.5s infinite;
+        }
+
+        .brand {
+            font-family:
+                "Arial Black",
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            font-size: clamp(4.8rem, 10.5vw, 9.2rem);
+            line-height: 0.88;
+            letter-spacing: -0.08em;
+            font-weight: 900;
+
+            filter:
+                drop-shadow(
+                    0 13px 18px rgba(61,24,131,0.19)
+                );
+        }
+
+        .brand-purple {
+            background:
+                linear-gradient(
+                    180deg,
+                    #d19bff 0%,
+                    #aa5cf1 23%,
+                    #8129d8 50%,
+                    #5d159f 76%,
+                    #40077b 100%
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+
+            text-shadow:
+                0 2px 0 rgba(255,255,255,0.30),
+                0 8px 0 rgba(72,18,139,0.20);
+        }
+
+        .brand-shine {
+            position: absolute;
+            left: 10%;
+            top: 10%;
+            width: 80%;
+            height: 8px;
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,255,255,0.60),
+                    transparent
+                );
+
+            filter: blur(5px);
+            opacity: 0;
+
+            animation:
+                shine 4.6s ease-in-out 1.4s infinite;
+        }
+
+        .industrial {
+            margin-top: 22px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+
+            font-size:
+                clamp(0.84rem, 1.35vw, 1.10rem);
+
+            font-weight: 800;
+            letter-spacing: 0.30em;
+
+            color: #4b1796;
+
+            animation:
+                fadeUp 0.9s ease 0.45s both;
+        }
+
+        .industrial::before,
+        .industrial::after {
+            content: "";
+            width: 74px;
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(76,23,149,0.68)
+                );
+        }
+
+        .industrial::after {
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(76,23,149,0.68),
+                    transparent
+                );
+        }
+
+        .tagline {
+            margin-top: 8px;
+
+            font-size:
+                clamp(0.75rem, 1vw, 0.97rem);
+
+            font-weight: 700;
+            letter-spacing: 0.33em;
+
+            color: #5a30a2;
+
+            animation:
+                fadeUp 0.9s ease 0.65s both;
+        }
+
+        /* =========================
+           MAIN CAPSULE
+        ========================= */
+
+        .main-capsule {
+            position: absolute;
+
+            width: 115px;
+            height: 52px;
+
+            right: 4%;
+            top: 75px;
+
+            transform: rotate(23deg);
+
+            animation:
+                capsuleFloat 5s ease-in-out infinite;
+        }
+
+        .main-capsule .purple {
+            position: absolute;
+            left: 0;
+            top: 0;
+
+            width: 57px;
+            height: 52px;
+
+            border-radius: 52px 0 0 52px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #9538ef,
+                    #55109e
+                );
+
+            box-shadow:
+                inset 4px 4px 9px rgba(255,255,255,0.32),
+                0 11px 23px rgba(69,24,139,0.22);
+        }
+
+        .main-capsule .blue {
+            position: absolute;
+            right: 0;
+            top: 0;
+
+            width: 57px;
+            height: 52px;
+
+            border-radius: 0 52px 52px 0;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #f0f8ff,
+                    #bad3f3
+                );
+
+            box-shadow:
+                inset -4px 4px 9px rgba(255,255,255,0.74),
+                0 11px 23px rgba(66,106,161,0.15);
+        }
+
+        .main-capsule .seam {
+            position: absolute;
+
+            left: 55px;
+            top: 0;
+
+            width: 4px;
+            height: 52px;
+
+            background:
+                rgba(255,255,255,0.46);
+        }
+
+        /* =========================
+           2 EXTRA CAPSULES
+        ========================= */
+
+        .capsules {
+            position: absolute;
+            inset: 0;
+
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .capsule-item {
+            position: absolute;
+
+            display: flex;
+            align-items: center;
+
+            animation:
+                smallCapsuleFloat 5s ease-in-out infinite;
+        }
+
+        .capsule-item .half-purple {
+            background:
+                linear-gradient(
+                    145deg,
+                    #a14cf2,
+                    #6819b7
+                );
+
+            box-shadow:
+                inset 2px 2px 5px
+                rgba(255,255,255,0.28);
+        }
+
+        .capsule-item .half-blue {
+            background:
+                linear-gradient(
+                    145deg,
+                    #eff9ff,
+                    #9ec3ee
+                );
+
+            box-shadow:
+                inset -2px 2px 5px
+                rgba(255,255,255,0.66);
+        }
+
+        .capsule-item .seam {
+            position: absolute;
+
+            left: 50%;
+            top: 0;
+
+            width: 2px;
+            height: 100%;
+
+            transform:
+                translateX(-50%);
+
+            background:
+                rgba(255,255,255,0.42);
+        }
+
+        .capsule-large {
+            width: 92px;
+            height: 33px;
+        }
+
+        .capsule-large .half-purple,
+        .capsule-large .half-blue {
+            width: 46px;
+            height: 33px;
+        }
+
+        .capsule-large .half-purple {
+            border-radius:
+                999px 0 0 999px;
+        }
+
+        .capsule-large .half-blue {
+            border-radius:
+                0 999px 999px 0;
+        }
+
+        .capsule-small {
+            width: 48px;
+            height: 18px;
+        }
+
+        .capsule-small .half-purple,
+        .capsule-small .half-blue {
+            width: 24px;
+            height: 18px;
+        }
+
+        .capsule-small .half-purple {
+            border-radius:
+                999px 0 0 999px;
+        }
+
+        .capsule-small .half-blue {
+            border-radius:
+                0 999px 999px 0;
+        }
+
+        .capsule-one {
+            left: 8%;
+            top: 35%;
+
+            transform: rotate(-26deg);
+        }
+
+        .capsule-two {
+            right: 13%;
+            top: 40%;
+
+            transform: rotate(-17deg);
+
+            animation-delay: 1s;
+        }
+
+        /* =========================
+           TABLETS
+        ========================= */
+
+        .tablet-cluster {
+            position: absolute;
+
+            left: 15%;
+            top: 270px;
+
+            width: 90px;
+            height: 80px;
+
+            pointer-events: none;
+
+            animation:
+                clusterFloat 5.4s ease-in-out infinite;
+        }
+
+        .tablet {
+            position: absolute;
+
+            border-radius: 50%;
+
+            box-shadow:
+                inset 2px 1px 4px
+                rgba(255,255,255,0.68),
+
+                0 4px 8px
+                rgba(67,29,131,0.15);
+        }
+
+        .tablet-one {
+            width: 25px;
+            height: 25px;
+
+            left: 10px;
+            top: 29px;
+
+            background: #ffffff;
+        }
+
+        .tablet-two {
+            width: 19px;
+            height: 19px;
+
+            left: 38px;
+            top: 16px;
+
+            background: #924ae7;
+        }
+
+        .tablet-three {
+            width: 16px;
+            height: 16px;
+
+            left: 54px;
+            top: 44px;
+
+            background: #d7edff;
+        }
+
+        .tablet-four {
+            width: 11px;
+            height: 11px;
+
+            left: 30px;
+            top: 58px;
+
+            background: #a46fee;
+        }
+
+        /* =========================
+           QC
+        ========================= */
+
+        .qc {
+            position: absolute;
+
+            right: 13%;
+            top: 268px;
+
+            width: 92px;
+            height: 65px;
+
+            opacity: 0.68;
+
+            pointer-events: none;
+
+            animation:
+                qcFloat 5.8s ease-in-out infinite;
+        }
+
+        .qc-circle {
+            position: absolute;
+
+            left: 0;
+            top: 5px;
+
+            width: 52px;
+            height: 52px;
+
+            border-radius: 50%;
+
+            border:
+                2px solid
+                rgba(89,36,167,0.28);
+
+            background:
+                rgba(255,255,255,0.16);
+        }
+
+        .qc-check {
+            position: absolute;
+
+            left: 13px;
+            top: 16px;
+
+            width: 23px;
+            height: 13px;
+
+            border-left:
+                4px solid
+                #7130c7;
+
+            border-bottom:
+                4px solid
+                #7130c7;
+
+            transform:
+                rotate(-45deg);
+        }
+
+        .qc-lines {
+            position: absolute;
+
+            right: 0;
+            top: 4px;
+
+            width: 27px;
+        }
+
+        .qc-line {
+            width: 100%;
+            height: 4px;
+
+            margin-top: 9px;
+
+            border-radius: 8px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #8642df,
+                    #70acee
+                );
+        }
+
+        /* =========================
+           TEST TUBE - RIGHT
+        ========================= */
+
+        .test-tube {
+            position: absolute;
+
+            right: 7%;
+            bottom: 140px;
+
+            width: 78px;
+            height: 185px;
+
+            pointer-events: none;
+            z-index: 2;
+
+            animation:
+                tubeFloat 5.5s ease-in-out infinite;
+        }
+
+        .tube-body {
+            position: absolute;
+
+            left: 18px;
+            bottom: 0;
+
+            width: 42px;
+            height: 150px;
+
+            border:
+                2px solid
+                rgba(255,255,255,0.70);
+
+            border-top: none;
+
+            border-radius:
+                0 0 23px 23px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.10),
+                    rgba(255,255,255,0.38),
+                    rgba(184,224,255,0.12)
+                );
+
+            box-shadow:
+                inset 6px 0 12px
+                rgba(255,255,255,0.20),
+
+                0 12px 28px
+                rgba(63,42,133,0.14);
+
+            overflow: hidden;
+        }
+
+        .tube-liquid {
+            position: absolute;
+
+            left: 0;
+            bottom: 0;
+
+            width: 100%;
+            height: 63%;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #bd85ff 0%,
+                    #8a43e8 45%,
+                    #5c1db4 100%
+                );
+
+            box-shadow:
+                0 -6px 14px
+                rgba(192,139,255,0.25);
+        }
+
+        .tube-liquid::before {
+            content: "";
+
+            position: absolute;
+
+            left: -5%;
+            top: -7px;
+
+            width: 110%;
+            height: 15px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(240,219,255,0.55);
+        }
+
+        .tube-highlight {
+            position: absolute;
+
+            left: 8px;
+            bottom: 16px;
+
+            width: 6px;
+            height: 108px;
+
+            border-radius: 8px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(255,255,255,0.72),
+                    rgba(255,255,255,0.04)
+                );
+
+            opacity: 0.48;
+        }
+
+        .tube-rim {
+            position: absolute;
+
+            left: 11px;
+            top: 15px;
+
+            width: 56px;
+            height: 18px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(255,255,255,0.72),
+                    rgba(212,227,245,0.30)
+                );
+
+            border:
+                2px solid
+                rgba(255,255,255,0.70);
+
+            box-shadow:
+                0 4px 9px
+                rgba(66,38,127,0.12);
+        }
+
+        .tube-neck {
+            position: absolute;
+
+            left: 21px;
+            top: 23px;
+
+            width: 36px;
+            height: 22px;
+
+            border-left:
+                2px solid
+                rgba(255,255,255,0.62);
+
+            border-right:
+                2px solid
+                rgba(255,255,255,0.62);
+
+            background:
+                rgba(238,248,255,0.16);
+        }
+
+        .bubble {
+            position: absolute;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,0.70);
+
+            box-shadow:
+                0 0 5px
+                rgba(255,255,255,0.75);
+
+            animation:
+                bubbleRise
+                3.5s
+                ease-in
+                infinite;
+        }
+
+        .bubble-one {
+            width: 5px;
+            height: 5px;
+
+            left: 12px;
+            bottom: 22px;
+        }
+
+        .bubble-two {
+            width: 4px;
+            height: 4px;
+
+            left: 26px;
+            bottom: 42px;
+
+            animation-delay: 1s;
+        }
+
+        .bubble-three {
+            width: 6px;
+            height: 6px;
+
+            left: 18px;
+            bottom: 68px;
+
+            animation-delay: 1.7s;
+        }
+
+        .bubble-four {
+            width: 4px;
+            height: 4px;
+
+            left: 28px;
+            bottom: 88px;
+
+            animation-delay: 2.4s;
+        }
+
+        /* =========================
+           BEAKER - LEFT
+        ========================= */
+
+        .beaker {
+            position: absolute;
+
+            left: 6%;
+            bottom: 120px;
+
+            width: 105px;
+            height: 145px;
+
+            pointer-events: none;
+            z-index: 2;
+
+            animation:
+                beakerFloat
+                5.5s
+                ease-in-out
+                infinite;
+        }
+
+        .beaker-neck {
+            position: absolute;
+
+            left: 33px;
+            top: 0;
+
+            width: 39px;
+            height: 55px;
+
+            border-left:
+                2px solid
+                rgba(255,255,255,0.62);
+
+            border-right:
+                2px solid
+                rgba(255,255,255,0.62);
+
+            background:
+                rgba(238,248,255,0.14);
+        }
+
+        .beaker-body {
+            position: absolute;
+
+            left: 8px;
+            bottom: 0;
+
+            width: 89px;
+            height: 105px;
+
+            border:
+                2px solid
+                rgba(255,255,255,0.72);
+
+            border-radius:
+                8px 8px 28px 28px;
+
+            background:
+                linear-gradient(
+                    110deg,
+                    rgba(255,255,255,0.22),
+                    rgba(220,238,255,0.10)
+                );
+
+            clip-path:
+                polygon(
+                    24% 0,
+                    76% 0,
+                    76% 15%,
+                    92% 82%,
+                    80% 100%,
+                    20% 100%,
+                    8% 82%,
+                    24% 15%
+                );
+
+            overflow: hidden;
+
+            box-shadow:
+                0 14px 28px
+                rgba(65,43,130,0.14),
+                inset 5px 0 10px
+                rgba(255,255,255,0.20);
+        }
+
+        .beaker-liquid {
+            position: absolute;
+
+            left: 0;
+            bottom: 0;
+
+            width: 100%;
+            height: 58%;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #c48bff 0%,
+                    #8c42e8 48%,
+                    #5c1db5 100%
+                );
+
+            opacity: 0.86;
+        }
+
+        .beaker-liquid::before {
+            content: "";
+
+            position: absolute;
+
+            left: -4%;
+            top: -7px;
+
+            width: 108%;
+            height: 14px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(239,220,255,0.54);
+        }
+
+        .beaker-highlight {
+            position: absolute;
+
+            left: 18px;
+            bottom: 20px;
+
+            width: 6px;
+            height: 80px;
+
+            border-radius: 8px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(255,255,255,0.72),
+                    rgba(255,255,255,0.04)
+                );
+
+            opacity: 0.48;
+        }
+
+        .beaker-bubble {
+            position: absolute;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,0.72);
+
+            box-shadow:
+                0 0 5px
+                rgba(255,255,255,0.75);
+
+            animation:
+                beakerBubble
+                3.4s
+                ease-in
+                infinite;
+        }
+
+        .bubble-a {
+            width: 5px;
+            height: 5px;
+
+            left: 28px;
+            bottom: 25px;
+        }
+
+        .bubble-b {
+            width: 4px;
+            height: 4px;
+
+            left: 49px;
+            bottom: 36px;
+
+            animation-delay: 1s;
+        }
+
+        .bubble-c {
+            width: 6px;
+            height: 6px;
+
+            left: 40px;
+            bottom: 55px;
+
+            animation-delay: 1.7s;
+        }
+
+        /* =========================
+           STUDENT SECTION
+        ========================= */
+
+        .student-section {
+            width: min(730px, 92%);
+
+            margin:
+                95px
+                auto
+                0;
+
+            padding:
+                15px
+                20px;
+
+            border-radius: 24px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 18px;
+
+            background:
+                linear-gradient(
+                    140deg,
+                    rgba(255,255,255,0.52),
+                    rgba(246,243,255,0.22)
+                );
+
+            border:
+                1px solid rgba(255,255,255,0.70);
+
+            box-shadow:
+                0 18px 35px
+                rgba(76,35,146,0.11),
+
+                inset
+                0 1px 0
+                rgba(255,255,255,0.85);
+
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+
+            animation:
+                fadeUp
+                0.9s
+                ease
+                0.85s
+                both;
+        }
+
+        .academic-icon {
+            flex: 0 0 auto;
+
+            width: 62px;
+            height: 62px;
+
+            border-radius: 50%;
+
+            display: grid;
+            place-items: center;
+
+            background:
+                radial-gradient(
+                    circle at 35% 30%,
+                    #bb73ff,
+                    #7b32d9 50%,
+                    #5420ad 100%
+                );
+
+            border:
+                2px solid rgba(255,255,255,0.80);
+
+            box-shadow:
+                0 8px 18px rgba(75,31,148,0.18),
+                inset 0 0 12px rgba(255,255,255,0.18);
+        }
+
+        .cap {
+            position: relative;
+
+            width: 32px;
+            height: 25px;
+        }
+
+        .cap-top {
+            position: absolute;
+
+            left: 0;
+            top: 0;
+
+            width: 30px;
+            height: 15px;
+
+            background: white;
+
+            transform: skewX(-24deg);
+
+            border-radius: 2px;
+        }
+
+        .cap-base {
+            position: absolute;
+
+            left: 5px;
+            bottom: 2px;
+
+            width: 21px;
+            height: 8px;
+
+            background: white;
+
+            border-radius:
+                0 0 5px 5px;
+        }
+
+        .cap-tassel {
+            position: absolute;
+
+            right: -1px;
+            top: 8px;
+
+            width: 2px;
+            height: 16px;
+
+            background: white;
+
+            transform:
+                rotate(-8deg);
+        }
+
+        .cap-tassel::after {
+            content: "";
+
+            position: absolute;
+
+            right: -2px;
+            bottom: -2px;
+
+            width: 5px;
+            height: 5px;
+
+            border-radius: 50%;
+
+            background: white;
+        }
+
+        .student-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .student-title {
+            color: #4e1da2;
+
+            font-size: 0.80rem;
+            font-weight: 800;
+
+            margin-bottom: 5px;
+        }
+
+        .student-line {
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+
+            margin-top: 4px;
+
+            color: #5a438d;
+
+            font-size: 0.63rem;
+            line-height: 1.4;
+
+            font-weight: 700;
+        }
+
+        .mini-icon {
+            position: relative;
+
+            width: 19px;
+            height: 19px;
+
+            flex: 0 0 auto;
+
+            border-radius: 6px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #8a43ea,
+                    #591fb4
+                );
+        }
+
+        .mini-icon.pill::before {
+            content: "";
+
+            position: absolute;
+
+            width: 10px;
+            height: 5px;
+
+            left: 4px;
+            top: 7px;
+
+            border-radius: 8px;
+
+            background: white;
+
+            transform:
+                rotate(-28deg);
+        }
+
+        .mini-icon.mortar::before {
+            content: "";
+
+            position: absolute;
+
+            width: 9px;
+            height: 7px;
+
+            left: 5px;
+            top: 8px;
+
+            border-radius:
+                2px 2px 6px 6px;
+
+            background: white;
+        }
+
+        .mini-icon.mortar::after {
+            content: "";
+
+            position: absolute;
+
+            width: 3px;
+            height: 9px;
+
+            right: 2px;
+            top: 2px;
+
+            border-radius: 3px;
+
+            background: white;
+
+            transform:
+                rotate(25deg);
+        }
+
+        /* =========================
+           CTA
+        ========================= */
+
+        .cta-section {
+            margin-top: 31px;
+
+            text-align: center;
+
+            animation:
+                fadeUp 0.9s ease 1.05s both;
+        }
+
+        .cta-title {
+            color: #50179b;
+
+            font-size: 0.95rem;
+            font-weight: 800;
+
+            letter-spacing: 0.28em;
+        }
+
+        .cta-button {
+            margin-top: 12px;
+
+            min-width: 275px;
+
+            padding: 14px 30px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.90);
+
+            border-radius: 999px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #8d43ec,
+                    #631fc0 52%,
+                    #4d81df
+                );
+
+            color: white;
+
+            font-size: 0.96rem;
+            font-weight: 900;
+
+            letter-spacing: 0.18em;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 11px 27px
+                rgba(72,28,148,0.22),
+
+                inset
+                0 2px 7px
+                rgba(255,255,255,0.28);
+
+            transition:
+                transform 0.24s ease,
+                box-shadow 0.24s ease,
+                filter 0.24s ease;
+
+            animation:
+                buttonGlow
+                3s
+                ease-in-out
+                2s
+                infinite;
+        }
+
+        .cta-button:hover {
+            transform:
+                translateY(-3px)
+                scale(1.04);
+
+            filter:
+                brightness(1.08);
+
+            box-shadow:
+                0 17px 35px
+                rgba(72,28,148,0.31),
+
+                0 0 23px
+                rgba(145,97,255,0.21);
+        }
+
+        .cta-button:active {
+            transform: scale(0.97);
+        }
+
+        /* =========================
+           PERSONAL INFO
+        ========================= */
+
+        .personal-info {
+            margin-top: 31px;
+
+            padding-bottom: 4px;
+
+            text-align: center;
+
+            color:
+                rgba(68,45,105,0.72);
+
+            animation:
+                fadeUp 0.8s ease 1.2s both;
+        }
+
+        .personal-title {
+            font-size: 0.43rem;
+            font-weight: 800;
+
+            letter-spacing: 0.20em;
+        }
+
+        .personal-name {
+            margin-top: 2px;
+
+            font-size: 0.60rem;
+            font-weight: 900;
+
+            letter-spacing: 0.06em;
+        }
+
+        .personal-role {
+            margin-top: 1px;
+
+            font-size: 0.43rem;
+            font-weight: 600;
+        }
+
+        .personal-description {
+            margin-top: 2px;
+
+            font-size: 0.40rem;
+            line-height: 1.25;
+        }
+
+        .personal-faculty {
+            margin-top: 2px;
+
+            font-size: 0.40rem;
+        }
+
+        .personal-faculty strong {
+            color:
+                rgba(74,29,147,0.82);
+        }
+
+        /* =========================
+           ANIMATIONS
+        ========================= */
+
+        @keyframes brandEntrance {
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(16px)
+                    scale(0.93);
+
+                filter:
+                    blur(5px)
+                    drop-shadow(
+                        0 12px 18px
+                        rgba(61,26,132,0.20)
+                    );
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+
+                filter:
+                    blur(0)
+                    drop-shadow(
+                        0 12px 18px
+                        rgba(61,26,132,0.20)
+                    );
+            }
+        }
+
+        @keyframes brandFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-45%);
+                opacity: 0;
+            }
+
+            25% {
+                opacity: 0.55;
+            }
+
+            60% {
+                transform: translateX(45%);
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glowMove {
+            0%, 100% {
+                transform: translate(0,0);
+            }
+
+            50% {
+                transform: translate(18px,-14px);
+            }
+        }
+
+        @keyframes capsuleFloat {
+            0%, 100% {
+                transform:
+                    translateY(0)
+                    rotate(23deg);
+            }
+
+            50% {
+                transform:
+                    translateY(-9px)
+                    rotate(19deg);
+            }
+        }
+
+        @keyframes smallCapsuleFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        @keyframes clusterFloat {
+            0%, 100% {
+                transform:
+                    translateY(0)
+                    rotate(0deg);
+            }
+
+            50% {
+                transform:
+                    translateY(-7px)
+                    rotate(4deg);
+            }
+        }
+
+        @keyframes qcFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-7px);
+            }
+        }
+
+        @keyframes tubeFloat {
+            0%, 100% {
+                transform:
+                    translateY(0)
+                    rotate(2deg);
+            }
+
+            50% {
+                transform:
+                    translateY(-8px)
+                    rotate(-2deg);
+            }
+        }
+
+        @keyframes bubbleRise {
+            0% {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            25% {
+                opacity: 0.85;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-62px);
+            }
+        }
+
+        @keyframes beakerFloat {
+            0%, 100% {
+                transform:
+                    translateY(0)
+                    rotate(-2deg);
+            }
+
+            50% {
+                transform:
+                    translateY(-8px)
+                    rotate(2deg);
+            }
+        }
+
+        @keyframes beakerBubble {
+            0% {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            20% {
+                opacity: 0.85;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-48px);
+            }
+        }
+
+        @keyframes buttonGlow {
+            0%, 100% {
+                box-shadow:
+                    0 11px 27px
+                    rgba(72,28,148,0.22),
+
+                    inset
+                    0 2px 7px
+                    rgba(255,255,255,0.28);
+            }
+
+            50% {
+                box-shadow:
+                    0 14px 34px
+                    rgba(80,32,168,0.31),
+
+                    0 0 21px
+                    rgba(146,98,255,0.19),
+
+                    inset
+                    0 2px 7px
+                    rgba(255,255,255,0.31);
+            }
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .page {
+                padding:
+                    28px
+                    14px
+                    20px;
+            }
+
+            .brand {
+                font-size:
+                    clamp(
+                        3.2rem,
+                        15vw,
+                        5.7rem
+                    );
+            }
+
+            .industrial {
+                gap: 7px;
+                font-size: 0.75rem;
+                letter-spacing: 0.16em;
+            }
+
+            .industrial::before,
+            .industrial::after {
+                width: 30px;
+            }
+
+            .tagline {
+                font-size: 0.70rem;
+                letter-spacing: 0.18em;
+            }
+
+            .student-section {
+                width: 94%;
+                margin-top: 70px;
+                padding: 12px 14px;
+            }
+
+            .academic-icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .student-title {
+                font-size: 0.67rem;
+            }
+
+            .student-line {
+                font-size: 0.54rem;
+            }
+
+            .cta-section {
+                margin-top: 26px;
+            }
+
+            .cta-title {
+                font-size: 0.78rem;
+            }
+
+            .cta-button {
+                min-width: 235px;
+                padding: 12px 23px;
+                font-size: 0.82rem;
+            }
+
+            .personal-info {
+                margin-top: 28px;
+            }
+
+            .main-capsule,
+            .molecule,
+            .capsules,
+            .tablet-cluster,
+            .qc,
+            .test-tube,
+            .beaker {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="page">
+
+        <!-- Background -->
+        <div class="glow glow-left"></div>
+        <div class="glow glow-right"></div>
+
+        <div class="wave wave-left"></div>
+        <div class="wave wave-right"></div>
+
+        <!-- Molecules -->
+        <div class="molecule molecule-left">
+
+            <span class="atom a1"></span>
+            <span class="atom a2"></span>
+            <span class="atom a3"></span>
+            <span class="atom a4"></span>
+            <span class="atom a5"></span>
+
+            <span class="bond b1"></span>
+            <span class="bond b2"></span>
+            <span class="bond b3"></span>
+            <span class="bond b4"></span>
+
+        </div>
+
+        <div class="molecule molecule-right">
+
+            <span class="atom a1"></span>
+            <span class="atom a2"></span>
+            <span class="atom a3"></span>
+            <span class="atom a4"></span>
+            <span class="atom a5"></span>
+
+            <span class="bond b1"></span>
+            <span class="bond b2"></span>
+            <span class="bond b3"></span>
+            <span class="bond b4"></span>
+
+        </div>
+
+        <!-- Main capsule -->
+        <div class="main-capsule">
+
+            <div class="purple"></div>
+            <div class="blue"></div>
+            <div class="seam"></div>
+
+        </div>
+
+        <!-- Only TWO extra capsules -->
+        <div class="capsules">
+
+            <div class="capsule-item capsule-large capsule-one">
+                <span class="half-purple"></span>
+                <span class="half-blue"></span>
+                <span class="seam"></span>
+            </div>
+
+            <div class="capsule-item capsule-small capsule-two">
+                <span class="half-purple"></span>
+                <span class="half-blue"></span>
+                <span class="seam"></span>
+            </div>
+
+        </div>
+
+        <!-- Tablets -->
+        <div class="tablet-cluster">
+
+            <div class="tablet tablet-one"></div>
+            <div class="tablet tablet-two"></div>
+            <div class="tablet tablet-three"></div>
+            <div class="tablet tablet-four"></div>
+
+        </div>
+
+        <!-- QC -->
+        <div class="qc">
+
+            <div class="qc-circle">
+                <div class="qc-check"></div>
+            </div>
+
+            <div class="qc-lines">
+                <div class="qc-line"></div>
+                <div class="qc-line"></div>
+                <div class="qc-line"></div>
+            </div>
+
+        </div>
+
+        <!-- Right laboratory test tube -->
+        <div class="test-tube">
+
+            <div class="tube-neck"></div>
+            <div class="tube-rim"></div>
+
+            <div class="tube-body">
+
+                <div class="tube-liquid"></div>
+
+                <div class="tube-highlight"></div>
+
+                <span class="bubble bubble-one"></span>
+                <span class="bubble bubble-two"></span>
+                <span class="bubble bubble-three"></span>
+                <span class="bubble bubble-four"></span>
+
+            </div>
+
+        </div>
+
+        <!-- Left laboratory beaker -->
+        <div class="beaker">
+
+            <div class="beaker-neck"></div>
+
+            <div class="beaker-body">
+
+                <div class="beaker-liquid"></div>
+
+                <span class="beaker-bubble bubble-a"></span>
+                <span class="beaker-bubble bubble-b"></span>
+                <span class="beaker-bubble bubble-c"></span>
+
+            </div>
+
+            <div class="beaker-highlight"></div>
+
+        </div>
+
+
+        <div class="container">
+
+            <!-- HERO -->
+
+            <section class="hero">
+
+                <div class="brand-wrap">
+
+                    <h1 class="brand">
+
+                        <span class="brand-purple">
+                            PharmSinergy
+                        </span>
+
+                    </h1>
+
+                    <div class="brand-shine"></div>
+
+                </div>
+
+                <div class="industrial">
+                    INDUSTRIAL PHARMACY
+                </div>
+
+                <div class="tagline">
+                    LEARN • CONNECT • GROW
+                </div>
+
+            </section>
+
+
+            <!-- TARGET STUDENTS -->
+
+            <section class="student-section">
+
+                <div class="academic-icon">
+
+                    <div class="cap">
+
+                        <div class="cap-top"></div>
+                        <div class="cap-base"></div>
+                        <div class="cap-tassel"></div>
+
+                    </div>
+
+                </div>
+
+                <div class="student-text">
+
+                    <div class="student-title">
+                        Le site est destiné aux étudiants en :
+                    </div>
+
+                    <div class="student-line">
+
+                        <span class="mini-icon pill"></span>
+
+                        <span>
+                            pharmacie industrie des produits pharmaceutiques
+                            et de santé
+                        </span>
+
+                    </div>
+
+                    <div class="student-line">
+
+                        <span class="mini-icon mortar"></span>
+
+                        <span>
+                            auxiliaire en pharmacie
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- CTA -->
+
+            <section class="cta-section">
+
+                <div class="cta-title">
+                    START LEARNING
+                </div>
+
+                <button
+                    class="cta-button"
+                    id="startButton"
+                    type="button"
+                >
+                    PHARMSINERGY
+                </button>
+
+            </section>
+
+
+            <!-- PERSONAL INFORMATION -->
+
+            <section class="personal-info">
+
+                <div class="personal-title">
+                    A PROJECT CREATED BY
+                </div>
+
+                <div class="personal-name">
+                    MERIEM IPPS
+                </div>
+
+                <div class="personal-role">
+                    Industrial Pharmacy Student
+                </div>
+
+                <div class="personal-description">
+                    Specializing in the Manufacturing of Pharmaceutical
+                    and Healthcare Products.
+                </div>
+
+                <div class="personal-faculty">
+                    Faculty of Pharmacy — University of Health Sciences,
+                    <strong>ZIANIA.</strong>
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        const startButton =
+            document.getElementById("startButton");
+
+        startButton.addEventListener(
+    "click",
+    function () {
+        window.location.href = "page2.html";
+    }
+);
+  </script>
+
+</body>
+</html>

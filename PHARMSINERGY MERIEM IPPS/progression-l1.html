@@ -1,0 +1,3620 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Progression des matières | PharmSinergy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kufam:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        /* =====================================================
+           BODY
+        ===================================================== */
+
+        body {
+
+            min-height: 100vh;
+
+            overflow: hidden;
+
+            font-family:
+                "Inter",
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color:
+                #395c50;
+
+            background:
+
+                radial-gradient(
+                    circle at 50% 44%,
+                    rgba(255,255,255,0.97) 0%,
+                    rgba(243,255,219,0.50) 24%,
+                    transparent 53%
+                ),
+
+                radial-gradient(
+                    circle at 8% 12%,
+                    rgba(163,239,154,0.46),
+                    transparent 31%
+                ),
+
+                radial-gradient(
+                    circle at 92% 86%,
+                    rgba(79,192,238,0.43),
+                    transparent 33%
+                ),
+
+                radial-gradient(
+                    circle at 67% 7%,
+                    rgba(255,224,84,0.28),
+                    transparent 25%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #5eb786 0%,
+                    #a9d88d 25%,
+                    #e2dd89 48%,
+                    #a9d9f0 73%,
+                    #50acd7 100%
+                );
+        }
+
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .page {
+
+            position:
+                relative;
+
+            width:
+                100%;
+
+            height:
+                100vh;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            overflow:
+                hidden;
+
+            isolation:
+                isolate;
+        }
+
+
+        /* =====================================================
+           BACKGROUND ORBS
+        ===================================================== */
+
+        .orb {
+
+            position:
+                absolute;
+
+            border-radius:
+                50%;
+
+            filter:
+                blur(70px);
+
+            pointer-events:
+                none;
+
+            z-index:
+                -8;
+        }
+
+
+        .orb-one {
+
+            width:
+                390px;
+
+            height:
+                390px;
+
+            top:
+                -150px;
+
+            right:
+                -90px;
+
+            background:
+                rgba(235,238,102,0.28);
+
+            animation:
+                floatOne
+                10s
+                ease-in-out
+                infinite;
+        }
+
+
+        .orb-two {
+
+            width:
+                360px;
+
+            height:
+                360px;
+
+            bottom:
+                -150px;
+
+            left:
+                -100px;
+
+            background:
+                rgba(76,199,237,0.25);
+
+            animation:
+                floatTwo
+                12s
+                ease-in-out
+                infinite;
+        }
+
+
+        .orb-three {
+
+            width:
+                190px;
+
+            height:
+                190px;
+
+            top:
+                43%;
+
+            left:
+                45%;
+
+            background:
+                rgba(255,255,255,0.13);
+
+            filter:
+                blur(78px);
+        }
+
+
+        /* =====================================================
+           DECORATIVE CIRCLES
+        ===================================================== */
+
+        .circle {
+
+            position:
+                absolute;
+
+            border-radius:
+                50%;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.24);
+
+            pointer-events:
+                none;
+
+            z-index:
+                -3;
+        }
+
+
+        .circle-one {
+
+            width:
+                270px;
+
+            height:
+                270px;
+
+            left:
+                -110px;
+
+            top:
+                26%;
+        }
+
+
+        .circle-two {
+
+            width:
+                350px;
+
+            height:
+                350px;
+
+            right:
+                -145px;
+
+            bottom:
+                7%;
+        }
+
+
+        .circle-three {
+
+            width:
+                110px;
+
+            height:
+                110px;
+
+            right:
+                14%;
+
+            top:
+                9%;
+
+            border-color:
+                rgba(255,255,255,0.18);
+        }
+
+
+        /* =====================================================
+           PENCILS
+        ===================================================== */
+
+        .pencil {
+
+            position:
+                absolute;
+
+            width:
+                160px;
+
+            height:
+                17px;
+
+            border-radius:
+                999px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    rgba(95,176,126,0.25) 0%,
+                    rgba(246,220,91,0.35) 67%,
+                    rgba(255,255,255,0.25) 68%,
+                    rgba(255,255,255,0.25) 76%,
+                    rgba(68,142,161,0.24) 77%,
+                    rgba(68,142,161,0.24) 100%
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.20);
+
+            box-shadow:
+                0 10px 25px
+                rgba(46,118,97,0.08);
+
+            pointer-events:
+                none;
+
+            z-index:
+                -3;
+        }
+
+
+        .pencil-one {
+
+            top:
+                29%;
+
+            left:
+                -25px;
+
+            transform:
+                rotate(22deg);
+        }
+
+
+        .pencil-two {
+
+            right:
+                -25px;
+
+            bottom:
+                26%;
+
+            transform:
+                rotate(-21deg)
+                scale(.82);
+        }
+
+
+        /* =====================================================
+           CAPSULES
+        ===================================================== */
+
+        .capsule {
+
+            position:
+                absolute;
+
+            width:
+                125px;
+
+            height:
+                49px;
+
+            border-radius:
+                999px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.22);
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    rgba(71,185,158,0.27) 0%,
+                    rgba(71,185,158,0.27) 49%,
+                    rgba(255,220,87,0.32) 50%,
+                    rgba(255,220,87,0.32) 100%
+                );
+
+            opacity:
+                .42;
+
+            box-shadow:
+                0 16px 33px
+                rgba(42,117,99,0.08);
+
+            pointer-events:
+                none;
+
+            z-index:
+                -3;
+        }
+
+
+        .capsule-one {
+
+            top:
+                16%;
+
+            right:
+                4%;
+
+            transform:
+                rotate(25deg);
+        }
+
+
+        .capsule-two {
+
+            left:
+                5%;
+
+            bottom:
+                13%;
+
+            transform:
+                rotate(-28deg)
+                scale(.73);
+        }
+
+
+        /* =====================================================
+           BUBBLES
+        ===================================================== */
+
+        .bubble {
+
+            position:
+                absolute;
+
+            border-radius:
+                50%;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.25);
+
+            background:
+                rgba(255,255,255,0.07);
+
+            pointer-events:
+                none;
+
+            z-index:
+                -3;
+        }
+
+
+        .bubble-one {
+
+            width:
+                30px;
+
+            height:
+                30px;
+
+            left:
+                16%;
+
+            top:
+                14%;
+        }
+
+
+        .bubble-two {
+
+            width:
+                18px;
+
+            height:
+                18px;
+
+            left:
+                10%;
+
+            top:
+                39%;
+        }
+
+
+        .bubble-three {
+
+            width:
+                39px;
+
+            height:
+                39px;
+
+            right:
+                15%;
+
+            bottom:
+                18%;
+        }
+
+
+        .bubble-four {
+
+            width:
+                21px;
+
+            height:
+                21px;
+
+            right:
+                23%;
+
+            bottom:
+                12%;
+        }
+
+
+        /* =====================================================
+           LIGHT DOTS — CIRCLES ONLY
+        ===================================================== */
+
+        .light-dot {
+
+            position:
+                absolute;
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(255,255,255,0.73);
+
+            box-shadow:
+                0 0 17px
+                rgba(255,255,255,0.62);
+
+            pointer-events:
+                none;
+
+            animation:
+                pulseDot
+                4s
+                ease-in-out
+                infinite;
+
+            z-index:
+                -2;
+        }
+
+
+        .dot-one {
+
+            width:
+                6px;
+
+            height:
+                6px;
+
+            left:
+                20%;
+
+            top:
+                19%;
+        }
+
+
+        .dot-two {
+
+            width:
+                4px;
+
+            height:
+                4px;
+
+            right:
+                20%;
+
+            top:
+                26%;
+
+            animation-delay:
+                .8s;
+        }
+
+
+        .dot-three {
+
+            width:
+                5px;
+
+            height:
+                5px;
+
+            left:
+                26%;
+
+            bottom:
+                19%;
+
+            animation-delay:
+                1.6s;
+        }
+
+
+        .dot-four {
+
+            width:
+                6px;
+
+            height:
+                6px;
+
+            right:
+                28%;
+
+            bottom:
+                25%;
+
+            animation-delay:
+                2.1s;
+        }
+
+
+        /* =====================================================
+           BACK BUTTON
+        ===================================================== */
+
+        .back-button {
+
+            position:
+                absolute;
+
+            top:
+                24px;
+
+            left:
+                28px;
+
+            padding:
+                9px
+                17px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.64);
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(255,255,255,0.18);
+
+            color:
+                #3d7563;
+
+            font-size:
+                .76rem;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            backdrop-filter:
+                blur(12px);
+
+            -webkit-backdrop-filter:
+                blur(12px);
+
+            box-shadow:
+                0 8px 22px
+                rgba(35,115,94,0.10);
+
+            transition:
+                all .25s ease;
+
+            z-index:
+                30;
+        }
+
+
+        .back-button:hover {
+
+            transform:
+                translateX(-4px);
+
+            background:
+                rgba(255,255,255,0.32);
+        }
+
+
+        /* =====================================================
+           MAIN CARD
+        ===================================================== */
+
+        .content {
+
+            position:
+                relative;
+
+            width:
+                min(1020px, 91%);
+
+            height:
+                90vh;
+
+            padding:
+                20px
+                24px
+                18px;
+
+            border-radius:
+                32px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.44),
+                    rgba(244,255,239,0.15)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.69);
+
+            box-shadow:
+
+                0 30px 80px
+                rgba(42,111,91,0.17),
+
+                inset
+                0 1px 0
+                rgba(255,255,255,0.90);
+
+            backdrop-filter:
+                blur(23px);
+
+            -webkit-backdrop-filter:
+                blur(23px);
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            overflow:
+                hidden;
+
+            animation:
+                cardAppear
+                1s
+                cubic-bezier(.2,.8,.2,1)
+                both;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .header {
+
+            flex-shrink:
+                0;
+
+            text-align:
+                center;
+
+            margin-bottom:
+                12px;
+        }
+
+
+        .top-line {
+
+            width:
+                78px;
+
+            height:
+                3px;
+
+            margin:
+                0 auto
+                10px;
+
+            border-radius:
+                999px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    #68b780,
+                    #efd35d,
+                    #5bb6dd
+                );
+        }
+
+
+        .mini-label {
+
+            font-size:
+                .60rem;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                .29em;
+
+            color:
+                #628e7b;
+
+            text-transform:
+                uppercase;
+
+            margin-bottom:
+                4px;
+        }
+
+
+        .title {
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                clamp(
+                    1.48rem,
+                    3.5vw,
+                    2.45rem
+                );
+
+            font-weight:
+                800;
+
+            color:
+                #42775f;
+
+            text-shadow:
+                0 5px 18px
+                rgba(38,105,83,0.12);
+
+            margin-bottom:
+                3px;
+        }
+
+
+        .subtitle {
+
+            font-size:
+                clamp(
+                    .65rem,
+                    1.1vw,
+                    .82rem
+                );
+
+            color:
+                #698e80;
+
+            font-weight:
+                600;
+        }
+
+
+        /* =====================================================
+           TOP SUMMARY
+        ===================================================== */
+
+        .summary {
+
+            flex-shrink:
+                0;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1.25fr
+                .8fr
+                .8fr
+                .8fr;
+
+            gap:
+                9px;
+
+            margin-bottom:
+                10px;
+        }
+
+
+        .summary-card {
+
+            min-width:
+                0;
+
+            padding:
+                10px
+                12px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.48);
+
+            border-radius:
+                15px;
+
+            background:
+                rgba(255,255,255,0.20);
+
+            box-shadow:
+                0 7px 18px
+                rgba(42,111,91,0.05);
+
+            text-align:
+                center;
+        }
+
+
+        .summary-title {
+
+            display:
+                block;
+
+            font-size:
+                .49rem;
+
+            font-weight:
+                800;
+
+            color:
+                #74968a;
+
+            margin-bottom:
+                3px;
+        }
+
+
+        .summary-number {
+
+            display:
+                block;
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                1rem;
+
+            font-weight:
+                800;
+
+            color:
+                #4c866d;
+        }
+
+
+        /* =====================================================
+           ADD SUBJECT
+        ===================================================== */
+
+        .add-subject {
+
+            flex-shrink:
+                0;
+
+            display:
+                flex;
+
+            gap:
+                8px;
+
+            margin-bottom:
+                10px;
+        }
+
+
+        .subject-input {
+
+            flex:
+                1;
+
+            min-width:
+                0;
+
+            height:
+                37px;
+
+            padding:
+                0
+                11px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.54);
+
+            border-radius:
+                11px;
+
+            background:
+                rgba(255,255,255,0.23);
+
+            color:
+                #55776a;
+
+            outline:
+                none;
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            font-size:
+                .56rem;
+
+            font-weight:
+                600;
+        }
+
+
+        .subject-input::placeholder {
+
+            color:
+                #91aaa0;
+        }
+
+
+        .subject-input:focus {
+
+            background:
+                rgba(255,255,255,0.34);
+
+            border-color:
+                rgba(74,154,121,0.27);
+        }
+
+
+        .lessons-input {
+
+            width:
+                105px;
+
+            flex-shrink:
+                0;
+
+            height:
+                37px;
+
+            padding:
+                0
+                10px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.54);
+
+            border-radius:
+                11px;
+
+            background:
+                rgba(255,255,255,0.23);
+
+            color:
+                #55776a;
+
+            outline:
+                none;
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            font-size:
+                .56rem;
+
+            font-weight:
+                600;
+        }
+
+
+        .add-subject-button {
+
+            flex-shrink:
+                0;
+
+            height:
+                37px;
+
+            padding:
+                0 13px;
+
+            border:
+                none;
+
+            border-radius:
+                11px;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #67b882,
+                    #59b1d5
+                );
+
+            color:
+                white;
+
+            font-size:
+                .56rem;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            box-shadow:
+                0 8px 18px
+                rgba(67,145,117,0.15);
+
+            transition:
+                all .2s ease;
+        }
+
+
+        .add-subject-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 11px 22px
+                rgba(67,145,117,0.21);
+        }
+
+
+        /* =====================================================
+           SUBJECT LIST
+        ===================================================== */
+
+        .subject-list {
+
+            flex:
+                1 1 auto;
+
+            min-height:
+                0;
+
+            overflow-y:
+                auto;
+
+            padding:
+                2px
+                4px
+                5px
+                2px;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                8px;
+
+            scrollbar-width:
+                thin;
+
+            scrollbar-color:
+                rgba(75,140,114,0.25)
+                transparent;
+        }
+
+
+        .subject-list::-webkit-scrollbar {
+
+            width:
+                6px;
+        }
+
+
+        .subject-list::-webkit-scrollbar-track {
+
+            background:
+                transparent;
+        }
+
+
+        .subject-list::-webkit-scrollbar-thumb {
+
+            background:
+                rgba(75,140,114,0.23);
+
+            border-radius:
+                999px;
+        }
+
+
+        /* =====================================================
+           EMPTY
+        ===================================================== */
+
+        .empty-state {
+
+            flex:
+                1;
+
+            min-height:
+                180px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            text-align:
+                center;
+
+            border:
+                1px dashed
+                rgba(77,135,112,0.18);
+
+            border-radius:
+                18px;
+
+            background:
+                rgba(255,255,255,0.10);
+
+            padding:
+                20px;
+
+            color:
+                #8da79c;
+        }
+
+
+        .empty-state strong {
+
+            display:
+                block;
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                .76rem;
+
+            color:
+                #648978;
+
+            margin-bottom:
+                4px;
+        }
+
+
+        .empty-state span {
+
+            font-size:
+                .54rem;
+
+            line-height:
+                1.5;
+        }
+
+
+        /* =====================================================
+           SUBJECT CARD
+        ===================================================== */
+
+        .subject-card {
+
+            flex-shrink:
+                0;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                minmax(180px, 1.25fr)
+                1.35fr
+                auto;
+
+            align-items:
+                center;
+
+            gap:
+                12px;
+
+            padding:
+                11px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.49);
+
+            border-radius:
+                16px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.31),
+                    rgba(248,255,238,0.12)
+                );
+
+            box-shadow:
+
+                0 7px 19px
+                rgba(43,111,90,0.06),
+
+                inset
+                0 1px 0
+                rgba(255,255,255,0.60);
+
+            animation:
+                subjectAppear
+                .3s
+                ease
+                both;
+        }
+
+
+        /* =====================================================
+           SUBJECT INFO
+        ===================================================== */
+
+        .subject-info {
+
+            min-width:
+                0;
+        }
+
+
+        .subject-name {
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                .70rem;
+
+            font-weight:
+                800;
+
+            color:
+                #4d7f69;
+
+            line-height:
+                1.25;
+
+            word-break:
+                break-word;
+        }
+
+
+        .subject-meta {
+
+            margin-top:
+                3px;
+
+            font-size:
+                .48rem;
+
+            font-weight:
+                700;
+
+            color:
+                #8aa49a;
+        }
+
+
+        /* =====================================================
+           PROGRESS
+        ===================================================== */
+
+        .subject-progress {
+
+            min-width:
+                0;
+        }
+
+
+        .progress-top {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                8px;
+
+            margin-bottom:
+                5px;
+        }
+
+
+        .progress-label {
+
+            font-size:
+                .48rem;
+
+            font-weight:
+                700;
+
+            color:
+                #77978a;
+        }
+
+
+        .progress-percent {
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                .62rem;
+
+            font-weight:
+                800;
+
+            color:
+                #4c866d;
+        }
+
+
+        .progress-track {
+
+            width:
+                100%;
+
+            height:
+                8px;
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(75,142,113,0.10);
+
+            overflow:
+                hidden;
+        }
+
+
+        .progress-fill {
+
+            height:
+                100%;
+
+            width:
+                0%;
+
+            border-radius:
+                999px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    #63b581,
+                    #79c9d7,
+                    #f0cf58
+                );
+
+            transition:
+                width .35s ease;
+        }
+
+
+        .progress-details {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            margin-top:
+                4px;
+
+            font-size:
+                .43rem;
+
+            font-weight:
+                700;
+
+            color:
+                #8ba59a;
+        }
+
+
+        /* =====================================================
+           SUBJECT CONTROLS
+        ===================================================== */
+
+        .subject-controls {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                6px;
+        }
+
+
+        .manage-button {
+
+            width:
+                30px;
+
+            height:
+                30px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.46);
+
+            border-radius:
+                9px;
+
+            background:
+                rgba(255,255,255,0.20);
+
+            color:
+                #6c9484;
+
+            cursor:
+                pointer;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+        }
+
+
+        .manage-button:hover {
+
+            background:
+                rgba(255,255,255,0.34);
+        }
+
+
+        .manage-button svg {
+
+            width:
+                14px;
+
+            height:
+                14px;
+
+            fill:
+                none;
+
+            stroke:
+                currentColor;
+
+            stroke-width:
+                1.7;
+
+            stroke-linecap:
+                round;
+
+            stroke-linejoin:
+                round;
+        }
+
+
+        .delete-subject {
+
+            width:
+                30px;
+
+            height:
+                30px;
+
+            border:
+                none;
+
+            border-radius:
+                9px;
+
+            background:
+                rgba(221,105,113,0.08);
+
+            color:
+                #aa6d77;
+
+            cursor:
+                pointer;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+        }
+
+
+        .delete-subject:hover {
+
+            background:
+                rgba(221,105,113,0.16);
+        }
+
+
+        .delete-subject svg {
+
+            width:
+                14px;
+
+            height:
+                14px;
+
+            fill:
+                none;
+
+            stroke:
+                currentColor;
+
+            stroke-width:
+                1.7;
+
+            stroke-linecap:
+                round;
+
+            stroke-linejoin:
+                round;
+        }
+
+
+        /* =====================================================
+           LESSON PANEL
+        ===================================================== */
+
+        .lesson-panel {
+
+            grid-column:
+                1 / -1;
+
+            display:
+                none;
+
+            padding:
+                10px;
+
+            border-top:
+                1px solid
+                rgba(78,137,113,0.10);
+
+            margin-top:
+                1px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border-radius:
+                11px;
+        }
+
+
+        .lesson-panel.open {
+
+            display:
+                block;
+        }
+
+
+        .lesson-header {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            margin-bottom:
+                8px;
+        }
+
+
+        .lesson-title {
+
+            font-size:
+                .52rem;
+
+            font-weight:
+                800;
+
+            color:
+                #658c7d;
+        }
+
+
+        .lesson-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fill,
+                    minmax(
+                        120px,
+                        1fr
+                    )
+                );
+
+            gap:
+                6px;
+        }
+
+
+        .lesson-item {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                6px;
+
+            padding:
+                7px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.38);
+
+            border-radius:
+                9px;
+
+            background:
+                rgba(255,255,255,0.18);
+
+            font-size:
+                .48rem;
+
+            color:
+                #67877c;
+
+            font-weight:
+                700;
+        }
+
+
+        .lesson-item input {
+
+            appearance:
+                none;
+
+            -webkit-appearance:
+                none;
+
+            width:
+                16px;
+
+            height:
+                16px;
+
+            flex-shrink:
+                0;
+
+            border:
+                1px solid
+                rgba(89,140,119,0.30);
+
+            border-radius:
+                5px;
+
+            background:
+                rgba(255,255,255,0.25);
+
+            cursor:
+                pointer;
+
+            position:
+                relative;
+        }
+
+
+        .lesson-item input:checked {
+
+            border-color:
+                transparent;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #64b581,
+                    #6cb4d0
+                );
+        }
+
+
+        .lesson-item input:checked::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                4px;
+
+            height:
+                8px;
+
+            left:
+                5px;
+
+            top:
+                2px;
+
+            border-right:
+                2px solid
+                white;
+
+            border-bottom:
+                2px solid
+                white;
+
+            transform:
+                rotate(45deg);
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .bottom-note {
+
+            flex-shrink:
+                0;
+
+            text-align:
+                center;
+
+            padding:
+                7px
+                0
+                0;
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                .51rem;
+
+            color:
+                #729589;
+
+            font-weight:
+                600;
+        }
+
+
+        /* =====================================================
+           ANIMATIONS
+        ===================================================== */
+
+        @keyframes cardAppear {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(24px)
+                    scale(.97);
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+
+        @keyframes floatOne {
+
+            0%,
+            100% {
+
+                transform:
+                    translate(0,0);
+            }
+
+            50% {
+
+                transform:
+                    translate(-18px,17px);
+            }
+        }
+
+
+        @keyframes floatTwo {
+
+            0%,
+            100% {
+
+                transform:
+                    translate(0,0);
+            }
+
+            50% {
+
+                transform:
+                    translate(18px,-18px);
+            }
+        }
+
+
+        @keyframes pulseDot {
+
+            0%,
+            100% {
+
+                opacity:
+                    .20;
+
+                transform:
+                    scale(.78);
+            }
+
+            50% {
+
+                opacity:
+                    .88;
+
+                transform:
+                    scale(1.17);
+            }
+        }
+
+
+        @keyframes subjectAppear {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(5px);
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .content {
+
+                width:
+                    94%;
+
+                height:
+                    93vh;
+
+                padding:
+                    17px
+                    14px
+                    14px;
+            }
+
+
+            .summary {
+
+                grid-template-columns:
+                    repeat(
+                        4,
+                        1fr
+                    );
+            }
+
+
+            .main-grid-placeholder {
+                display:
+                    none;
+            }
+
+
+            .subject-card {
+
+                grid-template-columns:
+                    1fr
+                    1.3fr
+                    auto;
+            }
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 650px) {
+
+            .back-button {
+
+                top:
+                    15px;
+
+                left:
+                    15px;
+
+                padding:
+                    7px
+                    12px;
+
+                font-size:
+                    .64rem;
+            }
+
+
+            .content {
+
+                width:
+                    94%;
+
+                height:
+                    94vh;
+
+                padding:
+                    16px
+                    10px
+                    12px;
+
+                border-radius:
+                    26px;
+            }
+
+
+            .mini-label {
+
+                font-size:
+                    .52rem;
+            }
+
+
+            .title {
+
+                font-size:
+                    1.34rem;
+            }
+
+
+            .subtitle {
+
+                font-size:
+                    .55rem;
+            }
+
+
+            .summary {
+
+                gap:
+                    5px;
+            }
+
+
+            .summary-card {
+
+                padding:
+                    8px
+                    5px;
+            }
+
+
+            .summary-title {
+
+                font-size:
+                    .41rem;
+            }
+
+
+            .summary-number {
+
+                font-size:
+                    .82rem;
+            }
+
+
+            .add-subject {
+
+                display:
+                    grid;
+
+                grid-template-columns:
+                    1fr
+                    85px;
+
+                gap:
+                    6px;
+            }
+
+
+            .subject-input {
+
+                width:
+                    auto;
+            }
+
+
+            .lessons-input {
+
+                width:
+                    auto;
+            }
+
+
+            .add-subject-button {
+
+                grid-column:
+                    1 / -1;
+
+                width:
+                    100%;
+            }
+
+
+            .subject-card {
+
+                grid-template-columns:
+                    1fr
+                    auto;
+
+                gap:
+                    8px;
+
+                padding:
+                    10px;
+            }
+
+
+            .subject-progress {
+
+                grid-column:
+                    1 / -1;
+
+                grid-row:
+                    2;
+            }
+
+
+            .subject-controls {
+
+                grid-column:
+                    2;
+
+                grid-row:
+                    1;
+            }
+
+
+            .subject-name {
+
+                font-size:
+                    .64rem;
+            }
+
+
+            .lesson-grid {
+
+                grid-template-columns:
+                    1fr
+                    1fr;
+            }
+        }
+
+
+        @media (max-width: 430px) {
+
+            .lesson-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .summary-title {
+
+                line-height:
+                    1.2;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <main class="page">
+
+
+        <!-- =================================================
+             BACKGROUND
+        ================================================== -->
+
+        <div class="orb orb-one"></div>
+
+        <div class="orb orb-two"></div>
+
+        <div class="orb orb-three"></div>
+
+        <div class="circle circle-one"></div>
+
+        <div class="circle circle-two"></div>
+
+        <div class="circle circle-three"></div>
+
+        <div class="pencil pencil-one"></div>
+
+        <div class="pencil pencil-two"></div>
+
+        <div class="capsule capsule-one"></div>
+
+        <div class="capsule capsule-two"></div>
+
+        <div class="bubble bubble-one"></div>
+
+        <div class="bubble bubble-two"></div>
+
+        <div class="bubble bubble-three"></div>
+
+        <div class="bubble bubble-four"></div>
+
+        <div class="light-dot dot-one"></div>
+
+        <div class="light-dot dot-two"></div>
+
+        <div class="light-dot dot-three"></div>
+
+        <div class="light-dot dot-four"></div>
+
+
+        <!-- =================================================
+             RETOUR
+        ================================================== -->
+
+        <button
+            type="button"
+            class="back-button"
+            id="backButton"
+        >
+            ← Retour
+        </button>
+
+
+        <!-- =================================================
+             MAIN CARD
+        ================================================== -->
+
+        <section class="content">
+
+
+            <!-- =================================================
+                 HEADER
+            ================================================== -->
+
+            <header class="header">
+
+                <div class="top-line"></div>
+
+                <div class="mini-label">
+                    PHARMSINERGY • LICENCE 1
+                </div>
+
+                <h1 class="title">
+                    Progression des matières
+                </h1>
+
+                <p class="subtitle">
+                    Suis ton avancement, matière par matière
+                </p>
+
+            </header>
+
+
+            <!-- =================================================
+                 SUMMARY
+            ================================================== -->
+
+            <div class="summary">
+
+
+                <div class="summary-card">
+
+                    <span class="summary-title">
+                        Progression générale
+                    </span>
+
+                    <span
+                        class="summary-number"
+                        id="generalProgress"
+                    >
+                        0%
+                    </span>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <span class="summary-title">
+                        Matières
+                    </span>
+
+                    <span
+                        class="summary-number"
+                        id="subjectsCount"
+                    >
+                        0
+                    </span>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <span class="summary-title">
+                        Leçons vues
+                    </span>
+
+                    <span
+                        class="summary-number"
+                        id="lessonsDone"
+                    >
+                        0
+                    </span>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <span class="summary-title">
+                        Leçons restantes
+                    </span>
+
+                    <span
+                        class="summary-number"
+                        id="lessonsLeft"
+                    >
+                        0
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 ADD SUBJECT
+            ================================================== -->
+
+            <div class="add-subject">
+
+
+                <input
+                    type="text"
+                    id="subjectInput"
+                    class="subject-input"
+                    maxlength="80"
+                    placeholder="Nom de la matière..."
+                    autocomplete="off"
+                >
+
+
+                <input
+                    type="number"
+                    id="lessonsInput"
+                    class="lessons-input"
+                    min="1"
+                    max="300"
+                    placeholder="Nb. cours"
+                >
+
+
+                <button
+                    type="button"
+                    id="addSubjectButton"
+                    class="add-subject-button"
+                >
+                    + Ajouter
+                </button>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 SUBJECT LIST
+            ================================================== -->
+
+            <div
+                class="subject-list"
+                id="subjectList"
+            >
+
+
+                <div
+                    class="empty-state"
+                    id="emptyState"
+                >
+
+                    <div>
+
+                        <strong>
+                            Commence ton suivi
+                        </strong>
+
+                        <span>
+                            Ajoute une matière et indique
+                            le nombre total de cours ou chapitres.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 FOOTER
+            ================================================== -->
+
+            <div class="bottom-note">
+
+                Chaque cours terminé est une étape de plus. Continue à avancer. 💚
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <script>
+
+        /* =====================================================
+           RETURN
+        ===================================================== */
+
+        document
+            .getElementById("backButton")
+            .addEventListener(
+                "click",
+                function () {
+
+                    window.location.href =
+                        "carnetdeletudiant.html";
+
+                }
+            );
+
+
+        /* =====================================================
+           ELEMENTS
+        ===================================================== */
+
+        const subjectInput =
+            document.getElementById(
+                "subjectInput"
+            );
+
+
+        const lessonsInput =
+            document.getElementById(
+                "lessonsInput"
+            );
+
+
+        const addSubjectButton =
+            document.getElementById(
+                "addSubjectButton"
+            );
+
+
+        const subjectList =
+            document.getElementById(
+                "subjectList"
+            );
+
+
+        const emptyState =
+            document.getElementById(
+                "emptyState"
+            );
+
+
+        const generalProgress =
+            document.getElementById(
+                "generalProgress"
+            );
+
+
+        const subjectsCount =
+            document.getElementById(
+                "subjectsCount"
+            );
+
+
+        const lessonsDone =
+            document.getElementById(
+                "lessonsDone"
+            );
+
+
+        const lessonsLeft =
+            document.getElementById(
+                "lessonsLeft"
+            );
+
+
+        /* =====================================================
+           STORAGE
+        ===================================================== */
+
+        const storageKey =
+            "pharmsinergy_progression_l1";
+
+
+        let subjects =
+            JSON.parse(
+                localStorage.getItem(
+                    storageKey
+                )
+            ) || [];
+
+
+        /* =====================================================
+           SAVE
+        ===================================================== */
+
+        function saveSubjects() {
+
+            localStorage.setItem(
+                storageKey,
+                JSON.stringify(subjects)
+            );
+
+        }
+
+
+        /* =====================================================
+           CALCULATE SUBJECT PROGRESS
+        ===================================================== */
+
+        function getSubjectProgress(
+            subject
+        ) {
+
+            const total =
+                Number(
+                    subject.totalLessons
+                );
+
+
+            const done =
+                Array.isArray(
+                    subject.completedLessons
+                )
+                    ? subject.completedLessons
+                        .filter(Boolean)
+                        .length
+                    : 0;
+
+
+            if (
+                total <= 0
+            ) {
+
+                return 0;
+            }
+
+
+            return Math.min(
+                100,
+                Math.round(
+                    (
+                        done /
+                        total
+                    ) * 100
+                )
+            );
+
+        }
+
+
+        /* =====================================================
+           UPDATE SUMMARY
+        ===================================================== */
+
+        function updateSummary() {
+
+            let totalLessons =
+                0;
+
+
+            let totalDone =
+                0;
+
+
+            subjects.forEach(
+                function (subject) {
+
+                    totalLessons +=
+                        Number(
+                            subject.totalLessons
+                        );
+
+
+                    totalDone +=
+                        Array.isArray(
+                            subject.completedLessons
+                        )
+                            ? subject.completedLessons
+                                .filter(Boolean)
+                                .length
+                            : 0;
+
+                }
+            );
+
+
+            const totalLeft =
+                Math.max(
+                    0,
+                    totalLessons -
+                    totalDone
+                );
+
+
+            const progress =
+                totalLessons === 0
+                    ? 0
+                    : Math.round(
+                        (
+                            totalDone /
+                            totalLessons
+                        ) * 100
+                    );
+
+
+            generalProgress.textContent =
+                progress + "%";
+
+
+            subjectsCount.textContent =
+                subjects.length;
+
+
+            lessonsDone.textContent =
+                totalDone;
+
+
+            lessonsLeft.textContent =
+                totalLeft;
+
+        }
+
+
+        /* =====================================================
+           DELETE SUBJECT
+        ===================================================== */
+
+        function deleteSubject(
+            subjectId
+        ) {
+
+            const confirmed =
+                window.confirm(
+                    "Supprimer cette matière et sa progression ?"
+                );
+
+
+            if (!confirmed) {
+
+                return;
+            }
+
+
+            subjects =
+                subjects.filter(
+                    function (subject) {
+
+                        return (
+                            subject.id !==
+                            subjectId
+                        );
+
+                    }
+                );
+
+
+            saveSubjects();
+
+            renderSubjects();
+
+        }
+
+
+        /* =====================================================
+           TOGGLE LESSON PANEL
+        ===================================================== */
+
+        function toggleLessonPanel(
+            subjectId,
+            panel
+        ) {
+
+            panel.classList.toggle(
+                "open"
+            );
+
+        }
+
+
+        /* =====================================================
+           RENDER LESSONS
+        ===================================================== */
+
+        function renderLessons(
+            subject,
+            panel
+        ) {
+
+            panel.innerHTML =
+                "";
+
+
+            const header =
+                document.createElement(
+                    "div"
+                );
+
+
+            header.className =
+                "lesson-header";
+
+
+            const title =
+                document.createElement(
+                    "div"
+                );
+
+
+            title.className =
+                "lesson-title";
+
+
+            title.textContent =
+                "Cours / chapitres terminés";
+
+
+            const count =
+                document.createElement(
+                    "div"
+                );
+
+
+            count.className =
+                "lesson-title";
+
+
+            count.textContent =
+                (
+                    subject.completedLessons
+                        .filter(Boolean)
+                        .length
+                ) +
+                " / " +
+                subject.totalLessons;
+
+
+            header.appendChild(
+                title
+            );
+
+
+            header.appendChild(
+                count
+            );
+
+
+            const grid =
+                document.createElement(
+                    "div"
+                );
+
+
+            grid.className =
+                "lesson-grid";
+
+
+            for (
+                let i = 0;
+                i < subject.totalLessons;
+                i++
+            ) {
+
+                const lesson =
+                    document.createElement(
+                        "label"
+                    );
+
+
+                lesson.className =
+                    "lesson-item";
+
+
+                const checkbox =
+                    document.createElement(
+                        "input"
+                    );
+
+
+                checkbox.type =
+                    "checkbox";
+
+
+                checkbox.checked =
+                    Boolean(
+                        subject.completedLessons[
+                            i
+                        ]
+                    );
+
+
+                const text =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                text.textContent =
+                    "Cours " +
+                    (
+                        i + 1
+                    );
+
+
+                checkbox.addEventListener(
+                    "change",
+                    function () {
+
+                        subject.completedLessons[
+                            i
+                        ] =
+                            checkbox.checked;
+
+
+                        saveSubjects();
+
+                        renderSubjects();
+
+                        /* reopen same subject */
+
+                        setTimeout(
+                            function () {
+
+                                const cards =
+                                    document.querySelectorAll(
+                                        ".subject-card"
+                                    );
+
+
+                                cards.forEach(
+                                    function (card) {
+
+                                        if (
+                                            card.dataset.id ===
+                                            String(subject.id)
+                                        ) {
+
+                                            const panel =
+                                                card.querySelector(
+                                                    ".lesson-panel"
+                                                );
+
+
+                                            if (panel) {
+
+                                                panel.classList.add(
+                                                    "open"
+                                                );
+
+                                            }
+
+                                        }
+
+                                    }
+                                );
+
+                            },
+                            0
+                        );
+
+                    }
+                );
+
+
+                lesson.appendChild(
+                    checkbox
+                );
+
+
+                lesson.appendChild(
+                    text
+                );
+
+
+                grid.appendChild(
+                    lesson
+                );
+
+            }
+
+
+            panel.appendChild(
+                header
+            );
+
+
+            panel.appendChild(
+                grid
+            );
+
+        }
+
+
+        /* =====================================================
+           CREATE SUBJECT CARD
+        ===================================================== */
+
+        function createSubjectCard(
+            subject
+        ) {
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+
+            card.className =
+                "subject-card";
+
+
+            card.dataset.id =
+                String(subject.id);
+
+
+            /* ==========================
+               INFO
+            ========================== */
+
+            const info =
+                document.createElement(
+                    "div"
+                );
+
+
+            info.className =
+                "subject-info";
+
+
+            const name =
+                document.createElement(
+                    "div"
+                );
+
+
+            name.className =
+                "subject-name";
+
+
+            name.textContent =
+                subject.name;
+
+
+            const meta =
+                document.createElement(
+                    "div"
+                );
+
+
+            meta.className =
+                "subject-meta";
+
+
+            meta.textContent =
+                subject.totalLessons +
+                " cours / chapitres";
+
+
+            info.appendChild(
+                name
+            );
+
+
+            info.appendChild(
+                meta
+            );
+
+
+            /* ==========================
+               PROGRESS
+            ========================== */
+
+            const progress =
+                document.createElement(
+                    "div"
+                );
+
+
+            progress.className =
+                "subject-progress";
+
+
+            const progressTop =
+                document.createElement(
+                    "div"
+                );
+
+
+            progressTop.className =
+                "progress-top";
+
+
+            const progressLabel =
+                document.createElement(
+                    "span"
+                );
+
+
+            progressLabel.className =
+                "progress-label";
+
+
+            progressLabel.textContent =
+                "Progression";
+
+
+            const progressPercent =
+                document.createElement(
+                    "span"
+                );
+
+
+            progressPercent.className =
+                "progress-percent";
+
+
+            const percent =
+                getSubjectProgress(
+                    subject
+                );
+
+
+            progressPercent.textContent =
+                percent + "%";
+
+
+            progressTop.appendChild(
+                progressLabel
+            );
+
+
+            progressTop.appendChild(
+                progressPercent
+            );
+
+
+            const track =
+                document.createElement(
+                    "div"
+                );
+
+
+            track.className =
+                "progress-track";
+
+
+            const fill =
+                document.createElement(
+                    "div"
+                );
+
+
+            fill.className =
+                "progress-fill";
+
+
+            fill.style.width =
+                percent + "%";
+
+
+            track.appendChild(
+                fill
+            );
+
+
+            const details =
+                document.createElement(
+                    "div"
+                );
+
+
+            details.className =
+                "progress-details";
+
+
+            const done =
+                subject.completedLessons
+                    .filter(Boolean)
+                    .length;
+
+
+            const doneText =
+                document.createElement(
+                    "span"
+                );
+
+
+            doneText.textContent =
+                done +
+                " terminé(s)";
+
+
+            const leftText =
+                document.createElement(
+                    "span"
+                );
+
+
+            leftText.textContent =
+                (
+                    subject.totalLessons -
+                    done
+                ) +
+                " restant(s)";
+
+
+            details.appendChild(
+                doneText
+            );
+
+
+            details.appendChild(
+                leftText
+            );
+
+
+            progress.appendChild(
+                progressTop
+            );
+
+
+            progress.appendChild(
+                track
+            );
+
+
+            progress.appendChild(
+                details
+            );
+
+
+            /* ==========================
+               CONTROLS
+            ========================== */
+
+            const controls =
+                document.createElement(
+                    "div"
+                );
+
+
+            controls.className =
+                "subject-controls";
+
+
+            const manage =
+                document.createElement(
+                    "button"
+                );
+
+
+            manage.type =
+                "button";
+
+
+            manage.className =
+                "manage-button";
+
+
+            manage.title =
+                "Voir les cours";
+
+
+            manage.innerHTML = `
+
+                <svg viewBox="0 0 24 24">
+
+                    <path
+                        d="M5 4h14v16H5z"
+                    />
+
+                    <path d="M8 8h8" />
+
+                    <path d="M8 12h8" />
+
+                    <path d="M8 16h5" />
+
+                </svg>
+
+            `;
+
+
+            const deleteButton =
+                document.createElement(
+                    "button"
+                );
+
+
+            deleteButton.type =
+                "button";
+
+
+            deleteButton.className =
+                "delete-subject";
+
+
+            deleteButton.title =
+                "Supprimer";
+
+
+            deleteButton.innerHTML = `
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M4 7h16" />
+
+                    <path d="M10 11v6" />
+
+                    <path d="M14 11v6" />
+
+                    <path
+                        d="M6 7l1 13h10l1-13"
+                    />
+
+                    <path
+                        d="M9 7V4h6v3"
+                    />
+
+                </svg>
+
+            `;
+
+
+            controls.appendChild(
+                manage
+            );
+
+
+            controls.appendChild(
+                deleteButton
+            );
+
+
+            /* ==========================
+               LESSON PANEL
+            ========================== */
+
+            const lessonPanel =
+                document.createElement(
+                    "div"
+                );
+
+
+            lessonPanel.className =
+                "lesson-panel";
+
+
+            renderLessons(
+                subject,
+                lessonPanel
+            );
+
+
+            manage.addEventListener(
+                "click",
+                function () {
+
+                    toggleLessonPanel(
+                        subject.id,
+                        lessonPanel
+                    );
+
+                }
+            );
+
+
+            deleteButton.addEventListener(
+                "click",
+                function () {
+
+                    deleteSubject(
+                        subject.id
+                    );
+
+                }
+            );
+
+
+            /* ==========================
+               APPEND
+            ========================== */
+
+            card.appendChild(
+                info
+            );
+
+
+            card.appendChild(
+                progress
+            );
+
+
+            card.appendChild(
+                controls
+            );
+
+
+            card.appendChild(
+                lessonPanel
+            );
+
+
+            return card;
+
+        }
+
+
+        /* =====================================================
+           RENDER SUBJECTS
+        ===================================================== */
+
+        function renderSubjects() {
+
+            subjectList.innerHTML =
+                "";
+
+
+            if (
+                subjects.length ===
+                0
+            ) {
+
+                subjectList.appendChild(
+                    emptyState
+                );
+
+                updateSummary();
+
+                return;
+            }
+
+
+            subjects.forEach(
+                function (subject) {
+
+                    subjectList.appendChild(
+                        createSubjectCard(
+                            subject
+                        )
+                    );
+
+                }
+            );
+
+
+            updateSummary();
+
+        }
+
+
+        /* =====================================================
+           ADD SUBJECT
+        ===================================================== */
+
+        function addSubject() {
+
+            const name =
+                subjectInput.value.trim();
+
+
+            const total =
+                Number(
+                    lessonsInput.value
+                );
+
+
+            if (!name) {
+
+                subjectInput.focus();
+
+                return;
+            }
+
+
+            if (
+                !Number.isInteger(total) ||
+                total < 1
+            ) {
+
+                lessonsInput.focus();
+
+                return;
+            }
+
+
+            subjects.push({
+
+                id:
+                    Date.now() +
+                    Math.random(),
+
+                name:
+                    name,
+
+                totalLessons:
+                    total,
+
+                completedLessons:
+                    new Array(total)
+                        .fill(false)
+
+            });
+
+
+            saveSubjects();
+
+
+            subjectInput.value =
+                "";
+
+
+            lessonsInput.value =
+                "";
+
+
+            renderSubjects();
+
+
+            subjectInput.focus();
+
+        }
+
+
+        /* =====================================================
+           ADD BUTTON
+        ===================================================== */
+
+        addSubjectButton
+            .addEventListener(
+                "click",
+                addSubject
+            );
+
+
+        /* =====================================================
+           ENTER KEY
+        ===================================================== */
+
+        subjectInput
+            .addEventListener(
+                "keydown",
+                function (event) {
+
+                    if (
+                        event.key ===
+                        "Enter"
+                    ) {
+
+                        event.preventDefault();
+
+                        addSubject();
+
+                    }
+
+                }
+            );
+
+
+        lessonsInput
+            .addEventListener(
+                "keydown",
+                function (event) {
+
+                    if (
+                        event.key ===
+                        "Enter"
+                    ) {
+
+                        event.preventDefault();
+
+                        addSubject();
+
+                    }
+
+                }
+            );
+
+
+        /* =====================================================
+           INITIALIZE
+        ===================================================== */
+
+        renderSubjects();
+
+    </script>
+
+</body>
+
+</html>

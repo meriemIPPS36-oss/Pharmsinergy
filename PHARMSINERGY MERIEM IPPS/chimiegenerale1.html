@@ -1,0 +1,1846 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chimie générale 1 | PharmSinergy</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kufam:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            overflow: hidden;
+
+            font-family:
+                "Inter",
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color: #17324d;
+
+            background:
+
+                radial-gradient(
+                    circle at 50% 40%,
+                    rgba(255,255,255,0.97) 0%,
+                    rgba(235,240,245,0.55) 24%,
+                    transparent 52%
+                ),
+
+                radial-gradient(
+                    circle at 8% 12%,
+                    rgba(43,88,132,0.42),
+                    transparent 32%
+                ),
+
+                radial-gradient(
+                    circle at 92% 88%,
+                    rgba(160,173,188,0.42),
+                    transparent 32%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #102d47 0%,
+                    #234d70 27%,
+                    #66809a 52%,
+                    #c7ced5 76%,
+                    #7c8d9f 100%
+                );
+        }
+
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .page {
+
+            position: relative;
+
+            width: 100%;
+
+            height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            overflow: hidden;
+
+            isolation: isolate;
+        }
+
+
+        /* =====================================================
+           ORBS
+        ===================================================== */
+
+        .orb {
+
+            position: absolute;
+
+            border-radius: 50%;
+
+            filter: blur(65px);
+
+            pointer-events: none;
+
+            z-index: -5;
+        }
+
+
+        .orb-one {
+
+            width: 360px;
+
+            height: 360px;
+
+            top: -120px;
+
+            right: -90px;
+
+            background:
+                rgba(76,125,166,0.26);
+
+            animation:
+                floatOne
+                10s
+                ease-in-out
+                infinite;
+        }
+
+
+        .orb-two {
+
+            width: 330px;
+
+            height: 330px;
+
+            bottom: -130px;
+
+            left: -100px;
+
+            background:
+                rgba(210,220,230,0.30);
+
+            animation:
+                floatTwo
+                12s
+                ease-in-out
+                infinite;
+        }
+
+
+        /* =====================================================
+           MOLECULES
+        ===================================================== */
+
+        .molecule {
+
+            position: absolute;
+
+            width: 185px;
+
+            height: 185px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.26);
+
+            border-radius: 50%;
+
+            opacity: 0.55;
+
+            pointer-events: none;
+        }
+
+
+        .molecule::before,
+        .molecule::after {
+
+            content: "";
+
+            position: absolute;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.25);
+        }
+
+
+        .molecule::before {
+
+            width: 105px;
+
+            height: 105px;
+
+            top: 38px;
+
+            left: 38px;
+        }
+
+
+        .molecule::after {
+
+            width: 11px;
+
+            height: 11px;
+
+            top: 15px;
+
+            right: 24px;
+
+            border: none;
+
+            background:
+                rgba(255,255,255,0.55);
+
+            box-shadow:
+
+                -125px 55px 0
+                rgba(255,255,255,0.30),
+
+                62px 125px 0
+                rgba(255,255,255,0.24),
+
+                -48px 135px 0
+                rgba(255,255,255,0.20);
+        }
+
+
+        .molecule-one {
+
+            top: 5%;
+
+            left: 2%;
+
+            transform:
+                rotate(28deg);
+        }
+
+
+        .molecule-two {
+
+            bottom: 2%;
+
+            right: 2%;
+
+            transform:
+                rotate(-28deg)
+                scale(0.85);
+        }
+
+
+        /* =====================================================
+           CHEMICAL BONDS
+        ===================================================== */
+
+        .bond {
+
+            position: absolute;
+
+            width: 130px;
+
+            height: 130px;
+
+            opacity: 0.28;
+
+            pointer-events: none;
+        }
+
+
+        .bond::before,
+        .bond::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 70px;
+
+            height: 1px;
+
+            background:
+                rgba(255,255,255,0.55);
+
+            top: 64px;
+
+            left: 30px;
+        }
+
+
+        .bond::after {
+
+            transform:
+                rotate(60deg);
+        }
+
+
+        .bond-one {
+
+            top: 16%;
+
+            right: 8%;
+
+            transform:
+                rotate(15deg);
+        }
+
+
+        .bond-two {
+
+            bottom: 14%;
+
+            left: 8%;
+
+            transform:
+                rotate(-25deg)
+                scale(0.8);
+        }
+
+
+        /* =====================================================
+           RINGS
+        ===================================================== */
+
+        .ring {
+
+            position: absolute;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.28);
+
+            pointer-events: none;
+        }
+
+
+        .ring-one {
+
+            width: 260px;
+
+            height: 260px;
+
+            left: -95px;
+
+            top: 28%;
+        }
+
+
+        .ring-two {
+
+            width: 350px;
+
+            height: 350px;
+
+            right: -135px;
+
+            bottom: 7%;
+        }
+
+
+        /* =====================================================
+           PARTICLES
+        ===================================================== */
+
+        .particle {
+
+            position: absolute;
+
+            width: 5px;
+
+            height: 5px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,0.80);
+
+            box-shadow:
+                0 0 12px
+                rgba(255,255,255,0.90);
+
+            animation:
+                twinkle
+                3.5s
+                ease-in-out
+                infinite;
+        }
+
+
+        .particle-one {
+
+            top: 17%;
+
+            left: 21%;
+        }
+
+
+        .particle-two {
+
+            top: 24%;
+
+            right: 20%;
+
+            width: 4px;
+
+            height: 4px;
+
+            animation-delay:
+                1s;
+        }
+
+
+        .particle-three {
+
+            bottom: 19%;
+
+            left: 24%;
+
+            width: 4px;
+
+            height: 4px;
+
+            animation-delay:
+                1.7s;
+        }
+
+
+        .particle-four {
+
+            bottom: 25%;
+
+            right: 25%;
+
+            width: 6px;
+
+            height: 6px;
+
+            animation-delay:
+                2.2s;
+        }
+
+
+        /* =====================================================
+           PAGE HEADER
+        ===================================================== */
+
+        .page-header {
+
+            position: absolute;
+
+            top: 24px;
+
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            text-align:
+                center;
+
+            z-index:
+                10;
+        }
+
+
+        .top-line {
+
+            width:
+                72px;
+
+            height:
+                3px;
+
+            margin:
+                0 auto 10px;
+
+            border-radius:
+                999px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    #0f304e,
+                    #7890a6,
+                    #e0e5e9
+                );
+        }
+
+
+        .mini-label {
+
+            font-size:
+                0.64rem;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                0.30em;
+
+            color:
+                rgba(255,255,255,0.72);
+
+            text-transform:
+                uppercase;
+
+            margin-bottom:
+                5px;
+        }
+
+
+        .title {
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                clamp(
+                    1.45rem,
+                    3.4vw,
+                    2.45rem
+                );
+
+            font-weight:
+                800;
+
+            color:
+                #f4f7fa;
+
+            text-shadow:
+                0 5px 18px
+                rgba(8,30,50,0.30);
+        }
+
+
+        .subtitle {
+
+            margin-top:
+                4px;
+
+            font-size:
+                clamp(
+                    0.65rem,
+                    1.1vw,
+                    0.82rem
+                );
+
+            font-weight:
+                600;
+
+            color:
+                rgba(235,241,246,0.78);
+        }
+
+
+        /* =====================================================
+           RETOUR
+        ===================================================== */
+
+        .back-button {
+
+            position:
+                absolute;
+
+            top:
+                25px;
+
+            left:
+                28px;
+
+            padding:
+                9px
+                18px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.56);
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(255,255,255,0.16);
+
+            color:
+                #f0f4f7;
+
+            font-size:
+                0.78rem;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            backdrop-filter:
+                blur(12px);
+
+            -webkit-backdrop-filter:
+                blur(12px);
+
+            box-shadow:
+                0 7px 20px
+                rgba(8,30,50,0.16);
+
+            transition:
+                all .25s ease;
+
+            z-index:
+                20;
+        }
+
+
+        .back-button:hover {
+
+            transform:
+                translateX(-4px);
+
+            background:
+                rgba(255,255,255,0.27);
+
+            box-shadow:
+                0 11px 27px
+                rgba(8,30,50,0.22);
+        }
+
+
+        /* =====================================================
+           RESUME GRID
+        ===================================================== */
+
+        .resume-grid {
+
+            position:
+                relative;
+
+            width:
+                min(850px, 84%);
+
+            max-height:
+                63vh;
+
+            margin-top:
+                40px;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap:
+                13px;
+
+            overflow-y:
+                auto;
+
+            padding:
+                6px;
+
+            scrollbar-width:
+                thin;
+
+            scrollbar-color:
+                rgba(255,255,255,0.42)
+                transparent;
+
+            animation:
+                gridAppear
+                1s
+                .25s
+                cubic-bezier(.2,.8,.2,1)
+                both;
+
+            z-index:
+                5;
+        }
+
+
+        .resume-grid::-webkit-scrollbar {
+
+            width:
+                7px;
+        }
+
+
+        .resume-grid::-webkit-scrollbar-track {
+
+            background:
+                transparent;
+        }
+
+
+        .resume-grid::-webkit-scrollbar-thumb {
+
+            background:
+                rgba(255,255,255,0.38);
+
+            border-radius:
+                999px;
+        }
+
+
+        /* =====================================================
+           RESUME BUTTON
+        ===================================================== */
+
+        .resume-button {
+
+            position:
+                relative;
+
+            min-height:
+                81px;
+
+            padding:
+                11px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.58);
+
+            border-radius:
+                19px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.31),
+                    rgba(218,227,235,0.12)
+                );
+
+            color:
+                #eef3f7;
+
+            text-decoration:
+                none;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                7px;
+
+            box-shadow:
+
+                0 10px 25px
+                rgba(8,31,51,0.16),
+
+                inset
+                0 1px 0
+                rgba(255,255,255,0.62);
+
+            backdrop-filter:
+                blur(13px);
+
+            -webkit-backdrop-filter:
+                blur(13px);
+
+            transition:
+                transform .25s ease,
+                background .25s ease,
+                box-shadow .25s ease;
+
+            overflow:
+                hidden;
+        }
+
+
+        .resume-button::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                72px;
+
+            height:
+                72px;
+
+            border-radius:
+                50%;
+
+            right:
+                -27px;
+
+            bottom:
+                -40px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            pointer-events:
+                none;
+        }
+
+
+        .resume-button:hover {
+
+            transform:
+                translateY(-5px);
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.45),
+                    rgba(218,227,235,0.20)
+                );
+
+            box-shadow:
+
+                0 16px 32px
+                rgba(8,31,51,0.23),
+
+                0 0 22px
+                rgba(213,224,234,0.14);
+        }
+
+
+        .resume-button:active {
+
+            transform:
+                scale(.97);
+        }
+
+
+        /* =====================================================
+           PDF ICON
+        ===================================================== */
+
+        .pdf-icon {
+
+            width:
+                37px;
+
+            height:
+                37px;
+
+            border-radius:
+                11px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            color:
+                #f2f6f9;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    rgba(20,60,91,0.72),
+                    rgba(168,181,192,0.32)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.18);
+
+            box-shadow:
+
+                inset
+                0 1px 5px
+                rgba(255,255,255,0.22),
+
+                0 5px 12px
+                rgba(8,30,50,0.14);
+        }
+
+
+        .pdf-icon svg {
+
+            width:
+                20px;
+
+            height:
+                20px;
+
+            stroke:
+                currentColor;
+
+            fill:
+                none;
+
+            stroke-width:
+                1.7;
+
+            stroke-linecap:
+                round;
+
+            stroke-linejoin:
+                round;
+        }
+
+
+        .resume-name {
+
+            font-size:
+                0.68rem;
+
+            font-weight:
+                800;
+
+            color:
+                #f1f5f8;
+
+            text-shadow:
+                0 2px 7px
+                rgba(8,30,50,0.18);
+        }
+
+
+        /* =====================================================
+           ANIMATIONS
+        ===================================================== */
+
+        @keyframes gridAppear {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(20px);
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        @keyframes floatOne {
+
+            0%,
+            100% {
+
+                transform:
+                    translate(0,0);
+            }
+
+            50% {
+
+                transform:
+                    translate(-20px,18px);
+            }
+        }
+
+
+        @keyframes floatTwo {
+
+            0%,
+            100% {
+
+                transform:
+                    translate(0,0);
+            }
+
+            50% {
+
+                transform:
+                    translate(20px,-18px);
+            }
+        }
+
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+
+                opacity:
+                    .25;
+
+                transform:
+                    scale(.75);
+            }
+
+            50% {
+
+                opacity:
+                    1;
+
+                transform:
+                    scale(1.25);
+            }
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 700px) {
+
+            body {
+                overflow:
+                    hidden;
+            }
+
+
+            .page {
+
+                height:
+                    100vh;
+            }
+
+
+            .page-header {
+
+                top:
+                    20px;
+            }
+
+
+            .back-button {
+
+                top:
+                    17px;
+
+                left:
+                    17px;
+
+                padding:
+                    8px
+                    14px;
+
+                font-size:
+                    .68rem;
+            }
+
+
+            .mini-label {
+
+                font-size:
+                    .52rem;
+            }
+
+
+            .title {
+
+                font-size:
+                    1.38rem;
+            }
+
+
+            .subtitle {
+
+                font-size:
+                    .60rem;
+            }
+
+
+            .top-line {
+
+                width:
+                    62px;
+            }
+
+
+            .resume-grid {
+
+                width:
+                    91%;
+
+                max-height:
+                    69vh;
+
+                margin-top:
+                    35px;
+
+                grid-template-columns:
+                    repeat(3, 1fr);
+
+                gap:
+                    9px;
+            }
+
+
+            .resume-button {
+
+                min-height:
+                    68px;
+
+                padding:
+                    8px;
+
+                border-radius:
+                    15px;
+
+                gap:
+                    5px;
+            }
+
+
+            .pdf-icon {
+
+                width:
+                    31px;
+
+                height:
+                    31px;
+
+                border-radius:
+                    9px;
+            }
+
+
+            .pdf-icon svg {
+
+                width:
+                    17px;
+
+                height:
+                    17px;
+            }
+
+
+            .resume-name {
+
+                font-size:
+                    .55rem;
+            }
+
+
+            .molecule {
+
+                opacity:
+                    .18;
+            }
+
+
+            .bond {
+
+                opacity:
+                    .14;
+            }
+        }
+
+
+        @media (max-width: 420px) {
+
+            .resume-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+                max-height:
+                    70vh;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <main class="page">
+
+
+        <!-- BACKGROUND -->
+
+        <div class="orb orb-one"></div>
+
+        <div class="orb orb-two"></div>
+
+        <div class="molecule molecule-one"></div>
+
+        <div class="molecule molecule-two"></div>
+
+        <div class="bond bond-one"></div>
+
+        <div class="bond bond-two"></div>
+
+        <div class="ring ring-one"></div>
+
+        <div class="ring ring-two"></div>
+
+        <div class="particle particle-one"></div>
+
+        <div class="particle particle-two"></div>
+
+        <div class="particle particle-three"></div>
+
+        <div class="particle particle-four"></div>
+
+
+        <!-- RETOUR -->
+
+        <button
+            class="back-button"
+            id="backButton"
+            type="button"
+        >
+            ← Retour
+        </button>
+
+
+        <!-- HEADER -->
+
+        <header class="page-header">
+
+            <div class="top-line"></div>
+
+            <div class="mini-label">
+                PHARMSINERGY • CHIMIE
+            </div>
+
+            <h1 class="title">
+                Chimie générale 1
+            </h1>
+
+            <p class="subtitle">
+                Résumés — Licence 1
+            </p>
+
+        </header>
+
+
+        <!-- RÉSUMÉS -->
+
+        <div class="resume-grid">
+
+
+            <!-- RÉSUMÉ 1 -->
+
+            <a
+                href="resume1cg1.html.pdf"
+                class="resume-button"
+            >
+
+                <span class="pdf-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M6 3h9l3 3v15H6z" />
+
+                        <path d="M14 3v4h4" />
+
+                        <path d="M8 12h8" />
+
+                        <path d="M8 16h6" />
+
+                    </svg>
+
+                </span>
+
+                <span class="resume-name">
+                    Résumé 1
+                </span>
+
+            </a>
+
+
+            <!-- RÉSUMÉ 2 -->
+
+            <a
+                href="resume2cg1.html.pdf"
+                class="resume-button"
+            >
+
+                <span class="pdf-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M6 3h9l3 3v15H6z" />
+                        <path d="M14 3v4h4" />
+                        <path d="M8 12h8" />
+                        <path d="M8 16h6" />
+
+                    </svg>
+
+                </span>
+
+                <span class="resume-name">
+                    Résumé 2
+                </span>
+
+            </a>
+
+
+            <!-- RÉSUMÉ 3 -->
+
+            <a
+                href="resume3cg1.html.pdf"
+                class="resume-button"
+            >
+
+                <span class="pdf-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M6 3h9l3 3v15H6z" />
+                        <path d="M14 3v4h4" />
+                        <path d="M8 12h8" />
+                        <path d="M8 16h6" />
+
+                    </svg>
+
+                </span>
+
+                <span class="resume-name">
+                    Résumé 3
+                </span>
+
+            </a>
+
+
+            <!-- RÉSUMÉ 4 -->
+
+            <a
+                href="resume4cg1.html.pdf"
+                class="resume-button"
+            >
+
+                <span class="pdf-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M6 3h9l3 3v15H6z" />
+                        <path d="M14 3v4h4" />
+                        <path d="M8 12h8" />
+                        <path d="M8 16h6" />
+
+                    </svg>
+
+                </span>
+
+                <span class="resume-name">
+                    Résumé 4
+                </span>
+
+            </a>
+
+
+            <!-- RÉSUMÉ 5 -->
+
+            <a
+                href="resume5cg1.html.pdf"
+                class="resume-button"
+            >
+
+                <span class="pdf-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M6 3h9l3 3v15H6z" />
+                        <path d="M14 3v4h4" />
+                        <path d="M8 12h8" />
+                        <path d="M8 16h6" />
+
+                    </svg>
+
+                </span>
+
+                <span class="resume-name">
+                    Résumé 5
+                </span>
+
+            </a>
+
+
+            <!-- RÉSUMÉ 6 -->
+
+            <a
+                href="resume6cg1.html.pdf"
+                class="resume-button"
+            >
+
+                <span class="pdf-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M6 3h9l3 3v15H6z" />
+                        <path d="M14 3v4h4" />
+                        <path d="M8 12h8" />
+                        <path d="M8 16h6" />
+
+                    </svg>
+
+                </span>
+
+                <span class="resume-name">
+                    Résumé 6
+                </span>
+
+            </a>
+
+
+            <!-- RÉSUMÉ 7 -->
+
+            <a
+                href="resume7cg1.html.pdf"
+                class="resume-button"
+            >
+
+                <span class="pdf-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M6 3h9l3 3v15H6z" />
+                        <path d="M14 3v4h4" />
+                        <path d="M8 12h8" />
+                        <path d="M8 16h6" />
+
+                    </svg>
+
+                </span>
+
+                <span class="resume-name">
+                    Résumé 7
+                </span>
+
+            </a>
+
+
+            <!-- RÉSUMÉ 8 -->
+
+            <a
+                href="resume8cg1.html.pdf"
+                class="resume-button"
+            >
+
+                <span class="pdf-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M6 3h9l3 3v15H6z" />
+                        <path d="M14 3v4h4" />
+                        <path d="M8 12h8" />
+                        <path d="M8 16h6" />
+
+                    </svg>
+
+                </span>
+
+                <span class="resume-name">
+                    Résumé 8
+                </span>
+
+            </a>
+
+
+            <!-- RÉSUMÉ 9 -->
+
+            <a
+                href="resume9cg1.html.pdf"
+                class="resume-button"
+            >
+
+                <span class="pdf-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M6 3h9l3 3v15H6z" />
+                        <path d="M14 3v4h4" />
+                        <path d="M8 12h8" />
+                        <path d="M8 16h6" />
+
+                    </svg>
+
+                </span>
+
+                <span class="resume-name">
+                    Résumé 9
+                </span>
+
+            </a>
+
+
+            <!-- RÉSUMÉ 10 -->
+
+            <a
+                href="resume10cg1.html.pdf"
+                class="resume-button"
+            >
+
+                <span class="pdf-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M6 3h9l3 3v15H6z" />
+                        <path d="M14 3v4h4" />
+                        <path d="M8 12h8" />
+                        <path d="M8 16h6" />
+
+                    </svg>
+
+                </span>
+
+                <span class="resume-name">
+                    Résumé 10
+                </span>
+
+            </a>
+
+
+            <!-- RÉSUMÉ 11 -->
+
+            <a
+                href="resume11cg1.html.pdf"
+                class="resume-button"
+            >
+
+                <span class="pdf-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M6 3h9l3 3v15H6z" />
+                        <path d="M14 3v4h4" />
+                        <path d="M8 12h8" />
+                        <path d="M8 16h6" />
+
+                    </svg>
+
+                </span>
+
+                <span class="resume-name">
+                    Résumé 11
+                </span>
+
+            </a>
+
+
+            <!-- RÉSUMÉ 12 -->
+
+            <a
+                href="resume12cg1.html.pdf"
+                class="resume-button"
+            >
+
+                <span class="pdf-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M6 3h9l3 3v15H6z" />
+                        <path d="M14 3v4h4" />
+                        <path d="M8 12h8" />
+                        <path d="M8 16h6" />
+
+                    </svg>
+
+                </span>
+
+                <span class="resume-name">
+                    Résumé 12
+                </span>
+
+            </a>
+
+
+            <!-- RÉSUMÉ 13 -->
+
+            <a
+                href="resume13cg1.html.pdf"
+                class="resume-button"
+            >
+
+                <span class="pdf-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M6 3h9l3 3v15H6z" />
+                        <path d="M14 3v4h4" />
+                        <path d="M8 12h8" />
+                        <path d="M8 16h6" />
+
+                    </svg>
+
+                </span>
+
+                <span class="resume-name">
+                    Résumé 13
+                </span>
+
+            </a>
+
+
+            <!-- RÉSUMÉ 14 -->
+
+            <a
+                href="resume14cg1.html.pdf"
+                class="resume-button"
+            >
+
+                <span class="pdf-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M6 3h9l3 3v15H6z" />
+                        <path d="M14 3v4h4" />
+                        <path d="M8 12h8" />
+                        <path d="M8 16h6" />
+
+                    </svg>
+
+                </span>
+
+                <span class="resume-name">
+                    Résumé 14
+                </span>
+
+            </a>
+
+
+            <!-- RÉSUMÉ 15 -->
+
+            <a
+                href="resume15cg1.html.pdf"
+                class="resume-button"
+            >
+
+                <span class="pdf-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M6 3h9l3 3v15H6z" />
+                        <path d="M14 3v4h4" />
+                        <path d="M8 12h8" />
+                        <path d="M8 16h6" />
+
+                    </svg>
+
+                </span>
+
+                <span class="resume-name">
+                    Résumé 15
+                </span>
+
+            </a>
+
+
+            <!-- RÉSUMÉ 16 -->
+
+            <a
+                href="resume16cg1.html.pdf"
+                class="resume-button"
+            >
+
+                <span class="pdf-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M6 3h9l3 3v15H6z" />
+                        <path d="M14 3v4h4" />
+                        <path d="M8 12h8" />
+                        <path d="M8 16h6" />
+
+                    </svg>
+
+                </span>
+
+                <span class="resume-name">
+                    Résumé 16
+                </span>
+
+            </a>
+
+
+            <!-- RÉSUMÉ 17 -->
+
+            <a
+                href="resume17cg1.html.pdf"
+                class="resume-button"
+            >
+
+                <span class="pdf-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M6 3h9l3 3v15H6z" />
+                        <path d="M14 3v4h4" />
+                        <path d="M8 12h8" />
+                        <path d="M8 16h6" />
+
+                    </svg>
+
+                </span>
+
+                <span class="resume-name">
+                    Résumé 17
+                </span>
+
+            </a>
+
+
+            <!-- RÉSUMÉ 18 -->
+
+            <a
+                href="resume18cg1.html.pdf"
+                class="resume-button"
+            >
+
+                <span class="pdf-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M6 3h9l3 3v15H6z" />
+                        <path d="M14 3v4h4" />
+                        <path d="M8 12h8" />
+                        <path d="M8 16h6" />
+
+                    </svg>
+
+                </span>
+
+                <span class="resume-name">
+                    Résumé 18
+                </span>
+
+            </a>
+
+
+            <!-- RÉSUMÉ 19 -->
+
+            <a
+                href="resume19cg1.html.pdf"
+                class="resume-button"
+            >
+
+                <span class="pdf-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M6 3h9l3 3v15H6z" />
+                        <path d="M14 3v4h4" />
+                        <path d="M8 12h8" />
+                        <path d="M8 16h6" />
+
+                    </svg>
+
+                </span>
+
+                <span class="resume-name">
+                    Résumé 19
+                </span>
+
+            </a>
+
+
+            <!-- RÉSUMÉ 20 -->
+
+            <a
+                href="resume20cg1.html.pdf"
+                class="resume-button"
+            >
+
+                <span class="pdf-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M6 3h9l3 3v15H6z" />
+                        <path d="M14 3v4h4" />
+                        <path d="M8 12h8" />
+                        <path d="M8 16h6" />
+
+                    </svg>
+
+                </span>
+
+                <span class="resume-name">
+                    Résumé 20
+                </span>
+
+            </a>
+
+
+        </div>
+
+
+    </main>
+
+
+    <script>
+
+        document
+            .getElementById("backButton")
+            .addEventListener("click", function () {
+
+                window.location.href = "semestre1.html";
+
+            });
+
+    </script>
+
+
+</body>
+
+</html>

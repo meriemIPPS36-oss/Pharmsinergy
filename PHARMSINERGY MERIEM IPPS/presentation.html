@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Présentation | PharmSinergy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kufam:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow: hidden;
+
+            font-family:
+                "Segoe UI",
+                Tahoma,
+                Arial,
+                sans-serif;
+
+            color: #42206f;
+
+            background:
+
+                radial-gradient(
+                    circle at 50% 45%,
+                    rgba(255,255,255,0.97) 0%,
+                    rgba(255,255,255,0.40) 22%,
+                    transparent 48%
+                ),
+
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(155,84,255,0.42),
+                    transparent 32%
+                ),
+
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(73,170,255,0.40),
+                    transparent 33%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #5f2caf 0%,
+                    #8d54d6 27%,
+                    #d9cdf5 52%,
+                    #b8d8f5 76%,
+                    #568fd7 100%
+                );
+        }
+
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .page {
+            position: relative;
+
+            width: 100%;
+            height: 100vh;
+            min-height: 100vh;
+
+            overflow: hidden;
+
+            isolation: isolate;
+        }
+
+
+        /* =====================================================
+           BACKGROUND ORBS
+        ===================================================== */
+
+        .orb {
+            position: absolute;
+
+            border-radius: 50%;
+
+            filter: blur(55px);
+
+            pointer-events: none;
+
+            z-index: -4;
+        }
+
+        .orb-one {
+            width: 330px;
+            height: 330px;
+
+            top: -100px;
+            right: -80px;
+
+            background:
+                rgba(191,140,255,0.30);
+
+            animation:
+                orbFloat
+                9s
+                ease-in-out
+                infinite;
+        }
+
+        .orb-two {
+            width: 300px;
+            height: 300px;
+
+            left: -90px;
+            bottom: -80px;
+
+            background:
+                rgba(102,193,255,0.26);
+
+            animation:
+                orbFloat
+                11s
+                ease-in-out
+                infinite reverse;
+        }
+
+
+        /* =====================================================
+           DECORATIVE RINGS
+        ===================================================== */
+
+        .ring {
+            position: absolute;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.34);
+
+            pointer-events: none;
+        }
+
+        .ring-one {
+            width: 260px;
+            height: 260px;
+
+            left: -80px;
+            top: 28%;
+        }
+
+        .ring-two {
+            width: 340px;
+            height: 340px;
+
+            right: -120px;
+            bottom: 10%;
+        }
+
+
+        /* =====================================================
+           SPARKLES
+        ===================================================== */
+
+        .spark {
+            position: absolute;
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,0.74);
+
+            box-shadow:
+                0 0 13px
+                rgba(255,255,255,0.95);
+
+            animation:
+                sparkle
+                3s
+                ease-in-out
+                infinite;
+        }
+
+        .spark-one {
+            top: 18%;
+            left: 13%;
+        }
+
+        .spark-two {
+            top: 28%;
+            right: 16%;
+
+            width: 5px;
+            height: 5px;
+
+            animation-delay: 0.8s;
+        }
+
+        .spark-three {
+            bottom: 23%;
+            left: 19%;
+
+            width: 4px;
+            height: 4px;
+
+            animation-delay: 1.3s;
+        }
+
+        .spark-four {
+            bottom: 16%;
+            right: 21%;
+
+            width: 6px;
+            height: 6px;
+
+            animation-delay: 1.8s;
+        }
+
+
+        /* =====================================================
+           BACK BUTTON
+        ===================================================== */
+
+        .back-button {
+            position: absolute;
+
+            top: 22px;
+            left: 28px;
+
+            z-index: 20;
+
+            padding:
+                9px
+                18px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.70);
+
+            border-radius: 999px;
+
+            background:
+                rgba(255,255,255,0.23);
+
+            color:
+                #55218c;
+
+            text-decoration: none;
+
+            font-size:
+                0.82rem;
+
+            font-weight:
+                700;
+
+            direction: ltr;
+
+            backdrop-filter:
+                blur(12px);
+
+            -webkit-backdrop-filter:
+                blur(12px);
+
+            box-shadow:
+                0 7px 20px
+                rgba(75,35,135,0.10);
+
+            transition:
+                all 0.25s ease;
+        }
+
+        .back-button:hover {
+            transform:
+                translateX(-3px);
+
+            background:
+                rgba(255,255,255,0.42);
+
+            box-shadow:
+                0 10px 25px
+                rgba(75,35,135,0.17);
+        }
+
+
+        /* =====================================================
+           MAIN CONTAINER
+        ===================================================== */
+
+        .content {
+
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            transform:
+                translate(-50%, -50%);
+
+            width:
+                min(1000px, 88%);
+
+            height:
+                88vh;
+
+            padding:
+                28px
+                30px
+                30px;
+
+            border-radius:
+                30px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.43),
+                    rgba(250,246,255,0.18)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.68);
+
+            box-shadow:
+
+                0 24px 60px
+                rgba(68,32,128,0.15),
+
+                inset
+                0 1px 0
+                rgba(255,255,255,0.85);
+
+            backdrop-filter:
+                blur(20px);
+
+            -webkit-backdrop-filter:
+                blur(20px);
+
+            animation:
+                cardEntrance
+                1.1s
+                cubic-bezier(.2,.8,.2,1)
+                both;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .header {
+            text-align: center;
+
+            margin-bottom:
+                18px;
+        }
+
+        .top-line {
+            width: 85px;
+            height: 3px;
+
+            margin:
+                0
+                auto
+                15px;
+
+            border-radius:
+                999px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #7940c8,
+                    #b67cff,
+                    #73b9ef
+                );
+        }
+
+        .header h1 {
+
+            font-size:
+                clamp(
+                    1.45rem,
+                    3vw,
+                    2.25rem
+                );
+
+            font-weight:
+                800;
+
+            color:
+                #4b178f;
+
+            text-shadow:
+                0 4px 15px
+                rgba(72,32,130,0.14);
+        }
+
+        .header p {
+
+            margin-top:
+                5px;
+
+            font-size:
+                0.78rem;
+
+            color:
+                #67458c;
+        }
+
+
+        /* =====================================================
+           SCROLL AREA
+        ===================================================== */
+
+        .scroll-area {
+
+            height:
+                calc(100% - 85px);
+
+            overflow-y:
+                auto;
+
+            padding:
+                5px
+                10px
+                15px
+                5px;
+
+            scroll-behavior:
+                smooth;
+        }
+
+        /* Scrollbar */
+
+        .scroll-area::-webkit-scrollbar {
+            width: 7px;
+        }
+
+        .scroll-area::-webkit-scrollbar-track {
+            background:
+                rgba(255,255,255,0.18);
+
+            border-radius:
+                999px;
+        }
+
+        .scroll-area::-webkit-scrollbar-thumb {
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #8b52d4,
+                    #65a7df
+                );
+
+            border-radius:
+                999px;
+        }
+
+
+        /* =====================================================
+           SECTION CARDS
+        ===================================================== */
+
+        .section-card {
+
+            margin-bottom:
+                20px;
+
+            padding:
+                22px
+                24px;
+
+            border-radius:
+                23px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.43),
+                    rgba(255,255,255,0.20)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.66);
+
+            box-shadow:
+
+                0 12px 30px
+                rgba(70,35,130,0.10),
+
+                inset
+                0 1px 0
+                rgba(255,255,255,0.72);
+
+            backdrop-filter:
+                blur(12px);
+
+            -webkit-backdrop-filter:
+                blur(12px);
+
+            animation:
+                fadeUp
+                0.9s
+                ease
+                both;
+        }
+
+        .section-card:last-child {
+            margin-bottom:
+                5px;
+        }
+
+
+        /* =====================================================
+           SECTION TITLE
+        ===================================================== */
+
+        .section-title {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                9px;
+
+            margin-bottom:
+                18px;
+
+            text-align:
+                center;
+
+            font-size:
+                clamp(
+                    1rem,
+                    2vw,
+                    1.45rem
+                );
+
+            font-weight:
+                800;
+
+            color:
+                #4b178f;
+        }
+
+        .section-title .icon {
+            font-size:
+                1.35rem;
+        }
+
+
+        /* =====================================================
+           SUB TITLES
+        ===================================================== */
+
+        .sub-title {
+
+            margin-top:
+                19px;
+
+            margin-bottom:
+                7px;
+
+            padding-bottom:
+                5px;
+
+            border-bottom:
+                1px solid
+                rgba(91,45,145,0.16);
+
+            color:
+                #572595;
+
+            font-size:
+                0.94rem;
+
+            font-weight:
+                800;
+        }
+
+
+        /* =====================================================
+           TEXT
+        ===================================================== */
+
+        .text {
+
+            font-size:
+                0.82rem;
+
+            line-height:
+                1.85;
+
+            color:
+                #553b70;
+
+            text-align:
+                left;
+        }
+
+        .text strong {
+            color:
+                #4b178f;
+        }
+
+
+        /* =====================================================
+           SUBJECT LIST
+        ===================================================== */
+
+        .subjects {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(
+                        220px,
+                        1fr
+                    )
+                );
+
+            gap:
+                8px;
+
+            margin-top:
+                8px;
+        }
+
+        .subject {
+
+            padding:
+                8px
+                11px;
+
+            border-radius:
+                12px;
+
+            background:
+                rgba(255,255,255,0.25);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.40);
+
+            color:
+                #5a4072;
+
+            font-size:
+                0.75rem;
+
+            line-height:
+                1.5;
+        }
+
+
+        /* =====================================================
+           HIGHLIGHT BOX
+        ===================================================== */
+
+        .highlight {
+
+            margin-top:
+                12px;
+
+            padding:
+                12px
+                15px;
+
+            border-radius:
+                15px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(132,68,220,0.13),
+                    rgba(82,142,220,0.11)
+                );
+
+            border-left:
+                3px solid
+                rgba(105,55,174,0.55);
+
+            color:
+                #543675;
+
+            font-size:
+                0.78rem;
+
+            line-height:
+                1.8;
+        }
+
+
+        /* =====================================================
+           WORK / PROS LIST
+        ===================================================== */
+
+        .info-list {
+
+            margin-top:
+                8px;
+
+            padding-left:
+                18px;
+        }
+
+        .info-list li {
+
+            margin-bottom:
+                7px;
+
+            color:
+                #553b70;
+
+            font-size:
+                0.81rem;
+
+            line-height:
+                1.65;
+        }
+
+
+        /* =====================================================
+           HASHTAG
+        ===================================================== */
+
+        .hashtag {
+
+            margin-top:
+                15px;
+
+            text-align:
+                center;
+
+            color:
+                #7040ae;
+
+            font-size:
+                0.73rem;
+
+            font-weight:
+                700;
+
+            letter-spacing:
+                0.05em;
+        }
+
+
+        /* =====================================================
+           ANIMATIONS
+        ===================================================== */
+
+        @keyframes cardEntrance {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translate(-50%, -47%)
+                    scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translate(-50%, -50%)
+                    scale(1);
+            }
+        }
+
+        @keyframes fadeUp {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+        @keyframes orbFloat {
+
+            0%, 100% {
+                transform:
+                    translate(0,0);
+            }
+
+            50% {
+                transform:
+                    translate(20px,-15px);
+            }
+        }
+
+        @keyframes sparkle {
+
+            0%, 100% {
+                opacity:
+                    0.25;
+
+                transform:
+                    scale(0.8);
+            }
+
+            50% {
+                opacity:
+                    1;
+
+                transform:
+                    scale(1.25);
+            }
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 650px) {
+
+            .back-button {
+
+                top: 15px;
+                left: 15px;
+
+                padding:
+                    8px
+                    14px;
+
+                font-size:
+                    0.72rem;
+            }
+
+            .content {
+
+                width:
+                    92%;
+
+                height:
+                    90vh;
+
+                padding:
+                    22px
+                    14px
+                    20px;
+
+                border-radius:
+                    25px;
+            }
+
+            .header {
+
+                margin-bottom:
+                    12px;
+            }
+
+            .header h1 {
+
+                font-size:
+                    1.35rem;
+            }
+
+            .header p {
+
+                font-size:
+                    0.68rem;
+            }
+
+            .scroll-area {
+
+                height:
+                    calc(100% - 68px);
+
+                padding:
+                    3px
+                    5px
+                    10px
+                    2px;
+            }
+
+            .section-card {
+
+                padding:
+                    18px
+                    15px;
+
+                border-radius:
+                    20px;
+            }
+
+            .section-title {
+
+                font-size:
+                    0.95rem;
+            }
+
+            .text {
+
+                font-size:
+                    0.76rem;
+
+                line-height:
+                    1.8;
+            }
+
+            .sub-title {
+
+                font-size:
+                    0.85rem;
+            }
+
+            .subjects {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            .subject {
+
+                font-size:
+                    0.70rem;
+            }
+
+            .info-list li {
+
+                font-size:
+                    0.75rem;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<main class="page">
+
+    <!-- Background -->
+
+    <div class="orb orb-one"></div>
+    <div class="orb orb-two"></div>
+
+    <div class="ring ring-one"></div>
+    <div class="ring ring-two"></div>
+
+    <div class="spark spark-one"></div>
+    <div class="spark spark-two"></div>
+    <div class="spark spark-three"></div>
+    <div class="spark spark-four"></div>
+
+
+    <!-- Retour -->
+
+    <a
+        href="page3.html"
+        class="back-button"
+    >
+        ← Retour
+    </a>
+
+
+    <!-- Main Glass -->
+
+    <section class="content">
+
+        <header class="header">
+
+            <div class="top-line"></div>
+
+            <h1>
+                Présentation de la Pharmacie Industrielle
+            </h1>
+
+            <p>
+                Découvrez les deux parcours de la spécialité
+            </p>
+
+        </header>
+
+
+        <!-- Scroll -->
+
+        <div class="scroll-area">
+
+
+            <!-- =================================================
+                 TEXT 1
+            ================================================== -->
+
+            <article class="section-card">
+
+                <h2 class="section-title">
+                    <span class="icon">💊</span>
+                    Pharmacie industrielle
+                    <span class="icon">💊</span>
+                </h2>
+
+
+                <p class="text">
+
+                    La Pharmacie industrielle est une spécialité relativement
+                    nouvelle. La première promotion a commencé en 2022.
+                    Il existe actuellement quatre promotions et la cinquième
+                    promotion commence cette année.
+
+                </p>
+
+
+                <p class="text">
+
+                    Quand on parle de Pharmacie industrielle, deux spécialités
+                    sont concernées.
+
+                </p>
+
+
+                <h3 class="sub-title">
+                    📌 Première spécialité
+                </h3>
+
+                <p class="text">
+
+                    <strong>
+                        Industrie des produits pharmaceutiques et de santé
+                    </strong>
+
+                    : c’est ainsi que vous la trouverez sur la feuille
+                    des choix.
+
+                </p>
+
+
+                <h3 class="sub-title">
+                    📌 Deuxième spécialité
+                </h3>
+
+                <p class="text">
+
+                    <strong>
+                        Auxiliaire en pharmacie
+                    </strong>
+
+                </p>
+
+
+                <div class="highlight">
+
+                    Les deux spécialités dépendent de la Faculté de Pharmacie
+                    de l’Université des Sciences de la Santé
+                    (Alger 1 auparavant), à Ziania, Ben Aknoun,
+                    Alger.
+
+                </div>
+
+
+                <h3 class="sub-title">
+                    💊 Industrie des produits pharmaceutiques et de santé
+                </h3>
+
+                <p class="text">
+
+                    Cette spécialité est indiquée sous cette appellation
+                    sur la feuille des choix.
+
+                </p>
+
+
+                <h3 class="sub-title">
+                    🎓 Système d'études
+                </h3>
+
+                <p class="text">
+
+                    Système LMD :
+
+                    <br><br>
+
+                    <strong>
+                        Licence : 3 ans
+                    </strong>
+
+                    <br>
+
+                    <strong>
+                        Master : 2 ans
+                    </strong>
+
+                    <br><br>
+
+                    Pour le doctorat, il n’est pas encore ouvert.
+                    S’il y a besoin de docteurs, il pourra être ouvert.
+
+                </p>
+
+
+                <h3 class="sub-title">
+                    📊 Moyennes d'admission 2024
+                </h3>
+
+                <div class="subjects">
+
+                    <div class="subject">
+                        Sciences et Mathématiques :
+                        <strong>15,68</strong>
+                    </div>
+
+                    <div class="subject">
+                        Technique :
+                        <strong>16,17</strong>
+                    </div>
+
+                </div>
+
+
+                <h3 class="sub-title">
+                    📊 Moyennes d'admission 2025
+                </h3>
+
+                <div class="subjects">
+
+                    <div class="subject">
+                        Sciences et Mathématiques :
+                        <strong>16,19</strong>
+                    </div>
+
+                    <div class="subject">
+                        Technique :
+                        <strong>16,68</strong>
+                    </div>
+
+                </div>
+
+
+                <h3 class="sub-title">
+                    📚 Programme d'études
+                </h3>
+
+
+                <h3 class="sub-title">
+                    Première année — Semestre 1
+                </h3>
+
+                <div class="subjects">
+
+                    <div class="subject">Chimie générale 1</div>
+                    <div class="subject">Chimie organique</div>
+                    <div class="subject">Physique</div>
+                    <div class="subject">Biologie animale</div>
+                    <div class="subject">Biologie végétale</div>
+                    <div class="subject">Anglais 1</div>
+                    <div class="subject">Terminologie</div>
+                    <div class="subject">Informatique</div>
+                    <div class="subject">Biostatistique</div>
+
+                </div>
+
+
+                <h3 class="sub-title">
+                    Première année — Semestre 2
+                </h3>
+
+                <div class="subjects">
+
+                    <div class="subject">Chimie générale 2</div>
+                    <div class="subject">Chimie inorganique</div>
+                    <div class="subject">Méthode physique</div>
+                    <div class="subject">Méthode chimique</div>
+                    <div class="subject">Anatomie - Physiologie - Pathologie</div>
+                    <div class="subject">Taxonomie</div>
+                    <div class="subject">Anglais 2</div>
+                    <div class="subject">Histoire de pharmacie</div>
+
+                </div>
+
+
+                <h3 class="sub-title">
+                    Deuxième année — Semestre 1
+                </h3>
+
+                <div class="subjects">
+
+                    <div class="subject">Méthodes spectrales</div>
+                    <div class="subject">Sciences biologiques</div>
+                    <div class="subject">Opérations pharmaceutiques</div>
+                    <div class="subject">Pharmacologie générale</div>
+                    <div class="subject">Substances bioactives</div>
+                    <div class="subject">Méthodes séparatives</div>
+                    <div class="subject">Bonnes pratiques</div>
+                    <div class="subject">Compléments alimentaires</div>
+
+                </div>
+
+
+                <h3 class="sub-title">
+                    Deuxième année — Semestre 2
+                </h3>
+
+                <div class="subjects">
+
+                    <div class="subject">Formes pharmaceutiques</div>
+                    <div class="subject">Pharmacologie spéciale</div>
+                    <div class="subject">Analyse biologique</div>
+                    <div class="subject">Sciences biologiques</div>
+                    <div class="subject">Photothérapie</div>
+                    <div class="subject">Dermo-cosmétologie</div>
+                    <div class="subject">Normes et guidelines</div>
+                    <div class="subject">Anglais</div>
+
+                </div>
+
+
+                <h3 class="sub-title">
+                    Troisième année
+                </h3>
+
+                <div class="subjects">
+
+                    <div class="subject">Législation et code du travail</div>
+                    <div class="subject">Gestes sanitaires d'urgences et de premiers secours</div>
+                    <div class="subject">Biotechnologie</div>
+                    <div class="subject">Production pharmaceutique</div>
+                    <div class="subject">Contrôle de qualité</div>
+                    <div class="subject">Économie de santé</div>
+
+                </div>
+
+
+                <div class="highlight">
+
+                    Il existe également d'autres modules qui ne sont pas
+                    uniquement ceux mentionnés ci-dessus.
+
+                </div>
+
+
+                <h3 class="sub-title">
+                    🧪 Stages
+                </h3>
+
+                <p class="text">
+
+                    Les stages commencent dès la première année.
+                    Le premier stage est effectué au deuxième semestre
+                    et se déroule en pharmacie.
+
+                    <br><br>
+
+                    En deuxième année, il y a un stage dans un
+                    laboratoire pharmaceutique, ainsi qu'un autre stage
+                    en pharmacie et en laboratoire d'analyses médicales.
+
+                    <br><br>
+
+                    En troisième année, les stages se poursuivent dans
+                    les laboratoires, les pharmacies et les usines.
+
+                </p>
+
+
+                <h3 class="sub-title">
+                    🏭 Sorties pédagogiques
+                </h3>
+
+                <p class="text">
+
+                    Des sorties pédagogiques sont organisées dans
+                    des usines.
+
+                    <br><br>
+
+                    En dernière année, une langue étrangère supplémentaire
+                    est proposée. Chaque promotion choisit la langue
+                    qu’elle souhaite étudier. Par exemple, la troisième
+                    promotion de cette année a choisi le chinois.
+
+                </p>
+
+
+                <h3 class="sub-title">
+                    🎓 Après la Licence
+                </h3>
+
+                <p class="text">
+
+                    Il existe actuellement trois Masters.
+                    Vous pouvez passer un concours pour accéder à l’un
+                    d’entre eux. Si vous réussissez, vous poursuivez
+                    vos études pendant deux années.
+
+                </p>
+
+
+                <h3 class="sub-title">
+                    💼 Débouchés professionnels
+                </h3>
+
+                <ul class="info-list">
+
+                    <li>
+                        Laboratoires de recherche scientifique.
+                    </li>
+
+                    <li>
+                        Laboratoires pharmaceutiques.
+                    </li>
+
+                    <li>
+                        Laboratoires de cosmétique.
+                    </li>
+
+                    <li>
+                        Usines pharmaceutiques et de produits cosmétiques.
+                    </li>
+
+                    <li>
+                        Contrôle qualité et contrôle de la qualité.
+                    </li>
+
+                    <li>
+                        Hôpitaux et laboratoires d’analyses sanguines.
+                    </li>
+
+                    <li>
+                        Pharmacies.
+                    </li>
+
+                    <li>
+                        Création d’une marque personnelle, par exemple
+                        un produit cosmétique.
+                    </li>
+
+                    <li>
+                        Affaires réglementaires et juridiques
+                        liées au médicament.
+                    </li>
+
+                </ul>
+
+
+                <div class="highlight">
+
+                    En résumé, de nombreux métiers accessibles au
+                    pharmacien classique peuvent également être
+                    accessibles au pharmacien industriel.
+                    Cependant, le diplômé en pharmacie industrielle
+                    ne peut pas ouvrir une pharmacie d’officine.
+
+                </div>
+
+
+                <h3 class="sub-title">
+                    ⚖️ Différence avec la pharmacie classique
+                </h3>
+
+                <ul class="info-list">
+
+                    <li>
+                        Les études sont globalement similaires,
+                        mais certaines matières diffèrent.
+                    </li>
+
+                    <li>
+                        La pharmacie classique fonctionne selon un système
+                        de Doctorat, tandis que la pharmacie industrielle
+                        fonctionne selon le système LMD.
+                    </li>
+
+                    <li>
+                        En pharmacie industrielle, les matières sont
+                        organisées par semestre.
+                    </li>
+
+                    <li>
+                        La nature du diplôme est différente :
+                        Doctorat pour la pharmacie classique,
+                        Licence et Master pour la pharmacie industrielle.
+                    </li>
+
+                    <li>
+                        La pharmacie industrielle met davantage l’accent
+                        sur la chimie sous ses différentes formes.
+                    </li>
+
+                    <li>
+                        La formation industrielle est davantage
+                        orientée vers la pratique, contrairement à
+                        la pharmacie classique qui est davantage
+                        théorique.
+                    </li>
+
+                    <li>
+                        Les stages commencent dès la première année
+                        en pharmacie industrielle.
+                    </li>
+
+                    <li>
+                        Le pharmacien classique peut donner des conseils
+                        médicaux au patient en pharmacie, contrairement
+                        au pharmacien industriel.
+                    </li>
+
+                </ul>
+
+
+                <h3 class="sub-title">
+                    ✨ Avantages de la Pharmacie industrielle
+                </h3>
+
+                <ul class="info-list">
+
+                    <li>
+                        Étudier seulement trois ans pour obtenir une Licence
+                        et pouvoir ensuite travailler ou poursuivre
+                        en Master.
+                    </li>
+
+                    <li>
+                        C’est une spécialité nouvelle avec un nombre
+                        d’étudiants relativement limité.
+                    </li>
+
+                    <li>
+                        L’Algérie commence actuellement à réduire sa
+                        dépendance aux importations et se concentre
+                        davantage sur la production locale.
+                    </li>
+
+                    <li>
+                        Le secteur a donc besoin de jeunes compétences
+                        et d’une main-d’œuvre spécialisée dans
+                        l’industrie pharmaceutique.
+                    </li>
+
+                    <li>
+                        En 2021, le Ministère de l’Industrie Pharmaceutique
+                        a été créé, ce qui montre l’importance accordée
+                        à ce domaine.
+                    </li>
+
+                </ul>
+
+
+                <div class="hashtag">
+                    #Meriemipps
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 TEXT 2
+            ================================================== -->
+
+            <article class="section-card">
+
+                <h2 class="section-title">
+
+                    <span class="icon">💊</span>
+
+                    Auxiliaire en pharmacie
+
+                    <span class="icon">💊</span>
+
+                </h2>
+
+
+                <h3 class="sub-title">
+                    🎓 Système d'études
+                </h3>
+
+                <p class="text">
+
+                    Système LMD.
+
+                    <br><br>
+
+                    À Ziania, il s’agit d’une Licence professionnelle
+                    et il n’y a pas de Master.
+
+                </p>
+
+
+                <h3 class="sub-title">
+                    📊 Moyennes d'admission 2024
+                </h3>
+
+                <div class="subjects">
+
+                    <div class="subject">
+                        Sciences et Mathématiques :
+                        <strong>15,09</strong>
+                    </div>
+
+                    <div class="subject">
+                        Technique :
+                        <strong>16,56</strong>
+                    </div>
+
+                </div>
+
+
+                <h3 class="sub-title">
+                    📊 Moyennes d'admission 2025
+                </h3>
+
+                <div class="subjects">
+
+                    <div class="subject">
+                        Sciences et Mathématiques :
+                        <strong>15,41</strong>
+                    </div>
+
+                    <div class="subject">
+                        Technique :
+                        <strong>16,11</strong>
+                    </div>
+
+                </div>
+
+
+                <h3 class="sub-title">
+                    📚 Programme d'études
+                </h3>
+
+
+                <h3 class="sub-title">
+                    Première année — Semestre 1
+                </h3>
+
+                <div class="subjects">
+
+                    <div class="subject">Chimie générale 1</div>
+                    <div class="subject">Chimie organique</div>
+                    <div class="subject">Physique</div>
+                    <div class="subject">Biologie animale</div>
+                    <div class="subject">Biologie végétale</div>
+                    <div class="subject">Anglais 1</div>
+                    <div class="subject">Terminologie</div>
+                    <div class="subject">Informatique</div>
+                    <div class="subject">Biostatistique</div>
+
+                </div>
+
+
+                <h3 class="sub-title">
+                    Première année — Semestre 2
+                </h3>
+
+                <div class="subjects">
+
+                    <div class="subject">Chimie générale 2</div>
+                    <div class="subject">Chimie inorganique</div>
+                    <div class="subject">Méthode physique</div>
+                    <div class="subject">Méthode chimique</div>
+                    <div class="subject">Anatomie - Physiologie - Pathologie</div>
+                    <div class="subject">Taxonomie</div>
+                    <div class="subject">Anglais 2</div>
+                    <div class="subject">Histoire de pharmacie</div>
+
+                </div>
+
+
+                <h3 class="sub-title">
+                    Deuxième année — Semestre 1
+                </h3>
+
+                <div class="subjects">
+
+                    <div class="subject">Méthodes spectrales</div>
+                    <div class="subject">Sciences biologiques</div>
+                    <div class="subject">Opérations pharmaceutiques</div>
+                    <div class="subject">Pharmacologie générale</div>
+                    <div class="subject">Substances bioactives</div>
+                    <div class="subject">Méthodes séparatives</div>
+                    <div class="subject">Bonnes pratiques</div>
+                    <div class="subject">Logiciel de gestion</div>
+
+                </div>
+
+
+                <h3 class="sub-title">
+                    Deuxième année — Semestre 2
+                </h3>
+
+                <div class="subjects">
+
+                    <div class="subject">Formes pharmaceutiques</div>
+                    <div class="subject">Pharmacologie spéciale</div>
+                    <div class="subject">Analyses biologiques</div>
+                    <div class="subject">Sciences biologiques</div>
+                    <div class="subject">Photothérapie</div>
+                    <div class="subject">Stérilisation</div>
+                    <div class="subject">Normes et guidelines</div>
+                    <div class="subject">Anglais</div>
+
+                </div>
+
+
+                <h3 class="sub-title">
+                    Troisième année
+                </h3>
+
+                <div class="subjects">
+
+                    <div class="subject">Législation et code du travail</div>
+                    <div class="subject">Gestes sanitaires d'urgences et de premiers secours</div>
+                    <div class="subject">Contrôle de qualité</div>
+                    <div class="subject">Économie de santé</div>
+                    <div class="subject">Langue chinoise</div>
+
+                </div>
+
+
+                <h3 class="sub-title">
+                    🧪 Stages
+                </h3>
+
+                <p class="text">
+
+                    Les stages commencent dès la première année.
+                    Le premier stage est effectué au deuxième semestre
+                    et se déroule en pharmacie.
+
+                    <br><br>
+
+                    En deuxième année, il y a un stage dans un
+                    laboratoire pharmaceutique et un autre stage
+                    en pharmacie, laboratoire d’analyses médicales
+                    ou dans les hôpitaux.
+
+                    <br><br>
+
+                    En troisième année, les stages se poursuivent
+                    dans les laboratoires, pharmacies, usines
+                    et hôpitaux.
+
+                </p>
+
+
+                <h3 class="sub-title">
+                    🏭 Sorties pédagogiques
+                </h3>
+
+                <p class="text">
+
+                    Des sorties pédagogiques sont organisées dans
+                    les usines.
+
+                    <br><br>
+
+                    En dernière année, une langue étrangère
+                    supplémentaire est proposée. Chaque promotion
+                    choisit la langue qu’elle souhaite étudier.
+                    Par exemple, la troisième promotion de cette
+                    année a choisi le chinois.
+
+                </p>
+
+
+                <h3 class="sub-title">
+                    💼 Débouchés professionnels
+                </h3>
+
+                <ul class="info-list">
+
+                    <li>
+                        Hôpitaux et laboratoires d’analyses sanguines.
+                    </li>
+
+                    <li>
+                        Laboratoires de contrôle qualité.
+                    </li>
+
+                    <li>
+                        Pharmacies.
+                    </li>
+
+                </ul>
+
+
+                <div class="highlight">
+
+                    Le diplômé en auxiliaire en pharmacie ne peut pas
+                    ouvrir une pharmacie d’officine. L’ouverture
+                    d’une pharmacie nécessite un diplôme de pharmacie
+                    classique ainsi que les conditions réglementaires
+                    correspondantes.
+
+                </div>
+
+
+                <div class="hashtag">
+                    #Meriemipps
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </section>
+
+</main>
+
+</body>
+
+</html>

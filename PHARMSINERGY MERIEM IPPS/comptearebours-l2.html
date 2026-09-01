@@ -1,0 +1,3438 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Compte à rebours | PharmSinergy</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kufam:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        /* =====================================================
+           BODY
+        ===================================================== */
+
+        body {
+
+            min-height: 100vh;
+
+            overflow: hidden;
+
+            font-family:
+                "Inter",
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color:
+                #dbeaff;
+
+            background:
+
+                radial-gradient(
+                    circle at 50% 45%,
+                    rgba(255,255,255,0.08) 0%,
+                    rgba(78,146,255,0.06) 23%,
+                    transparent 51%
+                ),
+
+                radial-gradient(
+                    circle at 8% 12%,
+                    rgba(43,126,255,0.34),
+                    transparent 32%
+                ),
+
+                radial-gradient(
+                    circle at 92% 86%,
+                    rgba(38,95,180,0.28),
+                    transparent 34%
+                ),
+
+                radial-gradient(
+                    circle at 67% 7%,
+                    rgba(88,175,255,0.16),
+                    transparent 25%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #05070b 0%,
+                    #0a1019 25%,
+                    #101d2d 48%,
+                    #0a111b 73%,
+                    #040609 100%
+                );
+        }
+
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .page {
+
+            position:
+                relative;
+
+            width:
+                100%;
+
+            height:
+                100vh;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            overflow:
+                hidden;
+
+            isolation:
+                isolate;
+        }
+
+
+        /* =====================================================
+           ORBS
+        ===================================================== */
+
+        .orb {
+
+            position:
+                absolute;
+
+            border-radius:
+                50%;
+
+            filter:
+                blur(80px);
+
+            pointer-events:
+                none;
+
+            z-index:
+                -8;
+        }
+
+
+        .orb-one {
+
+            width:
+                410px;
+
+            height:
+                410px;
+
+            top:
+                -170px;
+
+            right:
+                -110px;
+
+            background:
+                rgba(32,126,255,0.22);
+
+            animation:
+                floatOne
+                10s
+                ease-in-out
+                infinite;
+        }
+
+
+        .orb-two {
+
+            width:
+                390px;
+
+            height:
+                390px;
+
+            left:
+                -130px;
+
+            bottom:
+                -170px;
+
+            background:
+                rgba(22,77,168,0.24);
+
+            animation:
+                floatTwo
+                12s
+                ease-in-out
+                infinite;
+        }
+
+
+        .orb-three {
+
+            width:
+                190px;
+
+            height:
+                190px;
+
+            top:
+                44%;
+
+            left:
+                46%;
+
+            background:
+                rgba(88,171,255,0.08);
+
+            filter:
+                blur(90px);
+        }
+
+
+        /* =====================================================
+           CALENDAR DECORATION
+        ===================================================== */
+
+        .calendar {
+
+            position:
+                absolute;
+
+            width:
+                160px;
+
+            height:
+                135px;
+
+            border-radius:
+                18px;
+
+            border:
+                1px solid
+                rgba(115,184,255,0.13);
+
+            background:
+                rgba(255,255,255,0.025);
+
+            box-shadow:
+                0 20px 45px
+                rgba(0,0,0,0.16);
+
+            pointer-events:
+                none;
+
+            z-index:
+                -3;
+        }
+
+
+        .calendar::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            top:
+                27px;
+
+            left:
+                0;
+
+            right:
+                0;
+
+            height:
+                1px;
+
+            background:
+                rgba(105,173,245,0.14);
+        }
+
+
+        .calendar::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            left:
+                25px;
+
+            right:
+                25px;
+
+            top:
+                43px;
+
+            height:
+                67px;
+
+            background:
+
+                repeating-linear-gradient(
+                    to bottom,
+                    rgba(85,165,240,0.10) 0px,
+                    rgba(85,165,240,0.10) 1px,
+                    transparent 1px,
+                    transparent 17px
+                );
+        }
+
+
+        .calendar-one {
+
+            left:
+                -45px;
+
+            top:
+                10%;
+
+            transform:
+                rotate(-8deg);
+        }
+
+
+        .calendar-two {
+
+            right:
+                -50px;
+
+            bottom:
+                10%;
+
+            transform:
+                rotate(8deg);
+        }
+
+
+        /* =====================================================
+           PENCILS
+        ===================================================== */
+
+        .pencil {
+
+            position:
+                absolute;
+
+            width:
+                165px;
+
+            height:
+                17px;
+
+            border-radius:
+                999px;
+
+            border:
+                1px solid
+                rgba(116,180,255,0.12);
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    rgba(56,116,198,0.20) 0%,
+                    rgba(79,161,255,0.28) 67%,
+                    rgba(255,255,255,0.10) 68%,
+                    rgba(255,255,255,0.10) 76%,
+                    rgba(23,59,104,0.24) 77%,
+                    rgba(23,59,104,0.24) 100%
+                );
+
+            pointer-events:
+                none;
+
+            z-index:
+                -3;
+        }
+
+
+        .pencil-one {
+
+            left:
+                -25px;
+
+            top:
+                32%;
+
+            transform:
+                rotate(20deg);
+        }
+
+
+        .pencil-two {
+
+            right:
+                -30px;
+
+            bottom:
+                28%;
+
+            transform:
+                rotate(-21deg)
+                scale(.82);
+        }
+
+
+        /* =====================================================
+           CAPSULE DECORATION
+        ===================================================== */
+
+        .capsule {
+
+            position:
+                absolute;
+
+            width:
+                130px;
+
+            height:
+                50px;
+
+            border-radius:
+                999px;
+
+            border:
+                1px solid
+                rgba(101,177,255,0.13);
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    rgba(48,133,255,0.20) 0%,
+                    rgba(48,133,255,0.20) 49%,
+                    rgba(159,208,255,0.18) 50%,
+                    rgba(159,208,255,0.18) 100%
+                );
+
+            opacity:
+                .43;
+
+            pointer-events:
+                none;
+
+            z-index:
+                -3;
+        }
+
+
+        .capsule-one {
+
+            top:
+                15%;
+
+            right:
+                4%;
+
+            transform:
+                rotate(26deg);
+        }
+
+
+        .capsule-two {
+
+            bottom:
+                12%;
+
+            left:
+                5%;
+
+            transform:
+                rotate(-29deg)
+                scale(.74);
+        }
+
+
+        /* =====================================================
+           BUBBLES
+        ===================================================== */
+
+        .bubble {
+
+            position:
+                absolute;
+
+            border-radius:
+                50%;
+
+            border:
+                1px solid
+                rgba(116,186,255,0.12);
+
+            background:
+                rgba(115,181,255,0.035);
+
+            pointer-events:
+                none;
+
+            z-index:
+                -3;
+        }
+
+
+        .bubble-one {
+
+            width:
+                30px;
+
+            height:
+                30px;
+
+            left:
+                17%;
+
+            top:
+                15%;
+        }
+
+
+        .bubble-two {
+
+            width:
+                18px;
+
+            height:
+                18px;
+
+            left:
+                10%;
+
+            top:
+                41%;
+        }
+
+
+        .bubble-three {
+
+            width:
+                40px;
+
+            height:
+                40px;
+
+            right:
+                15%;
+
+            bottom:
+                18%;
+        }
+
+
+        .bubble-four {
+
+            width:
+                21px;
+
+            height:
+                21px;
+
+            right:
+                24%;
+
+            bottom:
+                12%;
+        }
+
+
+        /* =====================================================
+           LIGHT DOTS
+        ===================================================== */
+
+        .light-dot {
+
+            position:
+                absolute;
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(147,207,255,0.72);
+
+            box-shadow:
+                0 0 16px
+                rgba(72,153,255,0.45);
+
+            pointer-events:
+                none;
+
+            animation:
+                pulseDot
+                4s
+                ease-in-out
+                infinite;
+
+            z-index:
+                -2;
+        }
+
+
+        .dot-one {
+
+            width:
+                6px;
+
+            height:
+                6px;
+
+            left:
+                21%;
+
+            top:
+                19%;
+        }
+
+
+        .dot-two {
+
+            width:
+                4px;
+
+            height:
+                4px;
+
+            right:
+                21%;
+
+            top:
+                27%;
+
+            animation-delay:
+                .9s;
+        }
+
+
+        .dot-three {
+
+            width:
+                5px;
+
+            height:
+                5px;
+
+            left:
+                27%;
+
+            bottom:
+                19%;
+
+            animation-delay:
+                1.5s;
+        }
+
+
+        .dot-four {
+
+            width:
+                6px;
+
+            height:
+                6px;
+
+            right:
+                28%;
+
+            bottom:
+                25%;
+
+            animation-delay:
+                2.1s;
+        }
+
+
+        /* =====================================================
+           BACK BUTTON
+        ===================================================== */
+
+        .back-button {
+
+            position:
+                absolute;
+
+            top:
+                23px;
+
+            left:
+                27px;
+
+            padding:
+                9px
+                17px;
+
+            border:
+                1px solid
+                rgba(108,177,255,0.22);
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(56,130,224,0.08);
+
+            color:
+                #aed4f8;
+
+            font-size:
+                .76rem;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            backdrop-filter:
+                blur(12px);
+
+            -webkit-backdrop-filter:
+                blur(12px);
+
+            box-shadow:
+                0 8px 24px
+                rgba(0,0,0,0.20);
+
+            transition:
+                all .25s ease;
+
+            z-index:
+                40;
+        }
+
+
+        .back-button:hover {
+
+            transform:
+                translateX(-4px);
+
+            background:
+                rgba(70,145,238,0.13);
+
+            border-color:
+                rgba(120,192,255,0.32);
+        }
+
+
+        /* =====================================================
+           MAIN CARD
+        ===================================================== */
+
+        .content {
+
+            position:
+                relative;
+
+            width:
+                min(1040px, 91%);
+
+            height:
+                90vh;
+
+            padding:
+                20px
+                24px
+                18px;
+
+            border-radius:
+                31px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.065),
+                    rgba(49,113,190,0.035)
+                );
+
+            border:
+                1px solid
+                rgba(133,193,255,0.14);
+
+            box-shadow:
+
+                0 32px 85px
+                rgba(0,0,0,0.42),
+
+                0 0 60px
+                rgba(38,118,220,0.07),
+
+                inset
+                0 1px 0
+                rgba(255,255,255,0.09);
+
+            backdrop-filter:
+                blur(25px);
+
+            -webkit-backdrop-filter:
+                blur(25px);
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            overflow:
+                hidden;
+
+            animation:
+                cardAppear
+                1s
+                cubic-bezier(.2,.8,.2,1)
+                both;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .header {
+
+            flex-shrink:
+                0;
+
+            text-align:
+                center;
+
+            margin-bottom:
+                11px;
+        }
+
+
+        .top-line {
+
+            width:
+                78px;
+
+            height:
+                3px;
+
+            margin:
+                0 auto
+                10px;
+
+            border-radius:
+                999px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    #257fe3,
+                    #62b7ff,
+                    #9dcfff
+                );
+
+            box-shadow:
+                0 0 15px
+                rgba(63,155,255,0.20);
+        }
+
+
+        .mini-label {
+
+            font-size:
+                .60rem;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                .29em;
+
+            color:
+                #91bce1;
+
+            text-transform:
+                uppercase;
+
+            margin-bottom:
+                4px;
+        }
+
+
+        .title {
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                clamp(
+                    1.50rem,
+                    3.6vw,
+                    2.5rem
+                );
+
+            font-weight:
+                800;
+
+            color:
+                #dceeff;
+
+            text-shadow:
+                0 5px 26px
+                rgba(54,143,241,0.20);
+        }
+
+
+        .subtitle {
+
+            margin-top:
+                4px;
+
+            font-size:
+                clamp(
+                    .63rem,
+                    1.1vw,
+                    .80rem
+                );
+
+            color:
+                #91aecd;
+
+            font-weight:
+                600;
+        }
+
+
+        /* =====================================================
+           SUMMARY
+        ===================================================== */
+
+        .summary {
+
+            flex-shrink:
+                0;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap:
+                8px;
+
+            margin-bottom:
+                9px;
+        }
+
+
+        .summary-card {
+
+            padding:
+                9px
+                10px;
+
+            border-radius:
+                14px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            background:
+                rgba(255,255,255,0.035);
+
+            text-align:
+                center;
+
+            box-shadow:
+                inset
+                0 1px 0
+                rgba(255,255,255,0.05);
+        }
+
+
+        .summary-label {
+
+            display:
+                block;
+
+            font-size:
+                .45rem;
+
+            font-weight:
+                700;
+
+            color:
+                #7e99b4;
+
+            margin-bottom:
+                3px;
+        }
+
+
+        .summary-number {
+
+            display:
+                block;
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                .98rem;
+
+            font-weight:
+                800;
+
+            color:
+                #9ed1ff;
+        }
+
+
+        /* =====================================================
+           ADD FORM
+        ===================================================== */
+
+        .add-form {
+
+            flex-shrink:
+                0;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1.25fr
+                150px
+                auto;
+
+            gap:
+                8px;
+
+            margin-bottom:
+                10px;
+        }
+
+
+        .field {
+
+            height:
+                38px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.09);
+
+            border-radius:
+                10px;
+
+            background:
+                rgba(255,255,255,0.04);
+
+            color:
+                #dbeafa;
+
+            outline:
+                none;
+
+            padding:
+                0 11px;
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            font-size:
+                .55rem;
+
+            font-weight:
+                600;
+        }
+
+
+        .field::placeholder {
+
+            color:
+                #748ca7;
+        }
+
+
+        .field:focus {
+
+            border-color:
+                rgba(81,157,236,0.32);
+
+            background:
+                rgba(255,255,255,0.06);
+        }
+
+
+        .add-countdown {
+
+            height:
+                38px;
+
+            padding:
+                0 15px;
+
+            border:
+                none;
+
+            border-radius:
+                10px;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #146fe0,
+                    #429cf3
+                );
+
+            color:
+                white;
+
+            font-size:
+                .55rem;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            box-shadow:
+                0 9px 23px
+                rgba(24,111,224,0.20);
+
+            transition:
+                all .20s ease;
+        }
+
+
+        .add-countdown:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 12px 27px
+                rgba(24,111,224,0.28);
+        }
+
+
+        /* =====================================================
+           COUNTDOWN LIST
+        ===================================================== */
+
+        .countdown-list {
+
+            flex:
+                1 1 auto;
+
+            min-height:
+                0;
+
+            overflow-y:
+                auto;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                9px;
+
+            padding:
+                2px
+                5px
+                4px
+                2px;
+
+            scrollbar-width:
+                thin;
+
+            scrollbar-color:
+                rgba(73,145,227,0.28)
+                transparent;
+        }
+
+
+        .countdown-list::-webkit-scrollbar {
+
+            width:
+                6px;
+        }
+
+
+        .countdown-list::-webkit-scrollbar-track {
+
+            background:
+                transparent;
+        }
+
+
+        .countdown-list::-webkit-scrollbar-thumb {
+
+            background:
+                rgba(73,145,227,0.27);
+
+            border-radius:
+                999px;
+        }
+
+
+        /* =====================================================
+           EMPTY
+        ===================================================== */
+
+        .empty-state {
+
+            min-height:
+                200px;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            text-align:
+                center;
+
+            border:
+                1px dashed
+                rgba(94,162,235,0.15);
+
+            border-radius:
+                19px;
+
+            background:
+                rgba(255,255,255,0.02);
+
+            padding:
+                20px;
+
+            color:
+                #7890aa;
+        }
+
+
+        .empty-icon {
+
+            width:
+                55px;
+
+            height:
+                55px;
+
+            border-radius:
+                17px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            margin-bottom:
+                10px;
+
+            background:
+                rgba(54,135,232,0.09);
+
+            color:
+                #77b9f5;
+        }
+
+
+        .empty-icon svg {
+
+            width:
+                27px;
+
+            height:
+                27px;
+
+            fill:
+                none;
+
+            stroke:
+                currentColor;
+
+            stroke-width:
+                1.5;
+
+            stroke-linecap:
+                round;
+
+            stroke-linejoin:
+                round;
+        }
+
+
+        .empty-title {
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                .78rem;
+
+            font-weight:
+                800;
+
+            color:
+                #a3c8e7;
+
+            margin-bottom:
+                4px;
+        }
+
+
+        .empty-text {
+
+            max-width:
+                360px;
+
+            font-size:
+                .53rem;
+
+            line-height:
+                1.6;
+        }
+
+
+        /* =====================================================
+           COUNTDOWN CARD
+        ===================================================== */
+
+        .countdown-card {
+
+            position:
+                relative;
+
+            flex-shrink:
+                0;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                minmax(190px, 1.25fr)
+                minmax(310px, 1.7fr)
+                auto;
+
+            align-items:
+                center;
+
+            gap:
+                14px;
+
+            padding:
+                13px;
+
+            border:
+                1px solid
+                rgba(113,181,249,0.10);
+
+            border-radius:
+                18px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.055),
+                    rgba(35,110,199,0.035)
+                );
+
+            box-shadow:
+
+                0 9px 24px
+                rgba(0,0,0,0.16),
+
+                inset
+                0 1px 0
+                rgba(255,255,255,0.05);
+
+            overflow:
+                hidden;
+
+            animation:
+                itemAppear
+                .28s
+                ease
+                both;
+        }
+
+
+        .countdown-card::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                120px;
+
+            height:
+                120px;
+
+            border-radius:
+                50%;
+
+            right:
+                -55px;
+
+            top:
+                -62px;
+
+            background:
+                rgba(60,150,240,0.06);
+
+            pointer-events:
+                none;
+        }
+
+
+        /* =====================================================
+           EVENT INFO
+        ===================================================== */
+
+        .event-info {
+
+            min-width:
+                0;
+
+            position:
+                relative;
+
+            z-index:
+                1;
+        }
+
+
+        .event-name {
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                .76rem;
+
+            font-weight:
+                800;
+
+            color:
+                #d5e8fa;
+
+            line-height:
+                1.3;
+
+            word-break:
+                break-word;
+        }
+
+
+        .event-date {
+
+            margin-top:
+                4px;
+
+            font-size:
+                .50rem;
+
+            color:
+                #819bb5;
+
+            font-weight:
+                700;
+        }
+
+
+        .event-tag {
+
+            display:
+                inline-block;
+
+            margin-top:
+                6px;
+
+            padding:
+                4px
+                7px;
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(58,144,232,0.09);
+
+            color:
+                #82b9ea;
+
+            font-size:
+                .42rem;
+
+            font-weight:
+                800;
+        }
+
+
+        /* =====================================================
+           TIME BOXES
+        ===================================================== */
+
+        .timer {
+
+            position:
+                relative;
+
+            z-index:
+                1;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap:
+                7px;
+        }
+
+
+        .time-box {
+
+            min-width:
+                0;
+
+            padding:
+                8px
+                5px;
+
+            border-radius:
+                11px;
+
+            border:
+                1px solid
+                rgba(119,185,245,0.09);
+
+            background:
+                rgba(0,0,0,0.13);
+
+            text-align:
+                center;
+        }
+
+
+        .time-value {
+
+            display:
+                block;
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                1.02rem;
+
+            font-weight:
+                800;
+
+            color:
+                #9fd4ff;
+
+            line-height:
+                1.1;
+        }
+
+
+        .time-label {
+
+            display:
+                block;
+
+            margin-top:
+                3px;
+
+            font-size:
+                .39rem;
+
+            color:
+                #6d88a4;
+
+            font-weight:
+                800;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                .05em;
+        }
+
+
+        /* =====================================================
+           DELETE
+        ===================================================== */
+
+        .delete-countdown {
+
+            position:
+                relative;
+
+            z-index:
+                2;
+
+            width:
+                31px;
+
+            height:
+                31px;
+
+            flex-shrink:
+                0;
+
+            border:
+                none;
+
+            border-radius:
+                9px;
+
+            background:
+                rgba(224,84,112,0.07);
+
+            color:
+                #bd7e94;
+
+            cursor:
+                pointer;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            transition:
+                all .20s ease;
+        }
+
+
+        .delete-countdown:hover {
+
+            background:
+                rgba(224,84,112,0.14);
+
+            transform:
+                scale(1.05);
+        }
+
+
+        .delete-countdown svg {
+
+            width:
+                14px;
+
+            height:
+                14px;
+
+            fill:
+                none;
+
+            stroke:
+                currentColor;
+
+            stroke-width:
+                1.7;
+
+            stroke-linecap:
+                round;
+
+            stroke-linejoin:
+                round;
+        }
+
+
+        /* =====================================================
+           FINISHED / TODAY STATES
+        ===================================================== */
+
+        .countdown-card.today {
+
+            border-color:
+                rgba(86,164,249,0.23);
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(42,129,223,0.10),
+                    rgba(255,255,255,0.035)
+                );
+        }
+
+
+        .countdown-card.finished {
+
+            border-color:
+                rgba(98,182,131,0.20);
+        }
+
+
+        .countdown-card.finished .time-value {
+
+            color:
+                #7dd49b;
+        }
+
+
+        .finished-message {
+
+            grid-column:
+                1 / -1;
+
+            padding:
+                8px
+                10px;
+
+            border-radius:
+                10px;
+
+            background:
+                rgba(86,186,123,0.08);
+
+            color:
+                #75c493;
+
+            font-size:
+                .51rem;
+
+            font-weight:
+                800;
+
+            text-align:
+                center;
+        }
+
+
+        /* =====================================================
+           BOTTOM
+        ===================================================== */
+
+        .bottom-note {
+
+            flex-shrink:
+                0;
+
+            text-align:
+                center;
+
+            padding:
+                7px 0 0;
+
+            color:
+                #728da8;
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                .50rem;
+
+            font-weight:
+                600;
+        }
+
+
+        /* =====================================================
+           ANIMATIONS
+        ===================================================== */
+
+        @keyframes cardAppear {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(24px)
+                    scale(.97);
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+
+        @keyframes itemAppear {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(6px);
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        @keyframes floatOne {
+
+            0%,
+            100% {
+
+                transform:
+                    translate(0,0);
+            }
+
+            50% {
+
+                transform:
+                    translate(-18px,18px);
+            }
+        }
+
+
+        @keyframes floatTwo {
+
+            0%,
+            100% {
+
+                transform:
+                    translate(0,0);
+            }
+
+            50% {
+
+                transform:
+                    translate(18px,-18px);
+            }
+        }
+
+
+        @keyframes pulseDot {
+
+            0%,
+            100% {
+
+                opacity:
+                    .18;
+
+                transform:
+                    scale(.78);
+            }
+
+            50% {
+
+                opacity:
+                    .86;
+
+                transform:
+                    scale(1.18);
+            }
+        }
+
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .content {
+
+                width:
+                    94%;
+
+                height:
+                    93vh;
+
+                padding:
+                    17px
+                    13px
+                    15px;
+            }
+
+
+            .summary {
+
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+
+
+            .countdown-card {
+
+                grid-template-columns:
+                    1fr
+                    1.5fr
+                    auto;
+            }
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 650px) {
+
+            .content {
+
+                width:
+                    95%;
+
+                height:
+                    94vh;
+
+                padding:
+                    16px
+                    10px
+                    13px;
+
+                border-radius:
+                    26px;
+            }
+
+
+            .back-button {
+
+                top:
+                    15px;
+
+                left:
+                    15px;
+
+                padding:
+                    7px
+                    12px;
+
+                font-size:
+                    .63rem;
+            }
+
+
+            .mini-label {
+
+                font-size:
+                    .51rem;
+            }
+
+
+            .title {
+
+                font-size:
+                    1.33rem;
+            }
+
+
+            .subtitle {
+
+                font-size:
+                    .54rem;
+            }
+
+
+            .summary {
+
+                gap:
+                    5px;
+            }
+
+
+            .summary-card {
+
+                padding:
+                    7px
+                    4px;
+            }
+
+
+            .summary-label {
+
+                font-size:
+                    .37rem;
+            }
+
+
+            .summary-number {
+
+                font-size:
+                    .78rem;
+            }
+
+
+            .add-form {
+
+                grid-template-columns:
+                    1fr
+                    105px;
+            }
+
+
+            .add-countdown {
+
+                grid-column:
+                    1 / -1;
+
+                width:
+                    100%;
+            }
+
+
+            .countdown-card {
+
+                grid-template-columns:
+                    1fr
+                    auto;
+
+                gap:
+                    8px;
+
+                padding:
+                    10px;
+            }
+
+
+            .timer {
+
+                grid-column:
+                    1 / -1;
+
+                grid-row:
+                    2;
+            }
+
+
+            .delete-countdown {
+
+                grid-column:
+                    2;
+
+                grid-row:
+                    1;
+            }
+
+
+            .event-name {
+
+                font-size:
+                    .65rem;
+            }
+
+
+            .time-box {
+
+                padding:
+                    7px
+                    3px;
+            }
+
+
+            .time-value {
+
+                font-size:
+                    .88rem;
+            }
+
+
+            .time-label {
+
+                font-size:
+                    .34rem;
+            }
+
+
+            .calendar,
+            .pencil,
+            .capsule,
+            .bubble {
+
+                opacity:
+                    .25;
+            }
+        }
+
+
+        @media (max-width: 420px) {
+
+            .timer {
+
+                gap:
+                    4px;
+            }
+
+
+            .time-value {
+
+                font-size:
+                    .78rem;
+            }
+
+
+            .time-label {
+
+                font-size:
+                    .30rem;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <main class="page">
+
+
+        <!-- =================================================
+             BACKGROUND
+        ================================================== -->
+
+        <div class="orb orb-one"></div>
+
+        <div class="orb orb-two"></div>
+
+        <div class="orb orb-three"></div>
+
+        <div class="calendar calendar-one"></div>
+
+        <div class="calendar calendar-two"></div>
+
+        <div class="pencil pencil-one"></div>
+
+        <div class="pencil pencil-two"></div>
+
+        <div class="capsule capsule-one"></div>
+
+        <div class="capsule capsule-two"></div>
+
+        <div class="bubble bubble-one"></div>
+
+        <div class="bubble bubble-two"></div>
+
+        <div class="bubble bubble-three"></div>
+
+        <div class="bubble bubble-four"></div>
+
+        <div class="light-dot dot-one"></div>
+
+        <div class="light-dot dot-two"></div>
+
+        <div class="light-dot dot-three"></div>
+
+        <div class="light-dot dot-four"></div>
+
+
+        <!-- =================================================
+             BACK
+        ================================================== -->
+
+        <button
+            type="button"
+            class="back-button"
+            id="backButton"
+        >
+            ← Retour
+        </button>
+
+
+        <!-- =================================================
+             MAIN CONTENT
+        ================================================== -->
+
+        <section class="content">
+
+
+            <!-- HEADER -->
+
+            <header class="header">
+
+                <div class="top-line"></div>
+
+                <div class="mini-label">
+                    PHARMSINERGY • LICENCE 2
+                </div>
+
+                <h1 class="title">
+                    Compte à rebours
+                </h1>
+
+                <p class="subtitle">
+                    Chaque jour te rapproche un peu plus de ton objectif
+                </p>
+
+            </header>
+
+
+            <!-- =================================================
+                 SUMMARY
+            ================================================== -->
+
+            <div class="summary">
+
+
+                <div class="summary-card">
+
+                    <span class="summary-label">
+                        Événements
+                    </span>
+
+                    <span
+                        class="summary-number"
+                        id="eventCount"
+                    >
+                        0
+                    </span>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <span class="summary-label">
+                        Prochain événement
+                    </span>
+
+                    <span
+                        class="summary-number"
+                        id="nextEvent"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <span class="summary-label">
+                        Aujourd'hui
+                    </span>
+
+                    <span
+                        class="summary-number"
+                        id="todayCount"
+                    >
+                        0
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 ADD COUNTDOWN
+            ================================================== -->
+
+            <form
+                class="add-form"
+                id="addForm"
+            >
+
+                <input
+                    class="field"
+                    id="eventName"
+                    type="text"
+                    maxlength="90"
+                    placeholder="Ex : Examen de Chimie générale"
+                    autocomplete="off"
+                    required
+                >
+
+
+                <input
+                    class="field"
+                    id="eventDate"
+                    type="datetime-local"
+                    required
+                >
+
+
+                <button
+                    class="add-countdown"
+                    type="submit"
+                >
+                    + Ajouter un compte à rebours
+                </button>
+
+            </form>
+
+
+            <!-- =================================================
+                 COUNTDOWN LIST
+            ================================================== -->
+
+            <div
+                class="countdown-list"
+                id="countdownList"
+            >
+
+                <div
+                    class="empty-state"
+                    id="emptyState"
+                >
+
+                    <div class="empty-icon">
+
+                        <svg viewBox="0 0 24 24">
+
+                            <circle
+                                cx="12"
+                                cy="13"
+                                r="7"
+                            ></circle>
+
+                            <path d="M12 9v4l3 2"></path>
+
+                            <path d="M9 3h6"></path>
+
+                            <path d="M12 3v3"></path>
+
+                        </svg>
+
+                    </div>
+
+
+                    <div class="empty-title">
+
+                        Aucun compte à rebours
+
+                    </div>
+
+
+                    <div class="empty-text">
+
+                        Ajoute ton prochain examen,
+                        TD important ou autre rendez-vous
+                        pour garder ton objectif toujours devant les yeux.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FOOTER -->
+
+            <div class="bottom-note">
+
+                Organise ton temps. Travaille avec constance. Avance chaque jour. 💙
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <script>
+
+        /* =====================================================
+           RETURN
+        ===================================================== */
+
+        document
+            .getElementById("backButton")
+            .addEventListener(
+                "click",
+                function () {
+
+                    window.location.href =
+                        "carnet-l2.html";
+
+                }
+            );
+
+
+        /* =====================================================
+           ELEMENTS
+        ===================================================== */
+
+        const addForm =
+            document.getElementById(
+                "addForm"
+            );
+
+
+        const eventName =
+            document.getElementById(
+                "eventName"
+            );
+
+
+        const eventDate =
+            document.getElementById(
+                "eventDate"
+            );
+
+
+        const countdownList =
+            document.getElementById(
+                "countdownList"
+            );
+
+
+        const emptyState =
+            document.getElementById(
+                "emptyState"
+            );
+
+
+        const eventCount =
+            document.getElementById(
+                "eventCount"
+            );
+
+
+        const nextEvent =
+            document.getElementById(
+                "nextEvent"
+            );
+
+
+        const todayCount =
+            document.getElementById(
+                "todayCount"
+            );
+
+
+        /* =====================================================
+           STORAGE
+        ===================================================== */
+
+        const storageKey =
+            "pharmsinergy_countdowns_l2";
+
+
+        let countdowns =
+            JSON.parse(
+                localStorage.getItem(
+                    storageKey
+                )
+            ) || [];
+
+
+        /* =====================================================
+           SAVE
+        ===================================================== */
+
+        function saveCountdowns() {
+
+            localStorage.setItem(
+                storageKey,
+                JSON.stringify(
+                    countdowns
+                )
+            );
+
+        }
+
+
+        /* =====================================================
+           FORMAT DATE
+        ===================================================== */
+
+        function formatDate(
+            timestamp
+        ) {
+
+            const date =
+                new Date(
+                    timestamp
+                );
+
+
+            return new Intl.DateTimeFormat(
+                "fr-FR",
+                {
+                    weekday:
+                        "long",
+
+                    day:
+                        "numeric",
+
+                    month:
+                        "long",
+
+                    year:
+                        "numeric",
+
+                    hour:
+                        "2-digit",
+
+                    minute:
+                        "2-digit"
+                }
+            ).format(
+                date
+            );
+
+        }
+
+
+        /* =====================================================
+           CREATE TIME ELEMENT
+        ===================================================== */
+
+        function createTimeBox(
+            value,
+            label
+        ) {
+
+            const box =
+                document.createElement(
+                    "div"
+                );
+
+
+            box.className =
+                "time-box";
+
+
+            const valueElement =
+                document.createElement(
+                    "span"
+                );
+
+
+            valueElement.className =
+                "time-value";
+
+
+            valueElement.textContent =
+                String(
+                    value
+                ).padStart(
+                    2,
+                    "0"
+                );
+
+
+            const labelElement =
+                document.createElement(
+                    "span"
+                );
+
+
+            labelElement.className =
+                "time-label";
+
+
+            labelElement.textContent =
+                label;
+
+
+            box.appendChild(
+                valueElement
+            );
+
+
+            box.appendChild(
+                labelElement
+            );
+
+
+            return box;
+
+        }
+
+
+        /* =====================================================
+           CALCULATE TIME
+        ===================================================== */
+
+        function getRemaining(
+            timestamp
+        ) {
+
+            const difference =
+                timestamp -
+                Date.now();
+
+
+            if (
+                difference <= 0
+            ) {
+
+                return {
+
+                    total:
+                        difference,
+
+                    days:
+                        0,
+
+                    hours:
+                        0,
+
+                    minutes:
+                        0,
+
+                    seconds:
+                        0
+
+                };
+
+            }
+
+
+            const seconds =
+                Math.floor(
+                    difference /
+                    1000
+                );
+
+
+            const days =
+                Math.floor(
+                    seconds /
+                    86400
+                );
+
+
+            const hours =
+                Math.floor(
+                    (
+                        seconds %
+                        86400
+                    ) /
+                    3600
+                );
+
+
+            const minutes =
+                Math.floor(
+                    (
+                        seconds %
+                        3600
+                    ) /
+                    60
+                );
+
+
+            const remainingSeconds =
+                seconds %
+                60;
+
+
+            return {
+
+                total:
+                    difference,
+
+                days:
+                    days,
+
+                hours:
+                    hours,
+
+                minutes:
+                    minutes,
+
+                seconds:
+                    remainingSeconds
+
+            };
+
+        }
+
+
+        /* =====================================================
+           STATUS
+        ===================================================== */
+
+        function getStatus(
+            timestamp
+        ) {
+
+            const remaining =
+                timestamp -
+                Date.now();
+
+
+            if (
+                remaining <= 0
+            ) {
+
+                return "finished";
+            }
+
+
+            const oneDay =
+                24 *
+                60 *
+                60 *
+                1000;
+
+
+            if (
+                remaining <=
+                oneDay
+            ) {
+
+                return "today";
+            }
+
+
+            return "normal";
+
+        }
+
+
+        /* =====================================================
+           DELETE
+        ===================================================== */
+
+        function deleteCountdown(
+            id
+        ) {
+
+            const confirmed =
+                window.confirm(
+                    "Supprimer ce compte à rebours ?"
+                );
+
+
+            if (
+                !confirmed
+            ) {
+
+                return;
+            }
+
+
+            countdowns =
+                countdowns.filter(
+                    function (
+                        item
+                    ) {
+
+                        return (
+                            item.id !==
+                            id
+                        );
+
+                    }
+                );
+
+
+            saveCountdowns();
+
+            renderCountdowns();
+
+        }
+
+
+        /* =====================================================
+           CREATE COUNTDOWN CARD
+        ===================================================== */
+
+        function createCountdownCard(
+            item
+        ) {
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+
+            card.className =
+                "countdown-card";
+
+
+            const status =
+                getStatus(
+                    item.timestamp
+                );
+
+
+            if (
+                status ===
+                "today"
+            ) {
+
+                card.classList.add(
+                    "today"
+                );
+            }
+
+
+            if (
+                status ===
+                "finished"
+            ) {
+
+                card.classList.add(
+                    "finished"
+                );
+            }
+
+
+            /* =========================
+               INFO
+            ========================= */
+
+            const info =
+                document.createElement(
+                    "div"
+                );
+
+
+            info.className =
+                "event-info";
+
+
+            const name =
+                document.createElement(
+                    "div"
+                );
+
+
+            name.className =
+                "event-name";
+
+
+            name.textContent =
+                item.name;
+
+
+            const date =
+                document.createElement(
+                    "div"
+                );
+
+
+            date.className =
+                "event-date";
+
+
+            date.textContent =
+                formatDate(
+                    item.timestamp
+                );
+
+
+            const tag =
+                document.createElement(
+                    "span"
+                );
+
+
+            tag.className =
+                "event-tag";
+
+
+            if (
+                status ===
+                "finished"
+            ) {
+
+                tag.textContent =
+                    "Terminé";
+
+            } else if (
+                status ===
+                "today"
+            ) {
+
+                tag.textContent =
+                    "Moins de 24h";
+
+            } else {
+
+                tag.textContent =
+                    "À venir";
+
+            }
+
+
+            info.appendChild(
+                name
+            );
+
+
+            info.appendChild(
+                date
+            );
+
+
+            info.appendChild(
+                tag
+            );
+
+
+            /* =========================
+               TIMER
+            ========================= */
+
+            const timer =
+                document.createElement(
+                    "div"
+                );
+
+
+            timer.className =
+                "timer";
+
+
+            const remaining =
+                getRemaining(
+                    item.timestamp
+                );
+
+
+            timer.appendChild(
+                createTimeBox(
+                    remaining.days,
+                    "Jours"
+                )
+            );
+
+
+            timer.appendChild(
+                createTimeBox(
+                    remaining.hours,
+                    "Heures"
+                )
+            );
+
+
+            timer.appendChild(
+                createTimeBox(
+                    remaining.minutes,
+                    "Minutes"
+                )
+            );
+
+
+            timer.appendChild(
+                createTimeBox(
+                    remaining.seconds,
+                    "Secondes"
+                )
+            );
+
+
+            /* =========================
+               DELETE
+            ========================= */
+
+            const deleteButton =
+                document.createElement(
+                    "button"
+                );
+
+
+            deleteButton.type =
+                "button";
+
+
+            deleteButton.className =
+                "delete-countdown";
+
+
+            deleteButton.title =
+                "Supprimer";
+
+
+            deleteButton.innerHTML = `
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M4 7h16"></path>
+
+                    <path d="M10 11v6"></path>
+
+                    <path d="M14 11v6"></path>
+
+                    <path
+                        d="M6 7l1 13h10l1-13"
+                    ></path>
+
+                    <path
+                        d="M9 7V4h6v3"
+                    ></path>
+
+                </svg>
+
+            `;
+
+
+            deleteButton.addEventListener(
+                "click",
+                function () {
+
+                    deleteCountdown(
+                        item.id
+                    );
+
+                }
+            );
+
+
+            card.appendChild(
+                info
+            );
+
+
+            card.appendChild(
+                timer
+            );
+
+
+            card.appendChild(
+                deleteButton
+            );
+
+
+            /* =========================
+               FINISHED
+            ========================= */
+
+            if (
+                status ===
+                "finished"
+            ) {
+
+                const message =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                message.className =
+                    "finished-message";
+
+
+                message.textContent =
+                    "Le moment est arrivé ! Bon courage pour cette étape. 💙";
+
+
+                card.appendChild(
+                    message
+                );
+
+            }
+
+
+            return card;
+
+        }
+
+
+        /* =====================================================
+           SORT
+        ===================================================== */
+
+        function sortCountdowns() {
+
+            countdowns.sort(
+                function (
+                    a,
+                    b
+                ) {
+
+                    return (
+                        a.timestamp -
+                        b.timestamp
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           RENDER
+        ===================================================== */
+
+        function renderCountdowns() {
+
+            sortCountdowns();
+
+
+            countdownList.innerHTML =
+                "";
+
+
+            if (
+                countdowns.length ===
+                0
+            ) {
+
+                countdownList.appendChild(
+                    emptyState
+                );
+
+                eventCount.textContent =
+                    "0";
+
+
+                nextEvent.textContent =
+                    "—";
+
+
+                todayCount.textContent =
+                    "0";
+
+
+                return;
+            }
+
+
+            countdowns.forEach(
+                function (
+                    item
+                ) {
+
+                    countdownList.appendChild(
+                        createCountdownCard(
+                            item
+                        )
+                    );
+
+                }
+            );
+
+
+            updateSummary();
+
+        }
+
+
+        /* =====================================================
+           UPDATE SUMMARY
+        ===================================================== */
+
+        function updateSummary() {
+
+            const active =
+                countdowns.filter(
+                    function (
+                        item
+                    ) {
+
+                        return (
+                            item.timestamp >
+                            Date.now()
+                        );
+
+                    }
+                );
+
+
+            const todayItems =
+                countdowns.filter(
+                    function (
+                        item
+                    ) {
+
+                        const difference =
+                            item.timestamp -
+                            Date.now();
+
+
+                        return (
+                            difference > 0 &&
+                            difference <=
+                            (
+                                24 *
+                                60 *
+                                60 *
+                                1000
+                            )
+                        );
+
+                    }
+                );
+
+
+            eventCount.textContent =
+                countdowns.length;
+
+
+            todayCount.textContent =
+                todayItems.length;
+
+
+            if (
+                active.length ===
+                0
+            ) {
+
+                nextEvent.textContent =
+                    "—";
+
+                return;
+            }
+
+
+            const closest =
+                active[0];
+
+
+            const remaining =
+                getRemaining(
+                    closest.timestamp
+                );
+
+
+            nextEvent.textContent =
+                remaining.days +
+                "j " +
+                remaining.hours +
+                "h";
+
+        }
+
+
+        /* =====================================================
+           ADD COUNTDOWN
+        ===================================================== */
+
+        addForm.addEventListener(
+            "submit",
+            function (
+                event
+            ) {
+
+                event.preventDefault();
+
+
+                const name =
+                    eventName.value.trim();
+
+
+                const dateValue =
+                    eventDate.value;
+
+
+                if (
+                    !name ||
+                    !dateValue
+                ) {
+
+                    return;
+                }
+
+
+                const timestamp =
+                    new Date(
+                        dateValue
+                    ).getTime();
+
+
+                if (
+                    Number.isNaN(
+                        timestamp
+                    )
+                ) {
+
+                    return;
+                }
+
+
+                if (
+                    timestamp <=
+                    Date.now()
+                ) {
+
+                    alert(
+                        "Choisis une date future."
+                    );
+
+                    return;
+                }
+
+
+                countdowns.push({
+
+                    id:
+                        Date.now() +
+                        Math.random(),
+
+                    name:
+                        name,
+
+                    timestamp:
+                        timestamp
+
+                });
+
+
+                saveCountdowns();
+
+
+                eventName.value =
+                    "";
+
+
+                eventDate.value =
+                    "";
+
+
+                renderCountdowns();
+
+
+                eventName.focus();
+
+            }
+        );
+
+
+        /* =====================================================
+           SET MIN DATE
+        ===================================================== */
+
+        function setMinimumDate() {
+
+            const now =
+                new Date();
+
+
+            now.setMinutes(
+                now.getMinutes() -
+                now.getTimezoneOffset()
+            );
+
+
+            eventDate.min =
+                now.toISOString()
+                    .slice(
+                        0,
+                        16
+                    );
+
+        }
+
+
+        /* =====================================================
+           LIVE TIMER
+        ===================================================== */
+
+        function refreshTimers() {
+
+            renderCountdowns();
+
+        }
+
+
+        /* =====================================================
+           INITIALIZE
+        ===================================================== */
+
+        setMinimumDate();
+
+        renderCountdowns();
+
+
+        /* =====================================================
+           UPDATE EVERY SECOND
+        ===================================================== */
+
+        setInterval(
+            refreshTimers,
+            1000
+        );
+
+
+    </script>
+
+</body>
+
+</html>

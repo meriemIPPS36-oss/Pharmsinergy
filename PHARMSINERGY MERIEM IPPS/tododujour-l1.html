@@ -1,0 +1,3390 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>To-Do du jour | PharmSinergy</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kufam:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        /* =====================================================
+           BODY
+        ===================================================== */
+
+        body {
+
+            min-height: 100vh;
+
+            overflow: hidden;
+
+            font-family:
+                "Inter",
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color:
+                #5d3045;
+
+            background:
+
+                radial-gradient(
+                    circle at 50% 45%,
+                    rgba(255,255,255,0.97) 0%,
+                    rgba(255,245,214,0.45) 22%,
+                    transparent 52%
+                ),
+
+                radial-gradient(
+                    circle at 9% 14%,
+                    rgba(255,161,72,0.48),
+                    transparent 31%
+                ),
+
+                radial-gradient(
+                    circle at 90% 85%,
+                    rgba(255,99,156,0.42),
+                    transparent 33%
+                ),
+
+                radial-gradient(
+                    circle at 67% 8%,
+                    rgba(255,221,74,0.30),
+                    transparent 24%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #d85f2c 0%,
+                    #ec7b69 24%,
+                    #f5b447 49%,
+                    #f2d66e 70%,
+                    #ef7a94 100%
+                );
+        }
+
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .page {
+
+            position:
+                relative;
+
+            width:
+                100%;
+
+            height:
+                100vh;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            overflow:
+                hidden;
+
+            isolation:
+                isolate;
+        }
+
+
+        /* =====================================================
+           SOFT ORBS
+        ===================================================== */
+
+        .orb {
+
+            position:
+                absolute;
+
+            border-radius:
+                50%;
+
+            filter:
+                blur(65px);
+
+            pointer-events:
+                none;
+
+            z-index:
+                -8;
+        }
+
+
+        .orb-one {
+
+            width:
+                380px;
+
+            height:
+                380px;
+
+            top:
+                -160px;
+
+            right:
+                -90px;
+
+            background:
+                rgba(255,203,60,0.28);
+
+            animation:
+                floatOne
+                10s
+                ease-in-out
+                infinite;
+        }
+
+
+        .orb-two {
+
+            width:
+                350px;
+
+            height:
+                350px;
+
+            bottom:
+                -150px;
+
+            left:
+                -100px;
+
+            background:
+                rgba(255,99,152,0.24);
+
+            animation:
+                floatTwo
+                12s
+                ease-in-out
+                infinite;
+        }
+
+
+        .orb-three {
+
+            width:
+                170px;
+
+            height:
+                170px;
+
+            top:
+                46%;
+
+            left:
+                46%;
+
+            background:
+                rgba(255,255,255,0.13);
+
+            filter:
+                blur(75px);
+        }
+
+
+        /* =====================================================
+           CIRCLES
+        ===================================================== */
+
+        .circle {
+
+            position:
+                absolute;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.26);
+
+            border-radius:
+                50%;
+
+            pointer-events:
+                none;
+
+            z-index:
+                -4;
+        }
+
+
+        .circle-one {
+
+            width:
+                280px;
+
+            height:
+                280px;
+
+            left:
+                -110px;
+
+            top:
+                24%;
+        }
+
+
+        .circle-two {
+
+            width:
+                340px;
+
+            height:
+                340px;
+
+            right:
+                -140px;
+
+            bottom:
+                6%;
+        }
+
+
+        .circle-three {
+
+            width:
+                120px;
+
+            height:
+                120px;
+
+            right:
+                16%;
+
+            top:
+                8%;
+
+            border-color:
+                rgba(255,255,255,0.18);
+        }
+
+
+        /* =====================================================
+           NOTE PAPERS
+        ===================================================== */
+
+        .note {
+
+            position:
+                absolute;
+
+            width:
+                115px;
+
+            height:
+                95px;
+
+            border-radius:
+                12px;
+
+            background:
+                rgba(255,248,206,0.32);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.30);
+
+            box-shadow:
+                0 16px 30px
+                rgba(129,72,47,0.10);
+
+            pointer-events:
+                none;
+
+            z-index:
+                -3;
+        }
+
+
+        .note::before,
+        .note::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            left:
+                16px;
+
+            right:
+                16px;
+
+            height:
+                1px;
+
+            background:
+                rgba(130,82,58,0.16);
+        }
+
+
+        .note::before {
+
+            top:
+                34px;
+
+            box-shadow:
+                0 12px 0
+                rgba(130,82,58,0.13),
+
+                0 24px 0
+                rgba(130,82,58,0.10);
+        }
+
+
+        .note-one {
+
+            left:
+                4%;
+
+            top:
+                15%;
+
+            transform:
+                rotate(-11deg);
+        }
+
+
+        .note-two {
+
+            right:
+                4%;
+
+            bottom:
+                14%;
+
+            transform:
+                rotate(10deg)
+                scale(.92);
+
+            background:
+                rgba(255,231,119,0.28);
+        }
+
+
+        /* =====================================================
+           PENCILS
+        ===================================================== */
+
+        .pencil {
+
+            position:
+                absolute;
+
+            width:
+                150px;
+
+            height:
+                17px;
+
+            border-radius:
+                10px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    rgba(255,182,91,0.28) 0%,
+                    rgba(255,215,113,0.40) 68%,
+                    rgba(255,255,255,0.30) 69%,
+                    rgba(255,255,255,0.30) 76%,
+                    rgba(211,126,71,0.30) 77%,
+                    rgba(211,126,71,0.30) 100%
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.22);
+
+            box-shadow:
+                0 10px 25px
+                rgba(139,72,43,0.10);
+
+            pointer-events:
+                none;
+
+            z-index:
+                -3;
+        }
+
+
+        .pencil::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            right:
+                -11px;
+
+            top:
+                2px;
+
+            border-top:
+                6px solid
+                transparent;
+
+            border-bottom:
+                6px solid
+                transparent;
+
+            border-left:
+                12px solid
+                rgba(105,73,52,0.28);
+        }
+
+
+        .pencil-one {
+
+            top:
+                30%;
+
+            left:
+                1%;
+
+            transform:
+                rotate(24deg);
+        }
+
+
+        .pencil-two {
+
+            right:
+                1%;
+
+            top:
+                37%;
+
+            transform:
+                rotate(-22deg)
+                scale(.82);
+        }
+
+
+        /* =====================================================
+           CAPSULES
+        ===================================================== */
+
+        .capsule {
+
+            position:
+                absolute;
+
+            width:
+                125px;
+
+            height:
+                49px;
+
+            border-radius:
+                999px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.25);
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    rgba(236,99,126,0.34) 0%,
+                    rgba(236,99,126,0.34) 49%,
+                    rgba(255,216,102,0.34) 50%,
+                    rgba(255,216,102,0.34) 100%
+                );
+
+            box-shadow:
+                0 15px 35px
+                rgba(137,69,54,0.10);
+
+            opacity:
+                0.48;
+
+            pointer-events:
+                none;
+
+            z-index:
+                -3;
+        }
+
+
+        .capsule-one {
+
+            right:
+                5%;
+
+            top:
+                14%;
+
+            transform:
+                rotate(25deg);
+        }
+
+
+        .capsule-two {
+
+            left:
+                6%;
+
+            bottom:
+                12%;
+
+            transform:
+                rotate(-30deg)
+                scale(.72);
+        }
+
+
+        /* =====================================================
+           BOTTLES
+        ===================================================== */
+
+        .bottle {
+
+            position:
+                absolute;
+
+            width:
+                57px;
+
+            height:
+                92px;
+
+            border-radius:
+                15px
+                15px
+                19px
+                19px;
+
+            background:
+                rgba(255,246,212,0.23);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.24);
+
+            box-shadow:
+                0 15px 28px
+                rgba(123,72,54,0.09);
+
+            pointer-events:
+                none;
+
+            z-index:
+                -3;
+        }
+
+
+        .bottle::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                25px;
+
+            height:
+                18px;
+
+            top:
+                -14px;
+
+            left:
+                15px;
+
+            border-radius:
+                5px 5px 2px 2px;
+
+            background:
+                rgba(118,72,57,0.23);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.18);
+        }
+
+
+        .bottle::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                34px;
+
+            height:
+                23px;
+
+            left:
+                11px;
+
+            top:
+                32px;
+
+            border-radius:
+                7px;
+
+            background:
+                rgba(255,224,116,0.25);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.18);
+        }
+
+
+        .bottle-one {
+
+            left:
+                3%;
+
+            bottom:
+                9%;
+
+            transform:
+                rotate(-7deg)
+                scale(.80);
+        }
+
+
+        .bottle-two {
+
+            right:
+                3%;
+
+            top:
+                20%;
+
+            transform:
+                rotate(8deg)
+                scale(.72);
+        }
+
+
+        /* =====================================================
+           CIRCULAR LIGHT DOTS
+        ===================================================== */
+
+        .light-dot {
+
+            position:
+                absolute;
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(255,255,255,0.72);
+
+            box-shadow:
+                0 0 16px
+                rgba(255,255,255,0.64);
+
+            pointer-events:
+                none;
+
+            animation:
+                dotPulse
+                4s
+                ease-in-out
+                infinite;
+
+            z-index:
+                -2;
+        }
+
+
+        .dot-one {
+
+            width:
+                6px;
+
+            height:
+                6px;
+
+            top:
+                18%;
+
+            left:
+                22%;
+        }
+
+
+        .dot-two {
+
+            width:
+                4px;
+
+            height:
+                4px;
+
+            top:
+                25%;
+
+            right:
+                21%;
+
+            animation-delay:
+                .8s;
+        }
+
+
+        .dot-three {
+
+            width:
+                5px;
+
+            height:
+                5px;
+
+            bottom:
+                18%;
+
+            left:
+                28%;
+
+            animation-delay:
+                1.6s;
+        }
+
+
+        .dot-four {
+
+            width:
+                6px;
+
+            height:
+                6px;
+
+            bottom:
+                26%;
+
+            right:
+                28%;
+
+            animation-delay:
+                2.1s;
+        }
+
+
+        /* =====================================================
+           BACK BUTTON
+        ===================================================== */
+
+        .back-button {
+
+            position:
+                absolute;
+
+            top:
+                24px;
+
+            left:
+                28px;
+
+            padding:
+                9px
+                17px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.66);
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(255,255,255,0.18);
+
+            color:
+                #713d48;
+
+            font-size:
+                0.77rem;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            backdrop-filter:
+                blur(12px);
+
+            -webkit-backdrop-filter:
+                blur(12px);
+
+            box-shadow:
+                0 8px 22px
+                rgba(122,67,47,0.12);
+
+            transition:
+                all .25s ease;
+
+            z-index:
+                30;
+        }
+
+
+        .back-button:hover {
+
+            transform:
+                translateX(-4px);
+
+            background:
+                rgba(255,255,255,0.31);
+
+            box-shadow:
+                0 12px 28px
+                rgba(122,67,47,0.18);
+        }
+
+
+        /* =====================================================
+           MAIN CARD
+        ===================================================== */
+
+        .content {
+
+            position:
+                relative;
+
+            width:
+                min(930px, 89%);
+
+            height:
+                88vh;
+
+            padding:
+                21px
+                28px
+                24px;
+
+            border-radius:
+                32px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.43),
+                    rgba(255,244,228,0.16)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.70);
+
+            box-shadow:
+
+                0 30px 80px
+                rgba(118,53,43,0.18),
+
+                inset
+                0 1px 0
+                rgba(255,255,255,0.90);
+
+            backdrop-filter:
+                blur(22px);
+
+            -webkit-backdrop-filter:
+                blur(22px);
+
+            animation:
+                cardAppear
+                1s
+                cubic-bezier(.2,.8,.2,1)
+                both;
+
+            overflow:
+                hidden;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .header {
+
+            text-align:
+                center;
+
+            margin-bottom:
+                14px;
+        }
+
+
+        .top-line {
+
+            width:
+                78px;
+
+            height:
+                3px;
+
+            margin:
+                0
+                auto
+                11px;
+
+            border-radius:
+                999px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    #ef7e37,
+                    #f47b93,
+                    #f5cf50
+                );
+        }
+
+
+        .mini-label {
+
+            font-size:
+                0.62rem;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                0.29em;
+
+            color:
+                #9a5a56;
+
+            text-transform:
+                uppercase;
+
+            margin-bottom:
+                5px;
+        }
+
+
+        .title {
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                clamp(
+                    1.65rem,
+                    3.8vw,
+                    2.65rem
+                );
+
+            font-weight:
+                800;
+
+            color:
+                #8e3f55;
+
+            text-shadow:
+                0 5px 18px
+                rgba(144,63,77,0.14);
+
+            margin-bottom:
+                4px;
+        }
+
+
+        .subtitle {
+
+            font-size:
+                clamp(
+                    0.69rem,
+                    1.15vw,
+                    0.86rem
+                );
+
+            font-weight:
+                600;
+
+            color:
+                #99635f;
+
+            margin-bottom:
+                4px;
+        }
+
+
+        .date-line {
+
+            font-size:
+                0.59rem;
+
+            color:
+                #aa796f;
+
+            font-weight:
+                700;
+        }
+
+
+        /* =====================================================
+           TODO LAYOUT
+        ===================================================== */
+
+        .todo-layout {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1.7fr
+                0.9fr;
+
+            gap:
+                14px;
+
+            height:
+                calc(100% - 118px);
+
+            min-height:
+                0;
+        }
+
+
+        /* =====================================================
+           TASK PANEL
+        ===================================================== */
+
+        .task-panel {
+
+            min-width:
+                0;
+
+            min-height:
+                0;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            padding:
+                16px;
+
+            border-radius:
+                22px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.36),
+                    rgba(255,248,237,0.13)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.56);
+
+            box-shadow:
+
+                0 11px 28px
+                rgba(123,63,53,0.08),
+
+                inset
+                0 1px 0
+                rgba(255,255,255,0.68);
+        }
+
+
+        .task-heading {
+
+            flex-shrink:
+                0;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                10px;
+
+            margin-bottom:
+                10px;
+        }
+
+
+        .task-heading h2 {
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                0.93rem;
+
+            color:
+                #8f4054;
+
+            font-weight:
+                800;
+        }
+
+
+        .task-counter {
+
+            padding:
+                5px
+                10px;
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(255,218,104,0.25);
+
+            color:
+                #a46447;
+
+            font-size:
+                0.53rem;
+
+            font-weight:
+                800;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.37);
+
+            white-space:
+                nowrap;
+        }
+
+
+        /* =====================================================
+           ADD ROW
+        ===================================================== */
+
+        .add-row {
+
+            flex-shrink:
+                0;
+
+            display:
+                flex;
+
+            gap:
+                8px;
+
+            margin-bottom:
+                9px;
+        }
+
+
+        .task-input {
+
+            flex:
+                1;
+
+            min-width:
+                0;
+
+            height:
+                42px;
+
+            padding:
+                0
+                13px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.67);
+
+            border-radius:
+                13px;
+
+            background:
+                rgba(255,255,255,0.32);
+
+            color:
+                #6f4454;
+
+            outline:
+                none;
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            font-size:
+                0.65rem;
+
+            font-weight:
+                600;
+        }
+
+
+        .task-input::placeholder {
+
+            color:
+                #ab7d88;
+        }
+
+
+        .task-input:focus {
+
+            background:
+                rgba(255,255,255,0.45);
+
+            border-color:
+                rgba(220,106,112,0.30);
+        }
+
+
+        .add-button {
+
+            height:
+                42px;
+
+            padding:
+                0
+                15px;
+
+            border:
+                none;
+
+            border-radius:
+                13px;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #ef7b3f,
+                    #e96f8e
+                );
+
+            color:
+                white;
+
+            font-size:
+                0.62rem;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            box-shadow:
+                0 9px 20px
+                rgba(211,94,94,0.18);
+
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease;
+        }
+
+
+        .add-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 13px 25px
+                rgba(211,94,94,0.23);
+        }
+
+
+        .add-button:active {
+
+            transform:
+                scale(.97);
+        }
+
+
+        /* =====================================================
+           ARCHIVE BUTTON
+        ===================================================== */
+
+        .archive-button {
+
+            width:
+                100%;
+
+            min-height:
+                35px;
+
+            flex-shrink:
+                0;
+
+            margin-bottom:
+                9px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.58);
+
+            border-radius:
+                12px;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    rgba(255,213,93,0.23),
+                    rgba(239,111,142,0.16)
+                );
+
+            color:
+                #8d5360;
+
+            font-size:
+                0.59rem;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            box-shadow:
+                0 6px 16px
+                rgba(135,71,60,0.06),
+
+                inset
+                0 1px 0
+                rgba(255,255,255,0.62);
+
+            transition:
+                transform .2s ease,
+                background .2s ease,
+                box-shadow .2s ease;
+        }
+
+
+        .archive-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    rgba(255,213,93,0.32),
+                    rgba(239,111,142,0.22)
+                );
+
+            box-shadow:
+                0 9px 21px
+                rgba(135,71,60,0.10);
+        }
+
+
+        .archive-icon {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            margin-right:
+                5px;
+
+            vertical-align:
+                middle;
+        }
+
+
+        .archive-icon svg {
+
+            width:
+                15px;
+
+            height:
+                15px;
+
+            fill:
+                none;
+
+            stroke:
+                currentColor;
+
+            stroke-width:
+                1.7;
+
+            stroke-linecap:
+                round;
+
+            stroke-linejoin:
+                round;
+        }
+
+
+        /* =====================================================
+           TASK LIST
+        ===================================================== */
+
+        .task-list {
+
+            flex:
+                1 1 auto;
+
+            min-height:
+                0;
+
+            overflow-y:
+                auto;
+
+            overflow-x:
+                hidden;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                8px;
+
+            padding:
+                2px
+                4px
+                4px
+                1px;
+
+            scrollbar-width:
+                thin;
+
+            scrollbar-color:
+                rgba(194,111,104,0.38)
+                transparent;
+        }
+
+
+        .task-list::-webkit-scrollbar {
+
+            width:
+                7px;
+        }
+
+
+        .task-list::-webkit-scrollbar-track {
+
+            background:
+                rgba(255,255,255,0.06);
+
+            border-radius:
+                999px;
+        }
+
+
+        .task-list::-webkit-scrollbar-thumb {
+
+            background:
+                rgba(194,111,104,0.33);
+
+            border-radius:
+                999px;
+        }
+
+
+        .empty-message {
+
+            min-height:
+                120px;
+
+            flex-shrink:
+                0;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            text-align:
+                center;
+
+            color:
+                #aa8084;
+
+            font-size:
+                0.61rem;
+
+            font-weight:
+                600;
+
+            padding:
+                15px;
+        }
+
+
+        /* =====================================================
+           TASK ITEM
+        ===================================================== */
+
+        .task-item {
+
+            flex-shrink:
+                0;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                9px;
+
+            padding:
+                9px
+                10px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.48);
+
+            border-radius:
+                13px;
+
+            background:
+                rgba(255,255,255,0.24);
+
+            box-shadow:
+                0 5px 14px
+                rgba(124,62,52,0.05);
+
+            animation:
+                taskAppear
+                .25s
+                ease
+                both;
+
+            transition:
+                transform .2s ease,
+                background .2s ease;
+        }
+
+
+        .task-item:hover {
+
+            transform:
+                translateX(2px);
+
+            background:
+                rgba(255,255,255,0.34);
+        }
+
+
+        .task-check {
+
+            appearance:
+                none;
+
+            -webkit-appearance:
+                none;
+
+            width:
+                20px;
+
+            height:
+                20px;
+
+            flex-shrink:
+                0;
+
+            border:
+                1.5px solid
+                rgba(172,99,96,0.38);
+
+            border-radius:
+                6px;
+
+            background:
+                rgba(255,255,255,0.27);
+
+            cursor:
+                pointer;
+
+            position:
+                relative;
+
+            transition:
+                all .2s ease;
+        }
+
+
+        .task-check:checked {
+
+            border-color:
+                transparent;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #ef7b3f,
+                    #e56e90
+                );
+        }
+
+
+        .task-check:checked::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                5px;
+
+            height:
+                9px;
+
+            border-right:
+                2px solid
+                white;
+
+            border-bottom:
+                2px solid
+                white;
+
+            transform:
+                rotate(45deg);
+
+            left:
+                6px;
+
+            top:
+                3px;
+        }
+
+
+        .task-text {
+
+            flex:
+                1;
+
+            min-width:
+                0;
+
+            font-size:
+                0.65rem;
+
+            font-weight:
+                700;
+
+            color:
+                #724757;
+
+            line-height:
+                1.35;
+
+            word-break:
+                break-word;
+
+            overflow-wrap:
+                anywhere;
+
+            transition:
+                color .2s ease,
+                text-decoration .2s ease,
+                opacity .2s ease;
+        }
+
+
+        .task-item.completed .task-text {
+
+            text-decoration:
+                line-through;
+
+            color:
+                #ae9399;
+
+            opacity:
+                .78;
+        }
+
+
+        .delete-button {
+
+            width:
+                27px;
+
+            height:
+                27px;
+
+            flex-shrink:
+                0;
+
+            border:
+                none;
+
+            border-radius:
+                9px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            background:
+                rgba(227,102,118,0.09);
+
+            color:
+                #b46d77;
+
+            cursor:
+                pointer;
+
+            transition:
+                all .2s ease;
+        }
+
+
+        .delete-button:hover {
+
+            background:
+                rgba(227,102,118,0.17);
+
+            transform:
+                scale(1.05);
+        }
+
+
+        .delete-button svg {
+
+            width:
+                14px;
+
+            height:
+                14px;
+
+            fill:
+                none;
+
+            stroke:
+                currentColor;
+
+            stroke-width:
+                1.7;
+
+            stroke-linecap:
+                round;
+
+            stroke-linejoin:
+                round;
+        }
+
+
+        /* =====================================================
+           SIDE PANEL
+        ===================================================== */
+
+        .side-panel {
+
+            min-width:
+                0;
+
+            min-height:
+                0;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                12px;
+        }
+
+
+        .progress-card,
+        .motivation-card,
+        .pharma-card {
+
+            padding:
+                14px;
+
+            border-radius:
+                20px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.35),
+                    rgba(255,248,229,0.13)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.53);
+
+            box-shadow:
+
+                0 9px 23px
+                rgba(124,62,52,0.07),
+
+                inset
+                0 1px 0
+                rgba(255,255,255,0.66);
+        }
+
+
+        .side-title {
+
+            font-size:
+                0.69rem;
+
+            font-weight:
+                800;
+
+            color:
+                #8e4a57;
+
+            margin-bottom:
+                10px;
+        }
+
+
+        .big-progress {
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                1.55rem;
+
+            font-weight:
+                800;
+
+            color:
+                #e36e53;
+
+            margin-bottom:
+                5px;
+        }
+
+
+        .progress-label {
+
+            font-size:
+                0.52rem;
+
+            color:
+                #9e7375;
+
+            font-weight:
+                700;
+
+            margin-bottom:
+                8px;
+        }
+
+
+        .progress-track {
+
+            width:
+                100%;
+
+            height:
+                8px;
+
+            background:
+                rgba(158,95,89,0.10);
+
+            border-radius:
+                999px;
+
+            overflow:
+                hidden;
+        }
+
+
+        .progress-fill {
+
+            width:
+                0%;
+
+            height:
+                100%;
+
+            border-radius:
+                999px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    #ef813e,
+                    #ee7294,
+                    #f2c94c
+                );
+
+            transition:
+                width .35s ease;
+        }
+
+
+        /* =====================================================
+           MOTIVATION
+        ===================================================== */
+
+        .motivation-card {
+
+            flex:
+                1;
+
+            position:
+                relative;
+
+            overflow:
+                hidden;
+        }
+
+
+        .motivation-card::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                110px;
+
+            height:
+                110px;
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(255,205,80,0.14);
+
+            right:
+                -40px;
+
+            top:
+                -45px;
+
+            pointer-events:
+                none;
+        }
+
+
+        .motivation-message {
+
+            position:
+                relative;
+
+            z-index:
+                1;
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                0.67rem;
+
+            line-height:
+                1.8;
+
+            color:
+                #825567;
+        }
+
+
+        /* =====================================================
+           PHARMA CARD
+        ===================================================== */
+
+        .pharma-card {
+
+            min-height:
+                115px;
+
+            position:
+                relative;
+
+            overflow:
+                hidden;
+        }
+
+
+        .pharma-title {
+
+            font-size:
+                0.63rem;
+
+            font-weight:
+                800;
+
+            color:
+                #8d4c57;
+
+            margin-bottom:
+                7px;
+        }
+
+
+        .pharma-text {
+
+            font-size:
+                0.53rem;
+
+            line-height:
+                1.6;
+
+            color:
+                #a27579;
+
+            max-width:
+                92%;
+        }
+
+
+        .mini-capsule {
+
+            position:
+                absolute;
+
+            width:
+                58px;
+
+            height:
+                22px;
+
+            right:
+                12px;
+
+            bottom:
+                12px;
+
+            transform:
+                rotate(-27deg);
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    rgba(239,115,130,0.52) 0%,
+                    rgba(239,115,130,0.52) 49%,
+                    rgba(246,199,73,0.55) 50%,
+                    rgba(246,199,73,0.55) 100%
+                );
+
+            border-radius:
+                999px;
+
+            opacity:
+                .55;
+        }
+
+
+        /* =====================================================
+           COMPLETE MESSAGE
+        ===================================================== */
+
+        .complete-message {
+
+            display:
+                none;
+
+            flex-shrink:
+                0;
+
+            margin-top:
+                9px;
+
+            padding:
+                8px
+                10px;
+
+            border-radius:
+                11px;
+
+            background:
+                rgba(90,195,127,0.11);
+
+            color:
+                #4d9b6d;
+
+            font-size:
+                0.55rem;
+
+            font-weight:
+                800;
+
+            text-align:
+                center;
+        }
+
+
+        .complete-message.show {
+
+            display:
+                block;
+        }
+
+
+        /* =====================================================
+           ANIMATIONS
+        ===================================================== */
+
+        @keyframes cardAppear {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(25px)
+                    scale(.97);
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+
+        @keyframes floatOne {
+
+            0%,
+            100% {
+
+                transform:
+                    translate(0,0);
+            }
+
+            50% {
+
+                transform:
+                    translate(-18px,17px);
+            }
+        }
+
+
+        @keyframes floatTwo {
+
+            0%,
+            100% {
+
+                transform:
+                    translate(0,0);
+            }
+
+            50% {
+
+                transform:
+                    translate(18px,-18px);
+            }
+        }
+
+
+        @keyframes dotPulse {
+
+            0%,
+            100% {
+
+                opacity:
+                    .22;
+
+                transform:
+                    scale(.78);
+            }
+
+            50% {
+
+                opacity:
+                    .90;
+
+                transform:
+                    scale(1.18);
+            }
+        }
+
+
+        @keyframes taskAppear {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(5px);
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        /* =====================================================
+           TABLET / MOBILE
+        ===================================================== */
+
+        @media (max-width: 820px) {
+
+            .content {
+
+                width:
+                    93%;
+
+                height:
+                    92vh;
+
+                padding:
+                    17px
+                    13px
+                    18px;
+
+                border-radius:
+                    27px;
+            }
+
+
+            .back-button {
+
+                top:
+                    17px;
+
+                left:
+                    17px;
+
+                padding:
+                    8px
+                    14px;
+
+                font-size:
+                    .68rem;
+            }
+
+
+            .todo-layout {
+
+                display:
+                    flex;
+
+                flex-direction:
+                    column;
+
+                height:
+                    calc(100% - 118px);
+
+                min-height:
+                    0;
+
+                overflow-y:
+                    auto;
+
+                padding-right:
+                    3px;
+            }
+
+
+            .task-panel {
+
+                min-height:
+                    430px;
+
+                flex-shrink:
+                    0;
+            }
+
+
+            .side-panel {
+
+                display:
+                    grid;
+
+                grid-template-columns:
+                    1fr
+                    1fr;
+
+                flex-shrink:
+                    0;
+            }
+
+
+            .motivation-card {
+
+                min-height:
+                    145px;
+            }
+
+
+            .pharma-card {
+
+                grid-column:
+                    1 / -1;
+            }
+
+
+            .title {
+
+                font-size:
+                    1.45rem;
+            }
+
+
+            .subtitle {
+
+                font-size:
+                    .61rem;
+            }
+
+
+            .note,
+            .pencil,
+            .bottle {
+
+                opacity:
+                    .35;
+            }
+        }
+
+
+        /* =====================================================
+           SMALL MOBILE
+        ===================================================== */
+
+        @media (max-width: 480px) {
+
+            .content {
+
+                height:
+                    93vh;
+            }
+
+
+            .side-panel {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .pharma-card {
+
+                grid-column:
+                    auto;
+            }
+
+
+            .add-row {
+
+                flex-direction:
+                    column;
+            }
+
+
+            .add-button {
+
+                width:
+                    100%;
+            }
+
+
+            .task-panel {
+
+                min-height:
+                    450px;
+            }
+
+
+            .task-text {
+
+                font-size:
+                    .61rem;
+            }
+
+
+            .task-input {
+
+                font-size:
+                    .59rem;
+            }
+
+
+            .light-dot {
+
+                opacity:
+                    .50;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <main class="page">
+
+
+        <!-- =================================================
+             BACKGROUND
+        ================================================== -->
+
+        <div class="orb orb-one"></div>
+
+        <div class="orb orb-two"></div>
+
+        <div class="orb orb-three"></div>
+
+        <div class="circle circle-one"></div>
+
+        <div class="circle circle-two"></div>
+
+        <div class="circle circle-three"></div>
+
+        <div class="note note-one"></div>
+
+        <div class="note note-two"></div>
+
+        <div class="pencil pencil-one"></div>
+
+        <div class="pencil pencil-two"></div>
+
+        <div class="capsule capsule-one"></div>
+
+        <div class="capsule capsule-two"></div>
+
+        <div class="bottle bottle-one"></div>
+
+        <div class="bottle bottle-two"></div>
+
+        <div class="light-dot dot-one"></div>
+
+        <div class="light-dot dot-two"></div>
+
+        <div class="light-dot dot-three"></div>
+
+        <div class="light-dot dot-four"></div>
+
+
+        <!-- =================================================
+             RETOUR
+        ================================================== -->
+
+        <button
+            class="back-button"
+            id="backButton"
+            type="button"
+        >
+            ← Retour
+        </button>
+
+
+        <!-- =================================================
+             MAIN CARD
+        ================================================== -->
+
+        <section class="content">
+
+
+            <!-- HEADER -->
+
+            <header class="header">
+
+                <div class="top-line"></div>
+
+                <div class="mini-label">
+                    PHARMSINERGY • LICENCE 1
+                </div>
+
+                <h1 class="title">
+                    To-Do du jour
+                </h1>
+
+                <p class="subtitle">
+                    Organise ta journée d'étudiant en pharmacie industrielle
+                </p>
+
+                <p
+                    class="date-line"
+                    id="todayDate"
+                >
+                    —
+                </p>
+
+            </header>
+
+
+            <!-- =================================================
+                 TODO LAYOUT
+            ================================================== -->
+
+            <div class="todo-layout">
+
+
+                <!-- =================================================
+                     TASK PANEL
+                ================================================== -->
+
+                <section class="task-panel">
+
+
+                    <div class="task-heading">
+
+                        <h2>
+                            Mes tâches
+                        </h2>
+
+                        <span
+                            class="task-counter"
+                            id="taskCounter"
+                        >
+                            0 tâche
+                        </span>
+
+                    </div>
+
+
+                    <!-- ADD TASK -->
+
+                    <div class="add-row">
+
+                        <input
+                            type="text"
+                            id="taskInput"
+                            class="task-input"
+                            maxlength="200"
+                            placeholder="Qu'est-ce que tu veux accomplir aujourd'hui ?"
+                            autocomplete="off"
+                        >
+
+
+                        <button
+                            type="button"
+                            id="addButton"
+                            class="add-button"
+                        >
+                            + Ajouter
+                        </button>
+
+                    </div>
+
+
+                    <!-- ARCHIVE BUTTON -->
+
+                    <button
+                        type="button"
+                        id="archiveButton"
+                        class="archive-button"
+                    >
+
+                        <span class="archive-icon">
+
+                            <svg viewBox="0 0 24 24">
+
+                                <path
+                                    d="M4 7h16v13H4z"
+                                />
+
+                                <path
+                                    d="M7 4h10l1 3H6z"
+                                />
+
+                                <path
+                                    d="M8 11h8"
+                                />
+
+                                <path
+                                    d="M9 15h6"
+                                />
+
+                            </svg>
+
+                        </span>
+
+                        Voir mon carnet — Archives
+
+                    </button>
+
+
+                    <!-- TASK LIST -->
+
+                    <div
+                        id="taskList"
+                        class="task-list"
+                    >
+
+                        <div
+                            id="emptyMessage"
+                            class="empty-message"
+                        >
+                            Ta journée commence ici.<br>
+                            Ajoute ta première tâche 
+                        </div>
+
+                    </div>
+
+
+                    <!-- COMPLETE MESSAGE -->
+
+                    <div
+                        id="completeMessage"
+                        class="complete-message"
+                    >
+                        Journée accomplie ! Bravo pour ton travail. 💗
+                    </div>
+
+
+                </section>
+
+
+                <!-- =================================================
+                     SIDE PANEL
+                ================================================== -->
+
+                <aside class="side-panel">
+
+
+                    <!-- PROGRESS -->
+
+                    <div class="progress-card">
+
+                        <div class="side-title">
+                            Progression du jour
+                        </div>
+
+                        <div
+                            class="big-progress"
+                            id="bigProgress"
+                        >
+                            0%
+                        </div>
+
+                        <div
+                            class="progress-label"
+                            id="progressLabel"
+                        >
+                            0 / 0 tâche terminée
+                        </div>
+
+                        <div class="progress-track">
+
+                            <div
+                                class="progress-fill"
+                                id="progressFill"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MOTIVATION -->
+
+                    <div class="motivation-card">
+
+                        <div class="side-title">
+                            Petit rappel 💛
+                        </div>
+
+                        <p
+                            class="motivation-message"
+                            id="motivationMessage"
+                        >
+                            Tu n'as pas besoin de tout faire
+                            parfaitement. Commence simplement
+                            par une petite tâche et avance à ton rythme.
+                        </p>
+
+                    </div>
+
+
+                    <!-- PHARMA -->
+
+                    <div class="pharma-card">
+
+                        <div class="pharma-title">
+                            Pharma mindset
+                        </div>
+
+                        <p class="pharma-text">
+                            Une journée organisée,
+                            une révision après l'autre,
+                            et chaque effort compte dans
+                            ton parcours universitaire.
+                        </p>
+
+                        <div class="mini-capsule"></div>
+
+                    </div>
+
+
+                </aside>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <script>
+
+
+        /* =====================================================
+           RETOUR → CARNET
+        ===================================================== */
+
+        document
+            .getElementById("backButton")
+            .addEventListener("click", function () {
+
+                window.location.href =
+                    "carnetdeletudiant.html";
+
+            });
+
+
+        /* =====================================================
+           ARCHIVES → MON CARNET
+        ===================================================== */
+
+        document
+            .getElementById("archiveButton")
+            .addEventListener("click", function () {
+
+                window.location.href =
+                    "archive-todo-l1.html";
+
+            });
+
+
+        /* =====================================================
+           DATE
+        ===================================================== */
+
+        const now =
+            new Date();
+
+
+        const dateFormatter =
+            new Intl.DateTimeFormat(
+                "fr-FR",
+                {
+                    weekday:
+                        "long",
+
+                    day:
+                        "numeric",
+
+                    month:
+                        "long",
+
+                    year:
+                        "numeric"
+                }
+            );
+
+
+        document
+            .getElementById("todayDate")
+            .textContent =
+                dateFormatter.format(now);
+
+
+        /* =====================================================
+           MOTIVATION
+        ===================================================== */
+
+        const motivationalMessages = [
+
+            "Tu n'as pas besoin de tout faire parfaitement. Commence simplement par une petite tâche et avance à ton rythme.",
+
+            "Chaque tâche terminée est une petite victoire. Continue !",
+
+            "La régularité transforme les petits efforts en grands résultats.",
+
+            "Travaille à ton rythme, mais avance chaque jour.",
+
+            "Ton travail d'aujourd'hui prépare tes réussites de demain."
+
+        ];
+
+
+        const messageIndex =
+            now.getDate()
+            %
+            motivationalMessages.length;
+
+
+        document
+            .getElementById("motivationMessage")
+            .textContent =
+                motivationalMessages[
+                    messageIndex
+                ];
+
+
+        /* =====================================================
+           ELEMENTS
+        ===================================================== */
+
+        const taskInput =
+            document.getElementById(
+                "taskInput"
+            );
+
+
+        const addButton =
+            document.getElementById(
+                "addButton"
+            );
+
+
+        const taskList =
+            document.getElementById(
+                "taskList"
+            );
+
+
+        const emptyMessage =
+            document.getElementById(
+                "emptyMessage"
+            );
+
+
+        const taskCounter =
+            document.getElementById(
+                "taskCounter"
+            );
+
+
+        const progressLabel =
+            document.getElementById(
+                "progressLabel"
+            );
+
+
+        const progressFill =
+            document.getElementById(
+                "progressFill"
+            );
+
+
+        const bigProgress =
+            document.getElementById(
+                "bigProgress"
+            );
+
+
+        const completeMessage =
+            document.getElementById(
+                "completeMessage"
+            );
+
+
+        /* =====================================================
+           DAILY STORAGE
+        ===================================================== */
+
+        const dateKey =
+            now.toISOString()
+                .slice(
+                    0,
+                    10
+                );
+
+
+        const storageKey =
+            "pharmsinergy_todo_l1_" +
+            dateKey;
+
+
+        /* =====================================================
+           LOAD TASKS
+        ===================================================== */
+
+        let tasks =
+            JSON.parse(
+                localStorage.getItem(
+                    storageKey
+                )
+            ) || [];
+
+
+        /* =====================================================
+           SAVE TASKS
+        ===================================================== */
+
+        function saveTasks() {
+
+            localStorage.setItem(
+                storageKey,
+                JSON.stringify(tasks)
+            );
+        }
+
+
+        /* =====================================================
+           UPDATE PROGRESS
+        ===================================================== */
+
+        function updateProgress() {
+
+            const total =
+                tasks.length;
+
+
+            const completed =
+                tasks.filter(
+                    function (task) {
+
+                        return task.completed;
+
+                    }
+                ).length;
+
+
+            const percentage =
+                total === 0
+                    ? 0
+                    : Math.round(
+                        (completed / total) *
+                        100
+                    );
+
+
+            taskCounter.textContent =
+                total === 1
+                    ? "1 tâche"
+                    : total + " tâches";
+
+
+            progressLabel.textContent =
+                completed +
+                " / " +
+                total +
+                (
+                    total === 1
+                        ? " tâche terminée"
+                        : " tâches terminées"
+                );
+
+
+            progressFill.style.width =
+                percentage + "%";
+
+
+            bigProgress.textContent =
+                percentage + "%";
+
+
+            if (
+                total > 0 &&
+                completed === total
+            ) {
+
+                completeMessage.classList.add(
+                    "show"
+                );
+
+            } else {
+
+                completeMessage.classList.remove(
+                    "show"
+                );
+            }
+
+        }
+
+
+        /* =====================================================
+           RENDER TASKS
+        ===================================================== */
+
+        function renderTasks() {
+
+            taskList.innerHTML = "";
+
+
+            if (tasks.length === 0) {
+
+                taskList.appendChild(
+                    emptyMessage
+                );
+
+                updateProgress();
+
+                return;
+            }
+
+
+            tasks.forEach(
+                function (task) {
+
+
+                    const taskItem =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    taskItem.className =
+                        "task-item";
+
+
+                    if (task.completed) {
+
+                        taskItem.classList.add(
+                            "completed"
+                        );
+                    }
+
+
+                    /* CHECKBOX */
+
+                    const checkbox =
+                        document.createElement(
+                            "input"
+                        );
+
+
+                    checkbox.type =
+                        "checkbox";
+
+
+                    checkbox.className =
+                        "task-check";
+
+
+                    checkbox.checked =
+                        task.completed;
+
+
+                    checkbox.setAttribute(
+                        "aria-label",
+                        "Terminer la tâche"
+                    );
+
+
+                    checkbox.addEventListener(
+                        "change",
+                        function () {
+
+                            task.completed =
+                                checkbox.checked;
+
+                            saveTasks();
+
+                            renderTasks();
+
+                        }
+                    );
+
+
+                    /* TEXT */
+
+                    const text =
+                        document.createElement(
+                            "span"
+                        );
+
+
+                    text.className =
+                        "task-text";
+
+
+                    text.textContent =
+                        task.text;
+
+
+                    /* DELETE */
+
+                    const deleteButton =
+                        document.createElement(
+                            "button"
+                        );
+
+
+                    deleteButton.type =
+                        "button";
+
+
+                    deleteButton.className =
+                        "delete-button";
+
+
+                    deleteButton.setAttribute(
+                        "aria-label",
+                        "Supprimer la tâche"
+                    );
+
+
+                    deleteButton.innerHTML = `
+
+                        <svg viewBox="0 0 24 24">
+
+                            <path d="M4 7h16" />
+
+                            <path d="M10 11v6" />
+
+                            <path d="M14 11v6" />
+
+                            <path
+                                d="M6 7l1 13h10l1-13"
+                            />
+
+                            <path
+                                d="M9 7V4h6v3"
+                            />
+
+                        </svg>
+
+                    `;
+
+
+                    deleteButton.addEventListener(
+                        "click",
+                        function () {
+
+                            tasks =
+                                tasks.filter(
+                                    function (item) {
+
+                                        return (
+                                            item.id !==
+                                            task.id
+                                        );
+
+                                    }
+                                );
+
+
+                            saveTasks();
+
+                            renderTasks();
+
+                        }
+                    );
+
+
+                    taskItem.appendChild(
+                        checkbox
+                    );
+
+
+                    taskItem.appendChild(
+                        text
+                    );
+
+
+                    taskItem.appendChild(
+                        deleteButton
+                    );
+
+
+                    taskList.appendChild(
+                        taskItem
+                    );
+
+                }
+            );
+
+
+            updateProgress();
+
+        }
+
+
+        /* =====================================================
+           ADD TASK
+        ===================================================== */
+
+        function addTask() {
+
+            const text =
+                taskInput.value.trim();
+
+
+            if (!text) {
+
+                taskInput.focus();
+
+                return;
+            }
+
+
+            tasks.push({
+
+                id:
+                    Date.now() +
+                    Math.random(),
+
+                text:
+                    text,
+
+                completed:
+                    false
+
+            });
+
+
+            saveTasks();
+
+            taskInput.value = "";
+
+            renderTasks();
+
+            taskInput.focus();
+
+        }
+
+
+        /* =====================================================
+           ADD BUTTON
+        ===================================================== */
+
+        addButton
+            .addEventListener(
+                "click",
+                addTask
+            );
+
+
+        /* =====================================================
+           ENTER KEY
+        ===================================================== */
+
+        taskInput
+            .addEventListener(
+                "keydown",
+                function (event) {
+
+                    if (
+                        event.key ===
+                        "Enter"
+                    ) {
+
+                        event.preventDefault();
+
+                        addTask();
+
+                    }
+
+                }
+            );
+
+
+        /* =====================================================
+           INITIAL RENDER
+        ===================================================== */
+
+        renderTasks();
+
+    </script>
+
+
+</body>
+
+</html>
