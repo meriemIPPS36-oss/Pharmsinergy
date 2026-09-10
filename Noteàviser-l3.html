@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Note à viser | PharmSinergy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kufam:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        /* =====================================================
+           BODY
+        ===================================================== */
+
+        body {
+            min-height: 100vh;
+            overflow: hidden;
+
+            font-family:
+                "Inter",
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color: #693f4d;
+
+            background:
+                radial-gradient(
+                    circle at 12% 14%,
+                    rgba(255,126,163,0.50),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 88% 14%,
+                    rgba(255,210,74,0.45),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 82% 88%,
+                    rgba(255,145,67,0.40),
+                    transparent 31%
+                ),
+
+                radial-gradient(
+                    circle at 18% 88%,
+                    rgba(255,195,84,0.36),
+                    transparent 29%
+                ),
+
+                radial-gradient(
+                    circle at 50% 45%,
+                    rgba(255,255,255,0.85),
+                    rgba(255,232,222,0.26) 26%,
+                    transparent 55%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #ee739c 0%,
+                    #f59b77 27%,
+                    #f8c95c 53%,
+                    #f8a86b 75%,
+                    #ef749c 100%
+                );
+        }
+
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .page {
+            position: relative;
+
+            width: 100%;
+            height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+            isolation: isolate;
+        }
+
+
+        /* =====================================================
+           BACKGROUND ORBS
+        ===================================================== */
+
+        .orb {
+            position: absolute;
+
+            border-radius: 50%;
+
+            filter: blur(70px);
+
+            pointer-events: none;
+
+            z-index: -9;
+        }
+
+        .orb-one {
+            width: 420px;
+            height: 420px;
+
+            top: -180px;
+            left: -120px;
+
+            background:
+                rgba(255,117,171,0.28);
+
+            animation:
+                floatOne
+                10s
+                ease-in-out
+                infinite;
+        }
+
+        .orb-two {
+            width: 400px;
+            height: 400px;
+
+            right: -130px;
+            bottom: -170px;
+
+            background:
+                rgba(255,175,61,0.26);
+
+            animation:
+                floatTwo
+                12s
+                ease-in-out
+                infinite;
+        }
+
+        .orb-three {
+            width: 210px;
+            height: 210px;
+
+            left: 43%;
+            top: 40%;
+
+            background:
+                rgba(255,223,106,0.15);
+
+            filter:
+                blur(88px);
+        }
+
+
+        /* =====================================================
+           DECORATIVE PAPER
+        ===================================================== */
+
+        .deco-paper {
+            position: absolute;
+
+            width: 165px;
+            height: 125px;
+
+            border-radius: 13px;
+
+            background:
+                rgba(255,249,222,0.34);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.38);
+
+            box-shadow:
+                0 20px 45px
+                rgba(130,74,62,0.10);
+
+            pointer-events: none;
+
+            z-index: -3;
+        }
+
+        .deco-paper::before {
+            content: "";
+
+            position: absolute;
+
+            left: 20px;
+            right: 20px;
+
+            top: 35px;
+
+            height: 1px;
+
+            background:
+                rgba(127,91,71,0.14);
+
+            box-shadow:
+                0 15px 0 rgba(127,91,71,0.11),
+                0 30px 0 rgba(127,91,71,0.09),
+                0 45px 0 rgba(127,91,71,0.07);
+        }
+
+        .deco-paper-one {
+            left: -40px;
+            top: 10%;
+
+            transform:
+                rotate(-10deg);
+        }
+
+        .deco-paper-two {
+            right: -42px;
+            bottom: 11%;
+
+            transform:
+                rotate(9deg);
+
+            background:
+                rgba(255,236,170,0.30);
+        }
+
+
+        /* =====================================================
+           PENCIL
+        ===================================================== */
+
+        .pencil {
+            position: absolute;
+
+            width: 165px;
+            height: 18px;
+
+            border-radius: 999px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(246,113,155,0.26) 0%,
+                    rgba(255,199,81,0.38) 65%,
+                    rgba(255,255,255,0.35) 66%,
+                    rgba(255,255,255,0.35) 75%,
+                    rgba(234,123,75,0.30) 76%,
+                    rgba(234,123,75,0.30) 100%
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.34);
+
+            box-shadow:
+                0 10px 26px
+                rgba(145,74,60,0.09);
+
+            pointer-events: none;
+
+            z-index: -3;
+        }
+
+        .pencil::after {
+            content: "";
+
+            position: absolute;
+
+            right: -12px;
+            top: 2px;
+
+            border-top:
+                7px solid transparent;
+
+            border-bottom:
+                7px solid transparent;
+
+            border-left:
+                13px solid rgba(108,75,61,0.28);
+        }
+
+        .pencil-one {
+            left: -30px;
+            top: 30%;
+
+            transform:
+                rotate(22deg);
+        }
+
+        .pencil-two {
+            right: -30px;
+            bottom: 29%;
+
+            transform:
+                rotate(-20deg)
+                scale(.82);
+        }
+
+
+        /* =====================================================
+           PHARMACY STICKERS
+        ===================================================== */
+
+        .sticker {
+            position: absolute;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.45);
+
+            box-shadow:
+                0 14px 28px
+                rgba(117,65,51,0.10);
+
+            pointer-events: none;
+
+            z-index: -2;
+
+            font-size: 1.15rem;
+        }
+
+        .sticker-capsule {
+            width: 85px;
+            height: 37px;
+
+            border-radius: 999px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(234,100,130,0.70) 0 49%,
+                    rgba(255,218,99,0.72) 50% 100%
+                );
+
+            transform:
+                rotate(-18deg);
+        }
+
+        .sticker-pill {
+            width: 46px;
+            height: 46px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,244,203,0.72);
+
+            color:
+                #e58d70;
+
+            font-size: 1.25rem;
+        }
+
+        .sticker-flask {
+            width: 48px;
+            height: 62px;
+
+            border-radius:
+                13px
+                13px
+                17px
+                17px;
+
+            background:
+                rgba(255,244,204,0.62);
+
+            color:
+                #df8f6c;
+
+            font-size: 1.15rem;
+        }
+
+        .sticker-book {
+            width: 62px;
+            height: 49px;
+
+            border-radius: 10px;
+
+            background:
+                rgba(255,237,180,0.72);
+
+            color:
+                #d78367;
+
+            font-size: 1rem;
+        }
+
+        .sticker-one {
+            top: 12%;
+            right: 13%;
+
+            transform:
+                rotate(-10deg);
+        }
+
+        .sticker-two {
+            top: 26%;
+            left: 8%;
+
+            transform:
+                rotate(8deg);
+        }
+
+        .sticker-three {
+            bottom: 16%;
+            right: 8%;
+
+            transform:
+                rotate(7deg);
+        }
+
+        .sticker-four {
+            bottom: 12%;
+            left: 12%;
+
+            transform:
+                rotate(-7deg);
+        }
+
+
+        /* =====================================================
+           SMALL CIRCULAR ELEMENTS
+        ===================================================== */
+
+        .bubble {
+            position: absolute;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.35);
+
+            background:
+                rgba(255,255,255,0.12);
+
+            pointer-events: none;
+
+            z-index: -3;
+        }
+
+        .bubble-one {
+            width: 29px;
+            height: 29px;
+
+            left: 14%;
+            top: 17%;
+        }
+
+        .bubble-two {
+            width: 18px;
+            height: 18px;
+
+            left: 8%;
+            top: 42%;
+        }
+
+        .bubble-three {
+            width: 39px;
+            height: 39px;
+
+            right: 15%;
+            bottom: 20%;
+        }
+
+        .bubble-four {
+            width: 21px;
+            height: 21px;
+
+            right: 23%;
+            bottom: 12%;
+        }
+
+
+        /* =====================================================
+           BACK BUTTON
+        ===================================================== */
+
+        .back-button {
+            position: absolute;
+
+            top: 24px;
+            left: 28px;
+
+            padding:
+                9px 17px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.66);
+
+            border-radius: 999px;
+
+            background:
+                rgba(255,255,255,0.25);
+
+            color:
+                #824b58;
+
+            font-size:
+                .76rem;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            backdrop-filter:
+                blur(13px);
+
+            -webkit-backdrop-filter:
+                blur(13px);
+
+            box-shadow:
+                0 8px 22px
+                rgba(116,66,57,0.11);
+
+            transition:
+                all .25s ease;
+
+            z-index:
+                50;
+        }
+
+        .back-button:hover {
+            transform:
+                translateX(-4px);
+
+            background:
+                rgba(255,255,255,0.40);
+        }
+
+
+        /* =====================================================
+           MAIN GLASS CARD
+        ===================================================== */
+
+        .content {
+            position: relative;
+
+            width:
+                min(820px, 91%);
+
+            min-height:
+                560px;
+
+            padding:
+                32px 35px 27px;
+
+            border-radius:
+                32px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.44),
+                    rgba(255,240,228,0.19)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.73);
+
+            box-shadow:
+                0 30px 82px
+                rgba(105,57,54,0.18),
+                inset
+                0 1px 0
+                rgba(255,255,255,0.92);
+
+            backdrop-filter:
+                blur(24px);
+
+            -webkit-backdrop-filter:
+                blur(24px);
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            overflow:
+                hidden;
+
+            animation:
+                cardAppear
+                1s
+                cubic-bezier(.2,.8,.2,1)
+                both;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .header {
+            text-align:
+                center;
+
+            margin-bottom:
+                32px;
+        }
+
+        .top-line {
+            width:
+                78px;
+
+            height:
+                3px;
+
+            margin:
+                0 auto
+                10px;
+
+            border-radius:
+                999px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ee6f9d,
+                    #f5b94f,
+                    #f18767
+                );
+        }
+
+        .mini-label {
+            font-size:
+                .60rem;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                .29em;
+
+            color:
+                #9f635f;
+
+            text-transform:
+                uppercase;
+
+            margin-bottom:
+                5px;
+        }
+
+        .title {
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                clamp(
+                    1.50rem,
+                    3.7vw,
+                    2.5rem
+                );
+
+            font-weight:
+                800;
+
+            color:
+                #934c60;
+
+            text-shadow:
+                0 5px 18px
+                rgba(144,61,77,0.13);
+        }
+
+        .subtitle {
+            margin-top:
+                7px;
+
+            font-size:
+                clamp(
+                    .63rem,
+                    1.1vw,
+                    .80rem
+                );
+
+            color:
+                #9a6b68;
+
+            font-weight:
+                600;
+        }
+
+
+        /* =====================================================
+           CHOICE AREA
+        ===================================================== */
+
+        .choices {
+            width:
+                min(620px, 100%);
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap:
+                22px;
+        }
+
+
+        /* =====================================================
+           CHOICE BUTTON
+        ===================================================== */
+
+        .choice-button {
+            position:
+                relative;
+
+            min-height:
+                155px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.60);
+
+            border-radius:
+                22px;
+
+            background:
+                rgba(255,255,255,0.30);
+
+            box-shadow:
+                0 15px 32px
+                rgba(126,72,59,0.12),
+                inset
+                0 1px 0
+                rgba(255,255,255,0.70);
+
+            backdrop-filter:
+                blur(14px);
+
+            -webkit-backdrop-filter:
+                blur(14px);
+
+            cursor:
+                pointer;
+
+            overflow:
+                hidden;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            transition:
+                all .25s ease;
+
+            color:
+                #824b58;
+        }
+
+        .choice-button::before {
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                130px;
+
+            height:
+                130px;
+
+            border-radius:
+                50%;
+
+            filter:
+                blur(18px);
+
+            opacity:
+                .38;
+
+            transition:
+                all .25s ease;
+        }
+
+        .choice-button:hover {
+            transform:
+                translateY(-6px)
+                scale(1.015);
+
+            background:
+                rgba(255,255,255,0.42);
+
+            box-shadow:
+                0 22px 42px
+                rgba(126,72,59,0.18),
+                inset
+                0 1px 0
+                rgba(255,255,255,0.85);
+        }
+
+        .choice-button:hover::before {
+            transform:
+                scale(1.25);
+
+            opacity:
+                .52;
+        }
+
+
+        /* =====================================================
+           IPPS
+        ===================================================== */
+
+        .ipps::before {
+            left:
+                -35px;
+
+            top:
+                -35px;
+
+            background:
+                rgba(238,111,157,0.35);
+        }
+
+
+        /* =====================================================
+           AUX
+        ===================================================== */
+
+        .aux::before {
+            right:
+                -35px;
+
+            bottom:
+                -35px;
+
+            background:
+                rgba(248,201,92,0.38);
+        }
+
+
+        /* =====================================================
+           BUTTON CONTENT
+        ===================================================== */
+
+        .choice-content {
+            position:
+                relative;
+
+            z-index:
+                2;
+
+            text-align:
+                center;
+        }
+
+        .choice-icon {
+            width:
+                52px;
+
+            height:
+                52px;
+
+            margin:
+                0 auto 12px;
+
+            border-radius:
+                16px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            background:
+                rgba(255,255,255,0.36);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.55);
+
+            box-shadow:
+                0 8px 20px
+                rgba(126,72,59,0.10);
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                .70rem;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                .05em;
+        }
+
+        .ipps .choice-icon {
+            color:
+                #c95b7b;
+        }
+
+        .aux .choice-icon {
+            color:
+                #d08351;
+        }
+
+        .choice-title {
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                1rem;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                .04em;
+        }
+
+        .choice-description {
+            margin-top:
+                5px;
+
+            font-size:
+                .53rem;
+
+            color:
+                #a16f6d;
+
+            font-weight:
+                600;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .bottom-note {
+            margin-top:
+                28px;
+
+            text-align:
+                center;
+
+            font-family:
+                "Kufam",
+                sans-serif;
+
+            font-size:
+                .51rem;
+
+            font-weight:
+                600;
+
+            color:
+                #9a7173;
+        }
+
+
+        /* =====================================================
+           ANIMATIONS
+        ===================================================== */
+
+        @keyframes cardAppear {
+
+            from {
+                opacity:
+                    0;
+
+                transform:
+                    translateY(23px)
+                    scale(.97);
+            }
+
+            to {
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+        @keyframes floatOne {
+
+            0%,
+            100% {
+                transform:
+                    translate(0,0);
+            }
+
+            50% {
+                transform:
+                    translate(18px,17px);
+            }
+        }
+
+        @keyframes floatTwo {
+
+            0%,
+            100% {
+                transform:
+                    translate(0,0);
+            }
+
+            50% {
+                transform:
+                    translate(-18px,-17px);
+            }
+        }
+
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .content {
+                width:
+                    94%;
+
+                min-height:
+                    520px;
+
+                padding:
+                    28px 22px 24px;
+            }
+
+            .choices {
+                width:
+                    min(580px, 100%);
+
+                gap:
+                    16px;
+            }
+
+            .choice-button {
+                min-height:
+                    140px;
+            }
+
+            .sticker,
+            .deco-paper,
+            .pencil {
+                opacity:
+                    .30;
+            }
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 600px) {
+
+            .content {
+                width:
+                    95%;
+
+                min-height:
+                    510px;
+
+                padding:
+                    26px 15px 22px;
+
+                border-radius:
+                    26px;
+            }
+
+            .back-button {
+                top:
+                    15px;
+
+                left:
+                    15px;
+
+                padding:
+                    7px 12px;
+
+                font-size:
+                    .63rem;
+            }
+
+            .mini-label {
+                font-size:
+                    .50rem;
+            }
+
+            .title {
+                font-size:
+                    1.32rem;
+            }
+
+            .subtitle {
+                font-size:
+                    .54rem;
+            }
+
+            .header {
+                margin-bottom:
+                    25px;
+            }
+
+            .choices {
+                grid-template-columns:
+                    1fr;
+
+                width:
+                    88%;
+
+                gap:
+                    13px;
+            }
+
+            .choice-button {
+                min-height:
+                    125px;
+
+                border-radius:
+                    18px;
+            }
+
+            .choice-icon {
+                width:
+                    45px;
+
+                height:
+                    45px;
+
+                margin-bottom:
+                    8px;
+            }
+
+            .choice-title {
+                font-size:
+                    .88rem;
+            }
+
+            .choice-description {
+                font-size:
+                    .48rem;
+            }
+
+            .bottom-note {
+                margin-top:
+                    20px;
+
+                font-size:
+                    .47rem;
+            }
+
+            .sticker,
+            .deco-paper,
+            .pencil,
+            .bubble {
+                opacity:
+                    .18;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <main class="page">
+
+        <!-- BACKGROUND -->
+
+        <div class="orb orb-one"></div>
+        <div class="orb orb-two"></div>
+        <div class="orb orb-three"></div>
+
+        <div class="deco-paper deco-paper-one"></div>
+        <div class="deco-paper deco-paper-two"></div>
+
+        <div class="pencil pencil-one"></div>
+        <div class="pencil pencil-two"></div>
+
+
+        <!-- PHARMACY DECORATION -->
+
+        <div class="sticker sticker-capsule sticker-one"></div>
+
+        <div class="sticker sticker-pill sticker-two">
+            💊
+        </div>
+
+        <div class="sticker sticker-flask sticker-three">
+            🧪
+        </div>
+
+        <div class="sticker sticker-book sticker-four">
+            📖
+        </div>
+
+
+        <!-- BUBBLES -->
+
+        <div class="bubble bubble-one"></div>
+        <div class="bubble bubble-two"></div>
+        <div class="bubble bubble-three"></div>
+        <div class="bubble bubble-four"></div>
+
+
+        <!-- BACK -->
+
+        <button
+            type="button"
+            class="back-button"
+            id="backButton"
+        >
+            ← Retour
+        </button>
+
+
+        <!-- MAIN CARD -->
+
+        <section class="content">
+
+            <!-- HEADER -->
+
+            <header class="header">
+
+                <div class="top-line"></div>
+
+                <div class="mini-label">
+                    PHARMSINERGY • LICENCE 3
+                </div>
+
+                <h1 class="title">
+                    Note à viser
+                </h1>
+
+                <p class="subtitle">
+                    Choisis ton parcours pour calculer la note à viser
+                </p>
+
+            </header>
+
+
+            <!-- CHOICES -->
+
+            <div class="choices">
+
+                <!-- IPPS -->
+
+                <button
+                    type="button"
+                    class="choice-button ipps"
+                    id="ippsButton"
+                >
+
+                    <div class="choice-content">
+
+                        <div class="choice-icon">
+                            IPPS
+                        </div>
+
+                        <div class="choice-title">
+                            IPPS
+                        </div>
+
+                        <div class="choice-description">
+                            Industrie des produits pharmaceutiques et de santé
+                        </div>
+
+                    </div>
+
+                </button>
+
+
+                <!-- AUX -->
+
+                <button
+                    type="button"
+                    class="choice-button aux"
+                    id="auxButton"
+                >
+
+                    <div class="choice-content">
+
+                        <div class="choice-icon">
+                            AUX
+                        </div>
+
+                        <div class="choice-title">
+                            AUX
+                        </div>
+
+                        <div class="choice-description">
+                            Auxiliaire en pharmacie
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </div>
+
+
+            <!-- FOOTER -->
+
+            <div class="bottom-note">
+                Choisis ton parcours pour continuer.
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        /* =====================================================
+           RETURN
+        ===================================================== */
+
+        document
+            .getElementById("backButton")
+            .addEventListener(
+                "click",
+                function () {
+
+                    window.location.href =
+                        "carnet-l3.html";
+
+                }
+            );
+
+
+        /* =====================================================
+           IPPS
+        ===================================================== */
+
+        document
+            .getElementById("ippsButton")
+            .addEventListener(
+                "click",
+                function () {
+
+                    window.location.href =
+                        "note-a-viser-ipps-l3.html";
+
+                }
+            );
+
+
+        /* =====================================================
+           AUX
+        ===================================================== */
+
+        document
+            .getElementById("auxButton")
+            .addEventListener(
+                "click",
+                function () {
+
+                    window.location.href =
+                        "note-a-viser-aux-l3.html";
+
+                }
+            );
+
+    </script>
+
+</body>
+</html>
