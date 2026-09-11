@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Semestre 4 | PharmSinergy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kufam:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Inter", sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(255,255,255,0.30),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 85% 75%,
+                    rgba(255,255,255,0.20),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #5f2caf 0%,
+                    #8d54d6 25%,
+                    #d9cdf5 50%,
+                    #b8d8f5 72%,
+                    #568fd7 100%
+                );
+
+            color: #24213b;
+            overflow: hidden;
+        }
+
+        .page {
+            position: relative;
+
+            width: 100%;
+            height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        /* =========================
+           BACKGROUND
+        ========================== */
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+
+            filter: blur(2px);
+            opacity: 0.45;
+
+            pointer-events: none;
+            z-index: -2;
+
+            animation: floatOne 9s ease-in-out infinite;
+        }
+
+        .orb.one {
+            width: 230px;
+            height: 230px;
+
+            top: -70px;
+            left: -50px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255,255,255,0.65),
+                    rgba(135,85,220,0.10)
+                );
+        }
+
+        .orb.two {
+            width: 280px;
+            height: 280px;
+
+            bottom: -100px;
+            right: -80px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255,255,255,0.55),
+                    rgba(70,130,220,0.08)
+                );
+
+            animation-delay: -3s;
+        }
+
+        .orb.three {
+            width: 130px;
+            height: 130px;
+
+            top: 22%;
+            right: 5%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255,255,255,0.55),
+                    rgba(95,44,175,0.05)
+                );
+
+            animation-delay: -5s;
+        }
+
+        .molecule {
+            position: absolute;
+
+            width: 120px;
+            height: 120px;
+
+            opacity: 0.22;
+
+            border: 1px solid rgba(255,255,255,0.55);
+            border-radius: 50%;
+
+            transform: rotate(30deg);
+
+            z-index: -1;
+
+            animation: floatTwo 10s ease-in-out infinite;
+        }
+
+        .molecule::before,
+        .molecule::after {
+            content: "";
+
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            width: 100%;
+            height: 1px;
+
+            background: rgba(255,255,255,0.6);
+        }
+
+        .molecule::before {
+            transform: translate(-50%, -50%) rotate(60deg);
+        }
+
+        .molecule::after {
+            transform: translate(-50%, -50%) rotate(-60deg);
+        }
+
+        .molecule.one {
+            top: 8%;
+            left: 8%;
+        }
+
+        .molecule.two {
+            bottom: 10%;
+            right: 9%;
+
+            transform: rotate(80deg) scale(0.75);
+
+            animation-delay: -4s;
+        }
+
+        .ring {
+            position: absolute;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255,255,255,0.35);
+
+            z-index: -1;
+        }
+
+        .ring.one {
+            width: 180px;
+            height: 180px;
+
+            top: 5%;
+            right: 18%;
+        }
+
+        .ring.two {
+            width: 90px;
+            height: 90px;
+
+            bottom: 18%;
+            left: 7%;
+        }
+
+        .star {
+            position: absolute;
+
+            width: 5px;
+            height: 5px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.75);
+
+            box-shadow:
+                0 0 12px rgba(255,255,255,0.8);
+
+            animation: twinkle 3s ease-in-out infinite;
+
+            z-index: -1;
+        }
+
+        .star.one {
+            top: 18%;
+            left: 30%;
+        }
+
+        .star.two {
+            top: 70%;
+            left: 15%;
+
+            animation-delay: -1s;
+        }
+
+        .star.three {
+            top: 30%;
+            right: 30%;
+
+            animation-delay: -2s;
+        }
+
+        .star.four {
+            bottom: 20%;
+            right: 25%;
+
+            animation-delay: -1.5s;
+        }
+
+        /* =========================
+           GLASS CARD
+        ========================== */
+
+        .content {
+            position: relative;
+
+            width: min(850px, 86%);
+            max-height: 92vh;
+
+            padding: 24px 40px 30px;
+
+            border-radius: 32px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,0.43),
+                    rgba(255,255,255,0.18)
+                );
+
+            border: 1px solid rgba(255,255,255,0.65);
+
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+
+            box-shadow:
+                0 25px 60px rgba(48,33,95,0.20),
+                inset 0 1px 0 rgba(255,255,255,0.7);
+
+            animation: cardAppear 0.8s ease-out forwards;
+
+            overflow: auto;
+            scrollbar-width: none;
+        }
+
+        .content::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* =========================
+           BACK BUTTON
+        ========================== */
+
+        .back-button {
+            position: relative;
+
+            display: inline-flex;
+            align-items: center;
+
+            border: none;
+            background: transparent;
+
+            color: #5f2caf;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            margin-bottom: 12px;
+
+            transition: 0.25s ease;
+        }
+
+        .back-button:hover {
+            transform: translateX(-4px);
+            color: #3f2484;
+        }
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        .header {
+            text-align: center;
+        }
+
+        .top-line {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+
+            margin-bottom: 7px;
+        }
+
+        .mini-label {
+            font-family: "Kufam", sans-serif;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            letter-spacing: 3px;
+
+            color: #6940a9;
+        }
+
+        .title {
+            font-family: "Kufam", sans-serif;
+
+            font-size: clamp(28px, 5vw, 43px);
+
+            line-height: 1.1;
+
+            color: #30245a;
+
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+
+            color: #5d5a76;
+
+            font-weight: 500;
+        }
+
+        /* =========================
+           DIVIDER
+        ========================== */
+
+        .divider {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin: 20px 0 18px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+
+            flex: 1;
+
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(95,44,175,0.30)
+                );
+        }
+
+        .divider::after {
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(95,44,175,0.30),
+                    transparent
+                );
+        }
+
+        .divider span {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #7042b5;
+
+            box-shadow:
+                0 0 10px rgba(112,66,181,0.45);
+        }
+
+        /* =========================
+           MODULES
+        ========================== */
+
+        .modules {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 12px;
+        }
+
+        .module-button {
+            min-height: 61px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 10px 13px;
+
+            border-radius: 17px;
+
+            border: 1px solid rgba(255,255,255,0.65);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,0.50),
+                    rgba(255,255,255,0.20)
+                );
+
+            color: #30245a;
+
+            font-family: "Inter", sans-serif;
+
+            font-size: 12.5px;
+            font-weight: 600;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 20px rgba(55,42,100,0.08),
+                inset 0 1px 0 rgba(255,255,255,0.6);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease;
+        }
+
+        .module-button:hover {
+            transform: translateY(-4px);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,0.72),
+                    rgba(255,255,255,0.30)
+                );
+
+            box-shadow:
+                0 14px 28px rgba(55,42,100,0.15);
+        }
+
+        .icon-box {
+            flex-shrink: 0;
+
+            width: 35px;
+            height: 35px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(112,66,181,0.16),
+                    rgba(79,145,215,0.16)
+                );
+
+            border: 1px solid rgba(112,66,181,0.20);
+        }
+
+        .icon-box svg {
+            width: 20px;
+            height: 20px;
+
+            stroke: #6240a5;
+
+            fill: none;
+
+            stroke-width: 1.8;
+
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* =========================
+           ANIMATIONS
+        ========================== */
+
+        @keyframes cardAppear {
+
+            from {
+                opacity: 0;
+                transform: translateY(18px) scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes floatOne {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-18px);
+            }
+        }
+
+        @keyframes floatTwo {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(30deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(38deg);
+            }
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.25;
+                transform: scale(0.8);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.25);
+            }
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 700px) {
+
+            .content {
+                width: 92%;
+                padding: 22px 20px 25px;
+            }
+
+            .modules {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .module-button {
+                font-size: 11.5px;
+            }
+        }
+
+        @media (max-width: 390px) {
+
+            .modules {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                padding: 20px 16px 22px;
+            }
+
+            .title {
+                font-size: 28px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <main class="page">
+
+        <!-- BACKGROUND -->
+
+        <div class="orb one"></div>
+        <div class="orb two"></div>
+        <div class="orb three"></div>
+
+        <div class="molecule one"></div>
+        <div class="molecule two"></div>
+
+        <div class="ring one"></div>
+        <div class="ring two"></div>
+
+        <div class="star one"></div>
+        <div class="star two"></div>
+        <div class="star three"></div>
+        <div class="star four"></div>
+
+
+        <!-- CONTENT -->
+
+        <section class="content">
+
+            <button
+                class="back-button"
+                id="backButton"
+            >
+                ← Retour
+            </button>
+
+
+            <header class="header">
+
+                <div class="top-line">
+                    <span class="mini-label">
+                        PHARMSINERGY
+                    </span>
+                </div>
+
+                <h1 class="title">
+                    Semestre 4
+                </h1>
+
+                <div class="subtitle">
+                    Modules — Licence 2 Pharmacie industrielle
+                </div>
+
+            </header>
+
+
+            <div class="divider">
+                <span></span>
+            </div>
+
+
+            <div class="modules">
+
+
+                <!-- 1 -->
+
+                <button
+                    class="module-button"
+                    onclick="window.location.href='formes-pharmaceutiques-l2.html'"
+                >
+
+                    <span class="icon-box">
+
+                        <svg viewBox="0 0 24 24">
+                            <path d="M7 3h10"></path>
+                            <path d="M8 3v5l-3 8a4 4 0 0 0 4 5h2"></path>
+                            <path d="M16 3v5l3 8a4 4 0 0 1-4 5h-2"></path>
+                            <path d="M7 13h10"></path>
+                        </svg>
+
+                    </span>
+
+                    Formes pharmaceutiques
+
+                </button>
+
+
+                <!-- 2 -->
+
+                <button
+                    class="module-button"
+                    onclick="window.location.href='pharmacologie-speciale-l2.html'"
+                >
+
+                    <span class="icon-box">
+
+                        <svg viewBox="0 0 24 24">
+                            <path d="M9 3h6"></path>
+                            <path d="M10 3v4l-5 9a4 4 0 0 0 3.5 5.9h7A4 4 0 0 0 19 16l-5-9V3"></path>
+                            <path d="M8 15h8"></path>
+                        </svg>
+
+                    </span>
+
+                    Pharmacologie spéciale
+
+                </button>
+
+
+                <!-- 3 -->
+
+                <button
+                    class="module-button"
+                    onclick="window.location.href='phytotherapie-l2.html'"
+                >
+
+                    <span class="icon-box">
+
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 20V9"></path>
+                            <path d="M12 12c-4-1-6-4-6-7 4 0 7 2 6 7z"></path>
+                            <path d="M12 15c4-1 6-4 6-7-4 0-7 2-6 7z"></path>
+                        </svg>
+
+                    </span>
+
+                    Phytothérapie
+
+                </button>
+
+
+                <!-- 4 -->
+
+                <button
+                    class="module-button"
+                    onclick="window.location.href='anglais-l2.html'"
+                >
+
+                    <span class="icon-box">
+
+                        <svg viewBox="0 0 24 24">
+                            <path d="M4 5h16"></path>
+                            <path d="M7 3v4"></path>
+                            <path d="M17 3v4"></path>
+
+                            <rect
+                                x="4"
+                                y="5"
+                                width="16"
+                                height="15"
+                                rx="2"
+                            ></rect>
+
+                            <path d="M8 11h3"></path>
+                            <path d="M13 11h3"></path>
+                            <path d="M8 15h3"></path>
+                            <path d="M13 15h3"></path>
+                        </svg>
+
+                    </span>
+
+                    Anglais
+
+                </button>
+
+
+                <!-- 5 -->
+
+                <button
+                    class="module-button"
+                    onclick="window.location.href='normes-guidelines-l2.html'"
+                >
+
+                    <span class="icon-box">
+
+                        <svg viewBox="0 0 24 24">
+                            <path d="M6 3h12v18H6z"></path>
+                            <path d="M9 7h6"></path>
+                            <path d="M9 11h6"></path>
+                            <path d="M9 15h4"></path>
+                            <path d="M9 18h3"></path>
+                        </svg>
+
+                    </span>
+
+                    Normes et guidelines
+
+                </button>
+
+
+                <!-- 6 -->
+
+                <button
+                    class="module-button"
+                    onclick="window.location.href='sciences-biologiques2-l2.html'"
+                >
+
+                    <span class="icon-box">
+
+                        <svg viewBox="0 0 24 24">
+
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="7"
+                            ></circle>
+
+                            <circle
+                                cx="9"
+                                cy="10"
+                                r="1"
+                            ></circle>
+
+                            <circle
+                                cx="14"
+                                cy="14"
+                                r="1"
+                            ></circle>
+
+                            <circle
+                                cx="15"
+                                cy="9"
+                                r="1"
+                            ></circle>
+
+                        </svg>
+
+                    </span>
+
+                    Sciences biologiques 2
+
+                </button>
+
+
+                <!-- 7 -->
+
+                <button
+                    class="module-button"
+                    onclick="window.location.href='analyses-biologiques-l2.html'"
+                >
+
+                    <span class="icon-box">
+
+                        <svg viewBox="0 0 24 24">
+
+                            <path d="M9 3h6"></path>
+
+                            <path d="M10 3v6l-4 8a3 3 0 0 0 3 4h6a3 3 0 0 0 3-4l-4-8V3"></path>
+
+                            <path d="M8 15h8"></path>
+
+                        </svg>
+
+                    </span>
+
+                    Analyses biologiques
+
+                </button>
+
+
+                <!-- 8 -->
+
+                <button
+                    class="module-button"
+                    onclick="window.location.href='dermo-cosmetologie-l2.html'"
+                >
+
+                    <span class="icon-box">
+
+                        <svg viewBox="0 0 24 24">
+
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="8"
+                            ></circle>
+
+                            <path d="M8 12c2-3 6-3 8 0"></path>
+
+                            <path d="M9 15c2 1 4 1 6 0"></path>
+
+                        </svg>
+
+                    </span>
+
+                    Dermo-cosmétologie (IPPS)
+
+                </button>
+
+
+                <!-- 9 -->
+
+                <button
+                    class="module-button"
+                    onclick="window.location.href='sterilisation-auxp.html'"
+                >
+
+                    <span class="icon-box">
+
+                        <svg viewBox="0 0 24 24">
+
+                            <rect
+                                x="5"
+                                y="4"
+                                width="14"
+                                height="16"
+                                rx="2"
+                            ></rect>
+
+                            <path d="M8 8h8"></path>
+                            <path d="M8 12h8"></path>
+                            <path d="M8 16h5"></path>
+
+                            <path d="M17 7l2-2"></path>
+                            <path d="M19 7l-2-2"></path>
+
+                        </svg>
+
+                    </span>
+
+                    Stérilisation (AuxP)
+
+                </button>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        document
+            .getElementById("backButton")
+            .addEventListener("click", function () {
+
+                window.location.href = "resumes-l2.html";
+
+            });
+
+    </script>
+
+</body>
+
+</html>

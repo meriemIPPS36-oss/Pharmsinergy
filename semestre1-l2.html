@@ -1,0 +1,1185 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Semestre 3 | PharmSinergy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kufam:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow: hidden;
+
+            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+
+            color: #42206f;
+
+            background:
+                radial-gradient(
+                    circle at 50% 45%,
+                    rgba(255,255,255,0.96) 0%,
+                    rgba(255,255,255,0.38) 23%,
+                    transparent 48%
+                ),
+                radial-gradient(
+                    circle at 8% 12%,
+                    rgba(161,91,255,0.45),
+                    transparent 31%
+                ),
+                radial-gradient(
+                    circle at 92% 88%,
+                    rgba(65,166,255,0.40),
+                    transparent 32%
+                ),
+                linear-gradient(
+                    135deg,
+                    #5f2caf 0%,
+                    #8d54d6 28%,
+                    #d9cdf5 52%,
+                    #b8d8f5 76%,
+                    #568fd7 100%
+                );
+        }
+
+
+        /* ================= PAGE ================= */
+
+        .page {
+            position: relative;
+
+            width: 100%;
+            height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+            isolation: isolate;
+        }
+
+
+        /* ================= BACKGROUND ================= */
+
+        .orb {
+            position: absolute;
+
+            border-radius: 50%;
+
+            filter: blur(65px);
+
+            pointer-events: none;
+
+            z-index: -5;
+        }
+
+        .orb-one {
+            width: 360px;
+            height: 360px;
+
+            top: -130px;
+            right: -90px;
+
+            background: rgba(195,145,255,0.30);
+
+            animation: floatOne 10s ease-in-out infinite;
+        }
+
+        .orb-two {
+            width: 330px;
+            height: 330px;
+
+            bottom: -130px;
+            left: -100px;
+
+            background: rgba(74,181,255,0.27);
+
+            animation: floatTwo 12s ease-in-out infinite;
+        }
+
+        .orb-three {
+            width: 180px;
+            height: 180px;
+
+            top: 42%;
+            left: 42%;
+
+            background: rgba(206,169,255,0.18);
+
+            filter: blur(75px);
+        }
+
+
+        /* ================= MOLECULES ================= */
+
+        .molecule {
+            position: absolute;
+
+            width: 170px;
+            height: 170px;
+
+            border: 1px solid rgba(255,255,255,0.22);
+
+            border-radius: 50%;
+
+            pointer-events: none;
+
+            opacity: 0.55;
+        }
+
+        .molecule::before,
+        .molecule::after {
+            content: "";
+
+            position: absolute;
+
+            border: 1px solid rgba(255,255,255,0.22);
+
+            border-radius: 50%;
+        }
+
+        .molecule::before {
+            width: 95px;
+            height: 95px;
+
+            top: 37px;
+            left: 37px;
+        }
+
+        .molecule::after {
+            width: 12px;
+            height: 12px;
+
+            top: 14px;
+            right: 22px;
+
+            background: rgba(255,255,255,0.45);
+
+            border: none;
+
+            box-shadow:
+                -115px 50px 0 rgba(255,255,255,0.30),
+                55px 115px 0 rgba(255,255,255,0.25);
+        }
+
+        .molecule-one {
+            top: 7%;
+            left: 3%;
+
+            transform: rotate(25deg);
+        }
+
+        .molecule-two {
+            bottom: 3%;
+            right: 2%;
+
+            transform: rotate(-30deg);
+        }
+
+
+        /* ================= RINGS ================= */
+
+        .ring {
+            position: absolute;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255,255,255,0.28);
+
+            pointer-events: none;
+        }
+
+        .ring-one {
+            width: 270px;
+            height: 270px;
+
+            left: -100px;
+            top: 27%;
+        }
+
+        .ring-two {
+            width: 360px;
+            height: 360px;
+
+            right: -145px;
+            bottom: 8%;
+        }
+
+
+        /* ================= STARS ================= */
+
+        .star {
+            position: absolute;
+
+            width: 5px;
+            height: 5px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.75);
+
+            box-shadow:
+                0 0 14px rgba(255,255,255,0.95);
+
+            animation: twinkle 3.5s ease-in-out infinite;
+        }
+
+        .star-one {
+            top: 17%;
+            left: 20%;
+        }
+
+        .star-two {
+            top: 24%;
+            right: 19%;
+
+            width: 4px;
+            height: 4px;
+
+            animation-delay: 1s;
+        }
+
+        .star-three {
+            bottom: 19%;
+            left: 23%;
+
+            width: 4px;
+            height: 4px;
+
+            animation-delay: 1.7s;
+        }
+
+        .star-four {
+            bottom: 24%;
+            right: 25%;
+
+            width: 6px;
+            height: 6px;
+
+            animation-delay: 2.2s;
+        }
+
+
+        /* ================= CARD ================= */
+
+        .content {
+            position: relative;
+
+            width: min(850px, 86%);
+
+            max-height: 92vh;
+
+            padding: 24px 40px 30px;
+
+            border-radius: 32px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.45),
+                    rgba(255,255,255,0.17)
+                );
+
+            border: 1px solid rgba(255,255,255,0.70);
+
+            box-shadow:
+                0 28px 70px rgba(60,27,120,0.18),
+                inset 0 1px 0 rgba(255,255,255,0.90);
+
+            backdrop-filter: blur(22px);
+
+            -webkit-backdrop-filter: blur(22px);
+
+            animation:
+                cardAppear
+                1s
+                cubic-bezier(.2,.8,.2,1)
+                both;
+        }
+
+
+        /* ================= RETOUR ================= */
+
+        .back-button {
+            display: inline-flex;
+
+            align-items: center;
+
+            border: none;
+
+            background: transparent;
+
+            color: #60339b;
+
+            font-size: 0.80rem;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform .25s ease,
+                color .25s ease;
+        }
+
+        .back-button:hover {
+            transform: translateX(-4px);
+
+            color: #401c77;
+        }
+
+
+        /* ================= HEADER ================= */
+
+        .header {
+            text-align: center;
+        }
+
+        .top-line {
+            width: 78px;
+            height: 3px;
+
+            margin: 2px auto 14px;
+
+            border-radius: 999px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #7940c8,
+                    #b67cff,
+                    #73b9ef
+                );
+        }
+
+        .mini-label {
+            font-size: 0.68rem;
+
+            font-weight: 800;
+
+            letter-spacing: 0.28em;
+
+            color: #77549a;
+
+            text-transform: uppercase;
+
+            margin-bottom: 5px;
+        }
+
+        .title {
+            font-family: "Kufam", sans-serif;
+
+            font-size:
+                clamp(1.75rem, 4vw, 2.8rem);
+
+            font-weight: 800;
+
+            color: #4b178f;
+
+            text-shadow:
+                0 5px 18px rgba(72,32,130,0.14);
+
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size:
+                clamp(0.72rem, 1.3vw, 0.90rem);
+
+            font-weight: 600;
+
+            color: #69468f;
+
+            margin-bottom: 17px;
+        }
+
+
+        /* ================= DIVIDER ================= */
+
+        .divider {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+            margin-bottom: 17px;
+        }
+
+        .divider-line {
+            width: 75px;
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(105,60,161,0.45)
+                );
+        }
+
+        .divider-line.right {
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(105,60,161,0.45),
+                    transparent
+                );
+        }
+
+        .divider-dot {
+            width: 5px;
+            height: 5px;
+
+            border-radius: 50%;
+
+            background: #8151bc;
+
+            box-shadow:
+                0 0 10px rgba(129,81,188,0.40);
+        }
+
+
+        /* ================= MODULES ================= */
+
+        .modules {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 11px;
+        }
+
+        .module-button {
+            position: relative;
+
+            min-height: 61px;
+
+            padding: 10px 12px;
+
+            border-radius: 17px;
+
+            border:
+                1px solid rgba(255,255,255,0.72);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.46),
+                    rgba(255,255,255,0.18)
+                );
+
+            box-shadow:
+                0 8px 20px rgba(70,31,130,0.09),
+                inset 0 1px 0 rgba(255,255,255,0.75);
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: flex-start;
+
+            gap: 10px;
+
+            text-align: left;
+
+            color: #4b247d;
+
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease,
+                background .25s ease;
+
+            overflow: hidden;
+        }
+
+        .module-button::after {
+            content: "";
+
+            position: absolute;
+
+            width: 65px;
+            height: 65px;
+
+            border-radius: 50%;
+
+            right: -27px;
+            bottom: -38px;
+
+            background:
+                rgba(129,81,188,0.08);
+
+            pointer-events: none;
+        }
+
+        .module-button:hover {
+            transform: translateY(-4px);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.62),
+                    rgba(255,255,255,0.25)
+                );
+
+            box-shadow:
+                0 14px 28px rgba(70,31,130,0.15),
+                0 0 20px rgba(157,111,238,0.12);
+        }
+
+        .module-button:active {
+            transform: scale(0.97);
+        }
+
+
+        /* ================= ICON ================= */
+
+        .icon-box {
+            flex-shrink: 0;
+
+            width: 35px;
+            height: 35px;
+
+            border-radius: 11px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color: #6334a0;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(132,68,220,0.17),
+                    rgba(82,142,220,0.15)
+                );
+
+            border:
+                1px solid rgba(126,82,200,0.18);
+
+            box-shadow:
+                inset 0 1px 4px rgba(255,255,255,0.55);
+        }
+
+        .icon-box svg {
+            width: 19px;
+            height: 19px;
+
+            stroke: currentColor;
+
+            fill: none;
+
+            stroke-width: 1.7;
+
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+
+        /* ================= TEXT ================= */
+
+        .module-title {
+            font-size: 0.72rem;
+
+            font-weight: 800;
+
+            color: #4b247d;
+
+            line-height: 1.2;
+        }
+
+
+        /* ================= ANIMATIONS ================= */
+
+        @keyframes cardAppear {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(25px)
+                    scale(.97);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+        @keyframes floatOne {
+
+            0%, 100% {
+                transform: translate(0,0);
+            }
+
+            50% {
+                transform: translate(-20px,18px);
+            }
+        }
+
+        @keyframes floatTwo {
+
+            0%, 100% {
+                transform: translate(0,0);
+            }
+
+            50% {
+                transform: translate(20px,-18px);
+            }
+        }
+
+        @keyframes twinkle {
+
+            0%, 100% {
+                opacity: .25;
+
+                transform: scale(.75);
+            }
+
+            50% {
+                opacity: 1;
+
+                transform: scale(1.3);
+            }
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 700px) {
+
+            body {
+                overflow: auto;
+            }
+
+            .page {
+                min-height: 100vh;
+
+                height: auto;
+
+                padding: 25px 0;
+            }
+
+            .content {
+                width: 91%;
+
+                max-height: none;
+
+                padding:
+                    21px
+                    18px
+                    25px;
+
+                border-radius: 27px;
+            }
+
+            .back-button {
+                font-size: .72rem;
+            }
+
+            .mini-label {
+                font-size: .58rem;
+            }
+
+            .title {
+                font-size: 1.65rem;
+            }
+
+            .subtitle {
+                font-size: .70rem;
+            }
+
+            .divider {
+                margin-bottom: 14px;
+            }
+
+            .modules {
+                grid-template-columns: repeat(2, 1fr);
+
+                gap: 9px;
+            }
+
+            .module-button {
+                min-height: 64px;
+
+                padding: 9px;
+
+                border-radius: 15px;
+
+                gap: 8px;
+            }
+
+            .icon-box {
+                width: 32px;
+                height: 32px;
+
+                border-radius: 9px;
+            }
+
+            .icon-box svg {
+                width: 17px;
+                height: 17px;
+            }
+
+            .module-title {
+                font-size: .63rem;
+            }
+
+            .molecule {
+                opacity: .25;
+
+                transform: scale(.7);
+            }
+        }
+
+        @media (max-width: 390px) {
+
+            .modules {
+                grid-template-columns: 1fr;
+            }
+
+            .module-button {
+                min-height: 55px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <main class="page">
+
+        <!-- BACKGROUND -->
+
+        <div class="orb orb-one"></div>
+        <div class="orb orb-two"></div>
+        <div class="orb orb-three"></div>
+
+        <div class="ring ring-one"></div>
+        <div class="ring ring-two"></div>
+
+        <div class="molecule molecule-one"></div>
+        <div class="molecule molecule-two"></div>
+
+        <div class="star star-one"></div>
+        <div class="star star-two"></div>
+        <div class="star star-three"></div>
+        <div class="star star-four"></div>
+
+
+        <section class="content">
+
+            <!-- RETOUR -->
+
+            <button
+                class="back-button"
+                id="backButton"
+                type="button"
+            >
+                ← Retour
+            </button>
+
+
+            <!-- HEADER -->
+
+            <header class="header">
+
+                <div class="top-line"></div>
+
+                <div class="mini-label">
+                    PHARMSINERGY
+                </div>
+
+                <h1 class="title">
+                    Semestre 3
+                </h1>
+
+                <div class="subtitle">
+                    Modules — Licence 2 Pharmacie industrielle
+                </div>
+
+            </header>
+
+
+            <div class="divider">
+
+                <span class="divider-line"></span>
+
+                <span class="divider-dot"></span>
+
+                <span class="divider-line right"></span>
+
+            </div>
+
+
+            <!-- MODULES -->
+
+            <div class="modules">
+
+
+                <!-- OPÉRATIONS PHARMACEUTIQUES -->
+
+                <button
+                    class="module-button"
+                    onclick="window.location.href='operations-pharmaceutiques-l2.html'"
+                    type="button"
+                >
+
+                    <span class="icon-box">
+
+                        <svg viewBox="0 0 24 24">
+
+                            <path d="M9 3h6" />
+
+                            <path d="M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4A2 2 0 0 0 19 18l-5-9V3" />
+
+                            <path d="M8 15h8" />
+
+                        </svg>
+
+                    </span>
+
+                    <span class="module-title">
+                        Opérations pharmaceutiques
+                    </span>
+
+                </button>
+
+
+                <!-- MÉTHODES SPECTRALES -->
+
+                <button
+                    class="module-button"
+                    onclick="window.location.href='methodes-spectrales-l2.html'"
+                    type="button"
+                >
+
+                    <span class="icon-box">
+
+                        <svg viewBox="0 0 24 24">
+
+                            <path d="M4 18h16" />
+
+                            <path d="M6 16l4-8 3 5 2-3 3 6" />
+
+                        </svg>
+
+                    </span>
+
+                    <span class="module-title">
+                        Méthodes spectrales
+                    </span>
+
+                </button>
+
+
+                <!-- MÉTHODES SÉPARATIVES -->
+
+                <button
+                    class="module-button"
+                    onclick="window.location.href='methodes-separatives-l2.html'"
+                    type="button"
+                >
+
+                    <span class="icon-box">
+
+                        <svg viewBox="0 0 24 24">
+
+                            <path d="M4 5h16" />
+
+                            <path d="M7 5v5l-3 7a2 2 0 0 0 1.8 3h12.4A2 2 0 0 0 20 17l-3-7V5" />
+
+                            <path d="M7 14h10" />
+
+                        </svg>
+
+                    </span>
+
+                    <span class="module-title">
+                        Méthodes séparatives
+                    </span>
+
+                </button>
+
+
+                <!-- PHARMACOLOGIE GÉNÉRALE -->
+
+                <button
+                    class="module-button"
+                    onclick="window.location.href='pharmacologie-generale-l2.html'"
+                    type="button"
+                >
+
+                    <span class="icon-box">
+
+                        <svg viewBox="0 0 24 24">
+
+                            <path d="M8 4h8" />
+
+                            <path d="M9 4v4l-4 8a3 3 0 0 0 2.7 4h8.6A3 3 0 0 0 19 16l-4-8V4" />
+
+                            <path d="M8 15h8" />
+
+                        </svg>
+
+                    </span>
+
+                    <span class="module-title">
+                        Pharmacologie générale
+                    </span>
+
+                </button>
+
+
+                <!-- ANGLAIS -->
+
+                <button
+                    class="module-button"
+                    onclick="window.location.href='anglais-l2.html'"
+                    type="button"
+                >
+
+                    <span class="icon-box">
+
+                        <svg viewBox="0 0 24 24">
+
+                            <path d="M4 5h16" />
+
+                            <path d="M12 5v14" />
+
+                            <path d="M7 9h5" />
+
+                            <path d="M5 19h14" />
+
+                        </svg>
+
+                    </span>
+
+                    <span class="module-title">
+                        Anglais
+                    </span>
+
+                </button>
+
+
+                <!-- SCIENCES BIOLOGIQUES 1 -->
+
+                <button
+                    class="module-button"
+                    onclick="window.location.href='sciences-biologiques1-l2.html'"
+                    type="button"
+                >
+
+                    <span class="icon-box">
+
+                        <svg viewBox="0 0 24 24">
+
+                            <circle cx="12" cy="12" r="7" />
+
+                            <circle cx="9" cy="10" r="1" />
+
+                            <circle cx="15" cy="10" r="1" />
+
+                            <path d="M9 15c2 1.5 4 1.5 6 0" />
+
+                        </svg>
+
+                    </span>
+
+                    <span class="module-title">
+                        Sciences biologiques 1
+                    </span>
+
+                </button>
+
+
+                <!-- SUBSTANCES BIOACTIVES -->
+
+                <button
+                    class="module-button"
+                    onclick="window.location.href='substances-bioactives-l2.html'"
+                    type="button"
+                >
+
+                    <span class="icon-box">
+
+                        <svg viewBox="0 0 24 24">
+
+                            <path d="M12 20V10" />
+
+                            <path d="M12 12C8 12 5 9 5 5c4 0 7 3 7 7z" />
+
+                            <path d="M12 16c4 0 7-3 7-7-4 0-7 3-7 7z" />
+
+                        </svg>
+
+                    </span>
+
+                    <span class="module-title">
+                        Substances bioactives
+                    </span>
+
+                </button>
+
+
+                <!-- BONNES PRATIQUES -->
+
+                <button
+                    class="module-button"
+                    onclick="window.location.href='bonnes-pratiques-l2.html'"
+                    type="button"
+                >
+
+                    <span class="icon-box">
+
+                        <svg viewBox="0 0 24 24">
+
+                            <path d="M5 4h14v16H5z" />
+
+                            <path d="M8 8h8" />
+
+                            <path d="M8 12h8" />
+
+                            <path d="M8 16h5" />
+
+                        </svg>
+
+                    </span>
+
+                    <span class="module-title">
+                        Bonnes pratiques
+                    </span>
+
+                </button>
+
+
+                <!-- COMPLÉMENTS ALIMENTAIRES -->
+
+                <button
+                    class="module-button"
+                    onclick="window.location.href='complements-alimentaires-l2.html'"
+                    type="button"
+                >
+
+                    <span class="icon-box">
+
+                        <svg viewBox="0 0 24 24">
+
+                            <path d="M7 4h10" />
+
+                            <path d="M8 4v5l-3 8a2 2 0 0 0 1.9 3h10.2A2 2 0 0 0 19 17l-3-8V4" />
+
+                            <path d="M8 14h8" />
+
+                        </svg>
+
+                    </span>
+
+                    <span class="module-title">
+                        Compléments alimentaires (IPPS)
+                    </span>
+
+                </button>
+
+
+                <!-- LOGICIELS -->
+
+                <button
+                    class="module-button"
+                    onclick="window.location.href='logiciels-l2.html'"
+                    type="button"
+                >
+
+                    <span class="icon-box">
+
+                        <svg viewBox="0 0 24 24">
+
+                            <rect
+                                x="4"
+                                y="4"
+                                width="16"
+                                height="12"
+                                rx="2"
+                            />
+
+                            <path d="M8 20h8" />
+
+                            <path d="M12 16v4" />
+
+                        </svg>
+
+                    </span>
+
+                    <span class="module-title">
+                        Logiciels (AuxP)
+                    </span>
+
+                </button>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        /* ================================================
+           RETOUR VERS LA PAGE DES RÉSUMÉS L2
+        ================================================= */
+
+        document
+            .getElementById("backButton")
+            .addEventListener("click", function () {
+
+                window.location.href = "resumes-l2.html";
+
+            });
+
+    </script>
+
+</body>
+
+</html>
+```
