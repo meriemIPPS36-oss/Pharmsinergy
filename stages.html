@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Stages | PharmSinergy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Inter", sans-serif;
+            overflow-x: hidden;
+            color: #ffffff;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(255, 105, 150, 0.22), transparent 28%),
+                radial-gradient(circle at 85% 80%, rgba(130, 0, 35, 0.30), transparent 30%),
+                linear-gradient(135deg, #4b0018, #8f123f 45%, #e65d91 100%);
+            position: relative;
+        }
+
+        /* Décorations */
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(2px);
+        }
+
+        body::before {
+            width: 280px;
+            height: 280px;
+            top: -100px;
+            right: -80px;
+            background: rgba(255, 180, 205, 0.12);
+        }
+
+        body::after {
+            width: 220px;
+            height: 220px;
+            bottom: -80px;
+            left: -70px;
+            background: rgba(90, 0, 30, 0.22);
+        }
+
+        /* Petits éléments décoratifs */
+        .bubble {
+            position: fixed;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.14);
+            pointer-events: none;
+        }
+
+        .bubble.one {
+            width: 80px;
+            height: 80px;
+            top: 18%;
+            left: 4%;
+        }
+
+        .bubble.two {
+            width: 45px;
+            height: 45px;
+            top: 70%;
+            right: 7%;
+        }
+
+        .bubble.three {
+            width: 25px;
+            height: 25px;
+            top: 34%;
+            right: 12%;
+        }
+
+        /* Retour */
+        .back-btn {
+            position: fixed;
+            top: 24px;
+            left: 24px;
+            z-index: 20;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+
+            padding: 11px 18px;
+            border-radius: 14px;
+
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.25);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+
+            box-shadow: 0 8px 25px rgba(50,0,20,0.20);
+            transition: 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,0.20);
+        }
+
+        .back-icon {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Conteneur */
+        .page {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 80px 20px 35px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            max-width: 760px;
+            margin-bottom: 32px;
+        }
+
+        .mini-title {
+            font-size: 11px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            opacity: 0.72;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: clamp(34px, 6vw, 58px);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 15px;
+            line-height: 1.7;
+            opacity: 0.84;
+        }
+
+        .motivation {
+            margin-top: 15px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #ffd8e5;
+        }
+
+        /* Cartes stages */
+        .stages-container {
+            width: min(850px, 100%);
+            display: flex;
+            flex-direction: column;
+            gap: 17px;
+        }
+
+        .stage-card {
+            position: relative;
+            width: 100%;
+            min-height: 112px;
+
+            display: flex;
+            align-items: center;
+            gap: 22px;
+
+            padding: 22px 26px;
+
+            text-decoration: none;
+            color: white;
+
+            background: rgba(255,255,255,0.11);
+            border: 1px solid rgba(255,255,255,0.22);
+            border-radius: 24px;
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 14px 35px rgba(50,0,20,0.18),
+                inset 0 1px 0 rgba(255,255,255,0.12);
+
+            overflow: hidden;
+            transition: transform 0.3s ease,
+                        background 0.3s ease,
+                        box-shadow 0.3s ease;
+        }
+
+        .stage-card::before {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            right: -60px;
+            top: -70px;
+            background: rgba(255,255,255,0.08);
+        }
+
+        .stage-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.17);
+            box-shadow:
+                0 18px 40px rgba(50,0,20,0.25),
+                inset 0 1px 0 rgba(255,255,255,0.18);
+        }
+
+        /* Icônes */
+        .icon-box {
+            flex: 0 0 66px;
+            width: 66px;
+            height: 66px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 20px;
+
+            background: rgba(255,255,255,0.13);
+            border: 1px solid rgba(255,255,255,0.22);
+
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,0.15),
+                0 8px 20px rgba(60,0,25,0.14);
+        }
+
+        .icon-box svg {
+            width: 36px;
+            height: 36px;
+            stroke: #ffd5e3;
+            fill: none;
+            stroke-width: 1.7;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .stage-info {
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stage-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .stage-description {
+            font-size: 12px;
+            line-height: 1.6;
+            opacity: 0.72;
+        }
+
+        .arrow {
+            position: relative;
+            z-index: 2;
+
+            width: 34px;
+            height: 34px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.10);
+            border: 1px solid rgba(255,255,255,0.18);
+
+            font-size: 18px;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            opacity: 0.5;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            .page {
+                padding: 78px 14px 25px;
+            }
+
+            .back-btn {
+                top: 16px;
+                left: 16px;
+                padding: 9px 14px;
+            }
+
+            .header {
+                margin-bottom: 25px;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            .subtitle {
+                font-size: 13px;
+            }
+
+            .stage-card {
+                min-height: 100px;
+                padding: 18px;
+                gap: 15px;
+                border-radius: 20px;
+            }
+
+            .icon-box {
+                flex-basis: 56px;
+                width: 56px;
+                height: 56px;
+                border-radius: 17px;
+            }
+
+            .icon-box svg {
+                width: 30px;
+                height: 30px;
+            }
+
+            .stage-title {
+                font-size: 15px;
+            }
+
+            .stage-description {
+                font-size: 10px;
+            }
+
+            .arrow {
+                width: 29px;
+                height: 29px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bubble one"></div>
+    <div class="bubble two"></div>
+    <div class="bubble three"></div>
+
+    <!-- Retour en haut à gauche -->
+    <a href="page3.html" class="back-btn">
+        <svg class="back-icon" viewBox="0 0 24 24">
+            <path d="M15 18l-6-6 6-6"></path>
+        </svg>
+        Retour
+    </a>
+
+    <main class="page">
+
+        <header class="header">
+            <div class="mini-title">PHARMSINERGY • EXPÉRIENCE</div>
+
+            <h1>Stages</h1>
+
+            <p class="subtitle">
+                Découvrez les différents environnements professionnels
+                et les expériences qui peuvent enrichir votre parcours.
+            </p>
+
+            <p class="motivation">
+                Chaque stage est une nouvelle expérience,
+                chaque expérience construit votre avenir.
+            </p>
+        </header>
+
+        <section class="stages-container">
+
+            <!-- Stage en officine -->
+            <a href="#" class="stage-card">
+
+                <div class="icon-box">
+                    <!-- Capsule -->
+                    <svg viewBox="0 0 48 48">
+                        <path d="M16 32.5L31.5 17"></path>
+                        <path d="M13.5 35a7 7 0 0 1 0-10L25 13.5a7 7 0 0 1 10 10L23.5 35a7 7 0 0 1-10 0Z"></path>
+                        <path d="M20 28l8-8"></path>
+                    </svg>
+                </div>
+
+                <div class="stage-info">
+                    <div class="stage-title">
+                        Stage en officine
+                    </div>
+
+                    <div class="stage-description">
+                        Découvrir la pratique officinale, l’organisation
+                        de l’officine et le contact avec le patient.
+                    </div>
+                </div>
+
+                <div class="arrow">›</div>
+
+            </a>
+
+
+            <!-- Stage en industrie pharmaceutique -->
+            <a href="#" class="stage-card">
+
+                <div class="icon-box">
+                    <!-- Usine -->
+                    <svg viewBox="0 0 48 48">
+                        <path d="M7 40V22l10 6V22l10 6V14h8v26"></path>
+                        <path d="M4 40h40"></path>
+                        <path d="M32 20h3"></path>
+                        <path d="M32 25h3"></path>
+                        <path d="M32 30h3"></path>
+                        <path d="M13 34h5"></path>
+                        <path d="M22 34h5"></path>
+                    </svg>
+                </div>
+
+                <div class="stage-info">
+                    <div class="stage-title">
+                        Stage en industrie pharmaceutique
+                    </div>
+
+                    <div class="stage-description">
+                        Explorer la production, le contrôle qualité,
+                        l’assurance qualité et les différents métiers de l’industrie.
+                    </div>
+                </div>
+
+                <div class="arrow">›</div>
+
+            </a>
+
+
+            <!-- Stage en laboratoire -->
+            <a href="#" class="stage-card">
+
+                <div class="icon-box">
+                    <!-- Laboratoire -->
+                    <svg viewBox="0 0 48 48">
+                        <path d="M19 7h10"></path>
+                        <path d="M22 7v12L12 36a4 4 0 0 0 3.5 6h17a4 4 0 0 0 3.5-6L26 19V7"></path>
+                        <path d="M17 31h14"></path>
+                        <path d="M15 36h18"></path>
+                    </svg>
+                </div>
+
+                <div class="stage-info">
+                    <div class="stage-title">
+                        Stage en laboratoire d’analyses médicales
+                    </div>
+
+                    <div class="stage-description">
+                        Découvrir les analyses biologiques, les techniques
+                        de laboratoire et l’organisation d’un laboratoire médical.
+                    </div>
+                </div>
+
+                <div class="arrow">›</div>
+
+            </a>
+
+        </section>
+
+        <footer class="footer">
+            PHARMSINERGY • DÉCOUVRIR • EXPÉRIMENTER • ÉVOLUER
+        </footer>
+
+    </main>
+
+</body>
+</html>
