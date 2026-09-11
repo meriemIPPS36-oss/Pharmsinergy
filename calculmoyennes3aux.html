@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Calcul des moyennes AUX | PharmSinergy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+            font-family: "Inter", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #f5f5f5;
+
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(255, 255, 255, 0.10),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 75%,
+                    rgba(180, 180, 180, 0.10),
+                    transparent 32%
+                ),
+                linear-gradient(
+                    135deg,
+                    #050505 0%,
+                    #151515 35%,
+                    #383838 55%,
+                    #111111 78%,
+                    #050505 100%
+                );
+
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            top: -170px;
+            left: -150px;
+
+            border: 1px solid rgba(255, 255, 255, 0.10);
+
+            box-shadow:
+                0 0 80px rgba(255, 255, 255, 0.04),
+                inset 0 0 80px rgba(255, 255, 255, 0.03);
+
+            pointer-events: none;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 520px;
+            height: 520px;
+            border-radius: 50%;
+            right: -250px;
+            bottom: -250px;
+
+            border: 1px solid rgba(255, 255, 255, 0.09);
+
+            box-shadow:
+                0 0 100px rgba(255, 255, 255, 0.04),
+                inset 0 0 100px rgba(255, 255, 255, 0.03);
+
+            pointer-events: none;
+        }
+
+        .page {
+            min-height: 100vh;
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 40px 20px;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .calculator-decoration {
+            position: fixed;
+
+            width: 460px;
+            height: 460px;
+
+            border-radius: 50%;
+
+            right: -160px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+
+            box-shadow:
+                0 0 70px rgba(255, 255, 255, 0.035),
+                inset 0 0 70px rgba(255, 255, 255, 0.025);
+
+            opacity: 0.8;
+
+            pointer-events: none;
+        }
+
+        .calculator-decoration::before {
+            content: "";
+
+            position: absolute;
+
+            width: 330px;
+            height: 330px;
+
+            border-radius: 50%;
+
+            left: 50%;
+            top: 50%;
+
+            transform: translate(-50%, -50%);
+
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .calculator-decoration::after {
+            content: "";
+
+            position: absolute;
+
+            width: 190px;
+            height: 190px;
+
+            border-radius: 50%;
+
+            left: 50%;
+            top: 50%;
+
+            transform: translate(-50%, -50%);
+
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .container {
+            width: min(950px, 100%);
+
+            padding: 42px;
+
+            border-radius: 30px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.12),
+                    rgba(255, 255, 255, 0.035)
+                );
+
+            border: 1px solid rgba(255, 255, 255, 0.18);
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.45),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+            position: relative;
+            z-index: 3;
+        }
+
+        .back-button {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            padding: 10px 17px;
+
+            border-radius: 12px;
+
+            color: rgba(255, 255, 255, 0.82);
+
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            background: rgba(255, 255, 255, 0.06);
+
+            border: 1px solid rgba(255, 255, 255, 0.13);
+
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease,
+                border-color 0.25s ease;
+
+            margin-bottom: 28px;
+        }
+
+        .back-button:hover {
+            transform: translateX(-3px);
+
+            background: rgba(255, 255, 255, 0.11);
+
+            border-color: rgba(255, 255, 255, 0.24);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .brand {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 4px;
+
+            color: rgba(255, 255, 255, 0.58);
+
+            margin-bottom: 15px;
+        }
+
+        .title {
+            font-size: clamp(30px, 5vw, 48px);
+
+            font-weight: 800;
+
+            letter-spacing: -1.5px;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    #ffffff,
+                    #bdbdbd,
+                    #ffffff
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 15px;
+
+            color: rgba(255, 255, 255, 0.60);
+
+            font-weight: 500;
+        }
+
+        .speciality {
+            display: inline-block;
+
+            margin-top: 14px;
+
+            padding: 7px 15px;
+
+            border-radius: 30px;
+
+            background: rgba(255, 255, 255, 0.07);
+
+            border: 1px solid rgba(255, 255, 255, 0.14);
+
+            color: rgba(255, 255, 255, 0.75);
+
+            font-size: 12px;
+
+            letter-spacing: 1px;
+
+            font-weight: 700;
+        }
+
+        .semester {
+            margin-top: 28px;
+
+            padding: 25px;
+
+            border-radius: 23px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.075),
+                    rgba(255, 255, 255, 0.025)
+                );
+
+            border: 1px solid rgba(255, 255, 255, 0.11);
+        }
+
+        .semester-header {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 20px;
+        }
+
+        .semester-title {
+            font-size: 21px;
+
+            font-weight: 800;
+
+            letter-spacing: 1px;
+        }
+
+        .semester-result {
+            min-width: 100px;
+
+            padding: 10px 15px;
+
+            border-radius: 12px;
+
+            text-align: center;
+
+            background: rgba(255, 255, 255, 0.07);
+
+            border: 1px solid rgba(255, 255, 255, 0.12);
+
+            font-size: 14px;
+
+            font-weight: 700;
+        }
+
+        .subjects {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+        }
+
+        .subject {
+            display: grid;
+
+            grid-template-columns:
+                minmax(220px, 1fr)
+                100px
+                100px
+                100px;
+
+            gap: 10px;
+
+            align-items: center;
+
+            padding: 13px 14px;
+
+            border-radius: 15px;
+
+            background: rgba(255, 255, 255, 0.045);
+
+            border: 1px solid rgba(255, 255, 255, 0.075);
+
+            transition:
+                background 0.25s ease,
+                border-color 0.25s ease;
+        }
+
+        .subject:hover {
+            background: rgba(255, 255, 255, 0.065);
+
+            border-color: rgba(255, 255, 255, 0.13);
+        }
+
+        .subject-name {
+            font-size: 13px;
+
+            line-height: 1.4;
+
+            font-weight: 600;
+
+            color: rgba(255, 255, 255, 0.88);
+        }
+
+        .input-label {
+            display: none;
+        }
+
+        .grade-input {
+            width: 100%;
+
+            height: 40px;
+
+            padding: 0 10px;
+
+            border-radius: 10px;
+
+            border: 1px solid rgba(255, 255, 255, 0.12);
+
+            outline: none;
+
+            background: rgba(0, 0, 0, 0.25);
+
+            color: #ffffff;
+
+            text-align: center;
+
+            font-family: inherit;
+
+            font-size: 13px;
+
+            transition:
+                border-color 0.25s ease,
+                background 0.25s ease;
+        }
+
+        .grade-input:focus {
+            border-color: rgba(255, 255, 255, 0.35);
+
+            background: rgba(0, 0, 0, 0.38);
+        }
+
+        .grade-input::placeholder {
+            color: rgba(255, 255, 255, 0.30);
+        }
+
+        .coef-input {
+            border-color: rgba(190, 190, 190, 0.16);
+        }
+
+        .coef-input:focus {
+            border-color: rgba(220, 220, 220, 0.40);
+        }
+
+        .table-head {
+            display: grid;
+
+            grid-template-columns:
+                minmax(220px, 1fr)
+                100px
+                100px
+                100px;
+
+            gap: 10px;
+
+            padding: 0 14px 9px;
+
+            color: rgba(255, 255, 255, 0.38);
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            text-align: center;
+        }
+
+        .table-head div:first-child {
+            text-align: left;
+        }
+
+        .calculate-button {
+            width: 100%;
+
+            margin-top: 30px;
+
+            height: 56px;
+
+            border-radius: 16px;
+
+            border: 1px solid rgba(255, 255, 255, 0.18);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.17),
+                    rgba(255, 255, 255, 0.07)
+                );
+
+            color: #ffffff;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .calculate-button:hover {
+            transform: translateY(-3px);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.22),
+                    rgba(255, 255, 255, 0.09)
+                );
+
+            box-shadow:
+                0 14px 35px rgba(0, 0, 0, 0.28);
+        }
+
+        .results {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 18px;
+
+            margin-top: 25px;
+        }
+
+        .result-card {
+            padding: 22px;
+
+            border-radius: 19px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.08),
+                    rgba(255, 255, 255, 0.025)
+                );
+
+            border: 1px solid rgba(255, 255, 255, 0.11);
+
+            text-align: center;
+        }
+
+        .result-card.general {
+            grid-column: 1 / -1;
+        }
+
+        .result-label {
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+
+            color: rgba(255, 255, 255, 0.42);
+
+            margin-bottom: 8px;
+        }
+
+        .result-value {
+            font-size: 30px;
+
+            font-weight: 800;
+
+            color: #ffffff;
+        }
+
+        .result-value.good {
+            color: #9dffb5;
+        }
+
+        .result-value.bad {
+            color: #ff8585;
+        }
+
+        .formula {
+            margin-top: 25px;
+
+            padding: 17px 20px;
+
+            border-radius: 15px;
+
+            background: rgba(0, 0, 0, 0.18);
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+
+            color: rgba(255, 255, 255, 0.50);
+
+            font-size: 11px;
+
+            line-height: 1.7;
+
+            text-align: center;
+        }
+
+        @media (max-width: 760px) {
+
+            .page {
+                padding: 25px 14px;
+            }
+
+            .container {
+                padding: 30px 18px;
+
+                border-radius: 24px;
+            }
+
+            .subject {
+                grid-template-columns:
+                    1fr
+                    1fr
+                    1fr;
+
+                gap: 8px;
+            }
+
+            .subject-name {
+                grid-column: 1 / -1;
+
+                margin-bottom: 2px;
+            }
+
+            .table-head {
+                display: none;
+            }
+
+            .input-label {
+                display: block;
+
+                font-size: 9px;
+
+                color: rgba(255, 255, 255, 0.38);
+
+                margin-bottom: 4px;
+
+                text-align: center;
+
+                text-transform: uppercase;
+            }
+
+            .semester-header {
+                align-items: flex-start;
+
+                gap: 15px;
+            }
+
+            .results {
+                grid-template-columns: 1fr;
+            }
+
+            .result-card.general {
+                grid-column: auto;
+            }
+        }
+
+        @media (max-width: 460px) {
+
+            .container {
+                padding: 25px 13px;
+            }
+
+            .semester {
+                padding: 17px 12px;
+            }
+
+            .title {
+                font-size: 29px;
+            }
+
+            .brand {
+                font-size: 10px;
+
+                letter-spacing: 3px;
+            }
+
+            .semester-title {
+                font-size: 18px;
+            }
+
+            .semester-result {
+                min-width: 85px;
+
+                padding: 8px 10px;
+
+                font-size: 12px;
+            }
+
+            .subject {
+                padding: 12px 10px;
+            }
+
+            .subject-name {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="page">
+
+        <div class="calculator-decoration"></div>
+
+        <section class="container">
+
+            <a href="calculmoyennes3.html" class="back-button">
+                ← Retour
+            </a>
+
+            <header class="header">
+
+                <div class="brand">
+                    PHARMSINERGY • CALCUL
+                </div>
+
+                <h1 class="title">
+                    Calcul des moyennes
+                </h1>
+
+                <p class="subtitle">
+                    Licence 3 — Pharmacie industrielle
+                </p>
+
+                <div class="speciality">
+                    AUX
+                </div>
+
+            </header>
+
+
+            <!-- S5 -->
+
+            <section class="semester">
+
+                <div class="semester-header">
+
+                    <h2 class="semester-title">
+                        S5
+                    </h2>
+
+                    <div class="semester-result" id="resultS5">
+                        —
+                    </div>
+
+                </div>
+
+                <div class="table-head">
+                    <div>Matière</div>
+                    <div>TD</div>
+                    <div>Examen</div>
+                    <div>Coef.</div>
+                </div>
+
+                <div class="subjects">
+
+                    <div class="subject">
+
+                        <div class="subject-name">
+                            Assurance Qualité
+                        </div>
+
+                        <div>
+                            <div class="input-label">TD</div>
+                            <input
+                                class="grade-input td"
+                                type="number"
+                                min="0"
+                                max="20"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                        <div>
+                            <div class="input-label">Examen</div>
+                            <input
+                                class="grade-input exam"
+                                type="number"
+                                min="0"
+                                max="20"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                        <div>
+                            <div class="input-label">Coef.</div>
+                            <input
+                                class="grade-input coef-input coef"
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <div class="subject">
+
+                        <div class="subject-name">
+                            Exécution des ordonnances
+                        </div>
+
+                        <div>
+                            <div class="input-label">TD</div>
+                            <input
+                                class="grade-input td"
+                                type="number"
+                                min="0"
+                                max="20"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                        <div>
+                            <div class="input-label">Examen</div>
+                            <input
+                                class="grade-input exam"
+                                type="number"
+                                min="0"
+                                max="20"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                        <div>
+                            <div class="input-label">Coef.</div>
+                            <input
+                                class="grade-input coef-input coef"
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <div class="subject">
+
+                        <div class="subject-name">
+                            Geste sanitaire d'urgence
+                        </div>
+
+                        <div>
+                            <div class="input-label">TD</div>
+                            <input
+                                class="grade-input td"
+                                type="number"
+                                min="0"
+                                max="20"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                        <div>
+                            <div class="input-label">Examen</div>
+                            <input
+                                class="grade-input exam"
+                                type="number"
+                                min="0"
+                                max="20"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                        <div>
+                            <div class="input-label">Coef.</div>
+                            <input
+                                class="grade-input coef-input coef"
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <div class="subject">
+
+                        <div class="subject-name">
+                            HSE
+                        </div>
+
+                        <div>
+                            <div class="input-label">TD</div>
+                            <input
+                                class="grade-input td"
+                                type="number"
+                                min="0"
+                                max="20"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                        <div>
+                            <div class="input-label">Examen</div>
+                            <input
+                                class="grade-input exam"
+                                type="number"
+                                min="0"
+                                max="20"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                        <div>
+                            <div class="input-label">Coef.</div>
+                            <input
+                                class="grade-input coef-input coef"
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <div class="subject">
+
+                        <div class="subject-name">
+                            Legislation et code du travail
+                        </div>
+
+                        <div>
+                            <div class="input-label">TD</div>
+                            <input
+                                class="grade-input td"
+                                type="number"
+                                min="0"
+                                max="20"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                        <div>
+                            <div class="input-label">Examen</div>
+                            <input
+                                class="grade-input exam"
+                                type="number"
+                                min="0"
+                                max="20"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                        <div>
+                            <div class="input-label">Coef.</div>
+                            <input
+                                class="grade-input coef-input coef"
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <div class="subject">
+
+                        <div class="subject-name">
+                            BP de préparation officinale
+                        </div>
+
+                        <div>
+                            <div class="input-label">TD</div>
+                            <input
+                                class="grade-input td"
+                                type="number"
+                                min="0"
+                                max="20"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                        <div>
+                            <div class="input-label">Examen</div>
+                            <input
+                                class="grade-input exam"
+                                type="number"
+                                min="0"
+                                max="20"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                        <div>
+                            <div class="input-label">Coef.</div>
+                            <input
+                                class="grade-input coef-input coef"
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <div class="subject">
+
+                        <div class="subject-name">
+                            Gestion pharmaceutique
+                        </div>
+
+                        <div>
+                            <div class="input-label">TD</div>
+                            <input
+                                class="grade-input td"
+                                type="number"
+                                min="0"
+                                max="20"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                        <div>
+                            <div class="input-label">Examen</div>
+                            <input
+                                class="grade-input exam"
+                                type="number"
+                                min="0"
+                                max="20"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                        <div>
+                            <div class="input-label">Coef.</div>
+                            <input
+                                class="grade-input coef-input coef"
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <div class="subject">
+
+                        <div class="subject-name">
+                            Produit de santé
+                        </div>
+
+                        <div>
+                            <div class="input-label">TD</div>
+                            <input
+                                class="grade-input td"
+                                type="number"
+                                min="0"
+                                max="20"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                        <div>
+                            <div class="input-label">Examen</div>
+                            <input
+                                class="grade-input exam"
+                                type="number"
+                                min="0"
+                                max="20"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                        <div>
+                            <div class="input-label">Coef.</div>
+                            <input
+                                class="grade-input coef-input coef"
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- S6 -->
+
+            <section class="semester">
+
+                <div class="semester-header">
+
+                    <h2 class="semester-title">
+                        S6
+                    </h2>
+
+                    <div class="semester-result" id="resultS6">
+                        —
+                    </div>
+
+                </div>
+
+                <div class="table-head">
+                    <div>Matière</div>
+                    <div>TD</div>
+                    <div>Examen</div>
+                    <div>Coef.</div>
+                </div>
+
+                <div class="subjects">
+
+                    <div class="subject">
+
+                        <div class="subject-name">
+                            Insertion professionnelle
+                        </div>
+
+                        <div>
+                            <div class="input-label">TD</div>
+                            <input
+                                class="grade-input td"
+                                type="number"
+                                min="0"
+                                max="20"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                        <div>
+                            <div class="input-label">Examen</div>
+                            <input
+                                class="grade-input exam"
+                                type="number"
+                                min="0"
+                                max="20"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                        <div>
+                            <div class="input-label">Coef.</div>
+                            <input
+                                class="grade-input coef-input coef"
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <div class="subject">
+
+                        <div class="subject-name">
+                            Rédaction et recherche bibliographique
+                        </div>
+
+                        <div>
+                            <div class="input-label">TD</div>
+                            <input
+                                class="grade-input td"
+                                type="number"
+                                min="0"
+                                max="20"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                        <div>
+                            <div class="input-label">Examen</div>
+                            <input
+                                class="grade-input exam"
+                                type="number"
+                                min="0"
+                                max="20"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                        <div>
+                            <div class="input-label">Coef.</div>
+                            <input
+                                class="grade-input coef-input coef"
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <div class="subject">
+
+                        <div class="subject-name">
+                            Langue chinoise
+                        </div>
+
+                        <div>
+                            <div class="input-label">TD</div>
+                            <input
+                                class="grade-input td"
+                                type="number"
+                                min="0"
+                                max="20"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                        <div>
+                            <div class="input-label">Examen</div>
+                            <input
+                                class="grade-input exam"
+                                type="number"
+                                min="0"
+                                max="20"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                        <div>
+                            <div class="input-label">Coef.</div>
+                            <input
+                                class="grade-input coef-input coef"
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                placeholder="—"
+                            >
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <button
+                class="calculate-button"
+                id="calculateButton"
+                type="button"
+            >
+                CALCULER LES MOYENNES
+            </button>
+
+
+            <section class="results">
+
+                <div class="result-card">
+
+                    <div class="result-label">
+                        Moyenne S5
+                    </div>
+
+                    <div
+                        class="result-value"
+                        id="finalS5"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="result-card">
+
+                    <div class="result-label">
+                        Moyenne S6
+                    </div>
+
+                    <div
+                        class="result-value"
+                        id="finalS6"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="result-card general">
+
+                    <div class="result-label">
+                        Moyenne générale L3
+                    </div>
+
+                    <div
+                        class="result-value"
+                        id="annualResult"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <div class="formula">
+                Pour chaque matière : moyenne = TD × 40% + Examen × 60%.
+                <br>
+                La moyenne du semestre est calculée selon les coefficients
+                renseignés par l'étudiant.
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        function calculateSemester(semesterElement) {
+
+            const subjects =
+                semesterElement.querySelectorAll(".subject");
+
+            let weightedTotal = 0;
+            let coefficientTotal = 0;
+
+            subjects.forEach(function(subject) {
+
+                const tdInput =
+                    subject.querySelector(".td");
+
+                const examInput =
+                    subject.querySelector(".exam");
+
+                const coefInput =
+                    subject.querySelector(".coef");
+
+                const td =
+                    parseFloat(tdInput.value);
+
+                const exam =
+                    parseFloat(examInput.value);
+
+                const coefficient =
+                    parseFloat(coefInput.value);
+
+
+                if (
+                    !isNaN(td) &&
+                    !isNaN(exam) &&
+                    !isNaN(coefficient) &&
+                    coefficient > 0
+                ) {
+
+                    const subjectAverage =
+                        (td * 0.40) +
+                        (exam * 0.60);
+
+                    weightedTotal +=
+                        subjectAverage * coefficient;
+
+                    coefficientTotal +=
+                        coefficient;
+                }
+
+            });
+
+
+            if (coefficientTotal === 0) {
+                return null;
+            }
+
+
+            return weightedTotal / coefficientTotal;
+        }
+
+
+        function displayResult(element, value) {
+
+            if (value === null) {
+
+                element.textContent = "—";
+
+                element.classList.remove("good");
+                element.classList.remove("bad");
+
+                return;
+            }
+
+
+            element.textContent =
+                value.toFixed(2);
+
+
+            element.classList.remove("good");
+            element.classList.remove("bad");
+
+
+            if (value >= 10) {
+
+                element.classList.add("good");
+
+            } else {
+
+                element.classList.add("bad");
+
+            }
+        }
+
+
+        document
+            .getElementById("calculateButton")
+            .addEventListener(
+                "click",
+                function() {
+
+                    const semesters =
+                        document.querySelectorAll(".semester");
+
+
+                    const s5 =
+                        calculateSemester(semesters[0]);
+
+                    const s6 =
+                        calculateSemester(semesters[1]);
+
+
+                    displayResult(
+                        document.getElementById("resultS5"),
+                        s5
+                    );
+
+                    displayResult(
+                        document.getElementById("resultS6"),
+                        s6
+                    );
+
+
+                    displayResult(
+                        document.getElementById("finalS5"),
+                        s5
+                    );
+
+                    displayResult(
+                        document.getElementById("finalS6"),
+                        s6
+                    );
+
+
+                    if (
+                        s5 !== null &&
+                        s6 !== null
+                    ) {
+
+                        const annual =
+                            (s5 + s6) / 2;
+
+                        displayResult(
+                            document.getElementById("annualResult"),
+                            annual
+                        );
+
+                    } else {
+
+                        displayResult(
+                            document.getElementById("annualResult"),
+                            null
+                        );
+
+                    }
+
+                }
+            );
+
+    </script>
+
+</body>
+</html>
