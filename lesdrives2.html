@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Les Drives | PharmSinergy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            width: 100%;
+
+            font-family: 'Inter', sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 12% 18%,
+                    rgba(244, 174, 196, 0.32),
+                    transparent 34%
+                ),
+                radial-gradient(
+                    circle at 88% 82%,
+                    rgba(177, 225, 184, 0.34),
+                    transparent 36%
+                ),
+                linear-gradient(
+                    135deg,
+                    #fff1f6 0%,
+                    #ffffff 48%,
+                    #effbf1 100%
+                );
+
+            color: #414b45;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            overflow-x: hidden;
+
+            position: relative;
+        }
+
+
+        /* =========================
+           BACKGROUND
+        ========================= */
+
+        body::before {
+            content: "";
+
+            position: fixed;
+
+            width: 260px;
+            height: 260px;
+
+            top: -100px;
+            left: -80px;
+
+            border-radius: 50%;
+
+            background: rgba(239, 154, 180, 0.18);
+
+            filter: blur(5px);
+
+            z-index: -1;
+        }
+
+
+        body::after {
+            content: "";
+
+            position: fixed;
+
+            width: 310px;
+            height: 310px;
+
+            bottom: -130px;
+            right: -90px;
+
+            border-radius: 50%;
+
+            background: rgba(153, 219, 166, 0.20);
+
+            filter: blur(5px);
+
+            z-index: -1;
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .container {
+            width: min(92%, 900px);
+
+            min-height: 90vh;
+
+            padding: 38px 32px;
+
+            border-radius: 30px;
+
+            background: rgba(255, 255, 255, 0.52);
+
+            border: 1px solid rgba(255, 255, 255, 0.78);
+
+            box-shadow:
+                0 22px 60px rgba(86, 105, 92, 0.14),
+                inset 0 1px 0 rgba(255, 255, 255, 0.90);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            text-align: center;
+
+            margin-bottom: 32px;
+        }
+
+
+        .small-title {
+            font-size: 11px;
+
+            font-weight: 800;
+
+            letter-spacing: 3px;
+
+            color: #8e9992;
+
+            margin-bottom: 11px;
+        }
+
+
+        h1 {
+            font-size: clamp(32px, 6vw, 48px);
+
+            font-weight: 800;
+
+            letter-spacing: -1.5px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #df88a5,
+                    #91c89a
+                );
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+            margin-bottom: 11px;
+        }
+
+
+        .subtitle {
+            font-size: 14px;
+
+            line-height: 1.7;
+
+            color: #707b74;
+        }
+
+
+        .subtitle strong {
+            font-weight: 700;
+
+            color: #68746d;
+        }
+
+
+        /* =========================
+           DRIVES
+        ========================= */
+
+        .drives {
+            width: 100%;
+
+            max-width: 720px;
+
+            margin: 0 auto;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 17px;
+        }
+
+
+        .drive-bar {
+            position: relative;
+
+            min-height: 102px;
+
+            padding: 17px 22px;
+
+            border-radius: 23px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+            text-decoration: none;
+
+            color: #414b45;
+
+            background:
+                linear-gradient(
+                    105deg,
+                    rgba(255, 224, 233, 0.80),
+                    rgba(224, 247, 228, 0.80)
+                );
+
+            border: 1px solid rgba(255, 255, 255, 0.82);
+
+            box-shadow:
+                0 10px 28px rgba(93, 112, 99, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.90);
+
+            backdrop-filter: blur(13px);
+
+            -webkit-backdrop-filter: blur(13px);
+
+            transition:
+                transform 0.30s ease,
+                box-shadow 0.30s ease,
+                background 0.30s ease;
+        }
+
+
+        .drive-bar:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 17px 35px rgba(93, 112, 99, 0.17),
+                inset 0 1px 0 rgba(255, 255, 255, 0.95);
+        }
+
+
+        /* =========================
+           ICON
+        ========================= */
+
+        .drive-icon {
+            width: 59px;
+            height: 59px;
+
+            min-width: 59px;
+
+            border-radius: 18px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background:
+                rgba(255, 255, 255, 0.53);
+
+            border: 1px solid rgba(255, 255, 255, 0.72);
+
+            box-shadow:
+                inset 0 1px 6px rgba(255, 255, 255, 0.90),
+                0 6px 16px rgba(93, 112, 99, 0.09);
+
+            transition: 0.30s ease;
+        }
+
+
+        .drive-bar:hover .drive-icon {
+            transform: scale(1.05);
+        }
+
+
+        /* =========================
+           SVG
+        ========================= */
+
+        .drive-icon svg {
+            width: 29px;
+            height: 29px;
+
+            fill: none;
+
+            stroke-width: 1.7;
+
+            stroke-linecap: round;
+
+            stroke-linejoin: round;
+
+            transition: 0.30s ease;
+        }
+
+
+        .icon-p2rdix svg {
+            stroke: #c97997;
+        }
+
+
+        .icon-althea svg {
+            stroke: #78ad83;
+        }
+
+
+        .drive-bar:hover .drive-icon svg {
+            transform: scale(1.08);
+        }
+
+
+        /* =========================
+           TEXT
+        ========================= */
+
+        .drive-info {
+            flex: 1;
+
+            min-width: 0;
+        }
+
+
+        .drive-title {
+            font-size: 15px;
+
+            font-weight: 800;
+
+            line-height: 1.4;
+
+            color: #4c5750;
+
+            margin-bottom: 6px;
+        }
+
+
+        .drive-description {
+            font-size: 11.5px;
+
+            line-height: 1.55;
+
+            color: #78837c;
+        }
+
+
+        /* =========================
+           ARROW
+        ========================= */
+
+        .arrow {
+            font-size: 24px;
+
+            font-weight: 400;
+
+            color: #9aa69e;
+
+            transition: 0.30s ease;
+
+            padding-left: 5px;
+        }
+
+
+        .drive-bar:hover .arrow {
+            transform: translateX(5px);
+
+            color: #d786a1;
+        }
+
+
+        /* =========================
+           BACK
+        ========================= */
+
+        .back {
+            display: block;
+
+            width: fit-content;
+
+            margin: 30px auto 0;
+
+            padding: 11px 23px;
+
+            border-radius: 14px;
+
+            text-decoration: none;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            color: #68746d;
+
+            background:
+                rgba(255, 255, 255, 0.55);
+
+            border: 1px solid rgba(255, 255, 255, 0.80);
+
+            box-shadow:
+                0 7px 18px rgba(90, 110, 98, 0.10);
+
+            transition: 0.30s ease;
+        }
+
+
+        .back:hover {
+            transform: translateY(-2px);
+
+            background:
+                rgba(255, 255, 255, 0.82);
+
+            box-shadow:
+                0 10px 22px rgba(90, 110, 98, 0.13);
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            text-align: center;
+
+            margin-top: 24px;
+
+            font-size: 10px;
+
+            color: #99a39d;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .container {
+                width: 94%;
+
+                min-height: 94vh;
+
+                padding: 28px 16px;
+
+                border-radius: 25px;
+            }
+
+
+            .header {
+                margin-bottom: 25px;
+            }
+
+
+            .drive-bar {
+                min-height: 94px;
+
+                padding: 15px;
+
+                gap: 13px;
+
+                border-radius: 20px;
+            }
+
+
+            .drive-icon {
+                width: 50px;
+                height: 50px;
+
+                min-width: 50px;
+
+                border-radius: 16px;
+            }
+
+
+            .drive-icon svg {
+                width: 25px;
+                height: 25px;
+            }
+
+
+            .drive-title {
+                font-size: 13px;
+            }
+
+
+            .drive-description {
+                font-size: 10.5px;
+            }
+
+
+            .arrow {
+                font-size: 21px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <main class="container">
+
+
+        <!-- HEADER -->
+
+        <header class="header">
+
+            <div class="small-title">
+                PHARMSINERGY • RESSOURCES
+            </div>
+
+            <h1>
+                Les Drives
+            </h1>
+
+            <p class="subtitle">
+                Les ressources partagées par nos différentes promotions.
+                <br>
+                <strong>Chaque document est une étape vers la réussite.</strong>
+            </p>
+
+        </header>
+
+
+
+        <!-- DRIVES -->
+
+        <section class="drives">
+
+
+            <!-- =========================
+                 P2RDIX
+            ========================== -->
+
+            <a
+                class="drive-bar"
+                href="https://drive.google.com/drive/folders/1aAVVxswzrs5P4lGZEjplKxHZxllhTa-R"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+
+                <div class="drive-icon icon-p2rdix">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <circle
+                            cx="6"
+                            cy="6"
+                            r="2"
+                        ></circle>
+
+                        <circle
+                            cx="18"
+                            cy="6"
+                            r="2"
+                        ></circle>
+
+                        <circle
+                            cx="6"
+                            cy="18"
+                            r="2"
+                        ></circle>
+
+                        <circle
+                            cx="18"
+                            cy="18"
+                            r="2"
+                        ></circle>
+
+                        <path d="M8 6h8"></path>
+
+                        <path d="M6 8v8"></path>
+
+                        <path d="M18 8v8"></path>
+
+                        <path d="M8 18h8"></path>
+
+                    </svg>
+
+                </div>
+
+
+                <div class="drive-info">
+
+                    <div class="drive-title">
+                        Drive de promo 2023-2026 — P2RDIX
+                    </div>
+
+                    <div class="drive-description">
+                        Cours, documents et ressources pour avancer ensemble.
+                    </div>
+
+                </div>
+
+
+                <div class="arrow">
+                    →
+                </div>
+
+            </a>
+
+
+
+            <!-- =========================
+                 ALTHÉA
+            ========================== -->
+
+            <a
+                class="drive-bar"
+                href="https://drive.google.com/drive/folders/1u6MAFGV52IRq-qWwFxMbR_N7blk54ws-"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+
+                <div class="drive-icon icon-althea">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M12 21c0-6.5 1.8-11.5 7-15"></path>
+
+                        <path d="M12 17c-3.5-0.5-6-2.5-7-6"></path>
+
+                        <path d="M14 13c2.8-0.2 5-1.5 6-4"></path>
+
+                        <path d="M12 17c-1.5-3.2-1.8-6.5-1-10"></path>
+
+                    </svg>
+
+                </div>
+
+
+                <div class="drive-info">
+
+                    <div class="drive-title">
+                        Drive de promo 2024-2027 — ALTHÉA
+                    </div>
+
+                    <div class="drive-description">
+                        Un espace pour partager, réviser et progresser ensemble.
+                    </div>
+
+                </div>
+
+
+                <div class="arrow">
+                    →
+                </div>
+
+            </a>
+
+
+        </section>
+
+
+
+        <!-- RETOUR -->
+
+        <a
+            href="licence2.html"
+            class="back"
+        >
+            ← Retour
+        </a>
+
+
+
+        <!-- FOOTER -->
+
+        <div class="footer">
+            PharmSinergy • Partage • Révision • Réussite
+        </div>
+
+
+    </main>
+
+</body>
+</html>
